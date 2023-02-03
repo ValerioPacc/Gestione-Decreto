@@ -1,0 +1,65 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:u="sap.ui.unified"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:menu="sap.m.MenuItem"
+    xmlns:menBtn="sap.m.Menu" height="100%">
+    <Table class="sapUiSizeCompact" id="ListaIPE"  includeItemInSelection="true"  mode="SingleSelect">
+        <headerToolbar>
+            <OverflowToolbar>
+                <content>
+                    <ToolbarSpacer />
+                    <Button icon="sap-icon://display" id="rettificaIPE"  type="Emphasized" text="Rettifica IPE" press="navToWizard"/>
+                    <Button icon="sap-icon://display" id="DettagliIPE" type="Emphasized" text="Dettagli IPE" />
+                    <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column width="8%">
+                <Label text="N. IPE" />
+            </Column>
+            <Column width="10%">
+                <Label text="Tipo IPE" />
+            </Column>
+            <Column width="10%">
+                <Label text="Esercizio" />
+            </Column>
+            <Column width="12%">
+                <Label text="Posizione finanziaria" wrapping="true" />
+            </Column>
+            <Column width="15%" >
+                <Label text="Struttura Amministrativa Responsabile" wrapping="true"/>
+            </Column>
+            <Column width="12%">
+                <Label text="N. Contratto" />
+            </Column>
+            <Column width="12%">
+                <Label text="Beneficiario" />
+            </Column>
+            <Column width="18%">
+                <Label text="Oggetto della spesa " />
+            </Column>
+             <Column width="10%">
+                <Label text="Totale Impegnato" wrapping="true"/>
+            </Column>
+        </columns>
+        <ColumnListItem>
+            <Text text="{DecretoGI>Esercizio Decreto}" />
+            <Text text="{DecretoGI>Amminastrazione}" />
+            <Text text="{DecretoGI>Uff. I Livello}" />
+            <Text text="{DecretoGI>Uff. II Livello}" />
+            <Text text="{DecretoGI>N. Decreto}" />
+            <Text text="{DecretoGI>Data Decreto}" />
+            <Text text="{DecretoGI>Ragioneria}" />
+            <Text text="{DecretoGI>Oggetto della spesa}" />
+            <Text text="{DecretoGI>Totale Impegnato}" />
+
+        </ColumnListItem>
+    </Table>
+</core:FragmentDefinition>

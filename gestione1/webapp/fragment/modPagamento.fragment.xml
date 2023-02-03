@@ -1,0 +1,71 @@
+<core:FragmentDefinition controllerName="gestione1.controller.wizard" height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+    <Panel headerText="Modalità di pagamento" headerLevel="H4" accessibleRole="Form" collapsed="false" toggle="handleToggle">
+        <content>
+            <l:Grid>
+                <l:content>
+                    <VBox>
+                        <Label text="Modalità di pagamento" labelFor="Esercizio" required="true" />
+                        <ComboBox required="true" items="{comboBox>/items}" change="onListSelect" id="comboBox">
+                            <core:Item key="{comboBox>id}" text="{comboBox>Modalita_pagamento}" />
+                        </ComboBox>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                    </VBox>
+                    </l:content>
+                     </l:Grid>
+                    </content>
+                    </Panel>
+                     <Panel headerText="Elenco c/c associati" headerLevel="H4" accessibleRole="Form" collapsed="false" toggle="handleToggle">
+        <content>
+            <l:Grid>
+                <l:content>
+                     
+                    <VBox>
+                        <Label text="IBAN" labelFor="IBAN" />
+                        <ComboBox required="true" items="">
+                            <core:Item key="1" text="1" />
+                            <core:Item key="2" text="2" />
+                        </ComboBox>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                   
+                        <Label text="ABI:" />
+                        <Input value="" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                   
+                        <Label text="Casuale valutaria:" id="labelCS"/>
+                        <Input value="" id="CasualeVal"/>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="Paese di residenza:" />
+                        <Input value="" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                    
+                        <Label text="CAB:" />
+                        <Input value="" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                    </VBox>
+                   
+                </l:content>
+            </l:Grid>
+          
+        </content>
+    </Panel>
+  <OverflowToolbar>
+                            <Button text="Indietro" type="Emphasized" visible="{/BackButtonVisible}" press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized" visible="{/NextButtonVisible}" press="onNextButton" />
+                            <ToolbarSpacer />
+                            <Button type="Emphasized" text="Salva in bozza" visible="{/PNIButtonVisible}" />
+                        </OverflowToolbar>
+</core:FragmentDefinition>

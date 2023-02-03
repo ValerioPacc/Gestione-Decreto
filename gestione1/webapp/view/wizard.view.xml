@@ -1,0 +1,629 @@
+<mvc:View height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="gestione1.controller.wizard">
+    <NavContainer id="wizardNavContainer">
+        <f:DynamicPage stickySubheaderProvider="CreateProductWizard" toggleHeaderOnTitleClick="false" class="sapUiNoContentPadding" showFooter="true">
+            <f:title>
+                <f:DynamicPageTitle>
+                    <f:heading>
+                        <Title text="IPE Apertura Dati anagrafico-contabili IPE" />
+                    </f:heading>
+                </f:DynamicPageTitle>
+            </f:title>
+            <f:header>
+                <f:DynamicPageHeader id="h1" pinnable="false">
+                    <l:HorizontalLayout allowWrapping="true">
+                        <l:VerticalLayout class="sapUiMediumMarginEnd" visible="{/header1Visible}">
+                            <HBox id="idHBox1">
+                                <VBox id="idIpeH" class="sapUiSmallMargin" width="50%">
+                                    <Label id="IpeH" text="{i18n>Ipe}" design="Bold"/>
+                                    <Text id="Ipe1H" text="{}"/>
+                                </VBox>
+                                <VBox id="idVBox1" class="sapUiSmallMargin" width="50%">
+                                    <Label id="Eserecizio1" text="{i18n>esercizio}" design="Bold"/>
+                                    <Text id="eserecizio1" text="{}" wrapping="true"/>
+                                </VBox>
+                                <VBox id="idVBox2" class="sapUiSmallMargin" width="80%">
+                                    <Label id="Amm1" text="{i18n>amministrazione}" design="Bold"/>
+                                    <Text id="amm1" text="{}"/>
+                                </VBox>
+                                <VBox id="idVBox3" class="sapUiSmallMargin" width="80%">
+                                    <Label id="Rag1" text="{i18n>Ragioneria}" design="Bold"/>
+                                    <Text id="rag1" text="{}"/>
+                                </VBox>
+                            </HBox>
+                        
+                            <HBox id="idHBox2">
+                                <VBox id="idBenH" class="sapUiSmallMargin" width="50%">
+                                    <Label id="BenH" text="{i18n>beneficiarioH}" design="Bold"/>
+                                    <Text id="Ben1H" text="{}"/>
+                                </VBox>
+                                <VBox id="idVBox4" class="sapUiSmallMargin" width="50%">
+                                    <Label id="TotImp1" text="{i18n>totimp}" design="Bold"/>
+                                    <Text id="totImp1" text="{}" wrapping="true"/>
+                                </VBox>
+                                <VBox id="idVBox5" class="sapUiSmallMargin" width="80%">
+                                    <Label id="RicAss1" text="{i18n>NricAss}" design="Bold"/>
+                                    <Text id="ricAss1" text="{}"/>
+                                </VBox>
+                            </HBox>
+                        </l:VerticalLayout>
+                    </l:HorizontalLayout>
+                </f:DynamicPageHeader>
+                </f:header>
+            <f:content>
+                <Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" showNextButton="false" navigationChange="handleNavigationChange" renderMode="Page">
+                    <WizardStep id="SelezioneTitoliStep" title="Contratto" validated="true">
+                        <Label text="{i18n>Ccontratto}" />
+                        <Switch accessibleNameRef="regularSwitchLabel" customTextOff="No" customTextOn="Si" change="controlSwitch" id="switch"   />
+                        <Panel height="100%">
+                            <content>
+                                <l:Grid>
+                                    <l:content>
+                                        <VBox>
+                                            <Label text="{i18n>esercizio}" required="true"/>
+                                            <ComboBox id="es_decreto" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}">
+                                            <core:Item id="es_decreto1" key="{Esercizio}" text="{Esercizio}" />
+                                            </ComboBox>
+                                            <layoutData>
+                                                <l:GridData span="L3 M3 S3" />
+                                            </layoutData>
+                                        </VBox>
+                                        <VBox>
+                                            <Label text="{i18n>amministrazione}" required="true"/>
+                                            <Input value="" />
+                                            <layoutData>
+                                                <l:GridData span="L3 M3 S3" />
+                                            </layoutData>
+                                        </VBox>
+                                        <VBox>
+                                            <Label text="{i18n>Ncontratto}" required="true" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'ContrattoOrdine' }}"/>
+                                            <Input value="" >
+                                             <core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/>
+                                    </Input>
+                                            <layoutData>
+                                                <l:GridData span="L3 M3 S3" />
+                                            </layoutData>
+                                        </VBox>
+                                        <VBox>
+                                            <Label text="{i18n>Dstipula}" required="true" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}"/>
+                                            <Input value="">
+                                             <core:Item key="{}" text="{}"/>
+                                             </Input>
+                                            <layoutData>
+                                                <l:GridData span="L3 M3 S3" />
+                                            </layoutData>
+                                        </VBox>
+                                        <VBox>
+                                            <Label text="{i18n>descrizione}" />
+                                            <TextArea value="" width="90%" />
+                                            <layoutData>
+                                                <l:GridData span="L9 M9 S9" />
+                                            </layoutData>
+                                        </VBox>
+                                        <VBox>
+                                            <Label text="{i18n>beneficiarioH}" />
+                                            <Input value="" />
+                                            <layoutData>
+                                                <l:GridData span="L3 M3 S3" />
+                                            </layoutData>
+                                        </VBox>
+                                        <VBox>
+                                            <Label text="{i18n>cig}" />
+                                            <Input value="" />
+                                            <layoutData>
+                                                <l:GridData span="L4 M3 S3" />
+                                            </layoutData>
+                                        </VBox>
+                                        <VBox>
+                                            <Label text="{i18n>cup}" />
+                                            <Input value="" />
+                                            <layoutData>
+                                                <l:GridData span="L4 M3 S3" />
+                                            </layoutData>
+                                        </VBox>
+                                        <VBox>
+                                            <Label text="{i18n>ImpTot}" wrapping="true"/>
+                                            <Input value="" width="60%" />
+                                            <layoutData>
+                                                <l:GridData span="L6 M3 S3" />
+                                            </layoutData>
+                                        </VBox>
+                                    </l:content>
+                                </l:Grid>
+
+                                <Table class="sapUiSizeCompact" id="idpsfin" includeItemInSelection="true" items="{>/items}" headerText="Riepilogo Pianificazione Finanziaria" width="70%">
+                                    <columns>
+                                        <Column width="12%">
+                                            <Label text="Esercizio" />
+                                        </Column>
+                                        <Column width="18%">
+                                            <Label text="Posizione Finanziaria" />
+                                        </Column>
+                                        <Column width="12%">
+                                            <Label text="N. PNI" />
+                                        </Column>
+                                        <Column width="12%">
+                                            <Label text="Descrizione PNI" />
+                                        </Column>
+                                        <Column width="13%">
+                                            <Label text="Importi Impegnabili" />
+                                        </Column>
+                                    </columns>
+                                    <ColumnListItem>
+                                        <Text text="{DecretoImpegnoSet>Numero NI}" />
+                                        <Text text="{DecretoImpegnoSet>Struttura Amministrativa Responsabile}" />
+                                        <Text text="{DecretoImpegnoSet>Posizione Finanziaria}" />
+                                        <Text text="{DecretoImpegnoSet>Oggetto della spesa}" />
+                                        <Text text="{DecretoImpegnoSet>Mese}" />
+                                    </ColumnListItem>
+                                </Table>
+                            </content>
+                        </Panel>
+
+                        <OverflowToolbar>
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized"  press="onNextButton" />
+                            <ToolbarSpacer />
+                            <Button type="Emphasized" text="Salva in bozza"  />
+                        </OverflowToolbar>
+                    </WizardStep>
+                    <WizardStep id="Beneficiario1" validated="true" title="Beneficiario" activate="additionalInfoValidation">
+                        <Toolbar>
+                            <ToolbarSpacer />
+                            <Button type="Emphasized" text="Richiedi Anagrafica Beneficiario" press="onOpenFragment"/>
+                            <Button type="Emphasized" text="Inserisci Mod.Pag.-Iban" press="onOpenDialogModPag"/>
+                        </Toolbar>
+                        <RadioButtonGroup id="GroupA" columns="3" width="100%">
+                            <RadioButton text="Persona Fisica" selected="true" />
+                            <RadioButton text="Persona Giuridica" />
+                        </RadioButtonGroup>
+                        <form:SimpleForm
+                            id="SimpleFormChange480_12120"
+                            editable="true"
+                            layout="ResponsiveGridLayout"
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="12"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="2"
+                            columnsM="1"
+                            singleContainerFullSize="false"
+                        >
+                            <VBox>
+                                <Label text="Beneficiario:" required="true" />
+                               <Input showSuggestion="true" id="beneficiario1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'Beneficiario' }}">
+                                      <core:Item key="{Beneficiario}" text="{Beneficiario}"/>
+                                    </Input>
+                                <layoutData>
+                                    <l:GridData span="L6 M3 S3" />
+                                </layoutData>
+                            </VBox>
+                        </form:SimpleForm>
+                        
+                            <HBox justifyContent="Center" class="sapUiLargeMarginBegin">
+                            <items>
+                                <VBox class="sapUiLargeMarginBegin">
+                                    
+                                        <Label text="Codice Fiscale:" />
+                                        <Input id="cFiscale" />
+                                        <Label text="Nome:"  />
+                                        <Input id="nome" />
+                                        <Label text="Ragione Sociale:"  />
+                                        <Input id="rSociale" />
+                                        
+                                        </VBox>
+                                   
+
+                                   
+                                   
+                                    <VBox class="sapUiLargeMarginBegin">
+                                        <Label text="Codice Fiscale Estero:" />
+                                        <Input id="cFiscaleE" />
+                                        <Label text="Cognome:"  />
+                                        <Input id="cognome" />
+                                        <Label text="Partita IVA:" />
+                                        <Input id="IVA" />
+                                        </VBox>
+                                    
+                                       
+                                        </items>
+                                    </HBox>
+                                
+                                <!-- <HBox alignItems="End" justifyContent="Start" direction="Column">
+
+
+                      
+				 
+                 	
+			</HBox> -->
+                            
+                        
+                        <core:Fragment fragmentName="gestione1.fragment.modPagamento" type="XML" />
+                        <!-- <core:Fragment fragmentName="gestione1.fragment.anagrafica" type="XML" /> -->
+                    </WizardStep>
+
+                    <WizardStep id="ImputCont" validated="true" activate="optionalStepActivation" title="Imputazione Contabile">
+              <form:SimpleForm id="form"
+                   editable="true"
+                   width="100%">
+                
+                     
+                    <VBox>
+                     <HBox>
+                        <Label text="Sottoposto a richiesta di Assenso Preventivo" labelFor="Sottoposto a richiesta di Assenso Preventivo"/>
+                            <Switch accessibleNameRef="regularSwitchLabel" customTextOff="No" customTextOn="Si" change="handleChange" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                   </HBox>
+                   <Title text=""/>
+                   <HBox>
+                         <Label text="Posizione Finanziaria:" labelFor="Posizione Finanziaria:" required="true"/>
+                            <Input   id="pFin"  showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest"   />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                   </HBox>
+                   <Title text=""/>
+                   <HBox>
+                        <Label text="PNI" labelFor="PNI" />
+                        <Switch accessibleNameRef="regularSwitchLabel" customTextOff="No" customTextOn="Si" change="handleChange" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        </HBox>
+                        <Title text=""/>
+                        <HBox>
+                        <Label text="Oggetto della spesa:" labelFor="Oggetto della spesa:" />
+                        <Input value=""  />
+                        </HBox>
+                    </VBox>
+                    <VBox>
+                    <HBox>
+                        <Label text="ID Richiesta Assenso Preventivo:" labelFor="ID Richiesta Assenso Preventivo:" />
+                        <MultiInput id="IdAssPre"  key="{respModel>matricola}" editable="false" text="{respModel>cognome} {respModel>nome} {respModel>matricola}"/>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                    </HBox>
+                    <Title text=""/>
+                    <HBox>
+                        <Label text="Struttura Amministrativa Responsabile:" labelFor="Struttura Amministrativa Responsabile:" wrapping="true" />
+                         <Input   key="{respModel>matricola}" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" required="true"/>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        </HBox>
+                    </VBox>
+                   
+          
+</form:SimpleForm>
+
+                        <OverflowToolbar>
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized"  press="onNextButton" />
+                            <ToolbarSpacer/>
+                            <Button type="Emphasized" text="Salva in bozza"  />
+                        </OverflowToolbar>
+                    </WizardStep>
+
+                    <WizardStep id="idAttoAuth" validated="true" activate="optionalStepActivation" title="Atto Autorizzativo">
+                        <form:SimpleForm editable="true">
+                        <VBox>
+                            <HBox>
+                            <Label text="Natura Atto:" labelFor="Natura Atto:"/>
+                            <MultiComboBox id="naturAtto" items="{contrattiModel>/}" selectionFinish="onSelectionFinish">
+                                        <core:Item key="{}" text="{} {}" />
+                                    </MultiComboBox>
+                                    <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                            </HBox>
+                            <Title text=""/>
+                            <HBox visible="{/FilterSwitch1}">
+                            <Label text="Tipo Contratto:" labelFor="Tipo Contratto:"/>
+                             <MultiComboBox id="idTypeCon" items="{contrattiModel>/}" selectionFinish="onSelectionFinish">
+                                        <core:Item  key="{}" text="{} {}" />
+                                    </MultiComboBox>
+                                    <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                            </HBox>
+                        </VBox> 
+                         <VBox>
+                            <HBox  >
+                             <Label text="Numero Contratto/Atto:" labelFor="Numero Contratto/Atto:" />
+                         <MultiComboBox id="numConAtt" key="{respModel>matricola}" text="{respModel>cognome} {respModel>nome} {respModel>matricola}">
+                           <core:Item  key="{}" text="{} {}" />
+                                    </MultiComboBox>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                            </HBox >
+                             <Title text=""/>
+                            <HBox visible="{/FilterSwitch2}" >
+                             <Label text="Forma di aggiudicazione:" labelFor="Forma di aggiudizazione:" />
+                             <MultiComboBox id="formAgg"  items="{>/}" selectionFinish="onSelectionFinish">
+                             <core:Item  key="{}" text="{} {}" />
+                                    </MultiComboBox>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                             </HBox >
+                        </VBox>
+                        <VBox>
+                            <HBox>
+                            <Label text="Data Atto:" labelFor="Data Atto:" />
+                            <DatePicker id="dataAtt" displayFormat="dd/MM/yyyy" />
+                            </HBox>
+                        </VBox>  
+                        </form:SimpleForm>
+                        <OverflowToolbar>
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized"  press="onNextButton" />
+                            <ToolbarSpacer/>
+                            <Button type="Emphasized" text="Salva in bozza"  />
+                        </OverflowToolbar>
+                    </WizardStep>
+
+                    <WizardStep id="idTipoSpesa" validated="true" activate="optionalStepActivation" title="Tipologia ordinazione della spesa">
+                        <form:SimpleForm editable="true">
+                        <VBox>
+                            <HBox>
+                            <CheckBox id="CB1" text="Mandato Informatico" selected="false" select="onChangeSelect" />
+                            </HBox>
+                            </VBox>
+                            <VBox>
+                            <HBox >
+                            <CheckBox id="CB2" text="Ordine di accreditamento" selected="false" enabled="false"/>
+                            </HBox >
+                            </VBox>
+                            <VBox>
+                            <HBox>
+                            <CheckBox id="CB3" text="Note di Imputazione" selected="false"/>
+                            </HBox>
+                            </VBox>
+                        </form:SimpleForm>
+                        <OverflowToolbar>
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized"  press="onNextButton" />
+                            <ToolbarSpacer/>
+                            <Button type="Emphasized" text="Salva in bozza"  />
+                        </OverflowToolbar>
+                    </WizardStep>
+                    <WizardStep id="EsigiId" validated="true" activate="optionalStepActivation" title="Esigibilità">
+                    <Toolbar>
+                    <ToolbarSpacer/>
+                    <Title text="IPE-impegno pluriennale ad esigibilità" textAlign="Center"/>
+                    <ToolbarSpacer/>
+                    </Toolbar>
+                    	<IconTabBar
+		id="idIconTabBar1"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter text="Competenza" key="info">
+            	
+               
+                <content>
+             <Table class="sapUiSizeCompact" id="tableComp" includeItemInSelection="true"  visible="{/TableVisible}" selectionMode="MultiToggle"
+				ariaLabelledBy="title" >
+        
+        <headerToolbar>
+            
+            
+               <Toolbar height='auto'>
+    <content> 
+                
+               <VBox justifyContent="SpaceAround"> 
+              
+
+                <ToolbarSpacer />
+                <HBox justifyContent="SpaceAround">
+                <ToolbarSpacer />
+				 <Label text="Seleziona periodi:" labelFor="suggestionsMultiComboBox" vAlign="Inherit" class="sapUiLargeMarginStart"/>
+               <ComboBox id="suggestionsMultiComboBox" >
+               <items>
+							<core:Item text="2023-2024-2025-2026" />
+							<core:Item text="2027-2028-2029-2030" />
+							<core:Item text="2031-2033-2034-2035" />
+							<core:Item text="2036-2037-2038-2039" />
+							<core:Item text="2040-2041-2042-2043" />
+							<core:Item text="2044-2045-2046-2047" />
+							<core:Item text="2048-2049-2050-2051" />
+							<core:Item text="2052-2053-2054-2056" />
+							<core:Item text="2057-2058-2059-2060" />
+							<core:Item text="2061-2062-2063-2064" />
+							
+						</items>
+                </ComboBox> 
+               <Button id="idPNI" type="Emphasized" icon="sap-icon://add" text="Aggiungi PNI/Autorizzazione" press="onOpenDialog1"/>
+               <Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart"/>
+               <Button type="Emphasized" icon="sap-icon://excel-attachment" text="Esporta"/>
+               <Button type="Emphasized" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
+               </HBox>
+               
+               <HBox class="sapUiSmallMarginTop">
+               <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
+               <Text text=""/>
+               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit" class="sapUiLargeMarginStart"/>
+               <Text text=""/>
+               </HBox>
+               </VBox>
+              </content>
+          </Toolbar>
+            </headerToolbar>
+   
+                    <!-- <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
+               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/> -->
+       
+<!--        
+			 <OverflowToolbar>
+                <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
+               <Input text="{}" editable="false"/>
+               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/>
+                <Input text="{}" editable="false"/>
+                </OverflowToolbar>  -->
+           
+         
+               <columns>
+            <Column demandPopin="true" hAlign="Center">
+                <Label text="Clausola" />
+                </Column>
+                <Column demandPopin="true" hAlign="Center">
+                <Label text="Disponibilità PNI" />
+                </Column >
+                <Column demandPopin="true" hAlign="Center">
+                <Label text="2023" />
+                </Column>
+                <Column demandPopin="true" hAlign="Center">
+                <Label text="Disponibilità di cassa" />
+            </Column>
+            <Column demandPopin="true" hAlign="Center">
+                <Label text="Clausola" />
+                </Column>
+                <Column demandPopin="true" hAlign="Center">
+                <Label text="Disponibilità PNI" />
+                </Column>
+                <Column demandPopin="true" hAlign="Center">
+                <Label text="2024" />
+                </Column>
+                <Column demandPopin="true" hAlign="Center">
+                <Label text="Disponibilità di cassa" />
+            </Column>
+             <Column demandPopin="true" hAlign="Center">
+                <Label text="Clausola" />
+                 </Column>
+                 <Column demandPopin="true" hAlign="Center">
+                <Label text="Disponibilità PNI" />
+                 </Column>
+                 <Column demandPopin="true" hAlign="Center">
+                <Label text="2025" />
+                 </Column>
+                 <Column demandPopin="true" hAlign="Center">
+                <Label text="Disponibilità di cassa" />
+            </Column>
+             <Column demandPopin="true" hAlign="Center">
+                <Label text="Clausola" />
+                 </Column>
+                 <Column demandPopin="true" hAlign="Center">
+                <Label text="Disponibilità PNI" />
+                 </Column>
+                 <Column demandPopin="true" hAlign="Center">
+                <Label text="2026" />
+                 </Column>
+                 <Column demandPopin="true" hAlign="Center">
+                <Label text="Disponibilità di cassa" />
+            </Column>
+        </columns>
+        <ColumnListItem>
+            <Text text="{>ZcodIsin}" />
+            <Text text="{>Ztipo}" />
+            <Text text="{>Zsottotipo}" />
+            <Text text="{>Ztassoint}" />
+            <Text text="{>ZdataInizio}" />
+            <Text text="{>Zfbdt}" />
+            <Text text="{>ZdataPag}" />
+            <Text text="{>ZcompRes}" wrapping="false"/>
+            <Text text="{>ZimpoTitolo}" />
+        </ColumnListItem>
+      
+    </Table>
+    </content>
+    
+			</IconTabFilter>
+			<IconTabFilter text="Residui" key="results" >
+				<Table scrollX="true" class="sapUiSizeCompact" id="HeaderITB2" includeItemInSelection="true" mode="MultiSelect" visible="{/TableVisible}">
+                 
+        <headerToolbar>
+        
+            <OverflowToolbar>
+                <content>
+                <ToolbarSpacer />
+               <Button id="idERP" type="Emphasized" icon="sap-icon://add" text="Aggiungi ERP/PNI/Autorizzazione" press="onOpenDialog2"/>
+               <Button type="Emphasized" icon="sap-icon://delete" text="Elimina"/>
+               <Button type="Emphasized" icon="sap-icon://excel-attachment" text="Esporta"/>
+               <Button type="Emphasized" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
+               </content>
+            </OverflowToolbar>
+            </headerToolbar>
+<!-- <Toolbar>
+               <VBox>
+               <HBox>
+               <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
+               <Input value="" editable="fale"/>
+               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/>
+                <Input value="" editable="fale"/>
+               </HBox>
+               </VBox>
+               </Toolbar> -->
+                    <!-- <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
+               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/> -->
+               <columns>
+            <Column width="10%">
+                <Label text="Codice ISIN" />
+            </Column>
+            <Column width="10%">
+                <Label text="Tipologia" />
+            </Column>
+            <Column width="10%">
+                <Label text="Sottotipologia" />
+            </Column>
+            <Column width="13%">
+                <Label text="Tasso di Interesse" />
+            </Column>
+            <Column width="10%">
+                <Label text="Data inizio" />
+            </Column>
+            <Column width="13%">
+                <Label text="Data Scadenza" />
+            </Column>
+            <Column width="13%">
+                <Label text="Data Pagamento" />
+            </Column>
+            <Column width="4%">
+                <Label text="C/R" />
+            </Column>
+            <Column width="10%">
+                <Label text="Importo Titolo" />
+            </Column>
+        </columns>
+        <ColumnListItem>
+            <Text text="{HeaderITB>ZcodIsin}" />
+            <Text text="{HeaderITB>Ztipo}" />
+            <Text text="{HeaderITB>Zsottotipo}" />
+            <Text text="{HeaderITB>Ztassoint}" />
+            <Text text="{HeaderITB>ZdataInizio}" />
+            <Text text="{HeaderITB>Zfbdt}" />
+            <Text text="{HeaderITB>ZdataPag}" />
+            <Text text="{HeaderITB>ZcompRes}" wrapping="false"/>
+            <Text text="{HeaderITB>ZimpoTitolo}" />
+        </ColumnListItem>
+    </Table>
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+                        <OverflowToolbar>
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <ToolbarSpacer/>
+                            <Button text="Salva IPE" type="Emphasized"  press="" enabled="false"/>
+                        </OverflowToolbar>
+                    </WizardStep>
+                </Wizard>
+            </f:content>
+
+            <f:footer>
+                <!-- <OverflowToolbar>
+                    <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                    <Button text="Avanti" type="Emphasized"  press="onNextButton" />
+                    <ToolbarSpacer />
+                    <Button type="Emphasized" text="Preimposta NI"  press="onAcceptDati" id="PreimpostaNI" />
+                </OverflowToolbar> -->
+            </f:footer>
+        </f:DynamicPage>
+    </NavContainer>
+</mvc:View>

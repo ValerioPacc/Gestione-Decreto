@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZODATACOSP_DECRETO_IMPEGNO_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="StatoDecreto" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Codice"/>
+                </Key>
+                <Property Name="Codice" Type="Edm.String" Nullable="false"/>
+                <Property Name="Descrizione" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="TipologiaImpegno" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Codice"/>
+                </Key>
+                <Property Name="Codice" Type="Edm.String" Nullable="false"/>
+                <Property Name="Descrizione" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="DecretoImpegno" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Mandt"/>
+                    <PropertyRef Name="Ente"/>
+                    <PropertyRef Name="AreaFinanziaria"/>
+                    <PropertyRef Name="RegistratoBozza"/>
+                    <PropertyRef Name="Esercizio"/>
+                    <PropertyRef Name="Amministrazione"/>
+                    <PropertyRef Name="UfficioLiv1"/>
+                    <PropertyRef Name="UfficioLiv2"/>
+                    <PropertyRef Name="NumeroDecreto"/>
+                    <PropertyRef Name="ChiaveGiustificativo"/>
+                </Key>
+                <Property Name="PosizioneFinanziaria" Type="Edm.String" Nullable="false" MaxLength="24" sap:label="Commitment Item"/>
+                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client"/>
+                <Property Name="StrutturaAmmResp" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Funds center"/>
+                <Property Name="Ente" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Company Code"/>
+                <Property Name="AreaFinanziaria" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="FM Area"/>
+                <Property Name="CompetenzaResidui" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="RegistratoBozza" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="DocumentoAcquisti" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Purchasing Doc."/>
+                <Property Name="Esercizio" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Fiscal Year"/>
+                <Property Name="ContrattoOrdine" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Amministrazione" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="Cig" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="UfficioLiv1" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Beneficiario" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Vendor"/>
+                <Property Name="UfficioLiv2" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="CodiceIpe" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="NumeroDecreto" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="NumeroClausola" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ChiaveGiustificativo" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="TipologiaImpegno" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DataDecreto" Type="Edm.DateTime" Precision="7"/>
+                <Property Name="NProtocolloAmm" Type="Edm.String" MaxLength="20"/>
+                <Property Name="DataProtocolloAmm" Type="Edm.DateTime" Precision="7"/>
+                <Property Name="Ragioneria" Type="Edm.String" MaxLength="4"/>
+                <Property Name="NProtocolloRag" Type="Edm.String" MaxLength="7"/>
+                <Property Name="DataProtocolloRag" Type="Edm.DateTime" Precision="7"/>
+                <Property Name="CodiceUfficio" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ControlloCorteConti" Type="Edm.String" MaxLength="1"/>
+                <Property Name="NMi" Type="Edm.String" MaxLength="33"/>
+                <Property Name="DataCreazione" Type="Edm.String" MaxLength="19"/>
+                <Property Name="UtenteCreazione" Type="Edm.String" MaxLength="20"/>
+                <Property Name="UtenteModifica" Type="Edm.String" MaxLength="20"/>
+                <Property Name="DataModifica" Type="Edm.String" MaxLength="19"/>
+                <Property Name="CodiceStato" Type="Edm.String" MaxLength="2"/>
+                <Property Name="UtenteFirmatario" Type="Edm.String" MaxLength="20"/>
+                <Property Name="DataFirma" Type="Edm.DateTime" Precision="7"/>
+                <Property Name="DirigenteDirettoreFirmatario" Type="Edm.String" MaxLength="50"/>
+                <Property Name="UtenteRgs" Type="Edm.String" MaxLength="20"/>
+                <Property Name="DataModificaUtenteRGS" Type="Edm.DateTime" Precision="7"/>
+                <Property Name="DocumentazioneAgg" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DataDocumentazioneAgg" Type="Edm.DateTime" Precision="7"/>
+                <Property Name="UtenteDocumentazioneAgg" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Riscontro" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DataRiscontro" Type="Edm.DateTime" Precision="7"/>
+                <Property Name="UtenteRiscontro" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Osservazioni" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DataOsservazioni" Type="Edm.DateTime" Precision="7"/>
+                <Property Name="UtenteOsservazioni" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FlussiEsterni" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Richiamo" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DataRichiamo" Type="Edm.DateTime" Precision="7"/>
+                <Property Name="UtenteRichiamo" Type="Edm.String" MaxLength="20"/>
+                <Property Name="NumeroIpe" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Cancellato" Type="Edm.String" MaxLength="1"/>
+                <Property Name="NumeroIpeBozza" Type="Edm.String" MaxLength="3"/>
+                <Property Name="NumeroIpeRegistrata" Type="Edm.String" MaxLength="3"/>
+            </EntityType>
+            <EntityContainer Name="ZODATACOSP_DECRETO_IMPEGNO_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="StatoDecretoSet" EntityType="ZODATACOSP_DECRETO_IMPEGNO_SRV.StatoDecreto" sap:content-version="1"/>
+                <EntitySet Name="TipologiaImpegnoSet" EntityType="ZODATACOSP_DECRETO_IMPEGNO_SRV.TipologiaImpegno" sap:content-version="1"/>
+                <EntitySet Name="DecretoImpegnoSet" EntityType="ZODATACOSP_DECRETO_IMPEGNO_SRV.DecretoImpegno" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://10.38.125.80:8000/sap/opu/odata/sap/ZODATACOSP_DECRETO_IMPEGNO_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://10.38.125.80:8000/sap/opu/odata/sap/ZODATACOSP_DECRETO_IMPEGNO_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

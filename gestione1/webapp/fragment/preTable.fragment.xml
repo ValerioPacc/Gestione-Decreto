@@ -1,0 +1,122 @@
+    <core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc"
+
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:u="sap.ui.unified"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:menu="sap.m.MenuItem"
+    xmlns:menBtn="sap.m.Menu" height="100%"
+    xmlns="sap.ui.table"
+	xmlns:c="sap.ui.core"
+	xmlns:m="sap.m"
+    >
+			<Table
+				selectionMode="MultiToggle"
+				visibleRowCount="7"
+				ariaLabelledBy="title">
+				
+				<columns>
+					<Column width="11rem">
+						<m:Label text="Esegibilità Annuale" />
+						<template>
+							<m:Text text="{}" wrapping="false" />
+						</template>
+					</Column>
+					<Column width="11rem">
+						<m:Label text="2023" />
+						<template>
+							<m:Input value="{}"/>
+						</template>
+					</Column>
+					<Column width="6rem" hAlign="End">
+						<m:Label text="Previsioni PNI" />
+						<template>
+							<m:Label text="{}" />
+						</template>
+					</Column>
+					<Column width="9rem">
+						<m:Label text="2024" />
+						<template>
+							<m:ObjectStatus text="{}" state="{
+								
+							}"/>
+						</template>
+					</Column>
+					<Column width="">
+						<m:Label text="Previsioni PNI" />
+						<template>
+							<u:Currency value="{}" currency="{}"/>
+						</template>
+					</Column>
+					<Column width="12rem">
+						<m:Label text="2025" />
+						<template>
+							<m:ComboBox value="{}" items="{/}">
+								<c:Item text="{}"/>
+							</m:ComboBox>
+						</template>
+					</Column>
+					<Column width="9rem">
+						<m:Label text="2026" />
+						<template>
+							<m:Link text="" href="{}" target="_blank"/>
+						</template>
+					</Column>
+					<Column width="9rem">
+						<m:Label text="Previsioni PNI" />
+						<template>
+							<m:Button text="Show Details" />
+						</template>
+					</Column>
+					<Column width="7rem">
+						<m:Label text="2027" />
+						<template>
+							<m:CheckBox selected="{
+							
+							}"/>
+						</template>
+					</Column>
+					<Column width="12rem">
+						<m:Label text="Previsioni PNI" />
+						<template>
+							<m:Select selectedKey="{}" items="{/}">
+								<c:Item text="{}" key="{}"/>
+							</m:Select>
+						</template>
+					</Column>
+					<Column width="12rem">
+						<m:Label text="2028" />
+						<template>
+							<m:MultiInput
+								value="{}"
+								tokens="{}"
+								suggestionItems="{
+									
+								}"
+								showValueHelp="false"
+								>
+								<m:tokens>
+									<m:Token key="{}" text="{}"/>
+								</m:tokens>
+								<m:suggestionItems>
+									<c:Item key="{}" text="{}" />
+								</m:suggestionItems>
+							</m:MultiInput>
+						</template>
+					</Column>
+					<Column width="6rem" hAlign="Center">
+						<m:Label text="Previsioni PNI" />
+						<template>
+							<c:Icon src="{
+							
+							}"/>
+						</template>
+					</Column>
+					
+				</columns>
+			</Table>
+	
+    </core:FragmentDefinition>

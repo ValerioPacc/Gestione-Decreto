@@ -1,0 +1,185 @@
+{
+    "_version": "1.48.0",
+    "sap.app": {
+        "id": "gestione1",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.8.3",
+            "toolsId": "9787de22-d0c6-4a93-bbf2-ee2f6966f822"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZODATACOSP_DECRETO_IMPEGNO_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.108.4",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "gestione1.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "gestione1.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "View1",
+                    "pattern": "",
+                    "greedy": false,
+                    "target": "TargetView1"
+                },
+                {
+                    "name": "Decreto",
+                    "pattern": "Decreto",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "TargetDecreto"
+                },
+                {
+                    "name": "registraIPE",
+                    "pattern": "registraIPE",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "TargetregistraIPE"
+                },
+                {
+                    "name": "wizard",
+                    "pattern": "wizard",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "Targetwizard"
+                },
+                {
+                    "name": "dettagliDE",
+                    "pattern": "dettagliDE",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "TargetdettagliDE"
+                }
+            ],
+            "targets": {
+                "TargetView1": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "View1",
+                    "viewName": "View1",
+                    "viewLevel": 1
+                },
+                "TargetDecreto": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Decreto",
+                    "viewName": "Decreto",
+                    "viewLevel": 1
+                },
+                "TargetregistraIPE": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "registraIPE",
+                    "viewName": "registraIPE",
+                    "viewLevel": 1
+                },
+                "Targetwizard": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "wizard",
+                    "viewName": "wizard",
+                    "viewLevel": 1
+                },
+                "TargetdettagliDE": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "dettagliDE",
+                    "viewName": "dettagliDE",
+                    "viewLevel": 1
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "gestione1.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    }
+}

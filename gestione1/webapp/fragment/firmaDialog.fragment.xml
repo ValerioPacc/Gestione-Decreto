@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog  contentWidth="40%"  title="Vuoi registrare il Decreto in provvisorio?" showCancelButton="false" >
+    <HBox>
+                <VBox>
+                <Label text="Clausola" vAlign="Inherit" class="sapUiLargeMarginEnd" width="120%"/>
+                <Label text="Importo clausola" vAlign="Inherit" class="sapUiMediumMarginTop"/>
+                <Label text="PNI" vAlign="Inherit" class="sapUiMediumMarginTop"/>
+                </VBox>
+              
+                <VBox class="sapUiLargeMarginBegin">
+               <Input text="{}" class="sapUiLargeMarginBegin"/>
+               <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <Input text="{}" class="sapUiLargeMarginBegin"/>
+                </VBox>
+</HBox>
+    <beginButton>
+       <Button text="OK" type="Emphasized" press="onSuccessMessageBoxPress"/>
+      </beginButton>
+      <endButton>
+        <Button text="Annulla" type="Emphasized" press="onBackButton2"/>
+      </endButton>
+   </Dialog>
+</core:FragmentDefinition>

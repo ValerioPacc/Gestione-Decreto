@@ -1,0 +1,97 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+     <Dialog id="impPre"  draggable="true" showHeader="true" titleAlignment="Center"
+      afterClose="onAfterClose" contentWidth="100%" contentHeight="100%">
+      
+     
+                <content>
+                <OverflowToolbar height="100%">
+                
+                    <ToolbarSpacer />
+				 <Label text="Seleziona periodi:" labelFor="suggestionsMultiComboBox" vAlign="Inherit"/>
+               <ComboBox id="suggestionsMultiComboBox2" >
+               <items>
+							<core:Item text="2023-2024-2025-2026" />
+							<core:Item text="2027-2028-2029-2030" />
+							<core:Item text="2031-2033-2034-2035" />
+							<core:Item text="2036-2037-2038-2039" />
+							<core:Item text="2040-2041-2042-2043" />
+							<core:Item text="2044-2045-2046-2047" />
+							<core:Item text="2048-2049-2050-2051" />
+							<core:Item text="2052-2053-2054-2056" />
+							<core:Item text="2057-2058-2059-2060" />
+							<core:Item text="2061-2062-2063-2064" />
+							
+						</items>
+                </ComboBox> 
+              
+               <Button type="Emphasized" icon="sap-icon://excel-attachment" text="Esporta"/>
+               <Button type="Emphasized" icon="sap-icon://journey-change" text="Ribalta previsioni" />
+               
+            </OverflowToolbar>
+             <HBox>
+                <VBox>
+                <Label text="Clausola" vAlign="Inherit" class="sapUiLargeMarginEnd" width="120%"/>
+                <Label text="Importo clausola" vAlign="Inherit" class="sapUiMediumMarginTop"/>
+                <Label text="PNI" vAlign="Inherit" class="sapUiMediumMarginTop"/>
+                </VBox>
+              
+                <VBox class="sapUiLargeMarginBegin">
+               <Input text="{}" class="sapUiLargeMarginBegin"/>
+               <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <Input text="{}" class="sapUiLargeMarginBegin"/>
+
+                </VBox>
+
+                <VBox class="sapUiLargeMarginBegin">
+               <Input text="{}" class="sapUiLargeMarginBegin"/>
+               <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <Input text="{}" class="sapUiLargeMarginBegin"/>
+                </VBox>
+                
+                <VBox class="sapUiLargeMarginBegin">
+               <Input text="{}" class="sapUiLargeMarginBegin"/>
+               <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <Input text="{}" class="sapUiLargeMarginBegin"/>
+                </VBox>
+
+                <VBox class="sapUiLargeMarginBegin">
+               <Input text="{}" class="sapUiLargeMarginBegin"/>
+               <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <Input text="{}" class="sapUiLargeMarginBegin"/>
+                </VBox>
+
+                
+                
+                </HBox>
+               <!-- <HBox>
+                <Label text="Importo clausola" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+               <Input text="{}" class="sapUiSmallMarginStart"/>
+               <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <Input text="{}" class="sapUiSmallMarginStart"/>
+                <Label text="" class="sapUiLargeMarginEnd"/>
+               <Input text="" class="sapUiSmallMarginStart"/>
+                <Label text="" class="sapUiLargeMarginEnd"/>
+               <Input text="" class="sapUiSmallMarginStart"/>
+                </HBox>
+                <HBox>
+                <Label text="PNI" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+               <Input text="{}" class="sapUiSmallMarginStart"/>
+               <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <Input text="{}" class="sapUiSmallMarginStart"/>
+                <Label text="" class="sapUiLargeMarginEnd"/>
+               <Input text="" class="sapUiSmallMarginStart"/>
+                <Label text="" class="sapUiLargeMarginEnd"/>
+               <Input text="" class="sapUiSmallMarginStart"/>
+                </HBox> -->
+                <core:Fragment fragmentName="gestione1.fragment.preTable" type="XML" />
+                </content>
+                
+                
+      <beginButton>
+       <Button text="Annulla" type="Emphasized" press="onCloseDialog4"/>
+      </beginButton>
+      <endButton>
+        <Button text="Conferma" type="Emphasized" press=""/>
+      </endButton>
+   </Dialog>
+</core:FragmentDefinition>

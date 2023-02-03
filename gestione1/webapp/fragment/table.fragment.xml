@@ -1,0 +1,64 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:u="sap.ui.unified"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:menu="sap.m.MenuItem"
+    xmlns:menBtn="sap.m.Menu" height="100%">
+    <Table class="sapUiSizeCompact" id="DecretoImpegno" items="{DecretoImpegno>/}" includeItemInSelection="true"  mode="SingleSelectLeft" >
+        <headerToolbar>
+            <OverflowToolbar>
+                <content>
+                    <ToolbarSpacer />
+                    <Button icon="sap-icon://display" id="DettagliDE" press="onNavToDettagliDE" type="Emphasized" text="Dettagli Decreto di Impegno" />
+                    <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column demandPopin="true" hAlign="Center" >
+                <Label text="Esercizio Decreto" />
+            </Column>
+            <Column demandPopin="true" hAlign="Center">
+                <Label text="Amminastrazione" />
+            </Column>
+            <Column demandPopin="true" hAlign="Center">
+                <Label text="Uff. I Livello" />
+            </Column>
+            <Column demandPopin="true" hAlign="Center">
+                <Label text="Uff. II Livello" />
+            </Column>
+            <Column demandPopin="true" hAlign="Center">
+                <Label text="N. Decreto" />
+            </Column>
+            <Column demandPopin="true" hAlign="Center">
+                <Label text="Data Decreto" />
+            </Column>
+            <Column demandPopin="true" hAlign="Center">
+                <Label text="Ragioneria" />
+            </Column>
+            <Column demandPopin="true" hAlign="Center">
+                <Label text="Tipologia impegno " />
+            </Column>
+             <Column demandPopin="true" hAlign="Center">
+                <Label text="Stato Decreto" />
+            </Column>
+        </columns>
+        <ColumnListItem type="Active">
+            <Text text="{DecretoImpegno>Esercizio}" />
+            <Text text="{DecretoImpegno>Amministrazione}" />
+            <Text text="{DecretoImpegno>UfficioLiv1}" />
+            <Text text="{DecretoImpegno>UfficioLiv1}" />
+            <Text text="{DecretoImpegno>NumeroDecreto}" />
+            <Text text="{path:'DecretoImpegno>DataDecreto', formatter:'.formatter.convert'}" />
+            <Text text="{DecretoImpegno>Ragioneria}" />
+            <Text text="{DecretoImpegno>TipologiaImpegno}" />
+            <Text text="{DecretoImpegno>CodiceStato}" />
+
+        </ColumnListItem>
+    </Table>
+</core:FragmentDefinition>

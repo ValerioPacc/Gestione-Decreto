@@ -1,0 +1,91 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:u="sap.ui.unified"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:menu="sap.m.MenuItem"
+    xmlns:menBtn="sap.m.Menu"
+    height="100%"
+    controllerName="gestione1.controller.Decreto"
+>
+    <App id="app">
+        <f:DynamicPage showFooter="true">
+            <f:title>
+                <f:DynamicPageTitle>
+                    <f:heading>
+                        <Title text="Dati del Decreto" />
+                    </f:heading>
+                </f:DynamicPageTitle>
+            </f:title>
+            <f:header>
+                <f:DynamicPageHeader pinnable="false">
+                    <fb:FilterBar showClearOnFB="false" showFilterConfiguration="false" useToolbar="false"  showGoButton="false">
+                        <fb:filterGroupItems>
+                        <fb:FilterGroupItem groupName="gruppo2" name="TypeI" label="{i18n>typeI}" tooltip="suggestion" visibleInFilterBar="true" mandatory="true">
+                                <fb:control>
+                                    <ComboBox id="TypeI" items="{path: '/DecretoImpegnoSet', sorter: { path: 'TipologiaImpegno' }}">
+                                        <core:Item id="typeI1" key="{TipologiaImpegno}" text="{TipologiaImpegno}" />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="gruppo2" name="Esercizio" label="{i18n>esercizio}" tooltip="suggestion" visibleInFilterBar="true" mandatory="true">
+                                <fb:control>
+                                    <ComboBox id="es_decreto" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}">
+                                        <core:Item id="es_decreto1" key="{Esercizio}" text="{Esercizio}" />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="gruppo2" id="amministrazioneED" visibleInFilterBar="true" name="amministrazioneED" label="{i18n>amministrazioneED}" mandatory="true">
+                                <fb:control>
+                                     <ComboBox id="AmministrazioneED" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Amministrazione' }}">
+                                     <core:Item id="amministrazioneED1" key="{Amministrazione}" text="{Amministrazione}" />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="UffApp" visibleInFilterBar="true" name="UffApp" groupName="Group1" label="{i18n>UffApp}">
+                                <fb:control>
+                                     <ComboBox  id="UffApp1" Items="{path: '/DecretoImpegnoSet', sorter: { path: 'UfficioAppartenenza' }}">
+                                      <core:Item key="{UfficioAppartenenza}" text="{UfficioAppartenenza}"/>
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+							<fb:FilterGroupItem id="DataDE" visibleInFilterBar="true" name="DataDE" groupName="Group1" label="{i18n>dataDE}">
+                                <fb:control>
+                                    <DatePicker id="DataDE1" displayFormat="dd/MM/yyyy" />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+							<fb:FilterGroupItem id="numProtocolloAmma" visibleInFilterBar="true" name="numProtocolloAmma" groupName="Group1" label="{i18n>numProtocolloAmma}">
+                                <fb:control>
+                                   <Input showSuggestion="true" id="numProtocolloAmma1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloAmm' }}">
+                                      <core:Item key="{NProtocolloAmm}" text="{NProtocolloAmm}"/>
+                                    </Input>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="dataProtocolloAmm" visibleInFilterBar="true" name="dataProtocolloAmm" groupName="Group1" label="{i18n>dataProtocolloAmm}">
+                                <fb:control>
+                                    <DatePicker id="dataProtocolloAmm1" displayFormat="dd/MM/yyyy" />
+                                </fb:control>
+                                </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                    <CheckBox text="Controllo preventivo Corte dei conti" selected="false" wrapping="true" />
+                </f:DynamicPageHeader>
+            </f:header>
+
+            <f:content>
+             </f:content>
+            <f:footer>
+                <OverflowToolbar>
+                    <Button type="Emphasized" text="{i18n>Indietro}" press="onBackButton" />
+                    <ToolbarSpacer/>
+                    <Button type="Emphasized" text="{i18n>SalvaBozza}" press="navToRegistraIPE" />
+                </OverflowToolbar>
+            </f:footer>
+        </f:DynamicPage>
+    </App>
+</mvc:View>

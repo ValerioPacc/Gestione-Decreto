@@ -1,0 +1,72 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:u="sap.ui.unified"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:menu="sap.m.MenuItem"
+    xmlns:menBtn="sap.m.Menu" height="100%">
+
+ 
+            <Table class="sapUiSizeCompact" id="tab" includeItemInSelection="true" showFooter="true" >
+        <headerToolbar>
+        
+            <OverflowToolbar>
+                <content>
+                <Title text="Lista Decreti"/>
+                    <ToolbarSpacer />
+                    <Button icon="sap-icon://display" id="DettagliDE" type="Emphasized" text="Dettagli Decreto di Impegno" press="navToDettagliDE" />
+                    <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column width="14%">
+                <Label text="Esercizio Decreto" />
+            </Column>
+            <Column width="12%">
+                <Label text="Amminastrazione" />
+            </Column>
+            <Column width="12%">
+                <Label text="Uff. I Livello" />
+            </Column>
+            <Column width="12%">
+                <Label text="Uff. II Livello" />
+            </Column>
+            <Column width="12%">
+                <Label text="N. Decreto" />
+            </Column>
+            <Column width="10%">
+                <Label text="Data Decreto" />
+            </Column>
+            <Column width="10%">
+                <Label text="Ragioneria" />
+            </Column>
+            <Column width="14%">
+                <Label text="Tipologia impegno " />
+            </Column>
+             <Column width="12%">
+                <Label text="Stato Decreto" />
+            </Column>
+        </columns>
+        <ColumnListItem>
+            <Text text="{Esercizio Decreto}" />
+            <Text text="{Amminastrazione}" />
+            <Text text="{Uff. I Livello}" />
+            <Text text="{Uff. II Livello}" />
+            <Text text="{N. Decreto}" />
+            <Text text="{Data Decreto}" />
+            <Text text="{Ragioneria}" />
+            <Text text="{Tipologia impegno}" />
+            <Text text="{Stato Decreto}" /> 
+
+        </ColumnListItem>
+       
+       
+    </Table>
+ 
+            
+</core:FragmentDefinition>

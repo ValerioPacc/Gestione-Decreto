@@ -1,0 +1,73 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:u="sap.ui.unified"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:menu="sap.m.MenuItem"
+    xmlns:menBtn="sap.m.Menu"
+    xmlns:tnt="sap.tnt"
+    height="100%"
+    controllerName="gestione1.controller.registraIPE"
+>
+    <f:DynamicPage id="dynamicPageId" showFooter="true">
+        <f:header>
+            <f:DynamicPageHeader pinnable="false">
+                    <layout:VerticalLayout class="sapUiMediumMarginEnd">
+                        <Title text="Dati Decreto:" />
+                        <layout:HorizontalLayout wrapping="true">
+                        <Label text="Esercizio Decreto:" class="sapUiSmallMarginEnd" />
+                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                    <Label text="Amministrazione:" class="sapUiSmallMarginEnd" />
+                    <Text  text="" class="sapUiMediumMarginEnd"/>
+                     <Label text="N.Bozza:" class="sapUiSmallMarginEnd"/>
+                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                    <Label text="Data Decreto:" class="sapUiSmallMarginEnd" />
+                    <Text  text="" class="sapUiMediumMarginEnd"/>
+                     <Label text="Ragioneria:" class="sapUiSmallMarginEnd" />
+                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                    <Label text="Stato Decreto:" class="sapUiSmallMarginEnd"  />
+                    <Text  text="" class="sapUiMediumMarginEnd"/>
+               </layout:HorizontalLayout >
+                </layout:VerticalLayout>
+           
+            </f:DynamicPageHeader>
+           
+        </f:header> 
+      
+       <f:content>
+       <!-- <HBox>
+      	<Title text="Registrazione IPE" class="header"/>
+        </HBox> -->
+        <IconTabBar id="idIconTabBar" class="sapUiLargeMarginStart" select="onSelect" alignItems="End" >
+                <items>
+                <IconTabFilter icon="sap-icon://list" text="Lista IPE"  > 
+                 <OverflowToolbar height="50%" width="100%">
+       <ToolbarSpacer />
+                            <Button align="Center" type="Emphasized" text="Registra IPE Apertura" width="30%" class="button"  press="navToWizard"/>
+                           
+                            <Button align="Center" type="Emphasized" text="Registra IPE di Variazione" width="30%" press="navToWizard"/>
+                            
+                            <Button align="Center" type="Emphasized" text="Registra Atto di Annullamento" width="30%" press="navToView1"/>
+                    <ToolbarSpacer />   
+                        </OverflowToolbar>
+                </IconTabFilter>
+                </items>
+            </IconTabBar>
+            
+                        </f:content>
+
+        
+        <f:footer>
+            <OverflowToolbar>
+                <Button type="Emphasized" text="{i18n>Indietro}" press="onBackButton1" width="7%" />
+                <ToolbarSpacer/>
+                <Button type="Emphasized" text="{i18n>RegDEprov}" press="onSuccessMessageDialogPress"  width="20%"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

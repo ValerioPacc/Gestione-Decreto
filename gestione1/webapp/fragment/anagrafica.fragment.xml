@@ -1,0 +1,287 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+     <Dialog id="Anagrafica"  draggable="true" showHeader="true" titleAlignment="Start"
+      afterClose="onAfterClose" contentWidth="100%" contentHeight="100%">
+
+
+       <f:Form editable="false" title="Dati Anagrafica Bancario">
+         <f:layout>
+            <f:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/>
+         </f:layout>
+         <f:formContainers>
+            <f:FormContainer>
+               <f:FormElement visible="{dialogModel>/GgVisible}">
+                  <f:label>
+                     <Label text="Paese" required= "true"/>
+                  </f:label>
+                  <f:fields>
+                     <MultiInput id="inputPaese" class="validateFilter" value="{}" width="10%">
+                     <core:Item key="{comboBox>}" text="{comboBox>}" />
+                     </MultiInput>
+                      <Input id="input" class="validateFilter" value="{}"></Input>
+                  </f:fields>
+               </f:FormElement>
+               <f:FormElement>
+                        <f:label>
+                            <Label text="Cat.Beneficiario" required= "true"/>
+                        </f:label>
+                        <f:fields>
+                        <Select selectedKey="" items="{>/}">
+                        <core:Item key="{}" text="{}" />
+                        </Select>
+                        </f:fields>
+                </f:FormElement>
+                <f:FormElement visible="{dialogModel>/GgVisible}">
+                  <f:label>
+                     <Label text="Documentazione Beneficiario" required= "true"/>
+                  </f:label>
+                  <f:fields>
+                     <Input id="docBen" class="validateFilter" value="{}">
+                     </Input>
+                  </f:fields>
+               </f:FormElement>
+               <f:FormElement visible="{dialogModel>/GgVisible}">
+                  <f:label>
+                     <Label text="Nome" required= "true"/>
+                  </f:label>
+                  <f:fields>
+                     <Input id="inputNome" class="validateFilter" value="{}">
+                     </Input>
+                  </f:fields>
+               </f:FormElement>
+               <f:FormElement visible="{dialogModel>/GgVisible}">
+                  <f:label>
+                     <Label text="Cognome" required= "true"/>
+                  </f:label>
+                  <f:fields>
+                     <Input id="inputCog" class="validateFilter" value="{}">
+                     </Input>
+                  </f:fields>
+               </f:FormElement>
+               <f:FormElement label="Via" visible="{dialogModel>/GgVisible}">
+               <f:label>
+                     <Label  required= "true"/>
+                   </f:label>
+                  <f:fields>
+                     <Input id="inputVia" class="validateFilter" value="{}">
+                     </Input>
+                  </f:fields>
+                    <Input class="validateFilter" value="{}" width="30%">
+                     </Input>
+               </f:FormElement>
+                <f:FormElement visible="{dialogModel>/GgVisible}">
+                  <f:label>
+                     <Label text="Località" required= "true" labelFor="inputLoc"/>
+                    
+                  </f:label>
+                  <f:fields>
+                     <Input id="inputLoc" class="validateFilter" value="{}" width="120%">
+                     </Input>
+                     <Input id="inputReg1" class="validateFilter" value="{}" >
+                     </Input>
+                     </f:fields>
+                     <Input class="validateFilter" value="{}" width="120%" >
+                     </Input>
+                  
+               </f:FormElement>
+                 <f:FormElement visible="{dialogModel>/GgVisible}">
+                  <f:label>
+                     <Label text="CAP" required= "true"/>
+                  </f:label>
+                  <f:fields>
+                     <Input id="inputCAP" class="validateFilter" value="{}">
+                     </Input>
+                  </f:fields>
+               </f:FormElement>
+              
+  </f:FormContainer>
+         </f:formContainers>
+      </f:Form>
+               <f:Form editable="false" title="Dati Fiscali Beneficiario ">
+         <f:layout>
+            <f:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/>
+         </f:layout>
+         <f:formContainers>
+            <f:FormContainer>
+                <f:FormElement>
+                        <f:label>
+                            <Label text="Codice Fiscale" required= "true"/>
+                        </f:label>
+                        <f:fields>
+                        <Input id="inputCF" class="validateFilter" value="{}" >
+                     </Input>
+                        </f:fields>
+                </f:FormElement>
+                <f:FormElement>
+                        <f:label>
+                            <Label text="Partita IVA" />
+                        </f:label>
+                        <f:fields>
+                        <Input id="inputPiva" class="validateFilter" value="{}" >
+                     </Input>
+                        </f:fields>
+                </f:FormElement>
+                <f:FormElement>
+                        <f:label>
+                            <Label text="Codice Fiscale/Iva" />
+                        </f:label>
+                        <f:fields>
+                        <Input id="inputCfPiva" class="validateFilter" value="{}" >
+                     </Input>
+                        </f:fields>
+                </f:FormElement>
+                
+            </f:FormContainer>
+         </f:formContainers>
+      </f:Form> 
+      <beginButton>
+       <Button text="Indietro" type="Emphasized" press="onCloseDialog1"/>
+      </beginButton>
+      <endButton>
+        <Button text="Salva" type="Emphasized" press="onSaveMessageDialogPress"/>
+      </endButton>
+   </Dialog>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- <Panel headerText="Dati Anagrafica Beneficiario" 
+    headerLevel="H4"
+     accessibleRole="Form" 
+     collapsed="false" 
+     toggle="handleToggle">
+        <content>
+            <l:Grid>
+                <l:content>
+                
+                    <VBox>
+                     <HBox>
+                        <Label text="Paese:" labelFor="Paese" required="true" />
+                        <MultiInput required="true" items="{comboBox>/items}" id="datiAna" width="30%">
+                            <core:Item key="{comboBox>}" text="{comboBox>}" />
+                        </MultiInput>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        <Input text=""/>
+                        </HBox>
+                        
+                     <HBox>
+                        <Label text="Cat. Beneficiario:" labelFor="Cat" required="true" wrapping="true"  />
+                        <ComboBox required="true" items="" >
+                            <core:Item key="1" text="1" />
+                            <core:Item key="2" text="2" />
+                        </ComboBox>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        </HBox>
+                        <Title text=""/>
+                        
+
+                    </VBox>
+                    
+                    
+                    </l:content>
+                     </l:Grid>
+                    </content>
+                    </Panel>
+                                        
+
+                    <VBox>
+                        <Label text="Denominazione Beneficiario:" labelFor="Denominazione Beneficiario:" required="true" />
+                         <Input value="" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        <Label text="Nome:" required="true"/>
+                        <Input value=""  />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                   
+                        <Label text="Cognome:" required="true" />
+                        <Input value="" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        
+                    </VBox>
+                    <VBox>
+                      <HBox>
+                        <Label text="Via:"  required="true"/>
+                        <Input value=""/>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                   
+                    <Label text="Civico:" />
+                        <Input value=""  />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                    </HBox>
+                    <HBox>
+                        <Label text="Località:" required="true" />
+                        <Input value="" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+               <Label text="Regione:" labelFor="Regione" required="true" />
+                        <Input required="true" items="{comboBox>/items}"  width="30%">
+                            <core:Item key="{comboBox>}" text="{comboBox>}" />
+                        </Input>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        <Input text=""/>          
+</HBox>
+<HBox>
+                        <Label text="CAP:" required="true"/>
+                        <Input value=""  />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        </HBox>
+                    </VBox>
+                    <Panel headerText="Dati Fiscali Beneficiario" headerLevel="H4" accessibleRole="Form" collapsed="false" toggle="handleToggle">
+        <content>
+            <l:Grid>
+                <l:content>
+                <VBox>
+                        <Label text="Codice Fiscale:" labelFor="Denominazione Beneficiario:" required="true" />
+                         <Input value="" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        <Label text="P.IVA:" required="true"/>
+                        <Input value=""  />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                   
+                        <Label text="Codice Fiscale/P.Iva:" required="true" />
+                        <Input value="" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        
+                    </VBox>
+
+                    
+                   </l:content>
+                     </l:Grid>
+                    </content>
+                    </Panel> -->
+            
+  <!-- <OverflowToolbar>
+                            <Button text="Indietro" type="Emphasized" visible="{/BackButtonVisible}" press="onBackButton" />
+                            <ToolbarSpacer />
+                            <Button type="Emphasized" text="Salva"  press="onWarning2MessageBoxPress"/>
+                        </OverflowToolbar> -->
+                       
+</core:FragmentDefinition>

@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+    <Dialog id="regModPag" draggable="true" showHeader="true" titleAlignment="Start" afterClose="onAfterClose" contentWidth="100%" contentHeight="50%">
+        
+            <HBox justifyContent="SpaceAround" class="sapUiLargeMarginTop">
+                
+               
+                    <VBox justifyContent="Start" class="sapUiLargeMarginStart">
+                        <Label text="Beneficiario:" required="true" />
+                        <Input value="" showValueHelp="true" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'Beneficiario' }}" fieldWidth="63%">
+                            <core:Item key="{Beneficiario}" text="{Beneficiario}"/>
+                        </Input>
+                    </VBox>
+
+                    <VBox >
+                        <Label class="sapUiLargeMarginStart" text="Modalità di Pagamento" labelFor="IBAN" required="true" />
+                        <ComboBox required="true" items="" fieldWidth="63%">
+                            <core:Item key="1" text="1" />
+                            <core:Item key="2" text="2" />
+                        </ComboBox>
+                    </VBox>
+                    <VBox class="sapUiLargeMarginStart" >
+                        <Label text="IBAN:" required="true" />
+                        <Input value="" fieldWidth="63%"/>
+                    </VBox>
+                
+            </HBox>
+            
+        
+       
+
+        <!-- <Toolbar height="100%" width="100%">
+     <Label align="Center" text="Beneficiario" required="true" />
+     <Input align="Center" text="" showValueHelp="true" width="33%"/>
+     <ToolbarSpacer/>
+     <Label align="Center" text="Modalità di Pagamento" required="true"/>
+     <ComboBox align="Center" text="" width="33%"/>
+     <ToolbarSpacer/>
+      <Label align="Center" text="IBAN" required="true"/>
+     <Input align="Center" text="" width="33%"/>
+     </Toolbar>-->
+      <beginButton>
+       <Button text="Indietro" type="Emphasized" press="onCloseDialog3"/>
+      </beginButton>
+      <endButton>
+        <Button text="Salva" type="Emphasized" />
+      </endButton> 
+     
+    </Dialog>
+</core:FragmentDefinition>
