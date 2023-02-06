@@ -75,7 +75,7 @@
                 </layout:VerticalLayout>
                 <OverflowToolbar>
                 <ToolbarSpacer/>
-                <Button text="Inserisci dati per invio alla firma" type="Emphasized"/>
+                <Button text="Inserisci dati per invio alla firma" type="Emphasized" press="onOpenInvFirmDialogModPag"/>
                 </OverflowToolbar>
             </f:DynamicPageHeader>
         </f:header>

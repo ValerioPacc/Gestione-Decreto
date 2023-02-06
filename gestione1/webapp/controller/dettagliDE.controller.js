@@ -18,20 +18,20 @@ sap.ui.define(
           // open.setExpanded(true);
         
         },
-        _onObjectMatched: function (oEvent) {
-          this.getView().bindElement(
-              "/DecretoImpegnoSet('Esercizio='" + oEvent.getParameters().arguments.campo +
-              "',Amministrazione='" + oEvent.getParameters().arguments.campo1 +
-              "',UfficioLiv1='" + oEvent.getParameters().arguments.campo2 +
-              "',UfficioLiv2='" + oEvent.getParameters().arguments.campo3 +
-              "',NumeroDecreto='" + oEvent.getParameters().arguments.campo4 +
-              "',DataDecreto='" + oEvent.getParameters().arguments.campo5 + 
-              "',Ragioneria='" + oEvent.getParameters().arguments.campo6 + 
-              "',TipologiaImpegno='" + oEvent.getParameters().arguments.campo7 + 
-              "',CodiceStato='" + oEvent.getParameters().arguments.campo8 + "')"
-          );
+        // _onObjectMatched: function (oEvent) {
+        //   this.getView().bindElement(
+        //       "/DecretoImpegnoSet('Esercizio='" + oEvent.getParameters().arguments.campo +
+        //       "',Amministrazione='" + oEvent.getParameters().arguments.campo1 +
+        //       "',UfficioLiv1='" + oEvent.getParameters().arguments.campo2 +
+        //       "',UfficioLiv2='" + oEvent.getParameters().arguments.campo3 +
+        //       "',NumeroDecreto='" + oEvent.getParameters().arguments.campo4 +
+        //       "',DataDecreto='" + oEvent.getParameters().arguments.campo5 + 
+        //       "',Ragioneria='" + oEvent.getParameters().arguments.campo6 + 
+        //       "',TipologiaImpegno='" + oEvent.getParameters().arguments.campo7 + 
+        //       "',CodiceStato='" + oEvent.getParameters().arguments.campo8 + "')"
+        //   );
 
-      },
+      //},
 
         onSelect: function (oEvent) {
           var key = oEvent.getParameters().key;
@@ -41,6 +41,21 @@ sap.ui.define(
               this.getView().byId("IconTabBar").destroyContent()
 
           }
+        },
+        onOpenInvFirmDialogModPag : function () {
+
+          if (!this.fFragment) {
+            this.fFragment = this.loadFragment({
+              name: "gestione1.fragment.invioFirma",
+              controller: this
+            }).then(function (oFragment) {
+              this.getView().addDependent(oFragment);
+              return oFragment;
+            }.bind(this));
+          } 
+          this.fFragment.then(function(oFragment) {
+            oFragment.open();
+          }.bind(this));
         },
 
         onConfirmationCancelMessageBoxPress: function () {
@@ -71,8 +86,9 @@ sap.ui.define(
         onBackButton: function () {
           this.getOwnerComponent().getRouter().navTo("View1");
       },
+
       });
-      
+
     }
   );
   

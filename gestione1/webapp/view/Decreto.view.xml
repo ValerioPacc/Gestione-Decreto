@@ -14,9 +14,9 @@
     controllerName="gestione1.controller.Decreto"
 >
     <App id="app">
-        <f:DynamicPage showFooter="true">
+        <f:DynamicPage showFooter="true" >
             <f:title>
-                <f:DynamicPageTitle>
+                <f:DynamicPageTitle >
                     <f:heading>
                         <Title text="Dati del Decreto" />
                     </f:heading>
@@ -24,7 +24,7 @@
             </f:title>
             <f:header>
                 <f:DynamicPageHeader pinnable="false">
-                    <fb:FilterBar showClearOnFB="false" showFilterConfiguration="false" useToolbar="false"  showGoButton="false">
+                    <fb:FilterBar showClearOnFB="false" showFilterConfiguration="false" useToolbar="false"  showGoOnFB="false">
                         <fb:filterGroupItems>
                         <fb:FilterGroupItem groupName="gruppo2" name="TypeI" label="{i18n>typeI}" tooltip="suggestion" visibleInFilterBar="true" mandatory="true">
                                 <fb:control>
@@ -47,10 +47,10 @@
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="UffApp" visibleInFilterBar="true" name="UffApp" groupName="Group1" label="{i18n>UffApp}">
+                            <fb:FilterGroupItem id="uffApp" visibleInFilterBar="true" name="UffApp" groupName="Group1" label="{i18n>UffApp}">
                                 <fb:control>
-                                     <ComboBox  id="UffApp1" Items="{path: '/DecretoImpegnoSet', sorter: { path: 'UfficioAppartenenza' }}">
-                                      <core:Item key="{UfficioAppartenenza}" text="{UfficioAppartenenza}"/>
+                                     <ComboBox  id="UffApp" Items="{path: '/DecretoImpegnoSet', sorter: { path: 'UfficioAppartenenza' }}">
+                                      <core:Item id="UffApp1" key="{UfficioAppartenenza}" text="{UfficioAppartenenza}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -62,7 +62,7 @@
 							<fb:FilterGroupItem id="numProtocolloAmma" visibleInFilterBar="true" name="numProtocolloAmma" groupName="Group1" label="{i18n>numProtocolloAmma}">
                                 <fb:control>
                                    <Input showSuggestion="true" id="numProtocolloAmma1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloAmm' }}">
-                                      <core:Item key="{NProtocolloAmm}" text="{NProtocolloAmm}"/>
+                                      <core:Item id="IdnumProtocolloAmma" key="{NProtocolloAmm}" text="{NProtocolloAmm}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -73,7 +73,7 @@
                                 </fb:FilterGroupItem>
                         </fb:filterGroupItems>
                     </fb:FilterBar>
-                    <CheckBox text="Controllo preventivo Corte dei conti" selected="false" wrapping="true" />
+                    <CheckBox id="CcorteConti" text="Controllo preventivo Corte dei conti" selected="false" wrapping="true" />
                 </f:DynamicPageHeader>
             </f:header>
 
