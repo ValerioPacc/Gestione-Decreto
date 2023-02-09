@@ -18,7 +18,7 @@ sap.ui.define(
         
         },
         _onObjectMatched: function (oEvent) {
-          this.getView().bindElement(
+         /* this.getView().bindElement(
               "/DecretoImpegnoSet('Esercizio='" + oEvent.getParameters().arguments.campo +
               "',Amministrazione='" + oEvent.getParameters().arguments.campo1 +
               "',UfficioLiv1='" + oEvent.getParameters().arguments.campo2 +
@@ -28,7 +28,7 @@ sap.ui.define(
               "',Ragioneria='" + oEvent.getParameters().arguments.campo6 + 
               "',TipologiaImpegno='" + oEvent.getParameters().arguments.campo7 + 
               "',CodiceStato='" + oEvent.getParameters().arguments.campo8 + "')"
-          );
+          );*/
 
           this.viewHeader(oEvent);
       },

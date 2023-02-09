@@ -158,6 +158,7 @@ sap.ui.define([
             },
             onNavToDettagliDE: function(){
                 var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
+                this.getModel("temp").setProperty("/SelectedDecree", row);
                 // var HeaderITB = new sap.ui.model.json.JSONModel();
                 // HeaderITB.setData(row);
                 // this.getView().getModel("temp").setProperty('/', HeaderITB)
