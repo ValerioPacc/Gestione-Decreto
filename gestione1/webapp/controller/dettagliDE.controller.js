@@ -12,14 +12,17 @@ sap.ui.define(
   
       return BaseController.extend("gestione1.controller.dettagliDE", {
         onInit() {
-          //this.getRouter().getRoute("iconTabBar").attachPatternMatched(this._onObjectMatched, this);
+
+          var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			    oRouter.getRoute("dettagliDE").attachPatternMatched(this._onObjectMatched, this);
+          //this.getRouter().getRoute("dettagliDE").attachPatternMatched(this._onObjectMatched, this);
           
           // var open = iconTabBar.getItems()[1]; // retruning 2nd Item
           // open.setExpanded(true);
         
         },
         _onObjectMatched: function (oEvent) {
-          this.getView().bindElement(
+         /* this.getView().bindElement(
               "/DecretoImpegnoSet('Esercizio='" + oEvent.getParameters().arguments.campo +
               "',Amministrazione='" + oEvent.getParameters().arguments.campo1 +
               "',UfficioLiv1='" + oEvent.getParameters().arguments.campo2 +
@@ -29,7 +32,7 @@ sap.ui.define(
               "',Ragioneria='" + oEvent.getParameters().arguments.campo6 + 
               "',TipologiaImpegno='" + oEvent.getParameters().arguments.campo7 + 
               "',CodiceStato='" + oEvent.getParameters().arguments.campo8 + "')"
-          );
+          );*/
 
       },
 

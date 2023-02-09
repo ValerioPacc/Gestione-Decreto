@@ -158,10 +158,34 @@ sap.ui.define([
             },
             onNavToDettagliDE: function(){
                 var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
+                this.getModel("temp").setProperty("/SelectedDecree", row);
                 // var HeaderITB = new sap.ui.model.json.JSONModel();
                 // HeaderITB.setData(row);
                 // this.getView().getModel("temp").setProperty('/', HeaderITB)
-                this.getOwnerComponent().getRouter().navTo("dettagliDE", {campo:row.Esercizio, campo1:row.Amministrazione, campo2: row.UfficioLiv1, campo3:row.UfficioLiv2, campo4:row.NumeroDecreto, campo5:row.DataDecreto, campo6:row.Ragioneria, campo7:row.TipologiaImpegno, campo8:row.CodiceStato,})
+              /*  this.getOwnerComponent().getRouter().navTo("dettagliDE", {
+                    Mandt: row.Mandt, 
+                    Ente: row.Ente, 
+                    AreaFinanziaria: row.AreaFinanziaria, 
+                    RegistratoBozza: '',
+                    campo: row.Esercizio, 
+                    campo1: row.Amministrazione,
+                    campo2: row.UfficioLiv1, 
+                    campo3: row.UfficioLiv2, 
+                    campo4: row.NumeroDecreto, 
+                    campo5: row.DataDecreto, 
+                    campo6: row.Ragioneria, 
+                    campo7: row.TipologiaImpegno, 
+                    campo8: row.CodiceStato
+                });*/
+                this.getRouter().navTo("dettagliDE", {
+                    Esercizio: row.Esercizio, 
+                    Amministrazione: row.Amministrazione,
+                    UfficioLiv1: row.UfficioLiv1, 
+                    UfficioLiv2: row.UfficioLiv2, 
+                    NumeroDecreto: row.NumeroDecreto, 
+                    ChiaveGiustificativo: row.ChiaveGiustificativo
+                });
+
             },
 
             onRowSelectionChange: function (oEvent) {
