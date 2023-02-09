@@ -20,11 +20,11 @@
                         <Title text="Dati Amminastrazione" />
                         <layout:HorizontalLayout wrapping="true">
                         <Label text="Dirigente/Direttore Firmatario:" class="sapUiSmallMarginEnd" />
-                        <Text  text="{DirigenteDirettoreFirmatario}" class="sapUiMediumMarginEnd"/>
+                        <Text  id="DDFirmatario" class="sapUiMediumMarginEnd"/>
                     <Label text="Data Firma:" class="sapUiSmallMarginEnd" />
-                    <Text  text="{DataFirma}" class="sapUiMediumMarginEnd"/>
+                    <Text  id="dataFirma" class="sapUiMediumMarginEnd"/>
                      <Label text="Ufficio Amministrazione:" class="sapUiSmallMarginEnd"/>
-                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                        <Text  id="UffAmm" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
                 </layout:VerticalLayout>
 
@@ -32,33 +32,31 @@
                         <Title text="Dati Decreto" />
                         <layout:HorizontalLayout wrapping="true">
                         <Label text="Esercizio Decreto:" class="sapUiSmallMarginEnd" />
-                        <Text  text="{Esercizio}" class="sapUiMediumMarginEnd"/>
+                        <Text  id="esercizio" class="sapUiMediumMarginEnd"/>
                     <Label text="Amminstrazione:" class="sapUiSmallMarginEnd" />
-                    <Text  text="{Amminstrazione}" class="sapUiMediumMarginEnd"/>
+                    <Text  id="idAmm" class="sapUiMediumMarginEnd"/>
                      <Label text="N.Decreto:" class="sapUiSmallMarginEnd"/>
-                        <Text  text="{NumeroDecreto}" class="sapUiMediumMarginEnd"/>
+                        <Text  id="Ndecr" class="sapUiMediumMarginEnd"/>
                     <Label text="N.IPE:" class="sapUiSmallMarginEnd" />
-                    <Text  text="{NumeroIPE}" class="sapUiMediumMarginEnd"/>
+                    <Text  id="Nipe" class="sapUiMediumMarginEnd"/>
                      <Label text="Data Decreto:" class="sapUiSmallMarginEnd" />
-                        <Text  text="{DataDecreto}" class="sapUiMediumMarginEnd"/>
+                        <Text  id="dataDecr" class="sapUiMediumMarginEnd"/>
                     <Label text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
-                    <Text  text="{NProtocolloAmm}" class="sapUiMediumMarginEnd"/>
+                    <Text  id="NprotAmm" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
                <layout:HorizontalLayout wrapping="true"  class="sapUiMediumMarginTop">
-                <Label text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
-                    <Text  text="{NProtocolloAmm}" class="sapUiMediumMarginEnd"/>
                         <Label text="Stato Decreto:" class="sapUiSmallMarginEnd" />
-                        <Text  text="{StatoDecreto}" class="sapUiMediumMarginEnd"/>
+                        <Text  id="StatoDecreto" class="sapUiMediumMarginEnd"/>
                     <Label text="Tipologia Impegno:" class="sapUiSmallMarginEnd" />
-                    <Text  text="{TipologiaImpegno}" class="sapUiMediumMarginEnd"/>
+                    <Text  id="TipologiaImpegno" class="sapUiMediumMarginEnd"/>
                      <Label text="Contratto:" class="sapUiSmallMarginEnd"/>
-                        <Text  text="{ContrattoOrdine}" class="sapUiMediumMarginEnd"/>
+                        <Text  id="Cordine" class="sapUiMediumMarginEnd"/>
                     <Label text="Controllo preventivo Corte dei conti:" class="sapUiSmallMarginEnd" />
-                    <Text  text="{ControlloCorteConti}" class="sapUiMediumMarginEnd"/>
+                    <Text  id="CcConti" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
                 <layout:HorizontalLayout wrapping="true"  class="sapUiMediumMarginTop">
                 <Label text="Attesa documentazione aggiuntiva:" class="sapUiSmallMarginEnd"  />
-                    <Text  text="" class="sapUiMediumMarginEnd"/>  
+                    <Text  id="docAgg" class="sapUiMediumMarginEnd"/>  
                </layout:HorizontalLayout >
                 </layout:VerticalLayout>
                 
@@ -66,16 +64,16 @@
                         <Title text="Dati Ragioneria" />
                         <layout:HorizontalLayout wrapping="true">
                         <Label text="Ragioneria:" class="sapUiSmallMarginEnd" />
-                        <Text  text="{Ragioneria}" class="sapUiMediumMarginEnd"/>
+                        <Text  id="Rag" class="sapUiMediumMarginEnd"/>
                     <Label text="Data Protocollo RGS:" class="sapUiSmallMarginEnd" />
-                    <Text  text="{DataProtocolloRag}" class="sapUiMediumMarginEnd"/>
+                    <Text  id="dataProtRag" class="sapUiMediumMarginEnd"/>
                      <Label text="N.Protocollo RGS:" class="sapUiSmallMarginEnd"/>
-                        <Text  text="{NProtocolloRag}" class="sapUiMediumMarginEnd"/>
+                        <Text  id="nProtRag" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
                 </layout:VerticalLayout>
                 <OverflowToolbar>
                 <ToolbarSpacer/>
-                <Button text="Inserisci dati per invio alla firma" type="Emphasized"/>
+                <Button text="Inserisci dati per invio alla firma" type="Emphasized" press="onOpenInvFirmDialogModPag"/>
                 </OverflowToolbar>
             </f:DynamicPageHeader>
         </f:header>

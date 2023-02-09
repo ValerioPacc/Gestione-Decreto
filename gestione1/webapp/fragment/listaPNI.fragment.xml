@@ -3,12 +3,12 @@
       afterClose="onAfterClose" contentWidth="100%" contentHeight="100%">
       
       
-                <content>
+                 <content>
                 <HBox>
                 <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
-               <Input text="{}" editable="fale"/>
+               <Input text="{}" editable="false"/>
                <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/>
-                <Input text="{}" editable="fale"/>
+                <Input text="{}" editable="false"/>
                 <Label text="ERP:" class="sapUiSmallMargin" required="true" vAlign="Inherit" visible="{UIState>/visible}"/>
                <ComboBox value="" width="50%"  visible="{UIState>/visible}"/>
                 <Label text="PNI:" required="true" vAlign="Inherit"/>
@@ -19,7 +19,6 @@
                 <CheckBox  text="Autorizzazione:" selected="true"/>
                 </VBox>
                 </content>
-                
                 
       <beginButton>
        <Button text="Indietro" type="Emphasized" press="onCloseDialog2"/>

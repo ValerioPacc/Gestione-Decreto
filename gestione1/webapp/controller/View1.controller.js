@@ -162,35 +162,17 @@ sap.ui.define([
                 // var HeaderITB = new sap.ui.model.json.JSONModel();
                 // HeaderITB.setData(row);
                 // this.getView().getModel("temp").setProperty('/', HeaderITB)
-              /*  this.getOwnerComponent().getRouter().navTo("dettagliDE", {
-                    Mandt: row.Mandt, 
-                    Ente: row.Ente, 
-                    AreaFinanziaria: row.AreaFinanziaria, 
-                    RegistratoBozza: '',
-                    campo: row.Esercizio, 
-                    campo1: row.Amministrazione,
-                    campo2: row.UfficioLiv1, 
-                    campo3: row.UfficioLiv2, 
-                    campo4: row.NumeroDecreto, 
-                    campo5: row.DataDecreto, 
-                    campo6: row.Ragioneria, 
-                    campo7: row.TipologiaImpegno, 
-                    campo8: row.CodiceStato
-                });*/
-                this.getRouter().navTo("dettagliDE", {
-                    Esercizio: row.Esercizio, 
-                    Amministrazione: row.Amministrazione,
-                    UfficioLiv1: row.UfficioLiv1, 
-                    UfficioLiv2: row.UfficioLiv2, 
-                    NumeroDecreto: row.NumeroDecreto, 
-                    ChiaveGiustificativo: row.ChiaveGiustificativo
-                });
-
+                var dataNuova = new Date(row.DataDecreto),
+                    mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+                    day = ("0" + dataNuova.getDate()).slice(-2);
+                var nData = [dataNuova.getFullYear(), mnth, day].join("-");
+                var nDate = nData.split("-").reverse().join(".");
+                this.getOwnerComponent().getRouter().navTo("dettagliDE", {campo:row.Esercizio, campo1:row.Amministrazione, campo2: row.UfficioLiv1, campo3:row.UfficioLiv2, campo4:row.NumeroDecreto, campo5:nDate, campo6:row.Ragioneria, campo7:row.TipologiaImpegno, campo8:row.CodiceStato,})
             },
 
-            onRowSelectionChange: function (oEvent) {
-                this.getView().byId("PreimpostazioneNI").setEnabled(false);
-            },
+            // onRowSelectionChange: function (oEvent) {
+            //     this.getView().byId("PreimpostazioneNI").setEnabled(false);
+            // },
 
 
             createColumnConfig: function () {

@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+     <Dialog id="invioFirma" title="Inserimento dati per invio della firma" draggable="true" showHeader="true" titleAlignment="Center"
+      afterClose="onAfterClose" contentWidth="100%" contentHeight="40%">
+      <content>
+                <HBox justifyContent="SpaceAround">
+                <Label text="N.Protocollo Amm.:" vAlign="Inherit"/>
+               <Input text="{NProtocolloAmm}" />
+               <Label text="Data Protocollo Amm.:" vAlign="Inherit"/>
+                <DatePicker id="dataProtamm" displayFormat="dd/MM/yyyy" />
+                </HBox>
+                <VBox >
+                <HBox class="sapUiSmallMarginBegin">
+                 <Label text="Dirigente/Direttore Firmatario:" required="true" vAlign="Inherit"/>
+                 <ComboBox id="Ddfirmatario" items="{path: '/DecretoImpegnoSet', sorter: { path: 'DirigenteDirettoreFirmatario' }}" >
+                 <core:Item id="Ddfirmatario1" key="{DirigenteDirettoreFirmatario}" text="{DirigenteDirettoreFirmatario}" />
+                </ComboBox>
+                </HBox>
+                </VBox>
+                </content>
+      
+               
+                
+                
+      <beginButton>
+       <Button text="Conferma" type="Emphasized" press=""/>
+      </beginButton>
+      <endButton>
+        <Button text="Chiudi" type="Emphasized" press=""/>
+      </endButton>
+   </Dialog>
+</core:FragmentDefinition>

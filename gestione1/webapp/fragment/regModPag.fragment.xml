@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
-    <Dialog id="regModPag" draggable="true" showHeader="true" titleAlignment="Start" afterClose="onAfterClose" contentWidth="100%" contentHeight="50%">
+    <Dialog id="regModPag" draggable="true" showHeader="true" titleAlignment="Start" afterClose="onAfterClose" contentWidth="100%" contentHeight="40%">
         
             <HBox justifyContent="SpaceAround" class="sapUiLargeMarginTop">
                 
@@ -13,7 +13,7 @@
 
                     <VBox >
                         <Label class="sapUiLargeMarginStart" text="Modalità di Pagamento" labelFor="IBAN" required="true" />
-                        <ComboBox required="true" items="" fieldWidth="63%">
+                        <ComboBox required="true" items="" >
                             <core:Item key="1" text="1" />
                             <core:Item key="2" text="2" />
                         </ComboBox>

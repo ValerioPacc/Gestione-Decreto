@@ -9,6 +9,138 @@
                 <Property Name="Codice" Type="Edm.String" Nullable="false"/>
                 <Property Name="Descrizione" Type="Edm.String" Nullable="false"/>
             </EntityType>
+            <EntityType Name="DeepDecretoEntity" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ChiaveGiustificativo"/>
+                </Key>
+                <Property Name="ChiaveGiustificativo" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="Msgty" Type="Edm.String" MaxLength="1" sap:label="Message Type"/>
+                <Property Name="Message" Type="Edm.String"/>
+                <NavigationProperty Name="DecretoImpegnoSet" Relationship="ZODATACOSP_DECRETO_IMPEGNO_SRV.DeepEntityToDecretoImpegno" FromRole="FromRole_DeepEntityToDecretoImpegno" ToRole="ToRole_DeepEntityToDecretoImpegno"/>
+                <NavigationProperty Name="IpeEntitySet" Relationship="ZODATACOSP_DECRETO_IMPEGNO_SRV.DeepEntityToIpeEntity" FromRole="FromRole_DeepEntityToIpeEntity" ToRole="ToRole_DeepEntityToIpeEntity"/>
+            </EntityType>
+            <EntityType Name="IpeEntity" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Fikrs"/>
+                    <PropertyRef Name="Zregistrato"/>
+                    <PropertyRef Name="Gjahr"/>
+                    <PropertyRef Name="Zammin"/>
+                    <PropertyRef Name="Zufficioliv1"/>
+                    <PropertyRef Name="Zufficioliv2"/>
+                    <PropertyRef Name="Zcoddecr"/>
+                    <PropertyRef Name="ZCodGius"/>
+                    <PropertyRef Name="ZCodIpe"/>
+                    <PropertyRef Name="ZidIpe"/>
+                    <PropertyRef Name="ZNumCla"/>
+                    <PropertyRef Name="ZCodCla"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Company Code"/>
+                <Property Name="Fikrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="FM Area"/>
+                <Property Name="Zregistrato" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Fiscal Year"/>
+                <Property Name="Zammin" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="Zufficioliv1" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Zufficioliv2" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Zcoddecr" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="ZCodGius" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="ZCodIpe" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ZidIpe" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="ZNumCla" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ZCodCla" Type="Edm.String" Nullable="false" MaxLength="33"/>
+                <Property Name="ZcoddecrMod" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="ZCodGiusMod" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="ZCodIpeMod" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ZidIpeMod" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="ZNumClaMod" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ZCodClaMod" Type="Edm.String" Nullable="false" MaxLength="33"/>
+                <Property Name="ZcoddecrApe" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="ZCodGiusApe" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="ZCodIpeApe" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ZidIpeApe" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="ZNumClaApe" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ZCodClaApe" Type="Edm.String" Nullable="false" MaxLength="33"/>
+                <Property Name="ZtipoIpe" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ZtipoRes" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Zzanno" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ZFlContOrd" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Ebeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Purchasing Doc."/>
+                <Property Name="Zzdatastipula" Type="Edm.DateTime" Nullable="false" Precision="7"/>
+                <Property Name="Lifnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Vendor"/>
+                <Property Name="Zzcig" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Zzcup" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="Rlwrt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:label="Tot. val. rel."/>
+                <Property Name="Stcd1" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Tax Number 1"/>
+                <Property Name="Taxnumxl" Type="Edm.String" Nullable="false" MaxLength="60" sap:label="Tax Number"/>
+                <Property Name="NameFirst" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="First name"/>
+                <Property Name="NameLast" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Last name"/>
+                <Property Name="ZzragSoc" Type="Edm.String" Nullable="false" MaxLength="60" sap:label="Ragione Sociale"/>
+                <Property Name="Stcd2" Type="Edm.String" Nullable="false" MaxLength="11" sap:label="Tax Number 2"/>
+                <Property Name="Zwels" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Payment Methods"/>
+                <Property Name="Iban" Type="Edm.String" Nullable="false" MaxLength="34"/>
+                <Property Name="Fipex" Type="Edm.String" Nullable="false" MaxLength="24" sap:label="Commitment Item"/>
+                <Property Name="Fistl" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Funds center"/>
+                <Property Name="Zannualita" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Epr" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Fdatk" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Due On"/>
+                <Property Name="Ktext" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Name"/>
+                <Property Name="ZidRich" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="ZnumeroPni" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Znaturaatto" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="Znumcontratt" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="Zdataatto" Type="Edm.DateTime" Nullable="false" Precision="7"/>
+                <Property Name="Bsart" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Document Type"/>
+                <Property Name="Zzgara" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Zop" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Zoa" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Zni" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ZcompRes" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ZclausolaVar" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Zgeber" Type="Edm.String" Nullable="false" MaxLength="18"/>
+                <Property Name="Geber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Fund"/>
+                <Property Name="Zbloccfondi" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Wtorig" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="30 Characters"/>
+                <Property Name="FlgCanc" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ZcodiStatoipe" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ZTipoDecreto" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ZImpIpeCl" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="2"/>
+                <Property Name="Zbozza" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ZgjahrPer" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ZamministrPer" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Zufficioliv1Per" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Zufficioliv2Per" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ZcoddecrPer" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="ZCodGiusPer" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="ZCodIpePer" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ZidIpePer" Type="Edm.String" Nullable="false" MaxLength="29"/>
+                <Property Name="ZNumClaPer" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ZCodClaPer" Type="Edm.String" Nullable="false" MaxLength="33"/>
+                <Property Name="Zperenzione" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ZdatPer" Type="Edm.DateTime" Nullable="false" Precision="7"/>
+                <Property Name="ZmimpPer" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="0"/>
+                <Property Name="ZgjahrMig" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ZamministrMig" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="Zufficioliv1Mig" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Zufficioliv2Mig" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ZcoddecrMig" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="ZCodGiusMig" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="ZCodIpeMig" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ZidIpeMig" Type="Edm.String" Nullable="false" MaxLength="29"/>
+                <Property Name="ZNumClaMig" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ZCodClaMig" Type="Edm.String" Nullable="false" MaxLength="33"/>
+                <Property Name="Blart" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Document type"/>
+                <Property Name="Belnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Earmarked Funds"/>
+                <Property Name="Blpos" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Document item"/>
+                <Property Name="Bpent" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Val.Adjustment"/>
+                <Property Name="Zblart" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Zbelnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Document Number"/>
+                <Property Name="Zblpos" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Item"/>
+                <Property Name="Zbpent" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Val.Adjustment"/>
+                <Property Name="Zzblart" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Zzbelnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Document Number"/>
+                <Property Name="Zzblpos" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Item"/>
+                <Property Name="Zzbpent" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Val.Adjustment"/>
+            </EntityType>
             <EntityType Name="TipologiaImpegno" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Codice"/>
@@ -18,7 +150,6 @@
             </EntityType>
             <EntityType Name="DecretoImpegno" sap:content-version="1">
                 <Key>
-                    <PropertyRef Name="Mandt"/>
                     <PropertyRef Name="Ente"/>
                     <PropertyRef Name="AreaFinanziaria"/>
                     <PropertyRef Name="RegistratoBozza"/>
@@ -29,25 +160,24 @@
                     <PropertyRef Name="NumeroDecreto"/>
                     <PropertyRef Name="ChiaveGiustificativo"/>
                 </Key>
-                <Property Name="PosizioneFinanziaria" Type="Edm.String" Nullable="false" MaxLength="24" sap:label="Commitment Item"/>
-                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client"/>
-                <Property Name="StrutturaAmmResp" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Funds center"/>
                 <Property Name="Ente" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Company Code"/>
                 <Property Name="AreaFinanziaria" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="FM Area"/>
-                <Property Name="CompetenzaResidui" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="RegistratoBozza" Type="Edm.String" Nullable="false" MaxLength="1"/>
-                <Property Name="DocumentoAcquisti" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Purchasing Doc."/>
                 <Property Name="Esercizio" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Fiscal Year"/>
-                <Property Name="ContrattoOrdine" Type="Edm.String" Nullable="false" MaxLength="1"/>
                 <Property Name="Amministrazione" Type="Edm.String" Nullable="false" MaxLength="3"/>
-                <Property Name="Cig" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="UfficioLiv1" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="Beneficiario" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Vendor"/>
                 <Property Name="UfficioLiv2" Type="Edm.String" Nullable="false" MaxLength="4"/>
-                <Property Name="CodiceIpe" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="NumeroDecreto" Type="Edm.String" Nullable="false" MaxLength="7"/>
-                <Property Name="NumeroClausola" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="ChiaveGiustificativo" Type="Edm.String" Nullable="false" MaxLength="26"/>
+                <Property Name="PosizioneFinanziaria" Type="Edm.String" Nullable="false" MaxLength="24" sap:label="Commitment Item"/>
+                <Property Name="StrutturaAmmResp" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Funds center"/>
+                <Property Name="CompetenzaResidui" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="DocumentoAcquisti" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Purchasing Doc."/>
+                <Property Name="ContrattoOrdine" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="Cig" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Beneficiario" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Vendor"/>
+                <Property Name="CodiceIpe" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="NumeroClausola" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="TipologiaImpegno" Type="Edm.String" MaxLength="1"/>
                 <Property Name="DataDecreto" Type="Edm.DateTime" Precision="7"/>
                 <Property Name="NProtocolloAmm" Type="Edm.String" MaxLength="20"/>
@@ -57,7 +187,7 @@
                 <Property Name="DataProtocolloRag" Type="Edm.DateTime" Precision="7"/>
                 <Property Name="CodiceUfficio" Type="Edm.String" MaxLength="4"/>
                 <Property Name="ControlloCorteConti" Type="Edm.String" MaxLength="1"/>
-                <Property Name="NMi" Type="Edm.String" MaxLength="33"/>
+                <Property Name="s" Type="Edm.String" MaxLength="33"/>
                 <Property Name="DataCreazione" Type="Edm.String" MaxLength="19"/>
                 <Property Name="UtenteCreazione" Type="Edm.String" MaxLength="20"/>
                 <Property Name="UtenteModifica" Type="Edm.String" MaxLength="20"/>
@@ -85,11 +215,78 @@
                 <Property Name="Cancellato" Type="Edm.String" MaxLength="1"/>
                 <Property Name="NumeroIpeBozza" Type="Edm.String" MaxLength="3"/>
                 <Property Name="NumeroIpeRegistrata" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="IpeEntitySet" Relationship="ZODATACOSP_DECRETO_IMPEGNO_SRV.DecretoImpegnoToIpe" FromRole="FromRole_DecretoImpegnoToIpe" ToRole="ToRole_DecretoImpegnoToIpe"/>
             </EntityType>
+            <Association Name="DeepEntityToIpeEntity" sap:content-version="1">
+                <End Type="ZODATACOSP_DECRETO_IMPEGNO_SRV.DeepDecretoEntity" Multiplicity="1" Role="FromRole_DeepEntityToIpeEntity"/>
+                <End Type="ZODATACOSP_DECRETO_IMPEGNO_SRV.IpeEntity" Multiplicity="*" Role="ToRole_DeepEntityToIpeEntity"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_DeepEntityToIpeEntity">
+                        <PropertyRef Name="ChiaveGiustificativo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_DeepEntityToIpeEntity">
+                        <PropertyRef Name="ZCodGius"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="DeepEntityToDecretoImpegno" sap:content-version="1">
+                <End Type="ZODATACOSP_DECRETO_IMPEGNO_SRV.DeepDecretoEntity" Multiplicity="1" Role="FromRole_DeepEntityToDecretoImpegno"/>
+                <End Type="ZODATACOSP_DECRETO_IMPEGNO_SRV.DecretoImpegno" Multiplicity="*" Role="ToRole_DeepEntityToDecretoImpegno"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_DeepEntityToDecretoImpegno">
+                        <PropertyRef Name="ChiaveGiustificativo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_DeepEntityToDecretoImpegno">
+                        <PropertyRef Name="ChiaveGiustificativo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="DecretoImpegnoToIpe" sap:content-version="1">
+                <End Type="ZODATACOSP_DECRETO_IMPEGNO_SRV.DecretoImpegno" Multiplicity="1" Role="FromRole_DecretoImpegnoToIpe"/>
+                <End Type="ZODATACOSP_DECRETO_IMPEGNO_SRV.IpeEntity" Multiplicity="*" Role="ToRole_DecretoImpegnoToIpe"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_DecretoImpegnoToIpe">
+                        <PropertyRef Name="ChiaveGiustificativo"/>
+                        <PropertyRef Name="NumeroDecreto"/>
+                        <PropertyRef Name="UfficioLiv2"/>
+                        <PropertyRef Name="UfficioLiv1"/>
+                        <PropertyRef Name="Amministrazione"/>
+                        <PropertyRef Name="Esercizio"/>
+                        <PropertyRef Name="RegistratoBozza"/>
+                        <PropertyRef Name="AreaFinanziaria"/>
+                        <PropertyRef Name="Ente"/>
+                    </Principal>
+                    <Dependent Role="ToRole_DecretoImpegnoToIpe">
+                        <PropertyRef Name="ZCodGius"/>
+                        <PropertyRef Name="Zcoddecr"/>
+                        <PropertyRef Name="Zufficioliv2"/>
+                        <PropertyRef Name="Zufficioliv1"/>
+                        <PropertyRef Name="Zammin"/>
+                        <PropertyRef Name="Gjahr"/>
+                        <PropertyRef Name="Zregistrato"/>
+                        <PropertyRef Name="Fikrs"/>
+                        <PropertyRef Name="Bukrs"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
             <EntityContainer Name="ZODATACOSP_DECRETO_IMPEGNO_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
                 <EntitySet Name="StatoDecretoSet" EntityType="ZODATACOSP_DECRETO_IMPEGNO_SRV.StatoDecreto" sap:content-version="1"/>
+                <EntitySet Name="DeepDecretoEntitySet" EntityType="ZODATACOSP_DECRETO_IMPEGNO_SRV.DeepDecretoEntity" sap:content-version="1"/>
+                <EntitySet Name="IpeEntitySet" EntityType="ZODATACOSP_DECRETO_IMPEGNO_SRV.IpeEntity" sap:content-version="1"/>
                 <EntitySet Name="TipologiaImpegnoSet" EntityType="ZODATACOSP_DECRETO_IMPEGNO_SRV.TipologiaImpegno" sap:content-version="1"/>
                 <EntitySet Name="DecretoImpegnoSet" EntityType="ZODATACOSP_DECRETO_IMPEGNO_SRV.DecretoImpegno" sap:content-version="1"/>
+                <AssociationSet Name="DeepEntityToDecretoImpegnoSet" Association="ZODATACOSP_DECRETO_IMPEGNO_SRV.DeepEntityToDecretoImpegno" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DeepDecretoEntitySet" Role="FromRole_DeepEntityToDecretoImpegno"/>
+                    <End EntitySet="DecretoImpegnoSet" Role="ToRole_DeepEntityToDecretoImpegno"/>
+                </AssociationSet>
+                <AssociationSet Name="DeepEntityToIpeEntitySet" Association="ZODATACOSP_DECRETO_IMPEGNO_SRV.DeepEntityToIpeEntity" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DeepDecretoEntitySet" Role="FromRole_DeepEntityToIpeEntity"/>
+                    <End EntitySet="IpeEntitySet" Role="ToRole_DeepEntityToIpeEntity"/>
+                </AssociationSet>
+                <AssociationSet Name="DecretoImpegnoToIpeSet" Association="ZODATACOSP_DECRETO_IMPEGNO_SRV.DecretoImpegnoToIpe" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DecretoImpegnoSet" Role="FromRole_DecretoImpegnoToIpe"/>
+                    <End EntitySet="IpeEntitySet" Role="ToRole_DecretoImpegnoToIpe"/>
+                </AssociationSet>
             </EntityContainer>
             <atom:link rel="self" href="http://10.38.125.80:8000/sap/opu/odata/sap/ZODATACOSP_DECRETO_IMPEGNO_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
             <atom:link rel="latest-version" href="http://10.38.125.80:8000/sap/opu/odata/sap/ZODATACOSP_DECRETO_IMPEGNO_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
