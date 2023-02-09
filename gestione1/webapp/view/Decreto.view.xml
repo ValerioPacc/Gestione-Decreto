@@ -49,8 +49,8 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="uffApp" visibleInFilterBar="true" name="UffApp" groupName="Group1" label="{i18n>UffApp}">
                                 <fb:control>
-                                     <ComboBox  id="UffApp" Items="{path: '/DecretoImpegnoSet', sorter: { path: 'UfficioAppartenenza' }}">
-                                      <core:Item id="UffApp1" key="{UfficioAppartenenza}" text="{UfficioAppartenenza}"/>
+                                     <ComboBox  id="UffApp" items="{path: '/DecretoImpegnoSet', sorter: { path: 'CodiceUfficio' }}">
+                                      <core:Item id="UffApp1" key="{CodiceUfficio}" text="{CodiceUfficio}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -83,7 +83,7 @@
                 <OverflowToolbar>
                     <Button type="Emphasized" text="{i18n>Indietro}" press="onBackButton" />
                     <ToolbarSpacer/>
-                    <Button type="Emphasized" text="{i18n>SalvaBozza}" press="navToRegistraIPE" />
+                    <Button type="Emphasized" text="{i18n>SalvaBozza}" press="onRegDIbozza" />
                 </OverflowToolbar>
             </f:footer>
         </f:DynamicPage>

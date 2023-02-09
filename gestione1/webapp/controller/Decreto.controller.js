@@ -1,6 +1,6 @@
 sap.ui.define(
     [
-        "sap/ui/core/mvc/Controller",
+        //"sap/ui/core/mvc/Controller",
         "./BaseController",
         'sap/ui/export/Spreadsheet',
         "sap/ui/core/library",
@@ -27,70 +27,74 @@ sap.ui.define(
           this.getOwnerComponent().getRouter().navTo("View1");
       },
       
-    //   onRegDIbozza: function (oEvent) {
-    //     var self = this;
+ 
+
+
+      onRegDIbozza: function (oEvent) {
+        var self = this;
     
 
-    //     var N_es_gestione = this.getView().byId("TypeI1").getSelectedKey(); //header
-    //     var N_Mese = this.getView().byId("es_decreto1").getSelectedKey(); //header
-    //     var N_Tipologia = this.getView().byId("amministrazioneED1").getSelectedKey();  //position
-    //     var N_Sottotipologia = this.getView().byId("UffApp1").getValue().mProperties.text;  //position
-    //     //var N_CR = this.getView().byId("DataDE1").mProperties.value  //position
-    //     var N_ImportoTot = this.getView().byId("IdnumProtocolloAmma").getValue().mProperties.text;  //header
-    //     //var N_oggSpesa = this.getView().byId("dataProtocolloAmm1").getValue();  //header
-    //     var N_esercizioPF = this.getView().byId("CcorteConti").getState();  //header
+        var N_tipo_impegno = this.getView().byId("TypeI").getSelectedKey(); //header
+        var N_es_decreto = this.getView().byId("es_decreto").getSelectedKey(); //header
+        var N_Amm = this.getView().byId("AmministrazioneED").getSelectedKey();  //position
+        var N_codiceUff = this.getView().byId("UffApp1").mProperties.text;  //position
+        var N_Datade = this.getView().byId("DataDE1").mProperties.value  //position
+        var N_NprotAmm = this.getView().byId("IdnumProtocolloAmma").mProperties.text;  //header
+        var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").mProperties.value  //header
+        var N_CcConti = this.getView().byId("CcorteConti").getSelected();  //header
           
 
-    //     MessageBox.warning("Sei sicuro di voler preimpostare il DI?", {
-    //         actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-    //         emphasizedAction: MessageBox.Action.YES,
-    //         onClose: function (oAction) {
-    //             if (oAction === sap.m.MessageBox.Action.YES) {
+        MessageBox.warning("Sei sicuro di voler preimpostare il DI?", {
+            actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+            emphasizedAction: sap.m.MessageBox.Action.YES,
+            onClose: function (oAction) {
+                if (oAction === sap.m.MessageBox.Action.YES) {
 
-    //                 var oDataModel = self.getOwnerComponent().getModel();
+                  var oDataModel = self.getModel()
 
-    //                 var deepEntity = {
-    //                     Mandt: '', 
-    //                     DecretoImpegnoSet: null,
+                    var deepEntity = {
+                      ChiaveGiustificativo: '01', 
+                        DecretoImpegnoSet: null,
                       
-    //                 }
-    //                 deepEntity.HeaderNISet = {
-    //                     Esercizio: '2023',
-    //                     Amministrazione: '000',
-    //                     TipologiaImpegno: 'C',
-    //                     DataDecreto: '',
-    //                     NProtocolloAmm: '',
-    //                     DataProtocolloAmm: '',
-    //                     CodiceUfficio,
-    //                     ControlloCorteConti
-    //                 };
+                    }
+                    deepEntity.DecretoImpegnoSet = {
+                      ChiaveGiustificativo: '01',
+                      TipologiaImpegno: N_tipo_impegno,
+                        Esercizio: N_es_decreto,
+                        Amministrazione: N_Amm,
+                        DataDecreto: N_Datade,
+                        NProtocolloAmm: N_NprotAmm,
+                        DataProtocolloAmm: N_DataprotAmm,
+                        CodiceUfficio: N_codiceUff,
+                        ControlloCorteConti:N_CcConti
+                    };
 
-    //                 oDataModel.create("/DeepZNIEntitySet", deepEntity, {
-    //                     success: function (result) {
-    //                         console.log(result.Message)
-    //                         console.log('success');
+                    oDataModel.create("/DeepDecretoEntitySet",deepEntity, {
+                        success: function (result) {
+                            console.log(result.Message)
+                            console.log('success');
 
-    //                     },
-    //                     error: function (err) {
-    //                         console.log(err);
-    //                     },
-    //                     async: true,  // execute async request to not stuck the main thread
-    //                     urlParameters: {}  // send URL parameters if required 
-    //                 });
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        },
+                        async: true,  // execute async request to not stuck the main thread
+                        urlParameters: {}  // send URL parameters if required 
+                    });
 
-    //                 MessageBox.success("Decreto Impegno creato correttamente", {
-    //                     actions: [sap.m.MessageBox.Action.OK],
-    //                     emphasizedAction: MessageBox.Action.OK,
-    //                     onClose: function (oAction) {
-    //                         if (oAction === sap.m.MessageBox.Action.OK) {
-    //                             self.getOwnerComponent().getRouter().navTo("View1");
-    //                         }
-    //                     }
-    //                 })
-    //             }
-    //         }
-    //     })
-    // },
+                    MessageBox.success("Decreto Impegno creato correttamente", {
+                        actions: [sap.m.MessageBox.Action.OK],
+                        emphasizedAction: MessageBox.Action.OK,
+                        onClose: function (oAction) {
+                            if (oAction === sap.m.MessageBox.Action.OK) {
+                                self.getOwnerComponent().getRouter().navTo("View1");
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    },
      
       // onBackMessageBoxPress: function (oEvent) {
       //   MessageBox.success("Registrazione Bozza Decreto d'Impegno", {
