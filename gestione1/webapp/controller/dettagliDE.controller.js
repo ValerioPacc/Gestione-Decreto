@@ -12,7 +12,8 @@ sap.ui.define(
   
       return BaseController.extend("gestione1.controller.dettagliDE", {
         onInit() {
-          this.getRouter().getRoute("dettagliDE").attachPatternMatched(this._onObjectMatched, this);
+          var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+          oRouter.getRoute("dettagliDE").attachPatternMatched(this._onObjectMatched, this);
           
         
         },

@@ -17,7 +17,7 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "/sap/opu/odata/sap/ZODATACOSP_DECRETO_IMPEGNO_SRV",
+                "uri": "/sap/opu/odata/sap/ZS4_DECRETOIMPEGNO_SRV",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "2.0",

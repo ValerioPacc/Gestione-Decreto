@@ -59,14 +59,15 @@ sap.ui.define(
                     }
                     deepEntity.DecretoImpegnoSet = {
                       ChiaveGiustificativo: '01',
-                      TipologiaImpegno: N_tipo_impegno,
-                        Esercizio: N_es_decreto,
-                        Amministrazione: N_Amm,
-                        DataDecreto: N_Datade,
-                        NProtocolloAmm: N_NprotAmm,
-                        DataProtocolloAmm: N_DataprotAmm,
-                        CodiceUfficio: N_codiceUff,
-                        ControlloCorteConti:N_CcConti
+
+                      // TipologiaImpegno: N_tipo_impegno,
+                      //   Esercizio: N_es_decreto,
+                      //   Amministrazione: N_Amm,
+                      //   DataDecreto: N_Datade,
+                      //   NProtocolloAmm: N_NprotAmm,
+                      //   DataProtocolloAmm: N_DataprotAmm,
+                      //   CodiceUfficio: N_codiceUff,
+                      //   ControlloCorteConti:N_CcConti
                     };
 
                     oDataModel.create("/DeepDecretoEntitySet",deepEntity, {
