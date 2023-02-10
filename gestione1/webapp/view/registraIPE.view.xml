@@ -21,17 +21,17 @@
                         <Title text="Dati Decreto:" />
                         <layout:HorizontalLayout wrapping="true">
                         <Label text="Esercizio Decreto:" class="sapUiSmallMarginEnd" />
-                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                        <Text  text="{temp>/SelectedDecree/Esercizio}" class="sapUiMediumMarginEnd"/>
                     <Label text="Amministrazione:" class="sapUiSmallMarginEnd" />
-                    <Text  text="" class="sapUiMediumMarginEnd"/>
+                    <Text  text="{temp>/SelectedDecree/Amministrazione}" class="sapUiMediumMarginEnd"/>
                      <Label text="N.Bozza:" class="sapUiSmallMarginEnd"/>
-                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                        <Text  text="{temp>/SelectedDecree/RegistratoBozza}" class="sapUiMediumMarginEnd"/>
                     <Label text="Data Decreto:" class="sapUiSmallMarginEnd" />
-                    <Text  text="" class="sapUiMediumMarginEnd"/>
+                    <Text  id="reData" text=""  class="sapUiMediumMarginEnd"/>
                      <Label text="Ragioneria:" class="sapUiSmallMarginEnd" />
-                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                        <Text  text="{temp>/SelectedDecree/Ragioneria}" class="sapUiMediumMarginEnd"/>
                     <Label text="Stato Decreto:" class="sapUiSmallMarginEnd"  />
-                    <Text  text="" class="sapUiMediumMarginEnd"/>
+                    <Text  text="{temp>/SelectedDecree/CodiceStato}" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
                 </layout:VerticalLayout>
            <Bar class="title">

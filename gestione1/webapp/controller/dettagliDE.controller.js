@@ -1,16 +1,21 @@
 sap.ui.define(
     [
         //"sap/ui/core/mvc/Controller",
+        "gestione1/model/DateFormatter",
         "./BaseController",
         "sap/m/MessageBox",
         //"sap/m/iconTabBar",
         
 
     ],
-    function(BaseController, MessageBox, ) {
+    function(DateFormatter, BaseController, MessageBox, ) {
       "use strict";
   
       return BaseController.extend("gestione1.controller.dettagliDE", {
+
+        formatter: DateFormatter,
+
+
         onInit() {
           this.getRouter().getRoute("dettagliDE").attachPatternMatched(this._onObjectMatched, this);
           
