@@ -37,6 +37,7 @@ sap.ui.define(
                 var nData = [dataNuova.getFullYear(), mnth, day].join("-");
                 var nDate = nData.split("-").reverse().join(".");
                 this.getView().byId("reData").setText(nDate);
+                
         },
 
         onSuccessMessageDialogPress: function () {
