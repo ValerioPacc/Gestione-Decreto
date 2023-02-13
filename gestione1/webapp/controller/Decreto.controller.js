@@ -38,11 +38,14 @@ sap.ui.define(
         var N_es_decreto = this.getView().byId("es_decreto").getSelectedKey(); //header
         var N_Amm = this.getView().byId("AmministrazioneED").getSelectedKey();  //position
         var N_codiceUff = this.getView().byId("UffApp1").mProperties.text;  //position
-        var N_Datade = this.getView().byId("DataDE1").mProperties.value  //position
+        var N_Datade = this.getView().byId("DataDE1").mProperties.dateValue  //position
         var N_NprotAmm = this.getView().byId("IdnumProtocolloAmma").mProperties.text;  //header
-        var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").mProperties.value  //header
-        var N_CcConti = this.getView().byId("CcorteConti").getSelected();  //header
-          
+        var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").mProperties.dateValue  //header
+        var N_CcConti = this.getView().byId("CcorteConti").getSelected();
+        if (N_CcConti==true) 
+        var B_CcConti = "1" //header
+        if (N_CcConti==false) 
+        var B_CcConti = "0" 
 
         MessageBox.warning("Sei sicuro di voler preimpostare il DI?", {
             actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
@@ -51,26 +54,48 @@ sap.ui.define(
                 if (oAction === sap.m.MessageBox.Action.YES) {
 
                   var oDataModel = self.getModel()
+                  // var entity = {
+                  //    ChiaveGiustificativo: '12345', 
+                  //    DecretoImpegnoSet:{},
+                  //     IpeEntitySet: []
+                  //    };
+                  //   //  entity.DecretoImpegnoSet = {
+                  //   //   ChiaveGiustificativo: '12345',
+                  //   //  };
+
+                  //    oDataModel.create("/DeepEntitySet", entity,{
+                  //      success: function(result){ 
+                  //       console.log('SUCCESS') }, 
+                  //       error: function(err){
+                  //          console.log(err);  
+                  //         },
+                  //           async: true, 
+                  //            urlParameters: {}  });
 
                     var deepEntity = {
-                      ChiaveGiustificativo: '01', 
-                        DecretoImpegnoSet: null,
+                      ChiaveGiustificativo: '123324235', 
+                        DecretoImpegnoSet: {},
+                        IpeEntitySet: []
                       
                     }
                     deepEntity.DecretoImpegnoSet = {
-                      ChiaveGiustificativo: '01',
-
-                      // TipologiaImpegno: N_tipo_impegno,
-                      //   Esercizio: N_es_decreto,
-                      //   Amministrazione: N_Amm,
-                      //   DataDecreto: N_Datade,
-                      //   NProtocolloAmm: N_NprotAmm,
-                      //   DataProtocolloAmm: N_DataprotAmm,
-                      //   CodiceUfficio: N_codiceUff,
-                      //   ControlloCorteConti:N_CcConti
+                      ChiaveGiustificativo: '123324235',
+                      AreaFinanziaria:'1234',
+                      Ente:'0000',
+                      RegistratoBozza:'1',
+                      UfficioLiv1:'UFF',
+                      UfficioLiv2:'UFF',
+                      TipologiaImpegno: N_tipo_impegno,
+                      Esercizio: N_es_decreto,
+                      Amministrazione: N_Amm,
+                      DataDecreto: N_Datade,
+                      NProtocolloAmm: N_NprotAmm,
+                      DataProtocolloAmm: N_DataprotAmm,
+                      CodiceUfficio: N_codiceUff,
+                      ControlloCorteConti:B_CcConti
                     };
 
-                    oDataModel.create("/DeepDecretoEntitySet",deepEntity, {
+                    oDataModel.create("/DeepEntitySet",deepEntity, {
                         success: function (result) {
                             console.log(result.Message)
                             console.log('success');

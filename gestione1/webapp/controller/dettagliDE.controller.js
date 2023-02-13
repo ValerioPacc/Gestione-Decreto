@@ -115,8 +115,8 @@ sap.ui.define(
                 var Ragion = header[i].Ragioneria
                 this.getView().byId("Rag").setText(Ragion)
 
-                var dataProtocolloRag = header[i].DataProtocolloRag
-                this.getView().byId("dataProtRag").setText(dataProtocolloRag)
+                // var dataProtocolloRag = header[i].DataProtocolloRag
+                // this.getView().byId("dataProtRag").setText(dataProtocolloRag)
 
                 var NumProtRag = header[i].NProtocolloRag
                 this.getView().byId("nProtRag").setText(NumProtRag)
@@ -172,6 +172,10 @@ sap.ui.define(
         navToRegistraIPE: function (oEvent) {
           this.getOwnerComponent().getRouter().navTo("registraIPE");
       },
+
+      navToDettagli: function (oEvent) {
+        this.getOwnerComponent().getRouter().navTo("dettagliDE");
+    },
 
       navToWizard: function (oEvent) {
         this.getOwnerComponent().getRouter().navTo("wizard");

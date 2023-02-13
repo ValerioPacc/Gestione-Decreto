@@ -4,7 +4,7 @@
       <content>
                 <HBox justifyContent="SpaceAround">
                 <Label text="N.Protocollo Amm.:" vAlign="Inherit"/>
-               <Input text="{NProtocolloAmm}" />
+               <Input id="nPrtAmm" value="{NProtocolloAmm}" />
                <Label text="Data Protocollo Amm.:" vAlign="Inherit"/>
                 <DatePicker id="dataProtamm" displayFormat="dd/MM/yyyy" />
                 </HBox>
@@ -25,7 +25,7 @@
        <Button text="Conferma" type="Emphasized" press=""/>
       </beginButton>
       <endButton>
-        <Button text="Chiudi" type="Emphasized" press=""/>
+        <Button text="Chiudi" type="Emphasized" press="navToDettagli"/>
       </endButton>
    </Dialog>
 </core:FragmentDefinition>

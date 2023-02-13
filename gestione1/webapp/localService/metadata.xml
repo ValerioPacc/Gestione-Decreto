@@ -201,18 +201,18 @@
                 <Property Name="Codice" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Descrizione" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
-            <EntityType Name="DeepDecretoEntity" sap:content-version="1">
+            <EntityType Name="DeepEntity" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="ChiaveGiustificativo"/>
                 </Key>
-                <Property Name="ChiaveGiustificativo" Type="Edm.String" Nullable="false" MaxLength="26" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ChiaveGiustificativo" Type="Edm.String" Nullable="false" MaxLength="26" sap:unicode="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Msgty" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Message Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Message" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <NavigationProperty Name="DecretoImpegnoSet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToDecretoImpegno" FromRole="FromRole_DeepEntityToDecretoImpegno" ToRole="ToRole_DeepEntityToDecretoImpegno"/>
                 <NavigationProperty Name="IpeEntitySet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToIpeEntity" FromRole="FromRole_DeepEntityToIpeEntity" ToRole="ToRole_DeepEntityToIpeEntity"/>
             </EntityType>
             <Association Name="DeepEntityToIpeEntity" sap:content-version="1">
-                <End Type="ZS4_DECRETOIMPEGNO_SRV.DeepDecretoEntity" Multiplicity="1" Role="FromRole_DeepEntityToIpeEntity"/>
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.DeepEntity" Multiplicity="1" Role="FromRole_DeepEntityToIpeEntity"/>
                 <End Type="ZS4_DECRETOIMPEGNO_SRV.IpeEntity" Multiplicity="*" Role="ToRole_DeepEntityToIpeEntity"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_DeepEntityToIpeEntity">
@@ -224,8 +224,8 @@
                 </ReferentialConstraint>
             </Association>
             <Association Name="DeepEntityToDecretoImpegno" sap:content-version="1">
-                <End Type="ZS4_DECRETOIMPEGNO_SRV.DeepDecretoEntity" Multiplicity="1" Role="FromRole_DeepEntityToDecretoImpegno"/>
-                <End Type="ZS4_DECRETOIMPEGNO_SRV.DecretoImpegno" Multiplicity="*" Role="ToRole_DeepEntityToDecretoImpegno"/>
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.DeepEntity" Multiplicity="1" Role="FromRole_DeepEntityToDecretoImpegno"/>
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.DecretoImpegno" Multiplicity="0..1" Role="ToRole_DeepEntityToDecretoImpegno"/>
                 <ReferentialConstraint>
                     <Principal Role="FromRole_DeepEntityToDecretoImpegno">
                         <PropertyRef Name="ChiaveGiustificativo"/>
@@ -268,9 +268,9 @@
                 <EntitySet Name="IpeEntitySet" EntityType="ZS4_DECRETOIMPEGNO_SRV.IpeEntity" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="StatoDecretoSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.StatoDecreto" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="TipologiaImpegnoSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.TipologiaImpegno" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="DeepDecretoEntitySet" EntityType="ZS4_DECRETOIMPEGNO_SRV.DeepDecretoEntity" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="DeepEntitySet" EntityType="ZS4_DECRETOIMPEGNO_SRV.DeepEntity" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
                 <AssociationSet Name="DeepEntityToDecretoImpegnoSet" Association="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToDecretoImpegno" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="DeepDecretoEntitySet" Role="FromRole_DeepEntityToDecretoImpegno"/>
+                    <End EntitySet="DeepEntitySet" Role="FromRole_DeepEntityToDecretoImpegno"/>
                     <End EntitySet="DecretoImpegnoSet" Role="ToRole_DeepEntityToDecretoImpegno"/>
                 </AssociationSet>
                 <AssociationSet Name="DecretoImpegnoToIpeSet" Association="ZS4_DECRETOIMPEGNO_SRV.DecretoImpegnoToIpe" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
@@ -278,7 +278,7 @@
                     <End EntitySet="IpeEntitySet" Role="ToRole_DecretoImpegnoToIpe"/>
                 </AssociationSet>
                 <AssociationSet Name="DeepEntityToIpeEntitySet" Association="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToIpeEntity" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="DeepDecretoEntitySet" Role="FromRole_DeepEntityToIpeEntity"/>
+                    <End EntitySet="DeepEntitySet" Role="FromRole_DeepEntityToIpeEntity"/>
                     <End EntitySet="IpeEntitySet" Role="ToRole_DeepEntityToIpeEntity"/>
                 </AssociationSet>
             </EntityContainer>

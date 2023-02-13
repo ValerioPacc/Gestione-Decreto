@@ -30,7 +30,7 @@
                             <Label text="Amm." />
                         </f:label>
                         <f:fields>
-                         <Input showSuggestion="true" id="amm" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'Amministrazione' }}">
+                         <Input showSuggestion="true" id="IDamm" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'Amministrazione' }}">
                            <core:Item key="{Amministrazione}" text="{Amministrazione}"/>
                          </Input>
                         </f:fields>
