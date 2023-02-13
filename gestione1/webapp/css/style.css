@@ -5,6 +5,26 @@
     color: black;
     font-size: 15px;
   }
+  .VL{
+    padding-bottom: 2rem !important; 
+  }
+  .title{
+    border-top: 1px solid #a3a3a4 !important;
+    font-size: 1.8rem !important;
+    padding: 1rem 0 1rem 0 !important;
+    box-shadow: none !important;
+  }
+  .Grid{
+    text-align:center !important; 
+  }
+  .btnList::before
+  {
+    /*background-image: url("../img/btn_listaPE.jpg");*/
+    content: url("../img/btn_listaPE.jpg");
+    background-repeat: none;
+    width:30px;
+    height:40px;
+  }
   /* .sapMBtn{
     font-size:30px;
     height:20%;

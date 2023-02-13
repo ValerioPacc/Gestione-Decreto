@@ -17,47 +17,78 @@
     <f:DynamicPage id="dynamicPageId" showFooter="true">
         <f:header>
             <f:DynamicPageHeader pinnable="false">
-                    <layout:VerticalLayout class="sapUiMediumMarginEnd">
+                    <layout:VerticalLayout class="sapUiMediumMarginEnd VL">
                         <Title text="Dati Decreto:" />
                         <layout:HorizontalLayout wrapping="true">
                         <Label text="Esercizio Decreto:" class="sapUiSmallMarginEnd" />
-                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                        <Text  text="{temp>/SelectedDecree/Esercizio}" class="sapUiMediumMarginEnd"/>
                     <Label text="Amministrazione:" class="sapUiSmallMarginEnd" />
-                    <Text  text="" class="sapUiMediumMarginEnd"/>
+                    <Text  text="{temp>/SelectedDecree/Amministrazione}" class="sapUiMediumMarginEnd"/>
                      <Label text="N.Bozza:" class="sapUiSmallMarginEnd"/>
-                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                        <Text  text="{temp>/SelectedDecree/RegistratoBozza}" class="sapUiMediumMarginEnd"/>
                     <Label text="Data Decreto:" class="sapUiSmallMarginEnd" />
-                    <Text  text="" class="sapUiMediumMarginEnd"/>
+                    <Text  id="reData" text=""  class="sapUiMediumMarginEnd"/>
                      <Label text="Ragioneria:" class="sapUiSmallMarginEnd" />
-                        <Text  text="" class="sapUiMediumMarginEnd"/>
+                        <Text  text="{temp>/SelectedDecree/Ragioneria}" class="sapUiMediumMarginEnd"/>
                     <Label text="Stato Decreto:" class="sapUiSmallMarginEnd"  />
-                    <Text  text="" class="sapUiMediumMarginEnd"/>
+                    <Text  text="{temp>/SelectedDecree/CodiceStato}" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
                 </layout:VerticalLayout>
-           
+           <Bar class="title">
+				<contentLeft>
+	               <Text text="Registrazione IPE" class="title" />
+	            </contentLeft>
+	            <contentRight>
+
+                <Button align="Center" text="Lista IPE" icon="sap-icon://list"   />
+                
+	            </contentRight>
+			</Bar>	
             </f:DynamicPageHeader>
            
         </f:header> 
       
        <f:content>
-       <!-- <HBox>
+       <!--HBox>
       	<Title text="Registrazione IPE" class="header"/>
-        </HBox> -->
-        <IconTabBar id="idIconTabBar" class="sapUiLargeMarginStart" select="onSelect" alignItems="End" >
+        </HBox-->
+
+        <!--IconTabBar id="idIconTabBar" class="sapUiLargeMarginStart" select="onSelect" alignItems="End" >
                 <items>
                 <IconTabFilter icon="sap-icon://list" text="Lista IPE"  > 
                  <OverflowToolbar height="50%" width="100%">
-       <ToolbarSpacer />
-                            <Button align="Center" type="Emphasized" text="Registra IPE Apertura" width="30%" class="button"  press="navToWizard"/>
-                           
-                            <Button align="Center" type="Emphasized" text="Registra IPE di Variazione" width="30%" press="navToWizard"/>
-                            
-                            <Button align="Center" type="Emphasized" text="Registra Atto di Annullamento" width="30%" press="navToView1"/>
-                    <ToolbarSpacer />   
+       <ToolbarSpacer /-->
+         <layout:Grid defaultSpan="XL12 L12 M12 S12" vSpacing="0" class="Grid">
+         <VBox>
+					<items>
+						<Button align="Center" type="Emphasized" text="Registra IPE Apertura" class="button"  press="navToWizard"/>
+					</items>
+				<layoutData>
+					<layout:GridData span="XL4 L4 M4 S12"/>
+				</layoutData>
+				</VBox>
+                <VBox>
+					<items>
+						<Button align="Center" type="Emphasized" text="Registra IPE di Variazione" press="navToWizard"/> 
+					</items>
+				<layoutData>
+					<layout:GridData span="XL4 L4 M4 S12"/>
+				</layoutData>
+				</VBox>
+                <VBox>
+					<items>
+						<Button align="Center" type="Emphasized" text="Registra Atto di Annullamento" press="navToView1"/>
+					</items>
+				<layoutData>
+					<layout:GridData span="XL4 L4 M4 S12"/>
+				</layoutData>
+				</VBox>
+         </layout:Grid >
+                    <!--ToolbarSpacer />   
                         </OverflowToolbar>
                 </IconTabFilter>
                 </items>
-            </IconTabBar>
+            </IconTabBar-->
             
                         </f:content>
 

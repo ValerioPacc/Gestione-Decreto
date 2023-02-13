@@ -167,7 +167,7 @@ sap.ui.define([
                     day = ("0" + dataNuova.getDate()).slice(-2);
                 var nData = [dataNuova.getFullYear(), mnth, day].join("-");
                 var nDate = nData.split("-").reverse().join(".");
-                this.getOwnerComponent().getRouter().navTo("dettagliDE", {campo:row.Esercizio, campo1:row.Amministrazione, campo2: row.UfficioLiv1, campo3:row.UfficioLiv2, campo4:row.NumeroDecreto, campo5:nDate, campo6:row.Ragioneria, campo7:row.TipologiaImpegno, campo8:row.CodiceStato,})
+                this.getOwnerComponent().getRouter().navTo("dettagliDE", {campo:row.Esercizio, campo1:row.Amministrazione, campo2: row.UfficioLiv1, campo3:row.UfficioLiv2, campo4:row.NumeroDecreto, campo5:nDate, campo6:row.Ragioneria, campo7:row.TipologiaImpegno, campo8:row.CodiceStato})
             },
 
             // onRowSelectionChange: function (oEvent) {

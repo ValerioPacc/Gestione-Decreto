@@ -7,10 +7,13 @@ sap.ui.define(
         "sap/m/Button",
         "sap/m/library",
         "sap/m/Text",
-        "./BaseController"
+        "./BaseController",
+        "gestione1/model/DateFormatter",
     ],
-    function(BaseController,MessageBox,Dialog,coreLibrary,Button,mobileLibrary,Text) {
+    function(BaseController,MessageBox,Dialog,coreLibrary,Button,mobileLibrary,Text,DateFormatter) {
       "use strict";
+
+
       // shortcut for sap.m.ButtonType
 	var ButtonType = mobileLibrary.ButtonType;
 
@@ -21,8 +24,20 @@ sap.ui.define(
 	var ValueState = coreLibrary.ValueState;
   
       return BaseController.extend("gestione1.controller.registraIPE", {
+
+        formatter: DateFormatter,
+
         onInit() {
 
+          var view= this.getView();
+          var dataDecr = this.getOwnerComponent().getModel("temp").getData().SelectedDecree.DataDecreto;
+                var dataNuova = new Date(dataDecr),
+                    mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+                    day = ("0" + dataNuova.getDate()).slice(-2);
+                var nData = [dataNuova.getFullYear(), mnth, day].join("-");
+                var nDate = nData.split("-").reverse().join(".");
+                this.getView().byId("reData").setText(nDate);
+                
         },
 
         onSuccessMessageDialogPress: function () {
