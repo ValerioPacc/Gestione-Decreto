@@ -70,7 +70,7 @@
                      <Label text="Nr. Massimo Risultati " />
                   </f:label>
                   <f:fields>
-                     <Input showSuggestion="true" id="risulMaxId" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
+                     <Input showSuggestion="true" id="risulMaxID" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
                            <core:Item key="{}" text="{}"/>
                          </Input>
                   </f:fields>

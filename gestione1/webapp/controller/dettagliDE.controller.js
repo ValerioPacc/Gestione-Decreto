@@ -65,8 +65,8 @@ sap.ui.define(
                 header[i].UfficioLiv2 == oEvent.getParameters().arguments.campo3 &&
                 header[i].NumeroDecreto == oEvent.getParameters().arguments.campo4 &&
                 nDate == oEvent.getParameters().arguments.campo5 && 
-                header[i].Ragioneria == oEvent.getParameters().arguments.campo6 &&
-                header[i].TipologiaImpegno == oEvent.getParameters().arguments.campo7 &&
+                //header[i].Ragioneria == oEvent.getParameters().arguments.campo6 &&
+                //header[i].TipologiaImpegno == oEvent.getParameters().arguments.campo7 &&
                 header[i].CodiceStato == oEvent.getParameters().arguments.campo8) {
 
                 var dirigDirFirm = header[i].DirigenteDirettoreFirmatario
@@ -156,6 +156,8 @@ sap.ui.define(
             oFragment.open();
           }.bind(this));
         },
+
+        
 
         onConfirmationCancelMessageBoxPress: function () {
           MessageBox.confirm("Vuoi cancellare il Decreto in provvisorio?", {

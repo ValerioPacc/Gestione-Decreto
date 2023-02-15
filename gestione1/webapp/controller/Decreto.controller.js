@@ -20,9 +20,9 @@ sap.ui.define(
         },
      
       
-        navToRegistraIPE: function (oEvent) {
-            this.getOwnerComponent().getRouter().navTo("registraIPE");
-        },
+        // navToRegistraIPE: function (oEvent) {
+        //     this.getOwnerComponent().getRouter().navTo("registraIPE");
+        // },
         onBackButton: function () {
           this.getOwnerComponent().getRouter().navTo("View1");
       },
@@ -34,16 +34,16 @@ sap.ui.define(
         var self = this;
     
 
-        var N_tipo_impegno = this.getView().byId("TypeI").getSelectedKey(); //header
-        var N_es_decreto = this.getView().byId("es_decreto").getSelectedKey(); //header
-        var N_Amm = this.getView().byId("AmministrazioneED").getSelectedKey();  //position
-        var N_codiceUff = this.getView().byId("UffApp1").mProperties.text;  //position
-        var N_Datade = this.getView().byId("DataDE1").mProperties.dateValue  //position
-        var N_NprotAmm = this.getView().byId("IdnumProtocolloAmma").mProperties.text;  //header
-        var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").mProperties.dateValue  //header
+        var N_tipo_impegno = this.getView().byId("TypeI").getSelectedKey(); 
+        var N_es_decreto = this.getView().byId("es_decreto").getSelectedKey(); 
+        var N_Amm = this.getView().byId("AmministrazioneED").getSelectedKey();  
+        var N_codiceUff = this.getView().byId("UffApp1").mProperties.text;  
+        var N_Datade = this.getView().byId("DataDE1").mProperties.dateValue  
+        var N_NprotAmm = this.getView().byId("IdnumProtocolloAmma").mProperties.text;  
+        var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").mProperties.dateValue  
         var N_CcConti = this.getView().byId("CcorteConti").getSelected();
         if (N_CcConti==true) 
-        var B_CcConti = "1" //header
+        var B_CcConti = "1" 
         if (N_CcConti==false) 
         var B_CcConti = "0" 
 
@@ -52,61 +52,74 @@ sap.ui.define(
             emphasizedAction: sap.m.MessageBox.Action.YES,
             onClose: function (oAction) {
                 if (oAction === sap.m.MessageBox.Action.YES) {
+                  var oDataModel = self.getOwnerComponent().getModel();
+                  var entity = {
+                     ChiaveGiustificativo: '12345', 
+                     DecretoImpegnoSet:{},
+                      IpeEntitySet: []
+                     };
+                    entity.DecretoImpegnoSet = {
+                      ChiaveGiustificativo: '12345',
+                        AreaFinanziaria:'1234',
+                        Ente:'0000',
+                        RegistratoBozza:'B',
+                        UfficioLiv1:'UFF',
+                        UfficioLiv2:'UFF',
+                        CodiceStato: '01',
+                        TipologiaImpegno: N_tipo_impegno,
+                        Esercizio: N_es_decreto,
+                        Amministrazione: N_Amm,
+                        DataDecreto: N_Datade,
+                        NProtocolloAmm: N_NprotAmm,
+                        DataProtocolloAmm: N_DataprotAmm,
+                        CodiceUfficio: N_codiceUff,
+                        ControlloCorteConti:B_CcConti
+                     };
 
-                  var oDataModel = self.getModel()
-                  // var entity = {
-                  //    ChiaveGiustificativo: '12345', 
-                  //    DecretoImpegnoSet:{},
-                  //     IpeEntitySet: []
-                  //    };
-                  //   //  entity.DecretoImpegnoSet = {
-                  //   //   ChiaveGiustificativo: '12345',
-                  //   //  };
+                     oDataModel.create("/DeepEntitySet", entity,{
+                       success: function(result){ 
+                        console.log('SUCCESS') }, 
+                        error: function(err){
+                           console.log(err);  
+                          },
+                            async: true, 
+                             urlParameters: {}  });
 
-                  //    oDataModel.create("/DeepEntitySet", entity,{
-                  //      success: function(result){ 
-                  //       console.log('SUCCESS') }, 
-                  //       error: function(err){
-                  //          console.log(err);  
-                  //         },
-                  //           async: true, 
-                  //            urlParameters: {}  });
-
-                    var deepEntity = {
-                      ChiaveGiustificativo: '123324235', 
-                        DecretoImpegnoSet: {},
-                        IpeEntitySet: []
+                    // var deepEntity = {
+                    //   ChiaveGiustificativo: '123324235', 
+                    //     DecretoImpegnoSet: null,
+                    //     IpeEntitySet: []
                       
-                    }
-                    deepEntity.DecretoImpegnoSet = {
-                      ChiaveGiustificativo: '123324235',
-                      AreaFinanziaria:'1234',
-                      Ente:'0000',
-                      RegistratoBozza:'1',
-                      UfficioLiv1:'UFF',
-                      UfficioLiv2:'UFF',
-                      TipologiaImpegno: N_tipo_impegno,
-                      Esercizio: N_es_decreto,
-                      Amministrazione: N_Amm,
-                      DataDecreto: N_Datade,
-                      NProtocolloAmm: N_NprotAmm,
-                      DataProtocolloAmm: N_DataprotAmm,
-                      CodiceUfficio: N_codiceUff,
-                      ControlloCorteConti:B_CcConti
-                    };
+                    // }
+                    // deepEntity.DecretoImpegnoSet = {
+                    //   ChiaveGiustificativo: '123324235',
+                    //   AreaFinanziaria:'1234',
+                    //   Ente:'0000',
+                    //   RegistratoBozza:'1',
+                    //   UfficioLiv1:'UFF',
+                    //   UfficioLiv2:'UFF',
+                    //   TipologiaImpegno: N_tipo_impegno,
+                    //   Esercizio: N_es_decreto,
+                    //   Amministrazione: N_Amm,
+                    //   DataDecreto: N_Datade,
+                    //   NProtocolloAmm: N_NprotAmm,
+                    //   DataProtocolloAmm: N_DataprotAmm,
+                    //   CodiceUfficio: N_codiceUff,
+                    //   ControlloCorteConti:B_CcConti
+                    // };
 
-                    oDataModel.create("/DeepEntitySet",deepEntity, {
-                        success: function (result) {
-                            console.log(result.Message)
-                            console.log('success');
+                    // oDataModel.create("/DeepEntitySet",deepEntity, {
+                    //     success: function (result) {
+                    //         console.log(result.Message)
+                    //         console.log('success');
 
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        },
-                        async: true,  // execute async request to not stuck the main thread
-                        urlParameters: {}  // send URL parameters if required 
-                    });
+                    //     },
+                    //     error: function (err) {
+                    //         console.log(err);
+                    //     },
+                    //     async: true,  // execute async request to not stuck the main thread
+                    //     urlParameters: {}  // send URL parameters if required 
+                    // });
 
                     MessageBox.success("Decreto Impegno creato correttamente", {
                         actions: [sap.m.MessageBox.Action.OK],

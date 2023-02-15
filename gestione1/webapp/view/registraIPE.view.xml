@@ -38,11 +38,7 @@
 				<contentLeft>
 	               <Text text="Registrazione IPE" class="title" />
 	            </contentLeft>
-	            <contentRight>
-
-                <Button align="Center" text="Lista IPE" icon="sap-icon://list"   />
-                
-	            </contentRight>
+	           
 			</Bar>	
             </f:DynamicPageHeader>
            
