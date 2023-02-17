@@ -159,15 +159,15 @@ sap.ui.define([
             onNavToDettagliDE: function(){
                 var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
                 this.getModel("temp").setProperty("/SelectedDecree", row);
-                // var HeaderITB = new sap.ui.model.json.JSONModel();
-                // HeaderITB.setData(row);
-                // this.getView().getModel("temp").setProperty('/', HeaderITB)
-                var dataNuova = new Date(row.DataDecreto),
-                    mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
-                    day = ("0" + dataNuova.getDate()).slice(-2);
-                var nData = [dataNuova.getFullYear(), mnth, day].join("-");
-                var nDate = nData.split("-").reverse().join(".");
-                this.getOwnerComponent().getRouter().navTo("dettagliDE", {campo:row.Esercizio, campo1:row.Amministrazione, campo2: row.UfficioLiv1, campo3:row.UfficioLiv2, campo4:row.NumeroDecreto, campo5:nDate, campo8:row.CodiceStato})
+                // var dataNuova = new Date(row.DataDecreto),
+                //     mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+                //     day = ("0" + dataNuova.getDate()).slice(-2);
+                // var nData = [dataNuova.getFullYear(), mnth, day].join("-");
+                // var nDate = nData.split("-").reverse().join(".");
+                if (row.CodiceStato == "01") {
+                this.getOwnerComponent().getRouter().navTo("dettagliDE", {campo:row.Amministrazione, campo1:row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3:row.Ente, campo4:row.Esercizio, campo5:row.NumeroDecreto, campo6:row.RegistratoBozza, campo7:row.UfficioLiv1, campo8:row.UfficioLiv2 })
+              }
+              
             },
 
        

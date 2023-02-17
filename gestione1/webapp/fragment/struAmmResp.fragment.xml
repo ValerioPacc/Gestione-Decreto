@@ -80,7 +80,7 @@
                      <Label text="Descr. Ammin." />
                   </f:label>
                   <f:fields>
-                     <Input showSuggestion="true" id="descAmmId" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
+                     <Input showSuggestion="true" id="DescAmmId" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
                            <core:Item key="{}" text="{}"/>
                          </Input>
                   </f:fields>

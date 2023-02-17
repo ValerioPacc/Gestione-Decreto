@@ -537,7 +537,7 @@
     
 			</IconTabFilter>
 			<IconTabFilter text="Residui" key="results" >
-				<Table scrollX="true" class="sapUiSizeCompact" id="HeaderITB2" includeItemInSelection="true" mode="MultiSelect" visible="{/TableVisible}">
+				<Table  class="sapUiSizeCompact" id="HeaderITB2" includeItemInSelection="true" mode="MultiSelect" visible="{/TableVisible}">
                  
         <headerToolbar>
         

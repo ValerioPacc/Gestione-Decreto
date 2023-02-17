@@ -103,8 +103,8 @@
                 <Button text="Indietro" type="Emphasized" press="onBackButton" />
                 <ToolbarSpacer />
                 <Button type="Emphasized" text="Registra IPE"  press="navToRegistraIPE" />
-                <Button type="Emphasized" text="Rettifica Decreto"   />
-                <Button type="Emphasized" text="Cancella Decreto" press="onConfirmationCancelMessageBoxPress" />
+                <Button type="Emphasized" text="Rettifica Decreto"  press="onUpdateDati" />
+                <Button type="Emphasized" text="Cancella Decreto" press="onDeleteRow" />
             </OverflowToolbar>
         </f:footer>
     </f:DynamicPage>

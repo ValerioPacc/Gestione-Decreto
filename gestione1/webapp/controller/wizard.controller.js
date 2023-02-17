@@ -22,7 +22,7 @@ sap.ui.define(
                 FilterSwitch1: true,
                 FilterSwitch2: true,
                 header1Visible: true,
-                // HeaderNIWstep3Visible: true
+                 HeaderNIWstep3Visible: true
             };
 
     return BaseController.extend("gestione1.controller.wizard", {
@@ -34,7 +34,7 @@ sap.ui.define(
                  this.getView().setModel(oProprietà);
                  this._iSelectedStepIndex = 0;
          this.controlSwitch();
-         //this.controlHeader();
+         this.controlHeader();
         var oModel = new sap.ui.model.json.JSONModel("../mock/comboBox.json");
         this.getView().setModel(oModel, "comboBox");
         var UIStateModel= new JSONModel();
@@ -90,7 +90,7 @@ sap.ui.define(
         }
         this._iSelectedStepIndex--
         this._oSelectedStep = oNextStep;
-        //this.controlHeader();
+        this.controlHeader();
         //this.controlPreNI();
         //this.controlHeader()
     },
@@ -113,7 +113,7 @@ sap.ui.define(
 
         this._iSelectedStepIndex++;
         this._oSelectedStep = oNextStep;
-        //this.controlHeader();
+        this.controlHeader();
         // console.log(this._iSelectedStepIndex)
         //this.controlPreNI()
         
@@ -336,20 +336,20 @@ onCloseDialog6 : function () {
             },
 
           
-      //       controlHeader: function () {
-      //         var oProprietà = this.getView().getModel();
-      //         this._oWizard = this.byId("CreateProductWizard");
-      //   this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
-      //   this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);
+            controlHeader: function () {
+              var oProprietà = this.getView().getModel();
+              this._oWizard = this.byId("CreateProductWizard");
+        this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
+        this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);
 
-      //   if (this._iSelectedStepIndex == 5  ) {
-      //     oProprietà.setProperty("/header1Visible", true)
+        if (this._iSelectedStepIndex == 5 ) {
+          oProprietà.setProperty("/header1Visible", true)
             
-      //   } 
-      //   else {
-      //     oProprietà.setProperty("/header1Visible", false)
-      //   }           
-      // },
+        } 
+        else {
+          oProprietà.setProperty("/header1Visible", false)
+        }           
+      },
 
       onValueHelpRequest: function (oEvent) {
         // this._oBasicSearchField = new SearchField();
