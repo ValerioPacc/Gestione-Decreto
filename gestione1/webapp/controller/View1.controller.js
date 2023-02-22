@@ -81,7 +81,7 @@ sap.ui.define([
                             if (i == 19) {
                                 if(oEvent.getParameters().selectionSet[19].mProperties.value!= ''){
                                 datiGI.push(new Filter({
-                                    path: "DataProtocolloAMM",
+                                    path: "DataProtocolloAmm",
                                     operator: FilterOperator.BT,
                                     value1: oEvent.getParameters().selectionSet[19].mProperties.value,
                                     value2: oEvent.getParameters().selectionSet[20].mProperties.value
@@ -167,7 +167,7 @@ sap.ui.define([
                 if (row.CodiceStato == "01") {
                 this.getOwnerComponent().getRouter().navTo("dettagliDE", {campo:row.Amministrazione, campo1:row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3:row.Ente, campo4:row.Esercizio, campo5:row.NumeroDecreto, campo6:row.RegistratoBozza, campo7:row.UfficioLiv1, campo8:row.UfficioLiv2 })
               }
-              
+           
             },
 
        

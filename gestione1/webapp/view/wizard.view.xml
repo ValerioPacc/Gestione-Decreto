@@ -60,33 +60,41 @@
                                     <l:content>
                                         <VBox>
                                             <Label text="{i18n>esercizio}" required="true"/>
-                                            <ComboBox id="es_decreto" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}">
-                                            <core:Item id="es_decreto1" key="{Esercizio}" text="{Esercizio}" />
+                                            <ComboBox id="es_decreto" items="{path: '>/IpeEntitySet', sorter: { path: 'Gjahr' }}">
+                                            <core:Item id="es_decreto1" key="{Gjahr}" text="{Gjahr}" />
                                             </ComboBox>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>amministrazione}" required="true"/>
-                                            <Input value="" />
+                                            <Label text="{i18n>amministrazione}" required="true" editable="false"/>
+                                            <Input value="" showValueHelp="false" editable="false" suggestionItems="{path: '>/IpeEntitySet', sorter: { path: '{Zammin}' }}">
+                                             <suggestionItems>
+                                                        <core:ListItem text="{>Zammin}"/>
+                                                    </suggestionItems>
+                                                </Input>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>Ncontratto}" required="true" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'ContrattoOrdine' }}"/>
-                                            <Input value="" >
-                                             <core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/>
-                                    </Input>
+                                            <Label text="{i18n>Ncontratto}" required="true"/>
+                                            <Input value="" required="true" showValueHelp="true" showSuggestion="true" suggestionItems="{path: '/IpeEntitySet', sorter: { path: 'Znumcontratt' }}">
+                                                    <suggestionItems>
+                                                        <core:ListItem text="{>Znumcontratt}"/>
+                                                    </suggestionItems>
+                                                </Input>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>Dstipula}" required="true" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}"/>
-                                            <Input value="">
-                                             <core:Item key="{}" text="{}"/>
+                                            <Label text="{i18n>Dstipula}" required="true"/>
+                                            <Input value="" required="true" showValueHelp="true" showSuggestion="true" suggestionItems="{path: '/IpeEntitySet', sorter: { path: 'Zzdatastipula' }}">
+                                             <suggestionItems>
+                                                        <core:ListItem text="{IpeEntity>Zzdatastipula}"/>
+                                                    </suggestionItems>
                                              </Input>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
@@ -100,29 +108,37 @@
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>beneficiarioH}" />
-                                            <Input value="" />
+                                            <Label text="{i18n>beneficiarioH}" editable="false" />
+                                            <Input value="" showValueHelp="false" editable="false" suggestionItems="{path: '>/IpeEntity', sorter: { path: 'Lifnr' }}">
+                                            <core:Item key="{>Lifnr}"/>
+                                            </Input>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>cig}" />
-                                            <Input value="" />
+                                            <Label text="{i18n>cig}" editable="false"/>
+                                            <Input value="" showValueHelp="false" editable="false" suggestionItems="{path: '>/IpeEntity', sorter: { path: 'Zzcig' }}">
+                                            <core:Item key="{>Zzcig}"/>
+                                            </Input>
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>cup}" />
-                                            <Input value="" />
+                                            <Label text="{i18n>cup}" editable="false" />
+                                            <Input value="" showValueHelp="false" editable="false" suggestionItems="{path: '>/IpeEntity', sorter: { path: 'Zzcup' }}">
+                                            <core:Item key="{>Zzcup}"/>
+                                             </Input>
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>ImpTot}" wrapping="true"/>
-                                            <Input value="" width="60%" />
+                                            <Label text="{i18n>ImpTot}" wrapping="true" editable="false"/>
+                                            <Input value="" showValueHelp="false" editable="false" suggestionItems="{}" width="60%" >
+                                             <core:Item key="{}"/>
+                                             </Input>
                                             <layoutData>
                                                 <l:GridData span="L6 M3 S3" />
                                             </layoutData>
@@ -130,7 +146,7 @@
                                     </l:content>
                                 </l:Grid>
 
-                                <Table class="sapUiSizeCompact" id="idpsfin" includeItemInSelection="true" items="{>/items}" headerText="Riepilogo Pianificazione Finanziaria" width="70%">
+                                <Table class="sapUiSizeCompact" items="{IpeEntity>/}" id="idpsfin" includeItemInSelection="true"  headerText="Riepilogo Pianificazione Finanziaria" width="70%">
                                     <columns>
                                         <Column width="12%">
                                             <Label text="Esercizio" />
@@ -149,11 +165,11 @@
                                         </Column>
                                     </columns>
                                     <ColumnListItem>
-                                        <Text text="{DecretoImpegnoSet>Numero NI}" />
-                                        <Text text="{DecretoImpegnoSet>Struttura Amministrativa Responsabile}" />
-                                        <Text text="{DecretoImpegnoSet>Posizione Finanziaria}" />
-                                        <Text text="{DecretoImpegnoSet>Oggetto della spesa}" />
-                                        <Text text="{DecretoImpegnoSet>Mese}" />
+                                        <Text text="{IpeEntitySet>Gjahr}" />
+                                        <Text text="{IpeEntitySet>Fipex}" />
+                                        <Text text="{IpeEntitySet>ZnumeroPni}" />
+                                        <Text text="{IpeEntitySet>}" />
+                                        <Text text="{IpeEntitySet>}" />
                                     </ColumnListItem>
                                 </Table>
                             </content>

@@ -52,7 +52,12 @@ sap.ui.define([
 		 * Event handler when the share by E-Mail button has been clicked
 		 * @public
 		 */
-		
+		navToHome: function() {
+			this.getOwnerComponent().getRouter().navTo("View1");
+			this.getView().getModel("temp").setProperty("/SelectedDecree",[]);
+			var oTempModel = this.getView().getModel("temp");
+			oTempModel.setProperty("/draft","");
+		}
 
 		/**
 		 * Adds a history entry in the FLP page history

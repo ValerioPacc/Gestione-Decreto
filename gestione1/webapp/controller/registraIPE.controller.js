@@ -40,22 +40,22 @@ sap.ui.define(
                 
         },
 
-        onSuccessMessageDialogPress: function () {
-          MessageBox.confirm("Vuoi registrare il Decreto in provvisorio?", {
-            actions: ["OK", "Annulla"],
-            emphasizedAction: "OK",
-            title: "Registrazione",
-            onClose: function (sAction) {
+        // onSuccessMessageDialogPress: function () {
+        //   MessageBox.confirm("Vuoi registrare il Decreto in provvisorio?", {
+        //     actions: ["OK", "Annulla"],
+        //     emphasizedAction: "OK",
+        //     title: "Registrazione",
+        //     onClose: function (sAction) {
              
-              if (sAction === "OK") {
-                MessageBox.success("Decreto registrato con successo");
-              }
-              else{
-                sAction.close();
-              }
-            }
-          })
-        },
+        //       if (sAction === "OK") {
+        //         MessageBox.success("Decreto registrato con successo");
+        //       }
+        //       else{
+        //         sAction.close();
+        //       }
+        //     }
+        //   })
+        // },
 
         onOpenConfDialog : function () {
 

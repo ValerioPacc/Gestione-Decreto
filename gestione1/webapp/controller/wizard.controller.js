@@ -43,6 +43,7 @@ sap.ui.define(
         };
         UIStateModel.setData(UIStateData);
         this.getView().setModel(UIStateModel, "UIState");
+        this.callIpeEntity();
       },
 
       onListSelect: function (event) {
@@ -415,6 +416,26 @@ onCloseDialog6 : function () {
         });
 
       },
+      callIpeEntity:function () {
+        var that = this
+        var that = this;
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/IpeEntitySet", {
+            filters: [],
+            urlParameters: "",
+            success: function (data) {
+                oMdl.setData(data.results);
+                that.getView().getModel("temp").setProperty('/IpeEntitySet', data.results)
+            },
+            error: function (error) {
+                //that.getView().getModel("temp").setProperty(sProperty,[]);
+                //that.destroyBusyDialog();
+                var e = error;
+            }
+        });
+    },
+     
+
       onChangeSelect: function () {
         var bSelected= this.getView().byId("CB1").getSelected();
         if (bSelected) {

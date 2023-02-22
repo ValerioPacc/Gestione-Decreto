@@ -50,13 +50,13 @@ sap.ui.define(
                 var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
                 for (var i = 0; i < header.length; i++) {
 
-                    var dataNuova = new Date(header[i].DataDecreto),
+                    var dataNuova = new Date(header[i].DataProtocolloRag),
                         mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
                         day = ("0" + dataNuova.getDate()).slice(-2);
                     var nData = [dataNuova.getFullYear(), mnth, day].join("-");
                     var nDate = nData.split("-").reverse().join(".");
-                    var dataProtocolloRag = header[i].DataProtocolloRag
-                    this.getView().byId("dataProtRag").setText(dataProtocolloRag)
+                    //var dataProtocolloRag = header[i].DataProtocolloRag
+                    this.getView().byId("dataProtRag").setText(nDate)
 
 
                     if (header[i].Amministrazione == oEvent.getParameters().arguments.campo &&
@@ -258,99 +258,52 @@ sap.ui.define(
                 this.getOwnerComponent().getRouter().navTo("wizard");
             },
 
-            onBackButton: function () {
-                this.getOwnerComponent().getRouter().navTo("View1");
-            },
+            // onBackButton: function () {
+            //     this.getOwnerComponent().getRouter().navTo("View1");
+            //     this.getView().getModel("temp").setProperty("/SelectedDecree",[]);
+            //     var oTempModel = this.getView().getModel("temp");
+            //     oTempModel.setProperty("/draft","");
+            // },
 
+            onNavToupdateDecreto: function(){
+            //var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
+                //this.getModel("temp").setProperty("/SelectedDecree", row);
+                
+        var url = location.href
+        var sUrl = url.split("/dettagliDE/")[1]
+        var aValori = sUrl.split(",")
 
-            onUpdateDati: function (oEvent) {
-                var that = this;
-
-                var url = location.href
-                var sUrl = url.split("/dettagliDE/")[1]
-                var aValori = sUrl.split(",")
-
-                var Amministrazione = aValori[0]
-                var AreaFinanziaria = aValori[1]
-                var ChiaveGiustificativo = aValori[2]
-                var Ente = aValori[3]
-                var Esercizio = aValori[4]
-                var NumeroDecreto = aValori[5]
-                var RegistratoBozza = aValori[6]
-                var UfficioLiv1 = aValori[7]
-                var UfficioLiv2 = aValori[8]
-
-
-
-                var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
-                for (var i = 0; i < header.length; i++) {
-                    if (header[i].Amministrazione == Amministrazione &&
-                        header[i].AreaFinanziaria == AreaFinanziaria &&
-                        header[i].ChiaveGiustificativo == ChiaveGiustificativo &&
-                        header[i].Ente == Ente &&
-                        header[i].Esercizio == Esercizio &&
-                        header[i].NumeroDecreto == NumeroDecreto &&
-                        header[i].RegistratoBozza == RegistratoBozza &&
-                        header[i].UfficioLiv1 == UfficioLiv1 &&
-                        header[i].UfficioLiv2 == UfficioLiv2) {
-                        var indice = i
-                        MessageBox.warning("Sei sicuro di voler modificare il DI?", {
-                            actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-                            emphasizedAction: MessageBox.Action.YES,
-                            onClose: function (oAction) {
-                                if (oAction === sap.m.MessageBox.Action.YES) {
-                                    
-                                    // var oModel = that.getOwnerComponent().getModel("temp");
-                                    var oModel = that.getView().getModel();
-                                    
-
-                                    var path = oModel.createKey("/DecretoImpegnoSet", {
-                                        Amministrazione: header[indice].Amministrazione,
-                                        AreaFinanziaria: header[indice].AreaFinanziaria,
-                                        ChiaveGiustificativo: header[indice].ChiaveGiustificativo,
-                                        Ente: header[indice].Ente,
-                                        Esercizio: header[indice].Esercizio,
-                                        NumeroDecreto: header[indice].NumeroDecreto,
-                                        RegistratoBozza: header[indice].RegistratoBozza,
-                                        UfficioLiv1: header[indice].UfficioLiv1,
-                                        UfficioLiv2: header[indice].UfficioLiv2,
-                                    });
-                                     
-                                    for (var i = 0; i < 1; i++) {
-                                        var item = header[i];
-                                        var editDecreto = {
-                                            TipologiaImpegno: item.TipologiaImpegno,
-                                            NProtocolloAmm: item.NProtocolloAmm,
-                                            DataProtocolloAmm: item.DataProtocolloAmm,
-                                            NProtocolloAmm: item.NProtocolloAmm,
-                                            ControlloCorteConti: item.ControlloCorteConti
-                                        };
-                                        
-                                        oModel.update(path, editDecreto, {
-                                            success: function (data) {
-                                                console.log("success");
-                                                MessageBox.success("Operazione Eseguita con successo", {
-                                                    actions: [sap.m.MessageBox.Action.OK],
-                                                    emphasizedAction: MessageBox.Action.OK,
-                                                    onClose: function (oAction) {
-                                                        if (oAction === sap.m.MessageBox.Action.OK) {
-                                                            that.getOwnerComponent().getRouter().navTo("View1");
-                                                        }
-                                                    }
-                                                })
-                                            },
-                                            error: function (e) {
-                                                //console.log("error");
-                                                MessageBox.error("Operazione non eseguita")
-                                        }
-                                    });
-                                }
-                                }
-                            }
-                        });
-                    }
+        var Amministrazione = aValori[0]
+        var AreaFinanziaria = aValori[1]
+        var ChiaveGiustificativo = aValori[2]
+        var Ente = aValori[3]
+        var Esercizio = aValori[4]
+        var NumeroDecreto = aValori[5]
+        var RegistratoBozza = aValori[6]
+        var UfficioLiv1 = aValori[7]
+        var UfficioLiv2 = aValori[8]
+       
+        
+        var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
+        for (var i = 0; i < header.length; i++) {
+            if (header[i].Amministrazione == Amministrazione &&
+                header[i].AreaFinanziaria == AreaFinanziaria &&
+                header[i].ChiaveGiustificativo == ChiaveGiustificativo &&
+                header[i].Ente == Ente &&
+                header[i].Esercizio == Esercizio &&
+                header[i].NumeroDecreto == NumeroDecreto &&
+                header[i].RegistratoBozza == RegistratoBozza &&
+                header[i].UfficioLiv1 == UfficioLiv1 &&
+                header[i].UfficioLiv2 == UfficioLiv2) {
+                var oTempModel = this.getView().getModel("temp");
+                oTempModel.setProperty("/draft","x");
+                this.getOwnerComponent().getRouter().navTo("updateDecreto", {campo:header[i].Amministrazione, campo1:header[i].AreaFinanziaria, campo2: header[i].ChiaveGiustificativo, campo3:header[i].Ente, campo4:header[i].Esercizio, campo5:header[i].NumeroDecreto, campo6:header[i].RegistratoBozza, campo7:header[i].UfficioLiv1, campo8:header[i].UfficioLiv2 })
                 }
+            }     
             },
+
+        
+           
 
         })
 
