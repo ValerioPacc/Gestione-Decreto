@@ -219,6 +219,20 @@ sap.ui.define(
 				oFragment.open();
 			}.bind(this));*/
 		},
+
+    getOtherData: function (value) {
+
+      var oModel= this.getView().getModel("comboBox").getProperty("/Contratto"),
+      rowSelected= _.findWhere(oModel, {id: value});
+
+      this.getView().byId("Dstipula").setValue(rowSelected.data);
+      this.getView().byId("descContratto").setValue(rowSelected.desc);
+      this.getView().byId("beneficiario").setValue(rowSelected.beneficiario);
+      this.getView().byId("cig").setValue(rowSelected.cig);
+      this.getView().byId("cup").setValue(rowSelected.cup);
+      this.getView().byId("importoCont").setValue(rowSelected.importo);
+
+		},
     
 
     
@@ -361,12 +375,20 @@ onCloseDialog6 : function () {
                 var oProprietà = this.getView().getModel();
                 var stato= this.getView().byId("switch").getState();
                 if (stato) {
-                  oProprietà.setProperty("/FilterSwitch1", true)
-                  oProprietà.setProperty("/FilterSwitch2", true)
+                  oProprietà.setProperty("/FilterSwitch1", true);
+                  oProprietà.setProperty("/FilterSwitch2", true);
                 }
              else {
-              oProprietà.setProperty("/FilterSwitch1", false)
-                  oProprietà.setProperty("/FilterSwitch2", false)
+                oProprietà.setProperty("/FilterSwitch1", false);
+                oProprietà.setProperty("/FilterSwitch2", false);
+                this.getView().byId("Dstipula").setValue("");
+                this.getView().byId("descContratto").setValue("");
+                this.getView().byId("beneficiario").setValue("");
+                this.getView().byId("cig").setValue("");
+                this.getView().byId("cup").setValue("");
+                this.getView().byId("importoCont").setValue("");
+                this.getView().byId("Ncontratto").setSelectedKey("");
+                
              }
             },
 

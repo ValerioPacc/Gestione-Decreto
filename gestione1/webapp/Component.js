@@ -23,6 +23,10 @@ sap.ui.define([
             init: function () {
                 // call the base component's init function
                 UIComponent.prototype.init.apply(this, arguments);
+                var sRootPath = jQuery.sap.getModulePath("gestione1");
+            
+                /*** IMPORT CUSTOM LIBS ***/
+                jQuery.getScript(sRootPath + "/utils/underscore-min.js");
 
                 // enable routing
                 this.getRouter().initialize();
