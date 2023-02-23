@@ -188,7 +188,8 @@ sap.ui.define(
                             emphasizedAction: MessageBox.Action.OK,
                             onClose: function (oAction) {
                                 if (oAction === sap.m.MessageBox.Action.OK) {
-                                    self.getOwnerComponent().getRouter().navTo("View1");
+                                    self.getOwnerComponent().getRouter().navTo("View1")
+                                    location.reload();
                                 }
                             }
                         }) 

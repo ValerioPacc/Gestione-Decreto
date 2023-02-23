@@ -69,6 +69,16 @@ sap.ui.define(
                         header[i].UfficioLiv1 == oEvent.getParameters().arguments.campo7 &&
                         header[i].UfficioLiv2 == oEvent.getParameters().arguments.campo8) {
 
+                            var dataNuova = new Date(header[i].DataProtocolloRag),
+                            mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+                            day = ("0" + dataNuova.getDate()).slice(-2);
+                        var nData = [dataNuova.getFullYear(), mnth, day].join("-");
+                        var nDate = nData.split("-").reverse().join(".");
+                        //var dataProtocolloRag = header[i].DataProtocolloRag
+                        this.getView().byId("dataProtRag").setText(nDate)
+
+
+
                         var dirigDirFirm = header[i].DirigenteDirettoreFirmatario
                         this.getView().byId("DDFirmatario").setText(dirigDirFirm)
 
@@ -214,9 +224,17 @@ sap.ui.define(
                                     oModel.remove(path, {
                                         success: function (data, response) {
                                             //console.log("success");
-                                            MessageBox.success("Operazione eseguita con successo")
-                                            that.getOwnerComponent().getRouter().navTo("View1");
-                                        },
+                                            MessageBox.success("Operazione eseguita con successo",{
+                                            actions: [sap.m.MessageBox.Action.OK],
+                                            emphasizedAction: MessageBox.Action.OK,
+                                            onClose: function (oAction) {
+                                                if (oAction === sap.m.MessageBox.Action.OK) {
+                                            that.getOwnerComponent().getRouter().navTo("View1") 
+                                            location.reload();
+                                        }
+                                    }
+                                }) 
+                            }, 
                                         error: function (e) {
                                             //console.log("error");
                                             MessageBox.error("Operazione non eseguita")

@@ -17,6 +17,7 @@ sap.ui.define([
         return BaseController.extend("gestione1.controller.View1", {
             formatter: DateFormatter,
             onInit: function () {
+                
                 var oFilter = this.getView().byId("filterID"),
 				that = this;
 				

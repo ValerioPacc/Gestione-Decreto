@@ -28,6 +28,7 @@ sap.ui.define(
     return BaseController.extend("gestione1.controller.wizard", {
 
       onInit() {
+        this.callIpeEntity();
          var oProprietà = new JSONModel(),
                 oInitialModelState = Object.assign({}, oData);
                 oProprietà.setData(oInitialModelState);
@@ -43,7 +44,7 @@ sap.ui.define(
         };
         UIStateModel.setData(UIStateData);
         this.getView().setModel(UIStateModel, "UIState");
-        this.callIpeEntity();
+        
       },
 
       onListSelect: function (event) {
@@ -417,7 +418,7 @@ onCloseDialog6 : function () {
 
       },
       callIpeEntity:function () {
-        var that = this
+   
         var that = this;
         var oMdl = new sap.ui.model.json.JSONModel();
         this.getOwnerComponent().getModel().read("/IpeEntitySet", {

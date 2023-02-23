@@ -13,7 +13,7 @@
                     <l:HorizontalLayout allowWrapping="true">
                         <l:VerticalLayout class="sapUiMediumMarginEnd" visible="{/header1Visible}">
                             <HBox id="idHBox1">
-                                <VBox id="idIpeH" class="sapUiSmallMargin" width="50%">
+                                <VBox id="idIpe" class="sapUiSmallMargin" width="50%">
                                     <Label id="IpeH" text="{i18n>Ipe}" design="Bold"/>
                                     <Text id="Ipe1H" text="{}"/>
                                 </VBox>
@@ -68,7 +68,7 @@
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>amministrazione}" required="true" editable="false"/>
+                                            <Label text="{i18n>amministrazione}" required="true" />
                                             <Input value="" showValueHelp="false" editable="false" suggestionItems="{path: '>/IpeEntitySet', sorter: { path: '{Zammin}' }}">
                                              <suggestionItems>
                                                         <core:ListItem text="{>Zammin}"/>
@@ -108,7 +108,7 @@
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>beneficiarioH}" editable="false" />
+                                            <Label text="{i18n>beneficiarioH}"  />
                                             <Input value="" showValueHelp="false" editable="false" suggestionItems="{path: '>/IpeEntity', sorter: { path: 'Lifnr' }}">
                                             <core:Item key="{>Lifnr}"/>
                                             </Input>
@@ -117,7 +117,7 @@
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>cig}" editable="false"/>
+                                            <Label text="{i18n>cig}" />
                                             <Input value="" showValueHelp="false" editable="false" suggestionItems="{path: '>/IpeEntity', sorter: { path: 'Zzcig' }}">
                                             <core:Item key="{>Zzcig}"/>
                                             </Input>
@@ -126,7 +126,7 @@
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>cup}" editable="false" />
+                                            <Label text="{i18n>cup}"/>
                                             <Input value="" showValueHelp="false" editable="false" suggestionItems="{path: '>/IpeEntity', sorter: { path: 'Zzcup' }}">
                                             <core:Item key="{>Zzcup}"/>
                                              </Input>
@@ -135,7 +135,7 @@
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>ImpTot}" wrapping="true" editable="false"/>
+                                            <Label text="{i18n>ImpTot}" wrapping="true" />
                                             <Input value="" showValueHelp="false" editable="false" suggestionItems="{}" width="60%" >
                                              <core:Item key="{}"/>
                                              </Input>
