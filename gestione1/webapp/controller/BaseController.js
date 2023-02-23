@@ -48,6 +48,28 @@ sap.ui.define([
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
 
+		////////////////////////////////////////////////////////////
+		//	DIALOG
+		////////////////////////////////////////////////////////////
+		
+		openDialog: function (dialogPath) {
+			if (!this.__dialog) {
+				this.__dialog = sap.ui.xmlfragment(dialogPath, this);
+				this.getView().addDependent(this.__dialog);
+			}
+			return this.__dialog;
+		},
+		
+		closeDialog: function() {
+			if (this.__dialog) {
+				if( this.__dialog.close ) {
+					this.__dialog.close();
+				}
+				this.__dialog.destroy();
+				this.__dialog = null;
+			}
+		},
+
 		/**
 		 * Event handler when the share by E-Mail button has been clicked
 		 * @public

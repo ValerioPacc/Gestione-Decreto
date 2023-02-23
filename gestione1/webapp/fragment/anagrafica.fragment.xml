@@ -1,9 +1,10 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
-     <Dialog id="Anagrafica"  draggable="true" showHeader="true" titleAlignment="Start"
-      afterClose="onAfterClose" contentWidth="100%" contentHeight="100%">
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+     <Dialog id="Anagrafica"  title="Richiedi Anagrafica beneficiario" draggable="true" showHeader="true"
+      afterClose="closeDialog" contentWidth="100%" contentHeight="100%">
+    <content>
 
-
-       <f:Form editable="false" title="Dati Anagrafica Bancario">
+       <f:Form id="anagraficaB" editable="false" title="Dati Anagrafica Bancario">
          <f:layout>
             <f:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/>
          </f:layout>
@@ -14,10 +15,10 @@
                      <Label text="Paese" required= "true"/>
                   </f:label>
                   <f:fields>
-                     <MultiInput id="inputPaese" class="validateFilter" value="{}" width="10%">
+                     <MultiInput id="inputPaese" class="validateFilter" value="" width="10%">
                      <core:Item key="{comboBox>}" text="{comboBox>}" />
                      </MultiInput>
-                      <Input id="input" class="validateFilter" value="{}"></Input>
+                      <Input id="input" class="validateFilter" value=""></Input>
                   </f:fields>
                </f:FormElement>
                <f:FormElement>
@@ -25,17 +26,17 @@
                             <Label text="Cat.Beneficiario" required= "true"/>
                         </f:label>
                         <f:fields>
-                        <Select selectedKey="" items="{>/}">
-                        <core:Item key="{}" text="{}" />
+                        <Select selectedKey="" items="">
+                        <core:Item key="" text="" />
                         </Select>
                         </f:fields>
                 </f:FormElement>
                 <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="Documentazione Beneficiario" required= "true"/>
+                     <Label text="Documentazione Beneficiario" required="true"/>
                   </f:label>
                   <f:fields>
-                     <Input id="docBen" class="validateFilter" value="{}">
+                     <Input id="docBen" class="validateFilter" value="">
                      </Input>
                   </f:fields>
                </f:FormElement>
@@ -44,7 +45,7 @@
                      <Label text="Nome" required= "true"/>
                   </f:label>
                   <f:fields>
-                     <Input id="inputNome" class="validateFilter" value="{}">
+                     <Input id="inputNome" class="validateFilter" value="">
                      </Input>
                   </f:fields>
                </f:FormElement>
@@ -53,19 +54,19 @@
                      <Label text="Cognome" required= "true"/>
                   </f:label>
                   <f:fields>
-                     <Input id="inputCog" class="validateFilter" value="{}">
+                     <Input id="inputCog" class="validateFilter" value="">
                      </Input>
                   </f:fields>
                </f:FormElement>
                <f:FormElement label="Via" visible="{dialogModel>/GgVisible}">
                <f:label>
-                     <Label  required= "true"/>
+                     <Label text="Via" required="true"/>
                    </f:label>
                   <f:fields>
-                     <Input id="inputVia" class="validateFilter" value="{}">
+                     <Input id="inputVia" class="validateFilter" value="">
                      </Input>
                   </f:fields>
-                    <Input class="validateFilter" value="{}" width="30%">
+                    <Input class="validateFilter" value="" width="30%">
                      </Input>
                </f:FormElement>
                 <f:FormElement visible="{dialogModel>/GgVisible}">
@@ -74,12 +75,12 @@
                     
                   </f:label>
                   <f:fields>
-                     <Input id="inputLoc" class="validateFilter" value="{}" width="120%">
+                     <Input id="inputLoc" class="validateFilter" value="" width="120%">
                      </Input>
-                     <Input id="inputReg1" class="validateFilter" value="{}" >
+                     <Input id="inputReg1" class="validateFilter" value="">
                      </Input>
                      </f:fields>
-                     <Input class="validateFilter" value="{}" width="120%" >
+                     <Input class="validateFilter" value="" width="120%" >
                      </Input>
                   
                </f:FormElement>
@@ -88,15 +89,15 @@
                      <Label text="CAP" required= "true"/>
                   </f:label>
                   <f:fields>
-                     <Input id="inputCAP" class="validateFilter" value="{}">
+                     <Input id="inputCAP" class="validateFilter" value="">
                      </Input>
                   </f:fields>
                </f:FormElement>
               
-  </f:FormContainer>
+            </f:FormContainer>
          </f:formContainers>
       </f:Form>
-               <f:Form editable="false" title="Dati Fiscali Beneficiario ">
+    <f:Form editable="false" title="Dati Fiscali Beneficiario ">
          <f:layout>
             <f:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/>
          </f:layout>
@@ -107,7 +108,7 @@
                             <Label text="Codice Fiscale" required= "true"/>
                         </f:label>
                         <f:fields>
-                        <Input id="inputCF" class="validateFilter" value="{}" >
+                        <Input id="inputCF" class="validateFilter" value="">
                      </Input>
                         </f:fields>
                 </f:FormElement>
@@ -116,7 +117,7 @@
                             <Label text="Partita IVA" />
                         </f:label>
                         <f:fields>
-                        <Input id="inputPiva" class="validateFilter" value="{}" >
+                        <Input id="inputPiva" class="validateFilter" value="">
                      </Input>
                         </f:fields>
                 </f:FormElement>
@@ -125,7 +126,7 @@
                             <Label text="Codice Fiscale/Iva" />
                         </f:label>
                         <f:fields>
-                        <Input id="inputCfPiva" class="validateFilter" value="{}" >
+                        <Input id="inputCfPiva" class="validateFilter" value="">
                      </Input>
                         </f:fields>
                 </f:FormElement>
@@ -133,11 +134,12 @@
             </f:FormContainer>
          </f:formContainers>
       </f:Form> 
+      </content>
       <beginButton>
-       <Button text="Indietro" type="Emphasized" press="onCloseDialog1"/>
+       <Button text="Indietro" type="Emphasized" press="closeDialog"/>
       </beginButton>
       <endButton>
-        <Button text="Salva" type="Emphasized" press="onSaveMessageDialogPress"/>
+        <Button text="Salva" type="Emphasized" app:dialog="Anagrafica" press="onSaveMessageDialogPress"/>
       </endButton>
    </Dialog>
     

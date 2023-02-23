@@ -1,4 +1,8 @@
-<mvc:View height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="gestione1.controller.wizard">
+<mvc:View height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" 
+xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" 
+xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" 
+xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+xmlns="sap.m" controllerName="gestione1.controller.wizard">
     <NavContainer id="wizardNavContainer">
         <f:DynamicPage stickySubheaderProvider="CreateProductWizard" toggleHeaderOnTitleClick="false" class="sapUiNoContentPadding" showFooter="true">
             <f:title>
@@ -60,7 +64,7 @@
                                     <l:content>
                                         <VBox>
                                             <Label text="{i18n>esercizio}" required="true"/>
-                                            <ComboBox id="es_decreto" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}">
+                                            <ComboBox id="es_decreto" enabled="{/FilterSwitch1}" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}">
                                             <core:Item id="es_decreto1" key="{Esercizio}" text="{Esercizio}" />
                                             </ComboBox>
                                             <layoutData>
@@ -69,60 +73,69 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>amministrazione}" required="true"/>
-                                            <Input value="" />
+                                            <Input value="{temp>/SelectedDecree/Amministrazione}"  enabled="false"/>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>Ncontratto}" required="true" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'ContrattoOrdine' }}"/>
-                                            <Input value="" >
-                                             <core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/>
-                                    </Input>
+                                            <Label text="{i18n>Ncontratto}" required="true" />
+                                            <Input id="Ncontratto" showValueHelp="true"
+                                            enabled="{/FilterSwitch1}"
+                                            valueHelpOnly="true" valueHelpRequest="handleValueHelp"
+                                            app:fieldName="ContrattoOrdine" app:filterTableField="ContrattoOrdine"
+                                            class="sapUiSmallMarginBottom" />
+                                             <!--core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/-->
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Dstipula}" required="true" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}"/>
-                                            <Input value="">
-                                             <core:Item key="{}" text="{}"/>
-                                             </Input>
+                                             <Input id="Dstipula" showValueHelp="true"
+                                                enabled="{/FilterSwitch1}"
+                                                valueHelpOnly="true" valueHelpRequest="handleValueHelp"
+                                                app:fieldName="DataStipula" app:filterTableField="DataStipula"
+                                                class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>descrizione}" />
-                                            <TextArea value="" width="90%" />
+                                            <TextArea value="" width="90%" enabled="false"/>
                                             <layoutData>
                                                 <l:GridData span="L9 M9 S9" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>beneficiarioH}" />
-                                            <Input value="" />
+                                            <Input value="" enabled="false"/>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>cig}" />
-                                            <Input value="" />
+                                            <Input value="" enabled="false"/>
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>cup}" />
-                                            <Input value="" />
+                                            <Input id="cup" showValueHelp="true"
+                                            enabled="{= !${/FilterSwitch1} }"
+                                            valueHelpOnly="true" valueHelpRequest="handleValueHelp"
+                                            app:fieldName="CUP" app:filterTableField="CUP"
+                                            class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>ImpTot}" wrapping="true"/>
-                                            <Input value="" width="60%" />
+                                            <Input value="" width="60%" enabled="false"/>
                                             <layoutData>
                                                 <l:GridData span="L6 M3 S3" />
                                             </layoutData>
@@ -163,7 +176,7 @@
                             <Button text="Indietro" type="Emphasized"  press="onBackButton" />
                             <Button text="Avanti" type="Emphasized"  press="onNextButton" />
                             <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza"  />
+                            <Button type="Emphasized" text="Salva in bozza" press="onSaveDraftIPE" />
                         </OverflowToolbar>
                     </WizardStep>
                     <WizardStep id="Beneficiario1" validated="true" title="Beneficiario" activate="additionalInfoValidation">
@@ -172,7 +185,7 @@
                             <Button type="Emphasized" text="Richiedi Anagrafica Beneficiario" press="onOpenFragment"/>
                             <Button type="Emphasized" text="Inserisci Mod.Pag.-Iban" press="onOpenDialogModPag"/>
                         </Toolbar>
-                        <RadioButtonGroup id="GroupA" columns="3" width="100%">
+                        <RadioButtonGroup id="Person" columns="3" width="100%">
                             <RadioButton text="Persona Fisica" selected="true" />
                             <RadioButton text="Persona Giuridica" />
                         </RadioButtonGroup>
@@ -223,7 +236,7 @@
                                    
                                     <VBox class="sapUiLargeMarginBegin">
                                         <Label text="Codice Fiscale Estero:" />
-                                        <Input id="cFiscaleE" />
+                                        <Input id="cFiscaleE" value=""/>
                                         <Label text="Cognome:"  />
                                         <Input id="cognome" />
                                         <Label text="Partita IVA:" />
