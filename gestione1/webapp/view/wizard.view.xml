@@ -280,7 +280,11 @@
                    <Title text=""/>
                    <HBox>
                          <Label text="Posizione Finanziaria:" labelFor="Posizione Finanziaria:" required="true"/>
-                            <Input   id="pFin"  showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest"   />
+                            <Input   id="pFin" showValueHelp="true"  valueHelpRequest="onValueHelpRequest"  showSuggestion="true" suggestionItems="{path: '/IpeEntitySet', sorter: { path: 'Fipex' }}">
+                         <suggestionItems>
+                          <core:ListItem text="{IpeEntity>Fipex}"/>
+                         </suggestionItems>
+                        </Input>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
@@ -297,12 +301,15 @@
                         <HBox>
                         <Label text="Oggetto della spesa:" labelFor="Oggetto della spesa:" />
                         <Input value=""  />
+                         <layoutData>
+                            <l:GridData span="L6 M6 S6" />
+                        </layoutData>
                         </HBox>
                     </VBox>
                     <VBox>
                     <HBox>
-                        <Label text="ID Richiesta Assenso Preventivo:" labelFor="ID Richiesta Assenso Preventivo:" />
-                        <MultiInput id="IdAssPre"  key="{respModel>matricola}" editable="false" text="{respModel>cognome} {respModel>nome} {respModel>matricola}"/>
+                        <Label text="ID Richiesta Assenso Preventivo:" labelFor="ID Richiesta Assenso Preventivo:" required="true" />
+                        <Input id="IdAssPre"  key="{respModel>matricola}" editable="false" text="{respModel>cognome} {respModel>nome} {respModel>matricola}"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
@@ -310,7 +317,11 @@
                     <Title text=""/>
                     <HBox>
                         <Label text="Struttura Amministrativa Responsabile:" labelFor="Struttura Amministrativa Responsabile:" wrapping="true" />
-                         <Input   key="{respModel>matricola}" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" required="true"/>
+                         <Input    showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" suggestionItems="{path: '/IpeEntitySet', sorter: { path: 'Fistl' }}">
+                          <suggestionItems>
+                          <core:ListItem text="{IpeEntity>Fistl}"/>
+                         </suggestionItems>
+                        </Input>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
