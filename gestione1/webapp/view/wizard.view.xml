@@ -17,7 +17,7 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                     <l:HorizontalLayout allowWrapping="true">
                         <l:VerticalLayout class="sapUiMediumMarginEnd" visible="{/header1Visible}">
                             <HBox id="idHBox1">
-                                <VBox id="idIpeH" class="sapUiSmallMargin" width="50%">
+                                <VBox id="idIpe" class="sapUiSmallMargin" width="50%">
                                     <Label id="IpeH" text="{i18n>Ipe}" design="Bold"/>
                                     <Text id="Ipe1H" text="{}"/>
                                 </VBox>
@@ -64,7 +64,7 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                                     <l:content>
                                         <VBox>
                                             <Label text="{i18n>esercizio}" required="true"/>
-                                            <ComboBox id="es_decreto" enabled="{/FilterSwitch1}" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}">
+                                            <ComboBox id="es_decreto" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}">
                                             <core:Item id="es_decreto1" key="{Esercizio}" text="{Esercizio}" />
                                             </ComboBox>
                                             <layoutData>
@@ -73,30 +73,25 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>amministrazione}" required="true"/>
-                                            <Input value="{temp>/SelectedDecree/Amministrazione}"  enabled="false"/>
+                                            <Input value="" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>Ncontratto}" required="true" />
-                                            <Input id="Ncontratto" showValueHelp="true"
-                                            enabled="{/FilterSwitch1}"
-                                            valueHelpOnly="true" valueHelpRequest="handleValueHelp"
-                                            app:fieldName="ContrattoOrdine" app:filterTableField="ContrattoOrdine"
-                                            class="sapUiSmallMarginBottom" />
-                                             <!--core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/-->
+                                            <Label text="{i18n>Ncontratto}" required="true" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'ContrattoOrdine' }}"/>
+                                            <Input value="" >
+                                             <core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/>
+                                    </Input>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Dstipula}" required="true" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}"/>
-                                             <Input id="Dstipula" showValueHelp="true"
-                                                enabled="{/FilterSwitch1}"
-                                                valueHelpOnly="true" valueHelpRequest="handleValueHelp"
-                                                app:fieldName="DataStipula" app:filterTableField="DataStipula"
-                                                class="sapUiSmallMarginBottom" />
+                                            <Input value="">
+                                             <core:Item key="{}" text="{}"/>
+                                             </Input>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
@@ -110,32 +105,28 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>beneficiarioH}" />
-                                            <Input value="" enabled="false"/>
+                                            <Input value="" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>cig}" />
-                                            <Input value="" enabled="false"/>
+                                            <Input value="" />
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>cup}" />
-                                            <Input id="cup" showValueHelp="true"
-                                            enabled="{= !${/FilterSwitch1} }"
-                                            valueHelpOnly="true" valueHelpRequest="handleValueHelp"
-                                            app:fieldName="CUP" app:filterTableField="CUP"
-                                            class="sapUiSmallMarginBottom" />
+                                            <Input value="" />
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>ImpTot}" wrapping="true"/>
-                                            <Input value="" width="60%" enabled="false"/>
+                                            <Input value="" width="60%" />
                                             <layoutData>
                                                 <l:GridData span="L6 M3 S3" />
                                             </layoutData>
@@ -143,7 +134,7 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                                     </l:content>
                                 </l:Grid>
 
-                                <Table class="sapUiSizeCompact" id="idpsfin" includeItemInSelection="true" items="{>/items}" headerText="Riepilogo Pianificazione Finanziaria" width="70%">
+                                <Table class="sapUiSizeCompact" items="{IpeEntity>/}" id="idpsfin" includeItemInSelection="true"  headerText="Riepilogo Pianificazione Finanziaria" width="70%">
                                     <columns>
                                         <Column width="12%">
                                             <Label text="Esercizio" />
@@ -162,11 +153,11 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                                         </Column>
                                     </columns>
                                     <ColumnListItem>
-                                        <Text text="{DecretoImpegnoSet>Numero NI}" />
-                                        <Text text="{DecretoImpegnoSet>Struttura Amministrativa Responsabile}" />
-                                        <Text text="{DecretoImpegnoSet>Posizione Finanziaria}" />
-                                        <Text text="{DecretoImpegnoSet>Oggetto della spesa}" />
-                                        <Text text="{DecretoImpegnoSet>Mese}" />
+                                        <Text text="{IpeEntitySet>Gjahr}" />
+                                        <Text text="{IpeEntitySet>Fipex}" />
+                                        <Text text="{IpeEntitySet>ZnumeroPni}" />
+                                        <Text text="{IpeEntitySet>}" />
+                                        <Text text="{IpeEntitySet>}" />
                                     </ColumnListItem>
                                 </Table>
                             </content>
@@ -248,6 +239,8 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                                     </HBox>
                                 
                                 <!-- <HBox alignItems="End" justifyContent="Start" direction="Column">
+
+
                       
 				 
                  	
@@ -275,7 +268,11 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                    <Title text=""/>
                    <HBox>
                          <Label text="Posizione Finanziaria:" labelFor="Posizione Finanziaria:" required="true"/>
-                            <Input   id="pFin"  showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest"   />
+                            <Input   id="pFin" showValueHelp="true"  valueHelpRequest="onValueHelpRequest"  showSuggestion="true" suggestionItems="{path: '/IpeEntitySet', sorter: { path: 'Fipex' }}">
+                         <suggestionItems>
+                          <core:ListItem text="{IpeEntity>Fipex}"/>
+                         </suggestionItems>
+                        </Input>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
@@ -292,12 +289,15 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                         <HBox>
                         <Label text="Oggetto della spesa:" labelFor="Oggetto della spesa:" />
                         <Input value=""  />
+                         <layoutData>
+                            <l:GridData span="L6 M6 S6" />
+                        </layoutData>
                         </HBox>
                     </VBox>
                     <VBox>
                     <HBox>
-                        <Label text="ID Richiesta Assenso Preventivo:" labelFor="ID Richiesta Assenso Preventivo:" />
-                        <MultiInput id="IdAssPre"  key="{respModel>matricola}" editable="false" text="{respModel>cognome} {respModel>nome} {respModel>matricola}"/>
+                        <Label text="ID Richiesta Assenso Preventivo:" labelFor="ID Richiesta Assenso Preventivo:" required="true" />
+                        <Input id="IdAssPre"  key="{respModel>matricola}" editable="false" text="{respModel>cognome} {respModel>nome} {respModel>matricola}"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
@@ -305,7 +305,11 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                     <Title text=""/>
                     <HBox>
                         <Label text="Struttura Amministrativa Responsabile:" labelFor="Struttura Amministrativa Responsabile:" wrapping="true" />
-                         <Input   key="{respModel>matricola}" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" required="true"/>
+                         <Input    showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" suggestionItems="{path: '/IpeEntitySet', sorter: { path: 'Fistl' }}">
+                          <suggestionItems>
+                          <core:ListItem text="{IpeEntity>Fistl}"/>
+                         </suggestionItems>
+                        </Input>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
@@ -548,7 +552,7 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
     
 			</IconTabFilter>
 			<IconTabFilter text="Residui" key="results" >
-				<Table scrollX="true" class="sapUiSizeCompact" id="HeaderITB2" includeItemInSelection="true" mode="MultiSelect" visible="{/TableVisible}">
+				<Table  class="sapUiSizeCompact" id="HeaderITB2" includeItemInSelection="true" mode="MultiSelect" visible="{/TableVisible}">
                  
         <headerToolbar>
         
