@@ -19,7 +19,7 @@ sap.ui.define(
     var iTimeoutId;
     var ValueState = CoreLibrary.ValueState,
             oData = {
-                FilterSwitch1: true,
+                FilterSwitch1: false,
                 FilterSwitch2: true,
                 header1Visible: true,
                  HeaderNIWstep3Visible: true
@@ -44,7 +44,10 @@ sap.ui.define(
         };
         UIStateModel.setData(UIStateData);
         this.getView().setModel(UIStateModel, "UIState");
-        
+
+
+        this.checkStep1Fields;
+
       },
 
       onListSelect: function (event) {
@@ -58,15 +61,20 @@ sap.ui.define(
 
         // console.log(oSelectedItem);
 
-        var selectedItem = this.getView().byId('comboBox').getSelectedItem().getText(); console.log("text item: " + this.getView().byId('comboBox').getSelectedItem().getText())
-
-        var oModel = this.getOwnerComponent().getModel("comboBox");
+        //var selectedItem = this.getView().byId('comboBox').getSelectedItem().getText(); console.log("text item: " + this.getView().byId('comboBox').getSelectedItem().getText())
+        var oSelectedKey = this.getView().byId('comboBox').getSelectedKey();
+        //var oModel = this.getOwnerComponent().getModel("comboBox");
 
         // var text = oModel.getProperty(selectedItem)
         // console.log("You selected " + text.Modalita_pagamento)
+        if(oSelectedKey === '2'){
+          this.getView().byId('labelCS').setRequired(true);
+        }else{
+          this.getView().byId('labelCS').setRequired(false);
+        }
 
-        var setReqField = this.getView().byId('labelCS').setRequired(true);
-        console.log("text item: " + this.getView().byId('labelCS').setRequired(true))
+       // var setReqField = this.getView().byId('labelCS').setRequired(true);
+        //console.log("text item: " + this.getView().byId('labelCS').setRequired(true))
         // var fieldReq = oModel.getProperty(setReqField)
         // console.log("field set required: "+fieldReq)
 
@@ -124,7 +132,9 @@ sap.ui.define(
 
     onOpenFragment : function () {
 
-			if (!this.pFragment) {
+      var oDialog = this.openDialog("gestione1.fragment.anagrafica").open();
+
+			/*if (!this.pFragment) {
 				this.pFragment = this.loadFragment({
 					name: "gestione1.fragment.anagrafica",
           controller: this
@@ -135,7 +145,7 @@ sap.ui.define(
 			} 
 			this.pFragment.then(function(oFragment) {
 				oFragment.open();
-			}.bind(this));
+			}.bind(this));*/
 		},
 
     onOpenGridTable : function () {
@@ -193,7 +203,10 @@ sap.ui.define(
 		},
     onOpenDialogModPag : function () {
 
-			if (!this.cFragment) {
+      var oDialog = this.openDialog("gestione1.fragment.regModPag").open();
+      
+
+			/*if (!this.cFragment) {
 				this.cFragment = this.loadFragment({
 					name: "gestione1.fragment.regModPag",
           controller: this
@@ -204,7 +217,7 @@ sap.ui.define(
 			} 
 			this.cFragment.then(function(oFragment) {
 				oFragment.open();
-			}.bind(this));
+			}.bind(this));*/
 		},
     
 
@@ -226,15 +239,35 @@ sap.ui.define(
 
     //  },
 
-    onSaveMessageDialogPress: function () {
-      sap.m.MessageBox.warning("Servizio certificazione beneficiario avviato,in attesa di risposta, si prega di attendere", {
-        title: "Procedura avvio richiesta creazione anagrafica beneficiario",                                   // default
-        onClose:  MessageBox.success("Anagrafica beneficiario creata correttamente"),                                       // default
-        styleClass: "",                                      // default
-        customIcon: "../img/kOnzy.gif",               // default
-        textDirection: sap.ui.core.TextDirection.Inherit,
-       
-      })
+    onSaveMessageDialogPress: function (oEvent) {
+
+      var sDialog = oEvent.getSource().data("dialog"),
+      check= this.checkFields(sDialog);
+
+      if(!check){
+        sap.m.MessageBox.warning("Compilare i campi obbligatori!", {
+          title: "Attenzione",                                   // default
+          actions: [sap.m.MessageBox.Action.CLOSE],
+          styleClass: "",                                      // default
+          customIcon: "../img/kOnzy.gif",               // default
+          textDirection: sap.ui.core.TextDirection.Inherit,
+         
+        })
+
+      }else{
+
+        sap.m.MessageBox.warning("Servizio certificazione beneficiario avviato,in attesa di risposta, si prega di attendere", {
+          title: "Procedura avvio richiesta creazione anagrafica beneficiario",                                   // default
+          onClose:  MessageBox.success("Anagrafica beneficiario creata correttamente"),                                       // default
+          styleClass: "",                                      // default
+          customIcon: "../img/kOnzy.gif",               // default
+          textDirection: sap.ui.core.TextDirection.Inherit,
+         
+        })
+      }
+      
+      
+      
     },
 
     onWarning2MessageBoxPress: function () {
@@ -336,6 +369,66 @@ onCloseDialog6 : function () {
                   oProprietà.setProperty("/FilterSwitch2", false)
              }
             },
+
+            checkStep1Fields: function (fields) {
+              var self = this,
+                  check = true,
+                  sNcontratto = this.getView().byId("Ncontratto"),
+                  sDstipula = this.getView().byId("Dstipula");
+
+                  var checkNcontratto = sNcontratto.getValue() !== "" ? true : false;
+                  var checksDstipula = sDstipula.getSelectedItem() !== null ? true : false;
+ 
+                  if (!checkNcontratto) {
+                      check = false;
+                  }
+
+                  if (!checksDstipula) {
+                      check = false;
+                  }
+              return check;
+          },
+
+          checkFields: function (dialog) {
+            var self = this,
+            check = false;
+            
+              if(dialog === "Anagrafica"){
+                var oForm = self.__dialog.getContent()[0].getFormContainers()[0],
+                oForm2 = self.__dialog.getContent()[1].getFormContainers()[0],
+                sPaese = oForm.getFormElements()[0].getFields()[0].getValue() !== "" ? true : false,
+                sPaeseD = oForm.getFormElements()[0].getFields()[1].getValue() !== "" ? true : false,
+                sCatBen = oForm.getFormElements()[1].getFields()[0].getSelectedKey() !== "" ? true : false,
+                sDocBen = oForm.getFormElements()[2].getFields()[0].getValue() !== "" ? true : false,
+                sNome = oForm.getFormElements()[3].getFields()[0].getValue() !== "" ? true : false,
+                sCogn = oForm.getFormElements()[4].getFields()[0].getValue() !== "" ? true : false,
+                sVia = oForm.getFormElements()[5].getFields()[0].getValue() !== "" ? true : false,
+                sCiv = oForm.getFormElements()[5].getFields()[1].getValue() !== "" ? true : false,
+                sLoc = oForm.getFormElements()[6].getFields()[0].getValue() !== "" ? true : false,
+                sReg = oForm.getFormElements()[6].getFields()[1].getValue() !== "" ? true : false,
+                sRegD = oForm.getFormElements()[6].getFields()[2].getValue() !== "" ? true : false,
+                sCap = oForm.getFormElements()[7].getFields()[0].getValue() !== "" ? true : false,
+                sCF = oForm2.getFormElements()[0].getFields()[0].getValue() !== "" ? true : false;
+
+                if (sPaese && sPaeseD && sCatBen && sDocBen && sNome && sCogn && sVia && sCiv 
+                  && sLoc && sReg && sRegD && sCap && sCF) {
+                    check = true;
+                }
+
+              }else{
+                var ben = sap.ui.getCore().byId("RegBen").getValue() !== "" ? true : false,
+                mod = sap.ui.getCore().byId("RegModPag").getSelectedKey() !== "" ? true : false,
+                iban = sap.ui.getCore().byId("iban").getValue() !== "" ? true : false;
+
+                if (ben && mod && iban) {
+                    check = true;
+                }
+
+              }
+              
+
+            return check;
+        },
 
           
             controlHeader: function () {

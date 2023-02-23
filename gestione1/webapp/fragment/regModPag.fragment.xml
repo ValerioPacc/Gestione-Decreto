@@ -1,26 +1,29 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
-    <Dialog id="regModPag" draggable="true" showHeader="true" titleAlignment="Start" afterClose="onAfterClose" contentWidth="100%" contentHeight="40%">
-        
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" 
+xmlns:f="sap.ui.layout.form" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+
+    <Dialog id="regModPag" draggable="true" showHeader="true" title="Inserisci Mod.Pag.-Iban" afterClose="closeDialog" contentWidth="100%" contentHeight="40%">
+        <content>
             <HBox justifyContent="SpaceAround" class="sapUiLargeMarginTop">
                 
                
                     <VBox justifyContent="Start" class="sapUiLargeMarginStart">
                         <Label text="Beneficiario:" required="true" />
-                        <Input value="" showValueHelp="true" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'Beneficiario' }}" fieldWidth="63%">
+                        <Input id="RegBen" value="" showValueHelp="true" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'Beneficiario' }}" fieldWidth="63%">
                             <core:Item key="{Beneficiario}" text="{Beneficiario}"/>
                         </Input>
                     </VBox>
 
                     <VBox >
                         <Label class="sapUiLargeMarginStart" text="Modalità di Pagamento" labelFor="IBAN" required="true" />
-                        <ComboBox required="true" items="" >
+                        <ComboBox id="RegModPag" required="true" items="" >
                             <core:Item key="1" text="1" />
                             <core:Item key="2" text="2" />
                         </ComboBox>
                     </VBox>
                     <VBox class="sapUiLargeMarginStart" >
                         <Label text="IBAN:" required="true" />
-                        <Input value="" fieldWidth="63%"/>
+                        <Input id="iban" value="" fieldWidth="63%"/>
                     </VBox>
                 
             </HBox>
@@ -38,11 +41,12 @@
       <Label align="Center" text="IBAN" required="true"/>
      <Input align="Center" text="" width="33%"/>
      </Toolbar>-->
+     </content>
       <beginButton>
-       <Button text="Indietro" type="Emphasized" press="onCloseDialog3"/>
+       <Button text="Indietro" type="Emphasized" press="closeDialog"/>
       </beginButton>
       <endButton>
-        <Button text="Salva" type="Emphasized" />
+        <Button text="Salva" type="Emphasized" app:dialog="regModPag" press="onSaveMessageDialogPress"/>
       </endButton> 
      
     </Dialog>
