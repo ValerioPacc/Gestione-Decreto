@@ -7,5 +7,11 @@
         "id": 2,
         "Modalita_pagamento": "08 - CC Estero (Non Associato)"
 
-    }]
+    }],
+    "Esercizio" : [
+        {"id": "2020"},
+        {"id": "2021"},
+        {"id": "2022"},
+        {"id": "2023"}
+    ]
 }
