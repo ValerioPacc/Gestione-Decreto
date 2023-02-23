@@ -22,19 +22,20 @@ sap.ui.define(
                 FilterSwitch1: false,
                 FilterSwitch2: true,
                 header1Visible: true,
-                // HeaderNIWstep3Visible: true
+                 HeaderNIWstep3Visible: true
             };
 
     return BaseController.extend("gestione1.controller.wizard", {
 
       onInit() {
+        this.callIpeEntity();
          var oProprietà = new JSONModel(),
                 oInitialModelState = Object.assign({}, oData);
                 oProprietà.setData(oInitialModelState);
                  this.getView().setModel(oProprietà);
                  this._iSelectedStepIndex = 0;
          this.controlSwitch();
-         //this.controlHeader();
+         this.controlHeader();
         var oModel = new sap.ui.model.json.JSONModel("../mock/comboBox.json");
         this.getView().setModel(oModel, "comboBox");
         var UIStateModel= new JSONModel();
@@ -44,7 +45,9 @@ sap.ui.define(
         UIStateModel.setData(UIStateData);
         this.getView().setModel(UIStateModel, "UIState");
 
+
         this.checkStep1Fields;
+
       },
 
       onListSelect: function (event) {
@@ -97,7 +100,7 @@ sap.ui.define(
         }
         this._iSelectedStepIndex--
         this._oSelectedStep = oNextStep;
-        //this.controlHeader();
+        this.controlHeader();
         //this.controlPreNI();
         //this.controlHeader()
     },
@@ -120,7 +123,7 @@ sap.ui.define(
 
         this._iSelectedStepIndex++;
         this._oSelectedStep = oNextStep;
-        //this.controlHeader();
+        this.controlHeader();
         // console.log(this._iSelectedStepIndex)
         //this.controlPreNI()
         
@@ -428,20 +431,20 @@ onCloseDialog6 : function () {
         },
 
           
-      //       controlHeader: function () {
-      //         var oProprietà = this.getView().getModel();
-      //         this._oWizard = this.byId("CreateProductWizard");
-      //   this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
-      //   this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);
+            controlHeader: function () {
+              var oProprietà = this.getView().getModel();
+              this._oWizard = this.byId("CreateProductWizard");
+        this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
+        this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);
 
-      //   if (this._iSelectedStepIndex == 5  ) {
-      //     oProprietà.setProperty("/header1Visible", true)
+        if (this._iSelectedStepIndex == 5 ) {
+          oProprietà.setProperty("/header1Visible", true)
             
-      //   } 
-      //   else {
-      //     oProprietà.setProperty("/header1Visible", false)
-      //   }           
-      // },
+        } 
+        else {
+          oProprietà.setProperty("/header1Visible", false)
+        }           
+      },
 
       onValueHelpRequest: function (oEvent) {
         // this._oBasicSearchField = new SearchField();
@@ -507,6 +510,26 @@ onCloseDialog6 : function () {
         });
 
       },
+      callIpeEntity:function () {
+   
+        var that = this;
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/IpeEntitySet", {
+            filters: [],
+            urlParameters: "",
+            success: function (data) {
+                oMdl.setData(data.results);
+                that.getView().getModel("temp").setProperty('/IpeEntitySet', data.results)
+            },
+            error: function (error) {
+                //that.getView().getModel("temp").setProperty(sProperty,[]);
+                //that.destroyBusyDialog();
+                var e = error;
+            }
+        });
+    },
+     
+
       onChangeSelect: function () {
         var bSelected= this.getView().byId("CB1").getSelected();
         if (bSelected) {

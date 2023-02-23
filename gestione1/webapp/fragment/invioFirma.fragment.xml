@@ -2,6 +2,22 @@
      <Dialog id="invioFirma" title="Inserimento dati per invio della firma" draggable="true" showHeader="true" titleAlignment="Center"
       afterClose="onAfterClose" contentWidth="100%" contentHeight="40%">
       <content>
+      
+<!-- <VBox >
+<HBox >
+ <Label text="N.Protocollo Amm.:" vAlign="Inherit"/>
+               <Input id="nPrtAmm" value="{NProtocolloAmm}" class="sapUiSmallMarginBegin"/>
+                <Label text="Data Protocollo Amm.:" vAlign="Inherit"/>
+                <DatePicker id="dataProtamm" displayFormat="dd/MM/yyyy" />
+               </HBox>
+               <HBox >
+                <Label text="Dirigente/Direttore Firmatario:" required="true" vAlign="Inherit"/>
+                 <ComboBox id="Ddfirmatario" items="{path: '/DecretoImpegnoSet', sorter: { path: 'DirigenteDirettoreFirmatario' }}" >
+                 <core:Item id="Ddfirmatario1" key="{DirigenteDirettoreFirmatario}" text="{DirigenteDirettoreFirmatario}" />
+                </ComboBox>
+                </HBox>
+</VBox> -->
+
                 <HBox justifyContent="SpaceAround">
                 <Label text="N.Protocollo Amm.:" vAlign="Inherit"/>
                <Input id="nPrtAmm" value="{NProtocolloAmm}" />

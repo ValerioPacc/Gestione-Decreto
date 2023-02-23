@@ -100,11 +100,11 @@
         </f:content>
         <f:footer>
             <OverflowToolbar>
-                <Button text="Indietro" type="Emphasized" press="onBackButton" />
+                <Button text="Indietro" type="Emphasized" press="navToHome" />
                 <ToolbarSpacer />
                 <Button type="Emphasized" text="Registra IPE"  press="navToRegistraIPE" />
-                <Button type="Emphasized" text="Rettifica Decreto"   />
-                <Button type="Emphasized" text="Cancella Decreto" press="onConfirmationCancelMessageBoxPress" />
+                <Button type="Emphasized" id="rettificaDE" text="Rettifica Decreto"  press="onNavToupdateDecreto" />
+                <Button type="Emphasized" id="cancellaDE" text="Cancella Decreto" press="onDeleteRow" />
             </OverflowToolbar>
         </f:footer>
     </f:DynamicPage>

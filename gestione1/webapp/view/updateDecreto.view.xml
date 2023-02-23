@@ -11,7 +11,7 @@
     xmlns:menu="sap.m.MenuItem"
     xmlns:menBtn="sap.m.Menu"
     height="100%"
-    controllerName="gestione1.controller.Decreto"
+    controllerName="gestione1.controller.updateDecreto"
 >
     <App id="app">
         <f:DynamicPage showFooter="true" >
@@ -61,7 +61,7 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numProtocolloAmma" visibleInFilterBar="true" name="numProtocolloAmma" groupName="Group1" label="{i18n>numProtocolloAmma}">
                                 <fb:control>
-                                   <Input showSuggestion="false" id="numProtocolloAmma1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloAmm' }}">
+                                   <Input showSuggestion="true" id="numProtocolloAmma1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloAmm' }}">
                                       <core:Item id="IdnumProtocolloAmma" key="{NProtocolloAmm}" text="{temp>/SelectedDecree/NProtocolloAmm}"/>
                                     </Input>
                                 </fb:control>
@@ -83,8 +83,7 @@
                 <OverflowToolbar>
                     <Button type="Emphasized" text="{i18n>Indietro}" press="navToHome" />
                     <ToolbarSpacer/>
-                    <Button id="create" type="Emphasized"  text="{i18n>SalvaBozza}" press="onRegDIbozza"/>
-                    
+                    <Button id="update" type="Emphasized" visible="{= ${temp>/SelectedDecree/CodiceStato} === '01' ? true : false}" text="{i18n>SalvaBozza}" press="onModDIbozza"/>
                     <!-- <Button type="Emphasized" text="{i18n>SalvaBozza}" press="{= ${temp>/SelectedDecree/CodiceStato} === '01' ? 'onModDIbozza' : 'onRegDIbozza' }" />
                 <Button type="Emphasized" text="rettifica" press="onModDIbozza" /> -->
                 </OverflowToolbar>

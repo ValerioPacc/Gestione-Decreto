@@ -87,7 +87,7 @@
                </f:FormElement>
                  <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="categoria" required= "true"/>
+                     <Label text="Categoria" required= "true"/>
                   </f:label>
                   <f:fields>
                      <Input showSuggestion="true" id="categoriaId" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
