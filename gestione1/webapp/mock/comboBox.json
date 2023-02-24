@@ -13,5 +13,98 @@
         {"id": "2021"},
         {"id": "2022"},
         {"id": "2023"}
+    ],
+    "Contratto" : [
+        {
+            "id": "001",
+            "data":"20/02/2020", 
+            "desc":"descrizione contratto 1", 
+            "id_ben": "1",
+            "cig":"1",
+            "cup": "003",
+            "importo": "100"
+        },
+        {
+            "id": "002","data":"20/02/2021", 
+            "desc":"descrizione contratto 1",
+            "id_ben": "1",
+            "cig":"1",
+            "cup": "003",
+            "importo": "100"
+        },
+        {
+            "id": "003","data":"20/02/2022", 
+            "desc":"descrizione contratto 1",
+            "id_ben": "1",
+            "cig":"1",
+            "cup": "003",
+            "importo": "100"
+        },
+        {
+            "id": "004","data":"20/02/2023",
+            "desc":"descrizione contratto 1",
+            "id_ben": "1",
+            "cig":"1",
+            "cup": "003",
+            "importo": "100"
+        }
+    ],
+    "Cup" : [
+        {
+            "id": "1", 
+            "desc": "001"
+        },
+        {
+            "id": "2", 
+            "desc": "002"
+        },
+        {
+            "id": "3", 
+            "desc": "003"
+        }
+    ],
+    "Beneficiario" : [
+        {
+            "id": "1", 
+            "id_pag": "1",
+            "iban": "GB33BUKB20201555555555",
+            "cab":"20155",
+            "abi":"UKB20",
+            "res": "GB",
+            "causale": "",
+            "nome": "Mario", 
+            "cognome": "Rossi",
+            "cf": "RSSMRA80A01H501U",
+            "Rsociale": "Societa S.p.A.",
+            "IVA": "00000000000000"
+        },
+        {
+            "id": "2", 
+            "id_pag": "2",
+            "iban": "GB33BUKB20201555555555",
+            "cab":"20155",
+            "abi":"UKB20",
+            "res": "GB",
+            "causale": "",
+            "nome": "Luigi", 
+            "cognome": "Bianchi",
+            "cf": "RSSMRA80A01H501U",
+            "Rsociale": "Societa S.p.A.",
+            "IVA": "00000000000000"
+        },
+        {
+            "id": "3", 
+            "id_pag": "1",
+            "iban": "GB33BUKB20201555555555",
+            "cab":"20155",
+            "abi":"UKB20",
+            "res": "GB",
+            "causale": "",
+            "nome": "Mario", 
+            "cognome": "Verdi",
+            "cf": "RSSMRA80A01H501U",
+            "Rsociale": "Societa S.p.A.",
+            "IVA": "00000000000000"
+        }
     ]
 }

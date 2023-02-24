@@ -21,7 +21,9 @@ sap.ui.define([
         },
         createTempModel: function() {
             var oModel = {
-                draft: ""
+                draft: "",
+                Step1:[],
+                Step2:[]
             };
             
             return new JSONModel(oModel)

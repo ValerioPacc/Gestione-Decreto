@@ -219,6 +219,24 @@ sap.ui.define(
 				oFragment.open();
 			}.bind(this));*/
 		},
+
+    getOtherData: function (value) {
+
+      var oModel= this.getView().getModel("comboBox"),
+      oTempModel = this.getView().getModel("temp"),
+      rowSelected = _.findWhere(oModel.getProperty("/Contratto"), {id: value}),
+      beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), {id: rowSelected.id_ben});
+
+      this.getView().byId("Dstipula").setValue(rowSelected.data);
+      this.getView().byId("descContratto").setValue(rowSelected.desc);
+      this.getView().byId("beneficiario").setValue(beneficiario.nome + beneficiario.cognome);
+      this.getView().byId("cig").setValue(rowSelected.cig);
+      this.getView().byId("cup").setValue(rowSelected.cup);
+      this.getView().byId("importoCont").setValue(rowSelected.importo);
+      oTempModel.setProperty("/Step1", rowSelected);
+      oTempModel.setProperty("/Step2", beneficiario);
+
+		},
     
 
     
@@ -361,12 +379,22 @@ onCloseDialog6 : function () {
                 var oProprietà = this.getView().getModel();
                 var stato= this.getView().byId("switch").getState();
                 if (stato) {
-                  oProprietà.setProperty("/FilterSwitch1", true)
-                  oProprietà.setProperty("/FilterSwitch2", true)
+                  oProprietà.setProperty("/FilterSwitch1", true);
+                  oProprietà.setProperty("/FilterSwitch2", true);
                 }
              else {
-              oProprietà.setProperty("/FilterSwitch1", false)
-                  oProprietà.setProperty("/FilterSwitch2", false)
+                oProprietà.setProperty("/FilterSwitch1", false);
+                oProprietà.setProperty("/FilterSwitch2", false);
+                this.getView().byId("Dstipula").setValue("");
+                this.getView().byId("descContratto").setValue("");
+                this.getView().byId("beneficiario").setValue("");
+                this.getView().byId("cig").setValue("");
+                this.getView().byId("cup").setValue("");
+                this.getView().byId("importoCont").setValue("");
+                this.getView().byId("Ncontratto").setSelectedKey("");
+
+                this.getView().getModel("temp").setProperty("/Step2", []);
+                
              }
             },
 

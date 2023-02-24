@@ -5,7 +5,12 @@
                 <l:content>
                     <VBox>
                         <Label text="Modalità di pagamento" labelFor="Esercizio" required="true" />
-                        <ComboBox required="true" items="{comboBox>/items}" change="onListSelect" id="comboBox">
+                        <ComboBox 
+                        required="true" 
+                        items="{comboBox>/items}" 
+                        change="onListSelect" 
+                        id="comboBox"
+                        selectedKey="{temp>/Step2/id_pag}">
                             <core:Item key="{comboBox>id}" text="{comboBox>Modalita_pagamento}" />
                         </ComboBox>
                         <layoutData>
@@ -23,35 +28,34 @@
                      
                     <VBox>
                         <Label text="IBAN" labelFor="IBAN" />
-                        <ComboBox required="true" items="">
-                            <core:Item key="1" text="1" />
-                            <core:Item key="2" text="2" />
-                        </ComboBox>
+                        <Input value="{temp>/Step2/iban}" enabled="false"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
                    
                         <Label text="ABI:" />
-                        <Input value="" />
+                        <Input value="{temp>/Step2/abi}" enabled="false"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
                    
+                        <!--
                         <Label text="Casuale valutaria:" id="labelCS"/>
                         <Input value="" id="CasualeVal"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
+                        -->
                     </VBox>
                     <VBox>
                         <Label text="Paese di residenza:" />
-                        <Input value="" />
+                        <Input value="{temp>/Step2/res}" enabled="false"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
                     
                         <Label text="CAB:" />
-                        <Input value="" />
+                       <Input value="{temp>/Step2/cab}" enabled="false"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>

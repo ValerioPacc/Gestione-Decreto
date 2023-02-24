@@ -23,6 +23,32 @@ sap.ui.define(
 
             },
             _onObjectMatched: function (oEvent) {
+
+                var self = this;
+                var oDataModel = self.getModel();
+                var path = oDataModel.createKey("/DecretoImpegnoSet", {
+                    Amministrazione: oEvent.getParameters().arguments.campo,
+                    AreaFinanziaria: oEvent.getParameters().arguments.campo1,
+                    ChiaveGiustificativo: oEvent.getParameters().arguments.campo2,
+                    Ente: oEvent.getParameters().arguments.campo3,
+                    Esercizio: oEvent.getParameters().arguments.campo4,
+                    NumeroDecreto: oEvent.getParameters().arguments.campo5,
+                    RegistratoBozza: oEvent.getParameters().arguments.campo6,
+                    UfficioLiv1: oEvent.getParameters().arguments.campo7,
+                    UfficioLiv2: oEvent.getParameters().arguments.campo8,
+                });
+
+                
+                oDataModel.metadataLoaded().then( function() { 
+                   oDataModel.read(path, {
+                     success: function(data, oResponse){
+                         self.getView().getModel("temp").setProperty('/SelectedDecree', data); 
+                        },
+                         error: function(error){
+                        var e = error;
+                    }
+                });
+            });
                 /* this.getView().bindElement(
                      "/DecretoImpegnoSet('Esercizio='" + oEvent.getParameters().arguments.campo +
                      "',Amministrazione='" + oEvent.getParameters().arguments.campo1 +

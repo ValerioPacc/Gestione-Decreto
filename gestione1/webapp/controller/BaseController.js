@@ -70,6 +70,68 @@ sap.ui.define([
 			}
 		},
 
+		handleValueHelp: function(oEvent){
+				
+			var oSource = oEvent.getSource(),
+				oValue= oSource.getValue(),
+				sName = oSource.data("FieldName");
+	
+			var oDialog = this.openDialog("gestione1.fragment.Help.ValueHelp" + sName).open();
+			
+		},
+		_handleValueHelpContactClose : function (evt) {
+						
+			var that = this,
+			oSelectedItem = evt.getParameter("selectedItem"),
+			sField = evt.getSource().data("filterTableField"),
+			Input = this.getView().byId(sField);
+			
+			if (oSelectedItem) {			
+				var sValueTitle = oSelectedItem.getTitle();
+				Input.setValue(sValueTitle);
+				this.getOtherData(sValueTitle);
+			}
+			this.closeDialog();
+		},
+		_handleValueHelpCloseBen: function (evt) {
+						
+			var that = this,
+			oSelectedItem = evt.getParameter("selectedItem"),
+			sField = evt.getSource().data("filterTableField"),
+			Input = this.getView().byId(sField),
+			oTempModel = this.getView().getModel("temp"),
+			oMock = this.getView().getModel("comboBox");
+			
+			if (oSelectedItem) {			
+				var sValueTitle = oSelectedItem.getTitle(),
+				key = oSelectedItem.data("key"),
+				oItem = _.findWhere(oMock.getProperty("/Beneficiario"), {id: key});
+
+				Input.setValue(sValueTitle);
+				oTempModel.setProperty("/Step2", oItem);
+				
+			
+			}
+			this.closeDialog();
+		},
+
+		_handleValueHelpClose : function (evt) {
+						
+			var that = this,
+			oSelectedItem = evt.getParameter("selectedItem"),
+			sField = evt.getSource().data("filterTableField"),
+			Input = this.getView().byId(sField);
+			
+			if (oSelectedItem) {			
+				
+				var sValueTitle = oSelectedItem.getTitle();
+				Input.setValue(sValueTitle);
+				
+			}
+			
+			this.closeDialog();
+		},
+
 		/**
 		 * Event handler when the share by E-Mail button has been clicked
 		 * @public

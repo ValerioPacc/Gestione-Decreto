@@ -17,6 +17,9 @@
   .Grid{
     text-align:center !important; 
   }
+  .sapUiSizeCompact .sapMSLI.sapMSLIThumbnail, .sapUiSizeCompact .sapMSLI.sapMSLINoIconInset, .sapUiSizeCompact .sapMSLI.sapMSLIWithDescription, .sapUiSizeCompact .sapMSLI.sapMSLINoTitleAdapt {
+    height: 2rem !important;
+}
   .btnList::before
   {
     /*background-image: url("../img/btn_listaPE.jpg");*/
