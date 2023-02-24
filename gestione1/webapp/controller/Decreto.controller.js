@@ -45,93 +45,7 @@ sap.ui.define(
           this.getOwnerComponent().getRouter().navTo("View1");
       },
       
-    //   onModDIbozza: function (oEvent) {
-    //     var that = this;
-    //     var url = location.href
-    //     var sUrl = url.split("/Decreto/")[1]
-    //     var aValori = sUrl.split(",")
-
-    //     var Amministrazione = aValori[0]
-    //     var AreaFinanziaria = aValori[1]
-    //     var ChiaveGiustificativo = aValori[2]
-    //     var Ente = aValori[3]
-    //     var Esercizio = aValori[4]
-    //     var NumeroDecreto = aValori[5]
-    //     var RegistratoBozza = aValori[6]
-    //     var UfficioLiv1 = aValori[7]
-    //     var UfficioLiv2 = aValori[8]
-       
-        
-    //     var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
-    //     for (var i = 0; i < header.length; i++) {
-    //         if (header[i].Amministrazione == Amministrazione &&
-    //             header[i].AreaFinanziaria == AreaFinanziaria &&
-    //             header[i].ChiaveGiustificativo == ChiaveGiustificativo &&
-    //             header[i].Ente == Ente &&
-    //             header[i].Esercizio == Esercizio &&
-    //             header[i].NumeroDecreto == NumeroDecreto &&
-    //             header[i].RegistratoBozza == RegistratoBozza &&
-    //             header[i].UfficioLiv1 == UfficioLiv1 &&
-    //             header[i].UfficioLiv2 == UfficioLiv2) {
-    //             var indice = i
-    //             MessageBox.warning("Sei sicuro di voler modificare il DI?", {
-    //                 actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-    //                 emphasizedAction: MessageBox.Action.YES,
-    //                 onClose: function (oAction) {
-    //                     if (oAction === sap.m.MessageBox.Action.YES) {
-                            
-    //                         // var oModel = that.getOwnerComponent().getModel("temp");
-    //                         var oModel = that.getView().getModel();
-                            
-
-    //                         var path = oModel.createKey("/DecretoImpegnoSet", {
-    //                             Amministrazione: header[indice].Amministrazione,
-    //                             AreaFinanziaria: header[indice].AreaFinanziaria,
-    //                             ChiaveGiustificativo: header[indice].ChiaveGiustificativo,
-    //                             Ente: header[indice].Ente,
-    //                             Esercizio: header[indice].Esercizio,
-    //                             NumeroDecreto: header[indice].NumeroDecreto,
-    //                             RegistratoBozza: header[indice].RegistratoBozza,
-    //                             UfficioLiv1: header[indice].UfficioLiv1,
-    //                             UfficioLiv2: header[indice].UfficioLiv2,
-    //                         });
-                             
-                            
-                                
-    //                             var editDecreto = {
-    //                                 TipologiaImpegno: that.getView().byId("TypeI").getSelectedKey(),
-    //                                 DataDecreto: new Date(that.getView().byId("DataDE1").getValue()),
-    //                                 NProtocolloAmm: that.getView().byId("numProtocolloAmma1").getValue(),
-    //                                 DataProtocolloAmm: new Date(that.getView().byId("dataProtocolloAmm1").getValue()),
-    //                                 ControlloCorteConti: that.getView().byId("CcorteConti").getSelected() === true ? '1' : '0'
-    //                             };
-
-    //                             oModel.update(path, editDecreto, {
-    //                                 success: function (data) {
-    //                                     console.log("success");
-    //                                     MessageBox.success("Operazione Eseguita con successo", {
-    //                                         actions: [sap.m.MessageBox.Action.OK],
-    //                                         emphasizedAction: MessageBox.Action.OK,
-    //                                         onClose: function (oAction) {
-    //                                             if (oAction === sap.m.MessageBox.Action.OK) {
-    //                                                 that.getOwnerComponent().getRouter().navTo("View1");
-    //                                             }
-    //                                         }
-    //                                     })
-    //                                 },
-    //                                 error: function (e) {
-    //                                     //console.log("error");
-    //                                     MessageBox.error("Operazione non eseguita")
-    //                             }
-    //                         });
-                        
-    //                     }
-    //                 }
-    //             });
-    //             }
-    //         }
-        
-    // },
+   
 
 
       onRegDIbozza: function (oEvent) {
@@ -211,6 +125,46 @@ sap.ui.define(
         })
     },
      
+     checkFields: function (view) {
+       var self = this,
+       check = false;
+      
+  //       if(vie === "Anagrafica"){
+  //         var oForm = self.__dialog.getContent()[0].getFormContainers()[0],
+  //         oForm2 = self.__dialog.getContent()[1].getFormContainers()[0],
+  //         sPaese = oForm.getFormElements()[0].getFields()[0].getValue() !== "" ? true : false,
+  //         sPaeseD = oForm.getFormElements()[0].getFields()[1].getValue() !== "" ? true : false,
+  //         sCatBen = oForm.getFormElements()[1].getFields()[0].getSelectedKey() !== "" ? true : false,
+  //         sDocBen = oForm.getFormElements()[2].getFields()[0].getValue() !== "" ? true : false,
+  //         sNome = oForm.getFormElements()[3].getFields()[0].getValue() !== "" ? true : false,
+  //         sCogn = oForm.getFormElements()[4].getFields()[0].getValue() !== "" ? true : false,
+  //         sVia = oForm.getFormElements()[5].getFields()[0].getValue() !== "" ? true : false,
+  //         sCiv = oForm.getFormElements()[5].getFields()[1].getValue() !== "" ? true : false,
+  //         sLoc = oForm.getFormElements()[6].getFields()[0].getValue() !== "" ? true : false,
+  //         sReg = oForm.getFormElements()[6].getFields()[1].getValue() !== "" ? true : false,
+  //         sRegD = oForm.getFormElements()[6].getFields()[2].getValue() !== "" ? true : false,
+  //         sCap = oForm.getFormElements()[7].getFields()[0].getValue() !== "" ? true : false,
+  //         sCF = oForm2.getFormElements()[0].getFields()[0].getValue() !== "" ? true : false;
+
+  //         if (sPaese && sPaeseD && sCatBen && sDocBen && sNome && sCogn && sVia && sCiv 
+  //           && sLoc && sReg && sRegD && sCap && sCF) {
+  //             check = true;
+  //         }
+
+  //       }else{
+  //         var ben = sap.ui.getCore().byId("RegBen").getValue() !== "" ? true : false,
+  //         mod = sap.ui.getCore().byId("RegModPag").getSelectedKey() !== "" ? true : false,
+  //         iban = sap.ui.getCore().byId("iban").getValue() !== "" ? true : false;
+
+  //         if (ben && mod && iban) {
+  //             check = true;
+  //         }
+
+  //       }
+      
+
+  //     return check;
+  // },
       // onBackMessageBoxPress: function (oEvent) {
       //   MessageBox.success("Registrazione Bozza Decreto d'Impegno", {
       //     actions: ["Continuare", "Indietro"],

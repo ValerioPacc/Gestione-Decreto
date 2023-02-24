@@ -37,7 +37,7 @@
                 </f:FormElement>
                 <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="Missione" required= "true"/>
+                     <Label text="Missione" />
                   </f:label>
                   <f:fields>
                      <Input showSuggestion="true" id="missionId" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
@@ -47,7 +47,7 @@
                </f:FormElement>
                 <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="Programma" required= "true"/>
+                     <Label text="Programma" />
                   </f:label>
                   <f:fields>
                      <Input showSuggestion="true" id="programmId" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
@@ -57,7 +57,7 @@
                </f:FormElement>
                  <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="Azione" required= "true"/>
+                     <Label text="Azione" />
                   </f:label>
                   <f:fields>
                      <Input showSuggestion="true" id="actionId" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
@@ -67,7 +67,7 @@
                </f:FormElement>
                  <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="Capitolo" required= "true"/>
+                     <Label text="Capitolo" />
                   </f:label>
                   <f:fields>
                      <Input showSuggestion="true" id="capitoloId" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
@@ -77,7 +77,7 @@
                </f:FormElement>
                  <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="PG" required= "true"/>
+                     <Label text="PG" />
                   </f:label>
                   <f:fields>
                      <Input showSuggestion="true" id="pgId" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
@@ -87,7 +87,7 @@
                </f:FormElement>
                  <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="Categoria" required= "true"/>
+                     <Label text="Categoria" />
                   </f:label>
                   <f:fields>
                      <Input showSuggestion="true" id="categoriaId" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
@@ -97,7 +97,7 @@
                </f:FormElement>
                  <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="C.E.2" required= "true"/>
+                     <Label text="C.E.2" />
                   </f:label>
                   <f:fields>
                      <Input showSuggestion="true" id="ce2Id" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
@@ -107,7 +107,7 @@
                </f:FormElement>
                  <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="C.E.3" required= "true"/>
+                     <Label text="C.E.3" />
                   </f:label>
                   <f:fields>
                      <Input showSuggestion="true" id="ce3Id" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
