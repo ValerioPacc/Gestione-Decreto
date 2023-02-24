@@ -93,8 +93,29 @@ sap.ui.define([
 			}
 			this.closeDialog();
 		},
+		_handleValueHelpCloseBen: function (evt) {
+						
+			var that = this,
+			oSelectedItem = evt.getParameter("selectedItem"),
+			sField = evt.getSource().data("filterTableField"),
+			Input = this.getView().byId(sField),
+			oTempModel = this.getView().getModel("temp"),
+			oMock = this.getView().getModel("comboBox");
+			
+			if (oSelectedItem) {			
+				var sValueTitle = oSelectedItem.getTitle(),
+				key = oSelectedItem.data("key"),
+				oItem = _.findWhere(oMock.getProperty("/Beneficiario"), {id: key});
 
-		_handleValueHelpCClose : function (evt) {
+				Input.setValue(sValueTitle);
+				oTempModel.setProperty("/Step2", oItem);
+				
+			
+			}
+			this.closeDialog();
+		},
+
+		_handleValueHelpClose : function (evt) {
 						
 			var that = this,
 			oSelectedItem = evt.getParameter("selectedItem"),

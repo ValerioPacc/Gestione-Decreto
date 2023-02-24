@@ -222,15 +222,19 @@ sap.ui.define(
 
     getOtherData: function (value) {
 
-      var oModel= this.getView().getModel("comboBox").getProperty("/Contratto"),
-      rowSelected= _.findWhere(oModel, {id: value});
+      var oModel= this.getView().getModel("comboBox"),
+      oTempModel = this.getView().getModel("temp"),
+      rowSelected = _.findWhere(oModel.getProperty("/Contratto"), {id: value}),
+      beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), {id: rowSelected.id_ben});
 
       this.getView().byId("Dstipula").setValue(rowSelected.data);
       this.getView().byId("descContratto").setValue(rowSelected.desc);
-      this.getView().byId("beneficiario").setValue(rowSelected.beneficiario);
+      this.getView().byId("beneficiario").setValue(beneficiario.nome + beneficiario.cognome);
       this.getView().byId("cig").setValue(rowSelected.cig);
       this.getView().byId("cup").setValue(rowSelected.cup);
       this.getView().byId("importoCont").setValue(rowSelected.importo);
+      oTempModel.setProperty("/Step1", rowSelected);
+      oTempModel.setProperty("/Step2", beneficiario);
 
 		},
     
@@ -388,6 +392,8 @@ onCloseDialog6 : function () {
                 this.getView().byId("cup").setValue("");
                 this.getView().byId("importoCont").setValue("");
                 this.getView().byId("Ncontratto").setSelectedKey("");
+
+                this.getView().getModel("temp").setProperty("/Step2", []);
                 
              }
             },

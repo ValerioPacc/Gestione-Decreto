@@ -1,24 +1,56 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
 xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
      <Dialog id="Anagrafica"  title="Richiedi Anagrafica beneficiario" draggable="true" showHeader="true"
       afterClose="closeDialog" contentWidth="100%" contentHeight="100%">
     <content>
 
        <f:Form id="anagraficaB" editable="false" title="Dati Anagrafica Bancario">
+       
          <f:layout>
-            <f:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/>
+         		<f:ResponsiveGridLayout
+					labelSpanXL="3"
+					labelSpanL="3"
+					labelSpanM="3"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="4"
+					emptySpanL="4"
+					emptySpanM="4"
+					emptySpanS="0"
+					columnsXL="1"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+            <!--f:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/-->
          </f:layout>
          <f:formContainers>
             <f:FormContainer>
+       
                <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
                      <Label text="Paese" required= "true"/>
                   </f:label>
                   <f:fields>
-                     <MultiInput id="inputPaese" class="validateFilter" value="" width="10%">
+                   <Input id="inputPaese" 
+                    showValueHelp="true"
+                    enabled="true"
+                    valueHelpOnly="true" 
+                    valueHelpRequest="handleValueHelp"
+                    app:FieldName="Paese"
+                    app:filterTableField="Paese"
+                    class="sapUiSmallMarginBottom validateFilter">
+                        <layoutData>
+                            <l:GridData span="XL1 L1 M1 S2" />
+                        </layoutData>
+                    </Input>
+                     <!--MultiInput id="inputPaese"  class="validateFilter" value="" width="10%">
                      <core:Item key="{comboBox>}" text="{comboBox>}" />
-                     </MultiInput>
-                      <Input id="input" class="validateFilter" value=""></Input>
+                     </MultiInput-->
+                      <Input id="input" class="validateFilter" value="">
+                       <layoutData>
+                            <l:GridData span="XL2 L2 M6 S6" />
+                        </layoutData>
+                      </Input>
                   </f:fields>
                </f:FormElement>
                <f:FormElement>
@@ -27,7 +59,10 @@ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
                         </f:label>
                         <f:fields>
                         <Select selectedKey="" items="">
-                        <core:Item key="" text="" />
+                            <core:Item key="" text="" />
+                            <layoutData>
+                                <l:GridData span="XL3 L3 M7 S7" />
+                            </layoutData>
                         </Select>
                         </f:fields>
                 </f:FormElement>
@@ -58,29 +93,41 @@ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
                      </Input>
                   </f:fields>
                </f:FormElement>
-               <f:FormElement label="Via" visible="{dialogModel>/GgVisible}">
-               <f:label>
-                     <Label text="Via" required="true"/>
+               <f:FormElement visible="{dialogModel>/GgVisible}">
+                    <f:label>
+                     <Label text="Via/Civico" required="true"/>
                    </f:label>
                   <f:fields>
                      <Input id="inputVia" class="validateFilter" value="">
                      </Input>
-                  </f:fields>
-                    <Input class="validateFilter" value="" width="30%">
+                     <Input class="validateFilter" value="">
+                        <layoutData>
+                            <l:GridData span="XL1 L1 M6 S6" />
+                        </layoutData>
                      </Input>
+                  </f:fields>
+                    
                </f:FormElement>
                 <f:FormElement visible="{dialogModel>/GgVisible}">
                   <f:label>
-                     <Label text="Località" required= "true" labelFor="inputLoc"/>
-                    
+                     <Label text="Località/Regione" required= "true" labelFor="inputLoc"/>
                   </f:label>
                   <f:fields>
-                     <Input id="inputLoc" class="validateFilter" value="" width="120%">
+                     <Input id="inputLoc" class="validateFilter" value="">
+                        <layoutData>
+                            <l:GridData span="XL5 L5 M4 S4" />
+                        </layoutData>
                      </Input>
                      <Input id="inputReg1" class="validateFilter" value="">
+                        <layoutData>
+                            <l:GridData span="XL1 L1 M4 S4" />
+                        </layoutData>
                      </Input>
                      </f:fields>
-                     <Input class="validateFilter" value="" width="120%" >
+                     <Input class="validateFilter" value="" >
+                      <layoutData>
+                            <l:GridData span="XL2 L2 M6 S6" />
+                        </layoutData>
                      </Input>
                   
                </f:FormElement>
@@ -90,6 +137,9 @@ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
                   </f:label>
                   <f:fields>
                      <Input id="inputCAP" class="validateFilter" value="">
+                        <layoutData>
+                            <l:GridData span="XL2 L2 M6 S12" />
+                        </layoutData>
                      </Input>
                   </f:fields>
                </f:FormElement>
@@ -99,7 +149,20 @@ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
       </f:Form>
     <f:Form editable="false" title="Dati Fiscali Beneficiario ">
          <f:layout>
-            <f:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/>
+            <f:ResponsiveGridLayout
+					labelSpanXL="3"
+					labelSpanL="3"
+					labelSpanM="3"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="4"
+					emptySpanL="4"
+					emptySpanM="4"
+					emptySpanS="0"
+					columnsXL="1"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
          </f:layout>
          <f:formContainers>
             <f:FormContainer>
