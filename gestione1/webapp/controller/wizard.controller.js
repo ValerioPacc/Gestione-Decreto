@@ -133,19 +133,6 @@ sap.ui.define(
     onOpenFragment : function () {
 
       var oDialog = this.openDialog("gestione1.fragment.anagrafica").open();
-
-			/*if (!this.pFragment) {
-				this.pFragment = this.loadFragment({
-					name: "gestione1.fragment.anagrafica",
-          controller: this
-				}).then(function (oFragment) {
-          this.getView().addDependent(oFragment);
-          return oFragment;
-        }.bind(this));
-			} 
-			this.pFragment.then(function(oFragment) {
-				oFragment.open();
-			}.bind(this));*/
 		},
 
     onOpenGridTable : function () {
@@ -204,20 +191,6 @@ sap.ui.define(
     onOpenDialogModPag : function () {
 
       var oDialog = this.openDialog("gestione1.fragment.regModPag").open();
-      
-
-			/*if (!this.cFragment) {
-				this.cFragment = this.loadFragment({
-					name: "gestione1.fragment.regModPag",
-          controller: this
-				}).then(function (oFragment) {
-          this.getView().addDependent(oFragment);
-          return oFragment;
-        }.bind(this));
-			} 
-			this.cFragment.then(function(oFragment) {
-				oFragment.open();
-			}.bind(this));*/
 		},
 
     getOtherData: function (value) {
@@ -229,7 +202,7 @@ sap.ui.define(
 
       this.getView().byId("Dstipula").setValue(rowSelected.data);
       this.getView().byId("descContratto").setValue(rowSelected.desc);
-      this.getView().byId("beneficiario").setValue(beneficiario.nome + beneficiario.cognome);
+      this.getView().byId("beneficiario").setValue(beneficiario.nome + " " + beneficiario.cognome);
       this.getView().byId("cig").setValue(rowSelected.cig);
       this.getView().byId("cup").setValue(rowSelected.cup);
       this.getView().byId("importoCont").setValue(rowSelected.importo);
