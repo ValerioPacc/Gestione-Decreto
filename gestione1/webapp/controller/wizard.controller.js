@@ -233,6 +233,8 @@ sap.ui.define(
       this.getView().byId("cig").setValue(rowSelected.cig);
       this.getView().byId("cup").setValue(rowSelected.cup);
       this.getView().byId("importoCont").setValue(rowSelected.importo);
+      this.getView().byId("numConAtt").setValue(rowSelected.id);
+      
       oTempModel.setProperty("/Step1", rowSelected);
       oTempModel.setProperty("/Step2", beneficiario);
 
@@ -566,7 +568,83 @@ onCloseDialog6 : function () {
         else {
           this.getView().byId("CB3").setEnabled(true);
         }
-      }   
+      }, 
+      
+    //   onRegIpebozza: function (oEvent) {
+    //     var oModel= this.getView().getModel("comboBox"),
+    //     oTempModel = this.getView().getModel("temp"),
+    //     rowSelected = _.findWhere(oModel.getProperty("/Contratto"), {id: value}),
+    //     beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), {id: rowSelected.id_ben});
+  
+    //     this.getView().byId("Dstipula").setValue(rowSelected.data);
+    //     this.getView().byId("descContratto").setValue(rowSelected.desc);
+    //     this.getView().byId("beneficiario").setValue(beneficiario.nome + beneficiario.cognome);
+    //     this.getView().byId("cig").setValue(rowSelected.cig);
+    //     this.getView().byId("cup").setValue(rowSelected.cup);
+    //     this.getView().byId("importoCont").setValue(rowSelected.importo);
+    //     oTempModel.setProperty("/Step1", rowSelected);
+    //     oTempModel.setProperty("/Step2", beneficiario);
+
+    //     MessageBox.warning("Sei sicuro di voler salvare l'Ipe in Bozza ?", {
+    //         actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+    //         emphasizedAction: sap.m.MessageBox.Action.YES,
+    //         onClose: function (oAction) {
+    //             if (oAction === sap.m.MessageBox.Action.YES) {
+    //               var oDataModel = self.getOwnerComponent().getModel();
+    //               var entity = {
+    //                  ChiaveGiustificativo: '12345', 
+    //                  DecretoImpegnoSet:{},
+    //                   IpeEntitySet: []
+    //                  };
+    //                 entity.DecretoImpegnoSet = {
+    //                   ChiaveGiustificativo: '12345',
+    //                     AreaFinanziaria:'1234',
+    //                     Ente:'0000',
+    //                     RegistratoBozza:'B',
+    //                     UfficioLiv1:'UFF',
+    //                     UfficioLiv2:'UFF',
+    //                     CodiceStato: '01',
+    //                     TipologiaImpegno: N_tipo_impegno,
+    //                     Esercizio: N_es_decreto,
+    //                     Amministrazione: N_Amm,
+    //                     DataDecreto: N_Datade,
+    //                     NProtocolloAmm: N_NprotAmm,
+    //                     DataProtocolloAmm: N_DataprotAmm,
+    //                     CodiceUfficio: N_codiceUff,
+    //                     ControlloCorteConti:B_CcConti
+    //                  };
+
+    //                  oDataModel.create("/DeepEntitySet", entity,{
+    //                    success: function(result){ 
+    //                     console.log('SUCCESS')
+    //                     MessageBox.success("Decreto Impegno creato correttamente", {
+    //                         actions: [sap.m.MessageBox.Action.OK],
+    //                         emphasizedAction: MessageBox.Action.OK,
+    //                         onClose: function (oAction) {
+    //                             if (oAction === sap.m.MessageBox.Action.OK) {
+    //                                 self.getOwnerComponent().getRouter().navTo("View1")
+    //                                 location.reload();
+    //                             }
+    //                         }
+    //                     }) 
+    //                 }, 
+
+    //                     error: function(err){
+    //                        console.log(err); 
+    //                        MessageBox.error("Decreto Impegno non creato correttamente")
+    //                       },
+    //                         async: true, 
+    //                          urlParameters: {}  });
+                             
+
+                    
+
+                 
+    //             }
+    //         }
+    //     })
+    // },
+
     });
   }
 );

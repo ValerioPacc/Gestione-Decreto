@@ -124,10 +124,11 @@ sap.ui.define(
             }
         })
     },
+    
      
-     checkFields: function (view) {
-       var self = this,
-       check = false;
+    //  checkFields: function (view) {
+    //    var self = this,
+    //    check = false;
       
   //       if(vie === "Anagrafica"){
   //         var oForm = self.__dialog.getContent()[0].getFormContainers()[0],
