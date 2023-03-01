@@ -14,8 +14,8 @@
             <OverflowToolbar>
                 <content>
                     <ToolbarSpacer />
-                    <Button icon="sap-icon://display" id="rettificaIPE"  type="Emphasized" text="Rettifica IPE" press="navToWizard"/>
-                    <Button icon="sap-icon://display" id="DettagliIPE" type="Emphasized" text="Dettagli IPE" />
+                    <Button icon="sap-icon://edit" id="rettificaIPE"  type="Emphasized" text="Rettifica IPE" press="navToWizard"/>
+                    <Button icon="sap-icon://search" id="DettagliIPE" type="Emphasized" text="Dettaglio IPE" />
                     <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
                 </content>
             </OverflowToolbar>

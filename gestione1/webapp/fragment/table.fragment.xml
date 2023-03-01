@@ -14,7 +14,7 @@
             <OverflowToolbar>
                 <content>
                     <ToolbarSpacer />
-                    <Button icon="sap-icon://display" id="DettagliDE" press="onNavToDettagliDE" type="Emphasized" text="Dettagli Decreto di Impegno" />
+                    <Button icon="sap-icon://search" id="DettagliDE" press="onNavToDettagliDE" type="Emphasized" text="Dettaglio Decreto di Impegno" />
                     <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
                 </content>
             </OverflowToolbar>

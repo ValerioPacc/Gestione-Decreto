@@ -18,7 +18,7 @@
             <f:DynamicPageHeader pinnable="false" backgroundDesign="Trasparent">
                  <layout:VerticalLayout class="sapUiMediumMarginEnd">
                         <Title text="Dati Amminastrazione" />
-                        <layout:HorizontalLayout wrapping="true">
+                        <layout:HorizontalLayout >
                         <Label text="Dirigente/Direttore Firmatario:" class="sapUiSmallMarginEnd" />
                         <Text  id="DDFirmatario" class="sapUiMediumMarginEnd"/>
                     <Label text="Data Firma:" class="sapUiSmallMarginEnd" />
@@ -30,7 +30,7 @@
 
                 <layout:VerticalLayout class="sapUiLargeMarginTop">
                         <Title text="Dati Decreto" />
-                        <layout:HorizontalLayout wrapping="true">
+                        <layout:HorizontalLayout >
                         <Label text="Esercizio Decreto:" class="sapUiSmallMarginEnd" />
                         <Text  id="esercizio" class="sapUiMediumMarginEnd"/>
                     <Label text="Amminstrazione:" class="sapUiSmallMarginEnd" />
@@ -44,7 +44,7 @@
                     <Label text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
                     <Text  id="NprotAmm" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
-               <layout:HorizontalLayout wrapping="true"  class="sapUiMediumMarginTop">
+               <layout:HorizontalLayout   class="sapUiMediumMarginTop">
                         <Label text="Stato Decreto:" class="sapUiSmallMarginEnd" />
                         <Text  id="StatoDecreto" class="sapUiMediumMarginEnd"/>
                     <Label text="Tipologia Impegno:" class="sapUiSmallMarginEnd" />
@@ -54,7 +54,7 @@
                     <Label text="Controllo preventivo Corte dei conti:" class="sapUiSmallMarginEnd" />
                     <Text  id="CcConti" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
-                <layout:HorizontalLayout wrapping="true"  class="sapUiMediumMarginTop">
+                <layout:HorizontalLayout   class="sapUiMediumMarginTop">
                 <Label text="Attesa documentazione aggiuntiva:" class="sapUiSmallMarginEnd"  />
                     <Text  id="docAgg" class="sapUiMediumMarginEnd"/>  
                </layout:HorizontalLayout >
@@ -62,7 +62,7 @@
                 
                 <layout:VerticalLayout class="sapUiLargeMarginTop">
                         <Title text="Dati Ragioneria" />
-                        <layout:HorizontalLayout wrapping="true">
+                        <layout:HorizontalLayout >
                         <Label text="Ragioneria:" class="sapUiSmallMarginEnd" />
                         <Text  id="Rag" class="sapUiMediumMarginEnd"/>
                     <Label text="Data Protocollo RGS:" class="sapUiSmallMarginEnd" />
