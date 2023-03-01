@@ -1,0 +1,124 @@
+<core:FragmentDefinition 
+xmlns:core="sap.ui.core"
+xmlns="sap.ui.table"
+xmlns:c="sap.ui.core"
+xmlns:m="sap.m">
+
+	<Table id="table1"
+        rows="{/ProductCollection}"
+        selectionMode="MultiToggle"
+        fixedColumnCount="1"
+        visibleRowCount="7"
+        ariaLabelledBy="title">
+        <extension>
+            <m:OverflowToolbar style="Clear">
+                <m:Label text="Seleziona periodi:" labelFor="suggestionsMultiComboBox" vAlign="Inherit" 
+                class="marginRight sapUiLargeMarginStart"/>
+                <m:ComboBox id="Years" class="marginRight">
+                    <m:items>
+                        <core:Item text="2023-2024-2025-2026" />
+                        <core:Item text="2027-2028-2029-2030" />
+                        <core:Item text="2031-2033-2034-2035" />
+                        <core:Item text="2036-2037-2038-2039" />
+                        <core:Item text="2040-2041-2042-2043" />
+                        <core:Item text="2044-2045-2046-2047" />
+                        <core:Item text="2048-2049-2050-2051" />
+                        <core:Item text="2052-2053-2054-2056" />
+                        <core:Item text="2057-2058-2059-2060" />
+                        <core:Item text="2061-2062-2063-2064" />
+                        
+                    </m:items>
+                </m:ComboBox> 
+                <m:ToolbarSpacer/>
+               <m:Button id="idPNI" type="Emphasized" class="marginRight" icon="sap-icon://add" text="Aggiungi PNI/Autorizzazione" press="onOpenDialog1"/>
+               <m:Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight"/>
+               <m:Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta"/>
+               <m:Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
+            </m:OverflowToolbar>
+        </extension>
+
+       
+				<columns>
+					<Column width="11rem">
+						<m:Label text="Product Name" />
+						<template>
+							<m:Text text="{Name}" wrapping="false" />
+						</template>
+					</Column>
+					<Column width="11rem">
+						<m:Label text="Product Id" />
+						<template>
+							<m:Input value="{ProductId}"/>
+						</template>
+					</Column>
+					<Column width="6rem" hAlign="End">
+						<m:Label text="Quantity" />
+						<template>
+							<m:Label text="{Quantity}" />
+						</template>
+					</Column>
+					<Column width="9rem">
+						<m:Label text="Status" />
+						<template>
+							<m:Text text="{Name}" wrapping="false" />
+						</template>
+					</Column>
+					<Column width="9rem">
+						<m:Label text="Price" />
+						<template>
+							<m:Text text="{Name}" wrapping="false" />
+						</template>
+					</Column>
+					<Column width="12rem">
+						<m:Label text="Supplier" />
+						<template>
+							<m:ComboBox value="{SupplierName}" items="{/Suppliers}">
+								<c:Item text="{Name}"/>
+							</m:ComboBox>
+						</template>
+					</Column>
+					<Column width="9rem">
+						<m:Label text="Image" />
+						<template>
+							<m:Link text="Show Image" href="{ProductPicUrl}" target="_blank"/>
+						</template>
+					</Column>
+					<Column width="9rem">
+						<m:Label text="Details" />
+						<template>
+							<m:Button text="Show Details" press="handleDetailsPress"/>
+						</template>
+					</Column>
+					<Column width="7rem">
+						<m:Label text="Heavy Weight" />
+						<template>
+							<m:CheckBox selected="{
+								path: 'Heavy',
+								type: 'sap.ui.model.type.String'
+							}"/>
+						</template>
+					</Column>
+					<Column width="12rem">
+						<m:Label text="Category" />
+						<template>
+							<m:Select selectedKey="{Category}" items="{/Categories}">
+								<c:Item text="{Name}" key="{Name}"/>
+							</m:Select>
+						</template>
+					</Column>
+					<Column width="6rem" hAlign="Center">
+						<m:Label text="Status" />
+						<template>
+							<m:Text text="{Name}" wrapping="false" />
+						</template>
+					</Column>
+					<Column width="11rem" hAlign="Center">
+						<m:Label text="Delivery Date" />
+						<template>
+							<m:Text text="{Name}" wrapping="false" />
+						</template>
+					</Column>
+				</columns>
+    </Table>
+ 
+</core:FragmentDefinition>

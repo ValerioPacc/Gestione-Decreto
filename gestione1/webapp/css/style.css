@@ -28,6 +28,18 @@
     width:30px;
     height:40px;
   }
+  .marginRight
+  {
+    margin-right: 0.5rem !important;
+  }
+  .TabBar .sapMITBContent {
+    padding: 0 !important;
+}  
+.toolbar {
+  padding-top: 1rem !important;
+}
+
+
   /* .sapMBtn{
     font-size:30px;
     height:20%;

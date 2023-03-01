@@ -420,53 +420,47 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
                     </WizardStep>
                     <WizardStep id="EsigiId" validated="true" activate="optionalStepActivation" title="Esigibilità">
                     <Toolbar>
-                    <ToolbarSpacer/>
-                    <Title text="IPE-impegno pluriennale ad esigibilità" textAlign="Center"/>
-                    <ToolbarSpacer/>
+                        <ToolbarSpacer/>
+                        <Title text="IPE-impegno pluriennale ad esigibilità" textAlign="Center"/>
+                        <ToolbarSpacer/>
                     </Toolbar>
-                    	<IconTabBar
-		id="idIconTabBar1"
-		class="sapUiResponsiveContentPadding">
-		<items>
-			<IconTabFilter text="Competenza" key="info">
-            	
-               
-                <content>
-             <Table class="sapUiSizeCompact" id="tableComp" includeItemInSelection="true"  visible="{/TableVisible}" selectionMode="MultiToggle"
-				ariaLabelledBy="title" >
+                    <IconTabBar id="idIconTabBar1" class="TabBar">
+                    <items>
+                        <IconTabFilter text="Competenza" key="info">
+            	        <content>
+                         <core:Fragment fragmentName="gestione1.fragment.EsigTable" type="XML" />
+             <!--Table class="sapUiSizeCompact" id="tableComp" includeItemInSelection="true"  visible="{/TableVisible}" 
+             selectionMode="MultiToggle" ariaLabelledBy="title" >
         
-        <headerToolbar>
-            
-            
-               <Toolbar height='auto'>
-    <content> 
+            <headerToolbar>
+            <Toolbar height='auto' class="toolbar">
+                <content> 
                 
                <VBox justifyContent="SpaceAround"> 
-              
-
                 <ToolbarSpacer />
                 <HBox justifyContent="SpaceAround">
                 <ToolbarSpacer />
-				 <Label text="Seleziona periodi:" labelFor="suggestionsMultiComboBox" vAlign="Inherit" class="sapUiLargeMarginStart"/>
-               <ComboBox id="suggestionsMultiComboBox" >
-               <items>
-							<core:Item text="2023-2024-2025-2026" />
-							<core:Item text="2027-2028-2029-2030" />
-							<core:Item text="2031-2033-2034-2035" />
-							<core:Item text="2036-2037-2038-2039" />
-							<core:Item text="2040-2041-2042-2043" />
-							<core:Item text="2044-2045-2046-2047" />
-							<core:Item text="2048-2049-2050-2051" />
-							<core:Item text="2052-2053-2054-2056" />
-							<core:Item text="2057-2058-2059-2060" />
-							<core:Item text="2061-2062-2063-2064" />
-							
-						</items>
+  
+				 <Label text="Seleziona periodi:" labelFor="suggestionsMultiComboBox" vAlign="Inherit" class="marginRight sapUiLargeMarginStart"/>
+                <ComboBox id="Years" class="marginRight">
+                    <items>
+                        <core:Item text="2023-2024-2025-2026" />
+                        <core:Item text="2027-2028-2029-2030" />
+                        <core:Item text="2031-2033-2034-2035" />
+                        <core:Item text="2036-2037-2038-2039" />
+                        <core:Item text="2040-2041-2042-2043" />
+                        <core:Item text="2044-2045-2046-2047" />
+                        <core:Item text="2048-2049-2050-2051" />
+                        <core:Item text="2052-2053-2054-2056" />
+                        <core:Item text="2057-2058-2059-2060" />
+                        <core:Item text="2061-2062-2063-2064" />
+                        
+                    </items>
                 </ComboBox> 
-               <Button id="idPNI" type="Emphasized" icon="sap-icon://add" text="Aggiungi PNI/Autorizzazione" press="onOpenDialog1"/>
-               <Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart"/>
-               <Button type="Emphasized" icon="sap-icon://excel-attachment" text="Esporta"/>
-               <Button type="Emphasized" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
+               <Button id="idPNI" type="Emphasized" class="marginRight" icon="sap-icon://add" text="Aggiungi PNI/Autorizzazione" press="onOpenDialog1"/>
+               <Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight"/>
+               <Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta"/>
+               <Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
                </HBox>
                
                <HBox class="sapUiSmallMarginTop">
@@ -479,17 +473,6 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
               </content>
           </Toolbar>
             </headerToolbar>
-   
-                    <!-- <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
-               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/> -->
-       
-<!--        
-			 <OverflowToolbar>
-                <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
-               <Input text="{}" editable="false"/>
-               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/>
-                <Input text="{}" editable="false"/>
-                </OverflowToolbar>  -->
            
          
                <columns>
@@ -554,7 +537,7 @@ xmlns="sap.m" controllerName="gestione1.controller.wizard">
             <Text text="{>ZimpoTitolo}" />
         </ColumnListItem>
       
-    </Table>
+    </Table-->
     </content>
     
 			</IconTabFilter>
