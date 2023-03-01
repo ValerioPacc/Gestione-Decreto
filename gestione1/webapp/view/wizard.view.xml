@@ -1,15 +1,8 @@
-<mvc:View
-    height="100%"
-    xmlns:f="sap.f"
-    xmlns:form="sap.ui.layout.form"
-    xmlns:l="sap.ui.layout"
-    xmlns:core="sap.ui.core"
-    xmlns:u="sap.ui.unified"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
-    xmlns="sap.m"
-    controllerName="gestione1.controller.wizard"
->
+<mvc:View height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" 
+xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" 
+xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" 
+xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+xmlns="sap.m" controllerName="gestione1.controller.wizard">
     <NavContainer id="wizardNavContainer">
         <f:DynamicPage stickySubheaderProvider="CreateProductWizard" toggleHeaderOnTitleClick="false" class="sapUiNoContentPadding" showFooter="true">
             <f:title>
@@ -24,54 +17,57 @@
                     <l:HorizontalLayout allowWrapping="true">
                         <l:VerticalLayout class="sapUiMediumMarginEnd" visible="{/header1Visible}">
                             <HBox id="idHBox1">
-                                <VBox id="idIpe" class="sapUiSmallMargin" width="50%">
-                                    <Label id="IpeH" text="{i18n>Ipe}" design="Bold" />
-                                    <Text id="Ipe1H" text="{}" />
+                                <VBox id="idIpeH" class="sapUiSmallMargin" width="50%">
+                                    <Label id="IpeH" text="{i18n>Ipe}" design="Bold"/>
+                                    <Text id="Ipe1H" text="{}"/>
                                 </VBox>
                                 <VBox id="idVBox1" class="sapUiSmallMargin" width="50%">
-                                    <Label id="Eserecizio1" text="{i18n>esercizio}" design="Bold" />
-                                    <Text id="eserecizio1" text="{}" wrapping="true" />
+                                    <Label id="Eserecizio1" text="{i18n>esercizio}" design="Bold"/>
+                                    <Text id="eserecizio1" text="{}" wrapping="true"/>
                                 </VBox>
                                 <VBox id="idVBox2" class="sapUiSmallMargin" width="80%">
-                                    <Label id="Amm1" text="{i18n>amministrazione}" design="Bold" />
-                                    <Text id="amm1" text="{}" />
+                                    <Label id="Amm1" text="{i18n>amministrazione}" design="Bold"/>
+                                    <Text id="amm1" text="{}"/>
                                 </VBox>
                                 <VBox id="idVBox3" class="sapUiSmallMargin" width="80%">
-                                    <Label id="Rag1" text="{i18n>Ragioneria}" design="Bold" />
-                                    <Text id="rag1" text="{}" />
+                                    <Label id="Rag1" text="{i18n>Ragioneria}" design="Bold"/>
+                                    <Text id="rag1" text="{}"/>
                                 </VBox>
                             </HBox>
-
+                        
                             <HBox id="idHBox2">
                                 <VBox id="idBenH" class="sapUiSmallMargin" width="50%">
-                                    <Label id="BenH" text="{i18n>beneficiarioH}" design="Bold" />
-                                    <Text id="Ben1H" text="{}" />
+                                    <Label id="BenH" text="{i18n>beneficiarioH}" design="Bold"/>
+                                    <Text id="Ben1H" text="{}"/>
                                 </VBox>
                                 <VBox id="idVBox4" class="sapUiSmallMargin" width="50%">
-                                    <Label id="TotImp1" text="{i18n>totimp}" design="Bold" />
-                                    <Text id="totImp1" text="{}" wrapping="true" />
+                                    <Label id="TotImp1" text="{i18n>totimp}" design="Bold"/>
+                                    <Text id="totImp1" text="{}" wrapping="true"/>
                                 </VBox>
                                 <VBox id="idVBox5" class="sapUiSmallMargin" width="80%">
-                                    <Label id="RicAss1" text="{i18n>NricAss}" design="Bold" />
-                                    <Text id="ricAss1" text="{}" />
+                                    <Label id="RicAss1" text="{i18n>NricAss}" design="Bold"/>
+                                    <Text id="ricAss1" text="{}"/>
                                 </VBox>
                             </HBox>
                         </l:VerticalLayout>
                     </l:HorizontalLayout>
                 </f:DynamicPageHeader>
-            </f:header>
+                </f:header>
             <f:content>
                 <Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" showNextButton="false" navigationChange="handleNavigationChange" renderMode="Page">
                     <WizardStep id="SelezioneTitoliStep" title="Contratto" validated="true">
                         <Label text="{i18n>Ccontratto}" />
-                        <Switch accessibleNameRef="regularSwitchLabel" state="true" customTextOff="No" customTextOn="Si" change="controlSwitch" id="switch" />
+                        <Switch accessibleNameRef="regularSwitchLabel" state="true" customTextOff="No" customTextOn="Si" change="controlSwitch" id="switch"   />
                         <Panel height="100%">
                             <content>
                                 <l:Grid>
                                     <l:content>
                                         <VBox>
-                                            <Label text="{i18n>Eserc}" required="true" />
-                                            <ComboBox id="es_decreto" selectedKey="{temp>/SelectedDecree/Esercizio}" enabled="true" items="{comboBox>/Esercizio}">
+                                            <Label text="{i18n>esercizio}" required="true"/>
+                                            <ComboBox id="es_decreto" 
+                                            selectedKey="{temp>/SelectedDecree/Esercizio}" 
+                                            enabled="true" 
+                                            items="{comboBox>/Esercizio}">
                                                 <core:Item id="es_decreto1" key="{comboBox>id}" text="{comboBox>id}" />
                                             </ComboBox>
                                             <layoutData>
@@ -79,68 +75,71 @@
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>amministrazione}" required="true" />
-                                            <Input value="{temp>/SelectedDecree/Amministrazione}" enabled="true" />
+                                            <Label text="{i18n>amministrazione}" required="true"/>
+                                            <Input value="{temp>/SelectedDecree/Amministrazione}"  enabled="true"/>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Ncontratto}" required="true" />
-                                            <Input
-                                                id="Ncontratto"
-                                                showValueHelp="true"
-                                                app:FieldName="Contratto"
-                                                enabled="{/FilterSwitch1}"
-                                                valueHelpOnly="true"
-                                                valueHelpRequest="handleValueHelp"
-                                                app:fieldName="ContrattoOrdine"
-                                                app:filterTableField="ContrattoOrdine"
-                                                class="sapUiSmallMarginBottom"
-                                            />
-                                            <!--core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/-->
+                                            <Input id="Ncontratto" showValueHelp="true"
+                                            app:FieldName="Contratto"
+                                            enabled="{/FilterSwitch1}"
+                                            valueHelpOnly="true" valueHelpRequest="handleValueHelp"
+                                            app:fieldName="ContrattoOrdine" app:filterTableField="ContrattoOrdine"
+                                            class="sapUiSmallMarginBottom" />
+                                             <!--core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/-->
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Dstipula}" required="true" />
-                                            <Input id="Dstipula" showValueHelp="true" enabled="false" app:fieldName="DataStipula" app:filterTableField="DataStipula" class="sapUiSmallMarginBottom" />
+                                             <Input id="Dstipula" showValueHelp="true"
+                                                enabled="false"
+                                                app:fieldName="DataStipula" 
+                                                app:filterTableField="DataStipula"
+                                                class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>descrizione}" />
-                                            <TextArea id="descContratto" width="90%" enabled="false" />
+                                            <TextArea id="descContratto" width="90%" enabled="false"/>
                                             <layoutData>
                                                 <l:GridData span="L9 M9 S9" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>beneficiarioH}" />
-                                            <Input id="beneficiario" enabled="false" />
+                                            <Input id="beneficiario" enabled="false"/>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>cig}" />
-                                            <Input id="cig" value="" enabled="false" />
+                                            <Input id="cig" value=""  enabled="false"/>
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>cup}" />
-                                            <Input id="cup" showValueHelp="true" enabled="{= !${/FilterSwitch1} }" valueHelpOnly="true" valueHelpRequest="handleValueHelp" app:FieldName="CUP" app:filterTableField="CUP" class="sapUiSmallMarginBottom" />
+                                            <Input id="cup" showValueHelp="true"
+                                            enabled="{= !${/FilterSwitch1} }"
+                                            valueHelpOnly="true" valueHelpRequest="handleValueHelp"
+                                            app:FieldName="CUP" app:filterTableField="CUP"
+                                            class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
-                                            <Label text="{i18n>ImpTot}" wrapping="true" />
-                                            <Input id="importoCont" width="60%" enabled="false" />
+                                            <Label text="{i18n>ImpTot}" wrapping="true"/>
+                                            <Input id="importoCont" width="60%" enabled="false"/>
                                             <layoutData>
                                                 <l:GridData span="L6 M3 S3" />
                                             </layoutData>
@@ -148,7 +147,7 @@
                                     </l:content>
                                 </l:Grid>
 
-                                <Table class="sapUiSizeCompact" id="idpsfin" includeItemInSelection="true" items="{>/items}" headerText="Pianificazione Finanziaria">
+                                <Table class="sapUiSizeCompact" id="idpsfin" includeItemInSelection="true" items="{>/items}" headerText="Riepilogo Pianificazione Finanziaria">
                                     <columns>
                                         <Column width="12%">
                                             <Label text="Esercizio" />
@@ -178,8 +177,8 @@
                         </Panel>
 
                         <OverflowToolbar>
-                            <Button text="Indietro" type="Emphasized" press="onBackButton" />
-                            <Button text="Avanti" type="Emphasized" press="onNextButton" />
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized"  press="onNextButton" />
                             <ToolbarSpacer />
                             <Button type="Emphasized" text="Salva in bozza" press="onSaveDraftIPE" />
                         </OverflowToolbar>
@@ -187,8 +186,8 @@
                     <WizardStep id="Beneficiario1" validated="true" title="Beneficiario" activate="additionalInfoValidation">
                         <Toolbar>
                             <ToolbarSpacer />
-                            <Button type="Emphasized" text="Richiedi Anagrafica Beneficiario" press="onOpenFragment" />
-                            <Button type="Emphasized" text="Inserisci Mod.Pag.-Iban" press="onOpenDialogModPag" />
+                            <Button type="Emphasized" text="Richiedi Anagrafica Beneficiario" press="onOpenFragment"/>
+                            <Button type="Emphasized" text="Inserisci Mod.Pag.-Iban" press="onOpenDialogModPag"/>
                         </Toolbar>
                         <RadioButtonGroup id="Person" columns="3" width="100%">
                             <RadioButton text="Persona Fisica" selected="true" />
@@ -214,193 +213,209 @@
                         >
                             <VBox>
                                 <Label text="Beneficiario:" required="true" />
-                                <Input id="beneficiario1" showValueHelp="true" enabled="true" value="{temp>/Step2/nome} {temp>/Step2/cognome}" valueHelpOnly="true" valueHelpRequest="handleValueHelp" app:FieldName="Ben" app:filterTableField="beneficiario" class="sapUiSmallMarginBottom" />
-
+                                 <Input id="beneficiario1" 
+                                    showValueHelp="true"
+                                    enabled="true"
+                                    value="{temp>/Step2/nome} {temp>/Step2/cognome}"
+                                    valueHelpOnly="true" 
+                                    valueHelpRequest="handleValueHelp"
+                                    app:FieldName="Ben"
+                                    app:filterTableField="beneficiario"
+                                    class="sapUiSmallMarginBottom" />
+                                
                                 <layoutData>
                                     <l:GridData span="L6 M3 S3" />
                                 </layoutData>
                             </VBox>
                         </form:SimpleForm>
-
-                        <HBox justifyContent="Center" class="sapUiLargeMarginBegin">
+                        
+                            <HBox justifyContent="Center" class="sapUiLargeMarginBegin">
                             <items>
                                 <VBox class="sapUiLargeMarginBegin">
-                                    <Label text="Codice Fiscale:" />
-                                    <Input id="cFiscale" enabled="false" value="{temp>/Step2/cf}" />
-                                    <Label text="Nome:" />
-                                    <Input id="nome" enabled="false" value="{temp>/Step2/nome}" />
-                                    <Label text="Ragione Sociale:" />
-                                    <Input id="rSociale" enabled="false" value="{temp>/Step2/Rsociale}" />
-                                </VBox>
+                                    
+                                        <Label text="Codice Fiscale:" />
+                                        <Input id="cFiscale" enabled="false" value="{temp>/Step2/cf}"/>
+                                        <Label text="Nome:" />
+                                        <Input id="nome" enabled="false" value="{temp>/Step2/nome}"/>
+                                        <Label text="Ragione Sociale:"  />
+                                        <Input id="rSociale" enabled="false" value="{temp>/Step2/Rsociale}" />
+                                        
+                                        </VBox>
+                                   
 
-                                <VBox class="sapUiLargeMarginBegin">
-                                    <Label text="Codice Fiscale Estero:" />
-                                    <Input id="cFiscaleE" enabled="false" value="" />
-                                    <Label text="Cognome:" />
-                                    <Input id="cognome" enabled="false" value="{temp>/Step2/cognome}" />
-                                    <Label text="Partita IVA:" />
-                                    <Input id="IVA" enabled="false" value="{temp>/Step2/IVA}" />
-                                </VBox>
-                            </items>
-                        </HBox>
-
-                        <!-- <HBox alignItems="End" justifyContent="Start" direction="Column">
+                                   
+                                   
+                                    <VBox class="sapUiLargeMarginBegin">
+                                        <Label text="Codice Fiscale Estero:" />
+                                        <Input id="cFiscaleE" enabled="false" value=""/>
+                                        <Label text="Cognome:"  />
+                                        <Input id="cognome" enabled="false" value="{temp>/Step2/cognome}"/>
+                                        <Label text="Partita IVA:" />
+                                        <Input id="IVA" enabled="false" value="{temp>/Step2/IVA}"/>
+                                        </VBox>
+                                    
+                                       
+                                        </items>
+                                    </HBox>
+                                
+                                <!-- <HBox alignItems="End" justifyContent="Start" direction="Column">
                       
 				 
                  	
 			</HBox> -->
-
+                            
+                        
                         <core:Fragment fragmentName="gestione1.fragment.modPagamento" type="XML" />
                         <!-- <core:Fragment fragmentName="gestione1.fragment.anagrafica" type="XML" /> -->
-                        <OverflowToolbar>
-                            <Button text="Indietro" type="Emphasized" press="onBackButton" />
-                            <Button text="Avanti" type="Emphasized" press="onNextButton" />
-                            <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" press="onRegIpebozza" />
-                        </OverflowToolbar>
                     </WizardStep>
 
                     <WizardStep id="ImputCont" validated="true" activate="optionalStepActivation" title="Imputazione Contabile">
-                        <form:SimpleForm id="form" editable="true" width="100%">
-                            <VBox>
-                                <HBox>
-                                    <Label text="Sottoposto a richiesta di Assenso Preventivo" labelFor="Sottoposto a richiesta di Assenso Preventivo" />
-                                    <Switch accessibleNameRef="regularSwitchLabel" customTextOff="No" customTextOn="Si" change="handleChange" />
-                                    <layoutData>
-                                        <l:GridData span="L3 M3 S3" />
-                                    </layoutData>
-                                </HBox>
-                                <Title text="" />
-                                <HBox>
-                                    <Label text="Posizione Finanziaria:" labelFor="Posizione Finanziaria:" required="true" />
-                                    <Input id="pFin" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest" />
-                                    <layoutData>
-                                        <l:GridData span="L3 M3 S3" />
-                                    </layoutData>
-                                </HBox>
-                                <Title text="" />
-                                <HBox>
-                                    <Label text="PNI" labelFor="PNI" />
-                                    <Switch accessibleNameRef="regularSwitchLabel" customTextOff="No" customTextOn="Si" change="handleChange" />
-                                    <layoutData>
-                                        <l:GridData span="L3 M3 S3" />
-                                    </layoutData>
-                                </HBox>
-                                <Title text="" />
-                                <HBox>
-                                    <Label text="Oggetto della spesa:" labelFor="Oggetto della spesa:" />
-                                    <Input value="" />
-                                </HBox>
-                            </VBox>
-                            <VBox>
-                                <HBox>
-                                    <Label text="ID Richiesta Assenso Preventivo:" labelFor="ID Richiesta Assenso Preventivo:" />
-                                    <MultiInput id="IdAssPre" key="{respModel>matricola}" editable="false" text="{respModel>cognome} {respModel>nome} {respModel>matricola}" />
-                                    <layoutData>
-                                        <l:GridData span="L3 M3 S3" />
-                                    </layoutData>
-                                </HBox>
-                                <Title text="" />
-                                <HBox>
-                                    <Label text="Struttura Amministrativa Responsabile:" labelFor="Struttura Amministrativa Responsabile:" wrapping="true" />
-                                    <Input key="{respModel>matricola}" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" required="true" />
-                                    <layoutData>
-                                        <l:GridData span="L3 M3 S3" />
-                                    </layoutData>
-                                </HBox>
-                            </VBox>
-                        </form:SimpleForm>
+              <form:SimpleForm id="form"
+                   editable="true"
+                   width="100%">
+                
+                     
+                    <VBox>
+                     <HBox>
+                        <Label text="Sottoposto a richiesta di Assenso Preventivo" labelFor="Sottoposto a richiesta di Assenso Preventivo"/>
+                            <Switch accessibleNameRef="regularSwitchLabel" customTextOff="No" customTextOn="Si" change="handleChange" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                   </HBox>
+                   <Title text=""/>
+                   <HBox>
+                         <Label text="Posizione Finanziaria:" labelFor="Posizione Finanziaria:" required="true"/>
+                            <Input   id="pFin"  showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest"   />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                   </HBox>
+                   <Title text=""/>
+                   <HBox>
+                        <Label text="PNI" labelFor="PNI" />
+                        <Switch accessibleNameRef="regularSwitchLabel" customTextOff="No" customTextOn="Si" change="handleChange" />
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        </HBox>
+                        <Title text=""/>
+                        <HBox>
+                        <Label text="Oggetto della spesa:" labelFor="Oggetto della spesa:" />
+                        <Input value=""  />
+                        </HBox>
+                    </VBox>
+                    <VBox>
+                    <HBox>
+                        <Label text="ID Richiesta Assenso Preventivo:" labelFor="ID Richiesta Assenso Preventivo:" />
+                        <MultiInput id="IdAssPre"  key="{respModel>matricola}" editable="false" text="{respModel>cognome} {respModel>nome} {respModel>matricola}"/>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                    </HBox>
+                    <Title text=""/>
+                    <HBox>
+                        <Label text="Struttura Amministrativa Responsabile:" labelFor="Struttura Amministrativa Responsabile:" wrapping="true" />
+                         <Input   key="{respModel>matricola}" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" required="true"/>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        </HBox>
+                    </VBox>
+                   
+          
+</form:SimpleForm>
 
                         <OverflowToolbar>
-                            <Button text="Indietro" type="Emphasized" press="onBackButton" />
-                            <Button text="Avanti" type="Emphasized" press="onNextButton" />
-                            <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" />
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized"  press="onNextButton" />
+                            <ToolbarSpacer/>
+                            <Button type="Emphasized" text="Salva in bozza"  />
                         </OverflowToolbar>
                     </WizardStep>
 
                     <WizardStep id="idAttoAuth" validated="true" activate="optionalStepActivation" title="Atto Autorizzativo">
                         <form:SimpleForm editable="true">
-                            <VBox>
-                                <HBox>
-                                    <Label text="Natura Atto:" labelFor="Natura Atto:" />
-                                    <ComboBox id="naturAtto" items="{comboBox>/NaturaAtto}" selectionFinish="onSelectionFinish">
-                                        <core:Item id="nAtto" key="{comboBox>Atto}" text="{comboBox>Atto} " />
-                                    </ComboBox>
-                                    <layoutData>
-                                        <l:GridData span="L3 M3 S3" />
-                                    </layoutData>
-                                </HBox>
-                                <Title text="" />
-                                <HBox visible="{/FilterSwitch1}">
-                                    <Label text="{i18n>tipoAtto}" labelFor="Tipo Atto:" />
-                                    <MultiComboBox id="idTypeCon" items="{contrattiModel>/}" selectionFinish="onSelectionFinish">
+                        <VBox>
+                            <HBox>
+                            <Label text="Natura Atto:" labelFor="Natura Atto:"/>
+                            <MultiComboBox id="naturAtto" items="{contrattiModel>/}" selectionFinish="onSelectionFinish">
                                         <core:Item key="{}" text="{} {}" />
                                     </MultiComboBox>
                                     <layoutData>
-                                        <l:GridData span="L3 M3 S3" />
-                                    </layoutData>
-                                </HBox>
-                            </VBox>
-                            <VBox>
-                                <HBox>
-                                    <Label text="{i18n>Natto}" labelFor="{i18n>Natto}" />
-                                    <ComboBox id="numConAtt" enabled="false" items="{comboBox>/Contratto}">
-                                        <core:Item key="{comboBox>id}" text="{comboBox>id}" />
-                                    </ComboBox>
-                                    <layoutData>
-                                        <l:GridData span="L3 M3 S3" />
-                                    </layoutData>
-                                </HBox>
-                                <Title text="" />
-                                <HBox visible="{/FilterSwitch2}">
-                                    <Label text="Forma di aggiudicazione:" labelFor="Forma di aggiudizazione:" />
-                                    <MultiComboBox id="formAgg" items="{>/}" selectionFinish="onSelectionFinish">
-                                        <core:Item key="{}" text="{} {}" />
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                            </HBox>
+                            <Title text=""/>
+                            <HBox visible="{/FilterSwitch1}">
+                            <Label text="Tipo Contratto:" labelFor="Tipo Contratto:"/>
+                             <MultiComboBox id="idTypeCon" items="{contrattiModel>/}" selectionFinish="onSelectionFinish">
+                                        <core:Item  key="{}" text="{} {}" />
                                     </MultiComboBox>
                                     <layoutData>
-                                        <l:GridData span="L3 M3 S3" />
-                                    </layoutData>
-                                </HBox>
-                            </VBox>
-                            <VBox>
-                                <HBox>
-                                    <Label text="Data Atto:" labelFor="Data Atto:" />
-                                    <DatePicker id="dataAtt" displayFormat="dd/MM/yyyy" enabled="false" />
-                                </HBox>
-                            </VBox>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                            </HBox>
+                        </VBox> 
+                         <VBox>
+                            <HBox  >
+                             <Label text="Numero Contratto/Atto:" labelFor="Numero Contratto/Atto:" />
+                         <MultiComboBox id="numConAtt" key="{respModel>matricola}" text="{respModel>cognome} {respModel>nome} {respModel>matricola}">
+                           <core:Item  key="{}" text="{} {}" />
+                                    </MultiComboBox>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                            </HBox >
+                             <Title text=""/>
+                            <HBox visible="{/FilterSwitch2}" >
+                             <Label text="Forma di aggiudicazione:" labelFor="Forma di aggiudizazione:" />
+                             <MultiComboBox id="formAgg"  items="{>/}" selectionFinish="onSelectionFinish">
+                             <core:Item  key="{}" text="{} {}" />
+                                    </MultiComboBox>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                             </HBox >
+                        </VBox>
+                        <VBox>
+                            <HBox>
+                            <Label text="Data Atto:" labelFor="Data Atto:" />
+                            <DatePicker id="dataAtt" displayFormat="dd/MM/yyyy" />
+                            </HBox>
+                        </VBox>  
                         </form:SimpleForm>
                         <OverflowToolbar>
-                            <Button text="Indietro" type="Emphasized" press="onBackButton" />
-                            <Button text="Avanti" type="Emphasized" press="onNextButton" />
-                            <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" />
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized"  press="onNextButton" />
+                            <ToolbarSpacer/>
+                            <Button type="Emphasized" text="Salva in bozza"  />
                         </OverflowToolbar>
                     </WizardStep>
 
                     <WizardStep id="idTipoSpesa" validated="true" activate="optionalStepActivation" title="Tipologia ordinazione della spesa">
                         <form:SimpleForm editable="true">
-                            <VBox>
-                                <HBox>
-                                    <CheckBox id="CB1" text="Mandato Informatico" selected="false" select="onChangeSelect" />
-                                </HBox>
+                        <VBox>
+                            <HBox>
+                            <CheckBox id="CB1" text="Mandato Informatico" selected="false" select="onChangeSelect" />
+                            </HBox>
                             </VBox>
                             <VBox>
-                                <HBox>
-                                    <CheckBox id="CB2" text="Ordine di accreditamento" selected="false" enabled="false" />
-                                </HBox>
+                            <HBox >
+                            <CheckBox id="CB2" text="Ordine di accreditamento" selected="false" enabled="false"/>
+                            </HBox >
                             </VBox>
                             <VBox>
-                                <HBox>
-                                    <CheckBox id="CB3" text="Note di Imputazione" selected="false" />
-                                </HBox>
+                            <HBox>
+                            <CheckBox id="CB3" text="Note di Imputazione" selected="false"/>
+                            </HBox>
                             </VBox>
                         </form:SimpleForm>
                         <OverflowToolbar>
-                            <Button text="Indietro" type="Emphasized" press="onBackButton" />
-                            <Button text="Avanti" type="Emphasized" press="onNextButton" />
-                            <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" />
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized"  press="onNextButton" />
+                            <ToolbarSpacer/>
+                            <Button type="Emphasized" text="Salva in bozza"  />
                         </OverflowToolbar>
                     </WizardStep>
                     <WizardStep id="EsigiId" validated="true" activate="optionalStepActivation" title="Esigibilità">
@@ -541,7 +556,18 @@
                </content>
             </OverflowToolbar>
             </headerToolbar>
-
+<!-- <Toolbar>
+               <VBox>
+               <HBox>
+               <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
+               <Input value="" editable="fale"/>
+               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/>
+                <Input value="" editable="fale"/>
+               </HBox>
+               </VBox>
+               </Toolbar> -->
+                    <!-- <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
+               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/> -->
                <columns>
             <Column width="10%">
                 <Label text="Codice ISIN" />
@@ -582,20 +608,27 @@
             <Text text="{HeaderITB>ZcompRes}" wrapping="false"/>
             <Text text="{HeaderITB>ZimpoTitolo}" />
         </ColumnListItem>
-    </Table> -->
-                                </IconTabFilter>
-                            </items>
-                        </IconTabBar>
+    </Table>
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
                         <OverflowToolbar>
-                            <Button text="Indietro" type="Emphasized" press="onBackButton" />
-                            <ToolbarSpacer />
-                            <Button text="Salva IPE" type="Emphasized" press="" enabled="false" />
+                            <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                            <ToolbarSpacer/>
+                            <Button text="Salva IPE" type="Emphasized"  press="" enabled="false"/>
                         </OverflowToolbar>
                     </WizardStep>
                 </Wizard>
             </f:content>
 
-            <f:footer />
+            <f:footer>
+                <!-- <OverflowToolbar>
+                    <Button text="Indietro" type="Emphasized"  press="onBackButton" />
+                    <Button text="Avanti" type="Emphasized"  press="onNextButton" />
+                    <ToolbarSpacer />
+                    <Button type="Emphasized" text="Preimposta NI"  press="onAcceptDati" id="PreimpostaNI" />
+                </OverflowToolbar> -->
+            </f:footer>
         </f:DynamicPage>
     </NavContainer>
 </mvc:View>

@@ -206,10 +206,6 @@ sap.ui.define(
       this.getView().byId("cig").setValue(rowSelected.cig);
       this.getView().byId("cup").setValue(rowSelected.cup);
       this.getView().byId("importoCont").setValue(rowSelected.importo);
-        this.getView().byId("numConAtt").setValue(rowSelected.id)
-        this.getView().byId("dataAtt").setValue(rowSelected.data)
-      
-      
       oTempModel.setProperty("/Step1", rowSelected);
       oTempModel.setProperty("/Step2", beneficiario);
 
@@ -369,8 +365,6 @@ onCloseDialog6 : function () {
                 this.getView().byId("cup").setValue("");
                 this.getView().byId("importoCont").setValue("");
                 this.getView().byId("Ncontratto").setSelectedKey("");
-                this.getView().byId("numConAtt").setValue("").setEnabled(true);
-                this.getView().byId("dataAtt").setValue("").setEnabled(true);
 
                 this.getView().getModel("temp").setProperty("/Step2", []);
                 
@@ -545,97 +539,7 @@ onCloseDialog6 : function () {
         else {
           this.getView().byId("CB3").setEnabled(true);
         }
-      }, 
-      
-      onRegIpebozza: function (oEvent) {
-        var oModel= this.getView().getModel("comboBox"),
-        oTempModel = this.getView().getModel("temp"),
-        rowSelected = _.findWhere(oModel.getProperty("/Contratto"), ),
-        beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), );
-  
-        // this.getView().byId("Dstipula").getValue();
-        // this.getView().byId("descContratto").getValue();
-        // this.getView().byId("beneficiario").getValue();
-        // this.getView().byId("cig").getValue();
-        // this.getView().byId("cup").getValue();
-        // this.getView().byId("importoCont").getValue();
-        oTempModel.setProperty("/Step1", rowSelected);
-        oTempModel.setProperty("/Step2", beneficiario);
-var self= this
-        MessageBox.warning("Sei sicuro di voler salvare l'Ipe in Bozza ?", {
-            actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-            emphasizedAction: sap.m.MessageBox.Action.YES,
-            onClose: function (oAction) {
-                if (oAction === sap.m.MessageBox.Action.YES) {
-                  var oDataModel = self.getOwnerComponent().getModel();
-                  var entity = {
-                    Bukrs:oTempModel.getProperty("/SelectedDecree").Ente,
-                    Fikrs:oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
-                    Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
-                    Zregistrato: oTempModel.getProperty("/SelectedDecree").RegistratoBozza,
-                    ZCodCla:'',
-                    ZCodGius:oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo,
-                    ZCodIpe:oTempModel.getProperty("/SelectedDecree").CodiceIpe,
-                    ZNumCla:'',
-                    Zammin: oTempModel.getProperty("/SelectedDecree").Amministrazione,
-                    Zcoddecr:oTempModel.getProperty("/SelectedDecree").NumeroDecreto,
-                    ZidIpe:'',
-                    Zufficioliv1:oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
-                    Zufficioliv2:oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
-                    Zzdatastipula:new Date (oTempModel.getProperty("/Step1/").data),
-                    //ZzdataStipula:oTempModel.getProperty("/Step1/").data,
-                    Znumcontratt:oTempModel.getProperty("/Step1/").id,
-                    Lifnr:oTempModel.getProperty("/Step1/").id_ben,
-                    Zzcig:oTempModel.getProperty("/Step1/").cig,
-                    Zzcup:oTempModel.getProperty("/Step1/").cup,
-                    NameFirst:oTempModel.getProperty("/Step2/").nome,
-                    NameLast:oTempModel.getProperty("/Step2/").cognome,
-                    ZzragSoc:oTempModel.getProperty("/Step2/").Rsociale,
-                    Stcd1:oTempModel.getProperty("/Step2/").IVA,
-                    //Zwels:oTempModel.getProperty("/items/").Modalita_pagamento,
-                    Iban:oTempModel.getProperty("/Step2/").iban,
-                    
-
-
-
-                      //Funzionalita: "REGISTRAZIONE IPE"
-                     };
-                  
-
-
-                     
-
-                     oDataModel.create("/IpeEntitySet", entity,{
-                       success: function(result){ 
-                        console.log('SUCCESS')
-                        MessageBox.success("Decreto Impegno creato correttamente", {
-                            actions: [sap.m.MessageBox.Action.OK],
-                            emphasizedAction: MessageBox.Action.OK,
-                            onClose: function (oAction) {
-                                if (oAction === sap.m.MessageBox.Action.OK) {
-                                    self.getOwnerComponent().getRouter().navTo("View1")
-                                    location.reload();
-                                }
-                            }
-                        }) 
-                    }, 
-
-                        error: function(err){
-                           console.log(err); 
-                           MessageBox.error("Decreto Impegno non creato correttamente")
-                          },
-                            async: true, 
-                             urlParameters: {}  });
-                             
-
-                    
-
-                 
-                }
-            }
-        })
-    },
-
+      }   
     });
   }
 );

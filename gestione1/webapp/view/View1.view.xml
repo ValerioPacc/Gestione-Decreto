@@ -23,7 +23,7 @@
             <f:header>
                 <f:DynamicPageHeader pinnable="true">
                     <fb:FilterBar showClearOnFB="false" showFilterConfiguration="false" useToolbar="false"  id="filterID" search="onSearch">
-                        <fb:filterGroupItems>
+                        <fb:filterGroupitems>
 							<fb:FilterGroupItem groupName="gruppo1" name="Esercizio" label="{i18n>es_decreto}" tooltip="suggestion" visibleInFilterBar="true" mandatory="true">
                                 <fb:control>
                                     <ComboBox id="es_decreto" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}">
@@ -40,28 +40,28 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="uff1Livello" visibleInFilterBar="true" name="uff1Livello" groupName="Group1" label="{i18n>uff1Livello}">
                                 <fb:control>
-                                    <Input id="uff1Livello1" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'UfficioLiv1' }}">
+                                    <Input id="uff1Livello1" showValueHelp="false" showSuggestion="true">
                                     <core:Item key="{UfficioLiv1}" text="{UfficioLiv1}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="uff2Livello" visibleInFilterBar="true" name="uff2Livello" groupName="Group1" label="{i18n>uff2Livello}">
                                 <fb:control>
-                                     <Input id="uff2Livello1" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'UfficioLiv2' }}">
+                                     <Input id="uff2Livello1" showValueHelp="false" showSuggestion="true" >
                                     <core:Item key="{UfficioLiv2}" text="{UfficioLiv2}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="NumDeDa" visibleInFilterBar="true" name="NumDeDa" groupName="Group1" label="{i18n>NumDeDa}">
                                 <fb:control>
-                                   <Input showSuggestion="true" id="NumDEDa1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NumeroDecreto' }}">
+                                   <Input showSuggestion="true" id="NumDEDa1" showValueHelp="true">
                                       <core:Item key="{NumeroDecreto}" text="{NumeroDecreto}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="NumDeA" visibleInFilterBar="true" name="NumDeA" groupName="Group1" label="{i18n>NumDeA}">
                                 <fb:control>
-                                    <Input showSuggestion="true" id="NumDEA1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NumeroDecreto' }}">
+                                    <Input showSuggestion="true" id="NumDEA1" showValueHelp="true" suggestionitems="{path: '/DecretoImpegnoSet', sorter: { path: 'NumeroDecreto' }}">
                                       <core:Item key="{NumeroDecreto}" text="{NumeroDecreto}"/>
                                     </Input>
                                 </fb:control>
@@ -83,21 +83,21 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="nContratto" visibleInFilterBar="true" name="nContratto" groupName="Group1" label="{i18n>nContratto}">
                                 <fb:control>
-                                   <Input showSuggestion="true" id="nContratto1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'ContrattoOrdine' }}">
+                                   <Input showSuggestion="true" id="nContratto1" showValueHelp="true">
                                       <core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="CIG" visibleInFilterBar="true" name="CIG" groupName="Group1" label="{i18n>CIG}">
                                 <fb:control>
-                                       <Input showSuggestion="true" id="cCig" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'Cig' }}">
+                                       <Input showSuggestion="true" id="cCig" showValueHelp="false" >
                                       <core:Item key="{Cig}" text="{Cig}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="beneficiario" visibleInFilterBar="true" name="beneficiario" groupName="Group1" label="{i18n>beneficiario}">
                                 <fb:control>
-                                    <Input showSuggestion="true" id="beneficiario1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'Beneficiario' }}">
+                                    <Input showSuggestion="true" id="beneficiario1" showValueHelp="true" >
                                       <core:Item key="{Beneficiario}" text="{Beneficiario}"/>
                                     </Input>
                                 </fb:control>
@@ -113,7 +113,7 @@
                                     <DatePicker id="dDecretoA1" displayFormat="dd/MM/yyyy" />
                                 </fb:control>
                             </fb:FilterGroupItem>
-							<fb:FilterGroupItem id="numIPEda" visibleInFilterBar="true" name="numIPEda" groupName="Group1" label="{i18n>numIPEda}" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NumeroIPE' }}">
+							<fb:FilterGroupItem id="numIPEda" visibleInFilterBar="true" name="numIPEda" groupName="Group1" label="{i18n>numIPEda}" >
                                 <fb:control>
                                      <Input showSuggestion="true" id="numIPEda1" showValueHelp="false" >
                                       <core:Item key="{NumeroIPE}" text="{NumeroIPE}"/>
@@ -121,7 +121,7 @@
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
-							<fb:FilterGroupItem id="numIPEa" visibleInFilterBar="true" name="numIPEa" groupName="Group1" label="{i18n>numIPEa}" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NumeroIPE' }}">
+							<fb:FilterGroupItem id="numIPEa" visibleInFilterBar="true" name="numIPEa" groupName="Group1" label="{i18n>numIPEa}" >
                                 <fb:control>
                                     <Input showSuggestion="true" id="numIPEa1" showValueHelp="false" >
                                      <core:Item key="{NumeroIPE}" text="{NumeroIPE}"/>
@@ -130,14 +130,14 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numClausolaDa" visibleInFilterBar="true" name="numClausolaDa" groupName="Group1" label="{i18n>numClausolaDa}">
                                 <fb:control>
-                                    <Input showSuggestion="true" id="numClausolaDa1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'Z_num_cla' }}">
+                                    <Input showSuggestion="true" id="numClausolaDa1" showValueHelp="false" >
                                       <core:Item key="{Z_num_cla}" text="{Z_num_cla}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numClausolaA" visibleInFilterBar="true" name="numClausolaA" groupName="Group1" label="{i18n>numClausolaA}">
                                 <fb:control>
-                                    <Input showSuggestion="true" id="numClausolaA1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NumeroClausola' }}">
+                                    <Input showSuggestion="true" id="numClausolaA1" showValueHelp="false" >
                                       <core:Item key="{NumeroClausola}" text="{NumeroClausola}"/>
                                     </Input>
                                 </fb:control>
@@ -164,14 +164,14 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numProtocolloAmmaDa" visibleInFilterBar="true" name="numProtocolloAmmaDa" groupName="Group1" label="{i18n>numProtocolloAmmDa}">
                                 <fb:control>
-                                     <Input showSuggestion="true" id="numProtocolloAmmaDa1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloAmm' }}">
+                                     <Input showSuggestion="true" id="numProtocolloAmmaDa1" showValueHelp="false" >
                                       <core:Item key="{NProtocolloAmm}" text="{NProtocolloAmm}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="numProtocolloAmmA" visibleInFilterBar="true" name="numProtocolloAmmA" groupName="Group1" label="{i18n>numProtocolloAmmA}">
                                 <fb:control>
-                                   <Input showSuggestion="true" id="numProtocolloAmmaA1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloAmm' }}">
+                                   <Input showSuggestion="true" id="numProtocolloAmmaA1" showValueHelp="false" >
                                       <core:Item key="{NProtocolloAmm}" text="{NProtocolloAmm}"/>
                                     </Input>
                                 </fb:control>
@@ -188,14 +188,14 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numProtocolloRGSda" visibleInFilterBar="true" name="numProtocolloRGSda" groupName="Group1" label="{i18n>numProtocolloRGSda}">
                                 <fb:control>
-                                     <Input showSuggestion="true" id="numProtocolloRGSda1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloRag' }}">
+                                     <Input showSuggestion="true" id="numProtocolloRGSda1" showValueHelp="false" >
                                       <core:Item key="{NProtocolloRag}" text="{NProtocolloRag}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="numProtocolloRGSa" visibleInFilterBar="true" name="numProtocolloRGSa" groupName="Group1" label="{i18n>numProtocolloRGSa}">
                                 <fb:control>
-                                   <Input showSuggestion="true" id="numProtocolloRGSa1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloRag' }}">
+                                   <Input showSuggestion="true" id="numProtocolloRGSa1" showValueHelp="false" >
                                       <core:Item key="{NProtocolloRag}" text="{NProtocolloRag}"/>
                                     </Input>
                                 </fb:control>
@@ -209,68 +209,68 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="UffApp" visibleInFilterBar="true" name="UffApp" groupName="Group1" label="{i18n>UffApp}">
                                 <fb:control>
-                                    <ComboBox  id="UffApp1" Items="{path: '/DecretoImpegnoSet', sorter: { path: 'CodiceUfficio' }}">
+                                    <ComboBox  id="UffApp1" items="{path: '/DecretoImpegnoSet', sorter: { path: 'CodiceUfficio' }}">
                                       <core:Item key="{CodiceUfficio}" text="{CodiceUfficio}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
                              <fb:FilterGroupItem id="DuffApp" visibleInFilterBar="true" name="DuffApp" groupName="Group1" label="{i18n>DuffApp}">
                                 <fb:control>
-                                    <ComboBox  id="DuffApp1" Items="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
+                                    <ComboBox  id="DuffApp1" items="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
                                       <core:Item key="{}" text="{}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
                                <fb:FilterGroupItem id="FlEst" visibleInFilterBar="true" name="FlEst" groupName="Group1" label="{i18n>FlEst}">
                                 <fb:control>
-                                     <ComboBox  id="FlEst1" Items="{path: '/DecretoImpegnoSet', sorter: { path: 'FlussiEsterni' }}">
+                                     <ComboBox  id="FlEst1" items="{path: '/DecretoImpegnoSet', sorter: { path: 'FlussiEsterni' }}">
                                       <core:Item key="{FlussiEsterni}" text="{FlussiEsterni}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
                               <fb:FilterGroupItem id="Osservazioni" visibleInFilterBar="true" name="Osservazioni" groupName="Group1" label="{i18n>Osservazioni}">
                                 <fb:control>
-                                     <ComboBox  id="Osservazioni1" Items="{path: '/DecretoImpegnoSet', sorter: { path: 'Osservazioni' }}">
+                                     <ComboBox  id="Osservazioni1" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Osservazioni' }}">
                                       <core:Item key="{Osservazioni}" text="{Osservazioni}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
                              <fb:FilterGroupItem id="Riscontri" visibleInFilterBar="true" name="Riscontri" groupName="Group1" label="{i18n>Riscontri}">
                                 <fb:control>
-                                     <ComboBox  id="Riscontri1" Items="{path: '/DecretoImpegnoSet', sorter: { path: 'Riscontro' }}">
+                                     <ComboBox  id="Riscontri1" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Riscontro' }}">
                                       <core:Item key="{Riscontro}" text="{Riscontro}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="EserPosFin" visibleInFilterBar="true" name="EserPosFin" groupName="Group1" label="{i18n>EserPosFin}" mandatory="true">
                                 <fb:control>
-                                     <Input showSuggestion="true" id="EserPosFin1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
+                                     <Input showSuggestion="true" id="EserPosFin1" showValueHelp="false" >
                                       <core:Item key="{}" text="{}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="PosFin" visibleInFilterBar="true" name="PosFin" groupName="Group1" label="{i18n>PosFin}" mandatory="true">
                                 <fb:control>
-                                    <Input showSuggestion="true" id="PosFin1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'PosizioneFinanziaria' }}">
+                                    <Input showSuggestion="true" id="PosFin1" showValueHelp="true" >
                                       <core:Item key="{PosizioneFinanziaria}" text="{PosizioneFinanziaria}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="struttura_amm" visibleInFilterBar="true" name="struttura_amm" groupName="Group1" label="{i18n>struttura_amm}">
                                 <fb:control>
-                                    <Input showSuggestion="true" id="struttura_amm1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'StrutturaAmmResp' }}">
+                                    <Input showSuggestion="true" id="struttura_amm1" showValueHelp="true" suggestionitems="{path: '/DecretoImpegnoSet', sorter: { path: 'StrutturaAmmResp' }}">
                                       <core:Item key="{StrutturaAmmResp}" text="{StrutturaAmmResp}"/>
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="Comp_Res" visibleInFilterBar="true" name="Comp_Res" groupName="Group1" label="{i18n>Comp_Res}">
                                 <fb:control>
-                                     <ComboBox  id="Comp_Res1" Items="{path: '/DecretoImpegnoSet', sorter: { path: 'CompetenzaResidui' }}">
+                                     <ComboBox  id="Comp_Res1" items="{path: '/DecretoImpegnoSet', sorter: { path: 'CompetenzaResidui' }}">
                                       <core:Item key="{CompetenzaResidui}" text="{CompetenzaResidui}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
-						</fb:filterGroupItems>
+						</fb:filterGroupitems>
                     </fb:FilterBar>
                 </f:DynamicPageHeader>
             </f:header>
