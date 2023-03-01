@@ -1,0 +1,89 @@
+<core:FragmentDefinition 
+	xmlns="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns:m="sap.m"
+    height="100%">
+    	<m:Page
+		showHeader="false"
+		enableScrolling="false"
+		class="sapUiContentPadding">
+		<m:content>
+<Table
+				rows="{/ProductCollection}"
+					selectionMode="MultiToggle"
+				visibleRowCount="7"
+				paste="onPaste"
+				ariaLm:LabelledBy="title">
+
+				 	<extension>
+        
+            <m:OverflowToolbar>
+                <m:content>
+                <m:ToolbarSpacer />
+               <m:Button id="idERP" type="Emphasized" icon="sap-icon://add" text="Aggiungi ERP/PNI/Autorizzazione" press="onOpenDialog2"/>
+               <m:Button type="Emphasized" icon="sap-icon://delete" text="Elimina"/>
+               <m:Button type="Emphasized" icon="sap-icon://excel-attachment" text="Esporta"/>
+               <m:Button type="Emphasized" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
+               </m:content>
+            </m:OverflowToolbar>
+           	</extension>
+				<columns>
+					<Column width="11rem">
+						<m:Label text="Product Name" />
+						
+					</Column>
+					<Column width="11rem">
+						<Lm:Label text="Product Id" />
+						
+					</Column>
+					<Column width="6rem" hAlign="End">
+						<Lm:Label text="Quantity" />
+						
+					</Column>
+					<Column width="9rem">
+						<Lm:Label text="Status" />
+						
+					</Column>
+					<Column width="9rem">
+						<Lm:Label text="Price" />
+						
+					</Column>
+					<Column width="12rem">
+						<Lm:Label text="Supplier" />
+						
+					</Column>
+					<Column width="9rem">
+						<Lm:Label text="Image" />
+						
+					</Column>
+					<Column width="9rem">
+						<Lm:Label text="Details" />
+						
+					</Column>
+					<Column width="7rem">
+						<Lm:Label text="Heavy Weight" />
+						
+					</Column>
+					<Column width="12rem">
+						<Lm:Label text="Main Category" />
+						
+					</Column>
+					<Column width="12rem">
+						<Lm:Label text="Additional Categories" />
+						
+					</Column>
+					<Column width="6rem" hAlign="Center">
+						<Lm:Label text="Status" />
+						
+					</Column>
+					<Column width="11rem" hAlign="Center">
+						<Lm:Label text="Delivery Date" />
+						
+					</Column>
+				</columns>
+			</Table>
+            	</m:content>
+	</m:Page>
+            </core:FragmentDefinition >

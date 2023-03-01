@@ -66,10 +66,10 @@
           
         </content>
     </Panel>
-  <OverflowToolbar>
+  <!-- <OverflowToolbar>
                             <Button text="Indietro" type="Emphasized" visible="{/BackButtonVisible}" press="onBackButton" />
                             <Button text="Avanti" type="Emphasized" visible="{/NextButtonVisible}" press="onNextButton" />
                             <ToolbarSpacer />
                             <Button type="Emphasized" text="Salva in bozza" visible="{/PNIButtonVisible}" />
-                        </OverflowToolbar>
+                        </OverflowToolbar> -->
 </core:FragmentDefinition>

@@ -57,7 +57,7 @@ sap.ui.define(
         var N_Amm = this.getView().byId("AmministrazioneED").mProperties.value;  
         var N_codiceUff = this.getView().byId("UffApp1").mProperties.value;  
         var N_Datade = this.getView().byId("DataDE1").mProperties.dateValue  
-        var N_NprotAmm = this.getView().byId("numProtocolloAmma1").getValue();  
+        var N_NprotAmm = this.getView().byId("numProtocolloAmma1").mProperties.value;   
         var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").mProperties.dateValue  
         var N_CcConti = this.getView().byId("CcorteConti").getSelected();
         if (N_CcConti==true) 
@@ -66,20 +66,16 @@ sap.ui.define(
         var B_CcConti = "0" 
 
         MessageBox.warning("Sei sicuro di voler preimpostare il DI?", {
-            actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-            emphasizedAction: sap.m.MessageBox.Action.YES,
+            actions: ["Si", "No"],
+            emphasizedAction: "Si",
             onClose: function (oAction) {
-                if (oAction === sap.m.MessageBox.Action.YES) {
+                if (oAction === "Si") {
                   var oDataModel = self.getOwnerComponent().getModel();
-                  var entity = {
-                     ChiaveGiustificativo: '12345', 
-                     DecretoImpegnoSet:{},
-                      IpeEntitySet: []
-                     };
-                    entity.DecretoImpegnoSet = {
+                 
+                    var DecretoImpegnoSet = {
                       ChiaveGiustificativo: '12345',
                         AreaFinanziaria:'1234',
-                        Ente:'0000',
+                        Ente:'0001',
                         RegistratoBozza:'B',
                         UfficioLiv1:'UFF',
                         UfficioLiv2:'UFF',
@@ -94,14 +90,14 @@ sap.ui.define(
                         ControlloCorteConti:B_CcConti
                      };
 
-                     oDataModel.create("/DeepEntitySet", entity,{
-                       success: function(result){ 
+                     oDataModel.create("/DecretoImpegnoSet",DecretoImpegnoSet,{
+                       success: function(result,response){ 
                         console.log('SUCCESS')
                         MessageBox.success("Decreto Impegno creato correttamente", {
-                            actions: [sap.m.MessageBox.Action.OK],
-                            emphasizedAction: MessageBox.Action.OK,
+                            actions: ["Si"],
+                            emphasizedAction: "Si",
                             onClose: function (oAction) {
-                                if (oAction === sap.m.MessageBox.Action.OK) {
+                                if (oAction === "Si") {
                                     self.getOwnerComponent().getRouter().navTo("View1")
                                     location.reload();
                                 }

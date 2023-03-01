@@ -17,7 +17,7 @@
     "Contratto" : [
         {
             "id": "001",
-            "data":"20/02/2020", 
+            "data":"02/20/2020", 
             "desc":"descrizione contratto 1", 
             "id_ben": "1",
             "cig":"1",
@@ -25,7 +25,7 @@
             "importo": "100"
         },
         {
-            "id": "002","data":"20/02/2021", 
+            "id": "002","data":"02/20/2021", 
             "desc":"descrizione contratto 1",
             "id_ben": "1",
             "cig":"1",
@@ -33,7 +33,7 @@
             "importo": "100"
         },
         {
-            "id": "003","data":"20/02/2022", 
+            "id": "003","data":"02/20/2022", 
             "desc":"descrizione contratto 1",
             "id_ben": "1",
             "cig":"1",
@@ -41,7 +41,7 @@
             "importo": "100"
         },
         {
-            "id": "004","data":"20/02/2023",
+            "id": "004","data":"02/20/2023",
             "desc":"descrizione contratto 1",
             "id_ben": "1",
             "cig":"1",
