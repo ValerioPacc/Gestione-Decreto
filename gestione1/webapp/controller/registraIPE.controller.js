@@ -92,6 +92,7 @@ sap.ui.define(
     navToView1: function (oEvent) {
       this.getOwnerComponent().getRouter().navTo("View1");
   },
+  
       });
     }
   );

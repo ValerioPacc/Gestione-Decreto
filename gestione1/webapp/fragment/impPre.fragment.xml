@@ -36,28 +36,28 @@
                 </VBox>
               
                 <VBox class="sapUiLargeMarginBegin">
-               <Input text="{}" class="sapUiLargeMarginBegin"/>
+               <Input value="{}" class="sapUiLargeMarginBegin"/>
                <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
-                <Input text="{}" class="sapUiLargeMarginBegin"/>
+                <Input value="{}" class="sapUiLargeMarginBegin"/>
 
                 </VBox>
 
                 <VBox class="sapUiLargeMarginBegin">
-               <Input text="{}" class="sapUiLargeMarginBegin"/>
+               <Input value="{}" class="sapUiLargeMarginBegin"/>
                <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
-                <Input text="{}" class="sapUiLargeMarginBegin"/>
+                <Input value="{}" class="sapUiLargeMarginBegin"/>
                 </VBox>
                 
                 <VBox class="sapUiLargeMarginBegin">
-               <Input text="{}" class="sapUiLargeMarginBegin"/>
+               <Input value="{}" class="sapUiLargeMarginBegin"/>
                <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
-                <Input text="{}" class="sapUiLargeMarginBegin"/>
+                <Input value="{}" class="sapUiLargeMarginBegin"/>
                 </VBox>
 
                 <VBox class="sapUiLargeMarginBegin">
-               <Input text="{}" class="sapUiLargeMarginBegin"/>
+               <Input  value="{}" class="sapUiLargeMarginBegin"/>
                <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
-                <Input text="{}" class="sapUiLargeMarginBegin"/>
+                <Input value="{}" class="sapUiLargeMarginBegin"/>
                 </VBox>
 
                 

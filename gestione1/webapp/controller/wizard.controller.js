@@ -571,7 +571,7 @@ var self= this
                   var entity = {
                     Bukrs:oTempModel.getProperty("/SelectedDecree").Ente,
                     Fikrs:oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
-                    Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
+                    Zzanno: oTempModel.getProperty("/SelectedDecree").Esercizio,
                     Zregistrato: oTempModel.getProperty("/SelectedDecree").RegistratoBozza,
                     ZCodCla:'',
                     ZCodGius:oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo,
