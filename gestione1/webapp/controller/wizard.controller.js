@@ -515,8 +515,11 @@ onCloseDialog6 : function () {
    
         var that = this;
         var oMdl = new sap.ui.model.json.JSONModel();
+        var aFilters = [];
+        aFilters.push(new Filter({path: "ZCodGius", operator: FilterOperator.EQ, value1: "2023-001-UFF-UFF-0000001" }));
+
         this.getOwnerComponent().getModel().read("/IpeEntitySet", {
-            filters: [],
+            filters: aFilters,
             urlParameters: "",
             success: function (data) {
                 oMdl.setData(data.results);
