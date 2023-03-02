@@ -15,7 +15,7 @@
 >
    <f:DynamicPage id="dynamicPageId" showFooter="true">
         <f:header>
-            <f:DynamicPageHeader pinnable="false" backgroundDesign="Trasparent">
+            <f:DynamicPageHeader pinnable="false" >
                  <layout:VerticalLayout class="sapUiMediumMarginEnd">
                         <Title text="Dati Amminastrazione" />
                         <layout:HorizontalLayout >
