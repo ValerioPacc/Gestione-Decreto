@@ -509,16 +509,19 @@ onCloseDialog6 : function () {
       
       onRegIpebozza: function (oEvent) {
         var oModel= this.getView().getModel("comboBox"),
+        oBozza = oEvent.getSource().data("Bozza") === "X" ? true : false,
         oTempModel = this.getView().getModel("temp"),
         oIpeEntitySet = this.getView().getModel("IpeEntitySet"), 
         rowSelected = _.findWhere(oModel.getProperty("/Contratto"), ),
         beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), ),
         Zzanno = this.getView().byId("es_decreto").getSelectedKey();
 
-        oTempModel.setProperty("/Step1", rowSelected);
-        oTempModel.setProperty("/Step2", beneficiario);
+        //oTempModel.setProperty("/Step1", rowSelected);
+        //oTempModel.setProperty("/Step2", beneficiario);
+        
 
-var self= this
+        
+        var self= this
         MessageBox.warning("Sei sicuro di voler salvare l'Ipe in Bozza ?", {
             actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
             emphasizedAction: sap.m.MessageBox.Action.YES,
@@ -526,7 +529,7 @@ var self= this
                 if (oAction === sap.m.MessageBox.Action.YES) {
                   var oDataModel = self.getOwnerComponent().getModel();
                   var entity = {
-                    Bukrs:oTempModel.getProperty("/SelectedDecree").Ente,
+                    Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
                     Fikrs:oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
                     Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
                     Zzanno: Zzanno,
@@ -553,16 +556,8 @@ var self= this
                     Zwels: oIpeEntitySet.getProperty("/Zwels"), //oTempModel.getProperty("/items/").Modalita_pagamento,
                     Iban: oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
                     Zbozza: "X"
-                    
-
-
-
-                      //Funzionalita: "REGISTRAZIONE IPE"
-                     };
-                  
-
-
-                     
+                    };
+                    if(oBozza){
 
                      oDataModel.create("/IpeEntitySet", entity,{
                        success: function(result){ 
@@ -586,15 +581,63 @@ var self= this
                           },
                             async: true, 
                              urlParameters: {}  });
-                             
-
-                    
-
+                  }else{
+                    this.onEditIpebozza(entity, oDataModel);
+                  }
                  
                 }
             }
         })
+      
     },
+
+    onEditIpebozza: function (entry,oDataModel) {
+      var self = this
+      oTempModel = self.getView().getModel("temp"),
+      oIpeEntitySet = self.getView().getModel("IpeEntitySet"),
+      entry = self.getView().getModel("IpeEntitySet").getProperty('/'),
+      Stipula = self.getView().getModel("IpeEntitySet").getProperty('/Zzdatastipula');
+
+      self.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula', new Date (Stipula));
+      
+      var path = oModel.createKey("/IpeEntitySet", {
+        Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
+        Fikrs: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
+        Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
+        ZCodCla: oIpeEntitySet.getProperty("/ZCodCla"),
+        ZCodGius: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo,
+        ZCodIpe: oTempModel.getProperty("/SelectedDecree").CodiceIpe,
+        ZNumCla: oIpeEntitySet.getProperty("/ZNumCla"),
+        Zammin: oTempModel.getProperty("/SelectedDecree").Amministrazione,
+        Zcoddecr: oTempModel.getProperty("/SelectedDecree").NumeroDecreto,
+        ZidIpe: oIpeEntitySet.getProperty("/ZidIpe"),
+        Zregistrato: oTempModel.getProperty("/SelectedDecree").RegistratoBozza,
+        Zufficioliv1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
+        Zufficioliv2: oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
+    });
+
+    oDataModel.update(path, editDecreto,  {
+      success: function (data) {
+          console.log("success");
+          MessageBox.success("Operazione Eseguita con successo", {
+              actions: [sap.m.MessageBox.Action.OK],
+              emphasizedAction: MessageBox.Action.OK,
+              onClose: function (oAction) {
+                  if (oAction === sap.m.MessageBox.Action.OK) {
+                      that.getOwnerComponent().getRouter().navTo("View1");
+                      location.reload();
+                  }
+              }
+          })
+      },
+      error: function (e) {
+          //console.log("error");
+          MessageBox.error("Operazione non eseguita")
+  }
+});
+      
+
+    }
 
     });
   }
