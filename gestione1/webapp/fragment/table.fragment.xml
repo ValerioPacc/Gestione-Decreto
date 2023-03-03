@@ -9,10 +9,11 @@
     xmlns:core="sap.ui.core"
     xmlns:menu="sap.m.MenuItem"
     xmlns:menBtn="sap.m.Menu" height="100%">
-    <Table class="sapUiSizeCompact" id="DecretoImpegno" items="{DecretoImpegno>/}" includeItemInSelection="true"  mode="SingleSelectLeft" >
-        <headerToolbar>
-            <OverflowToolbar>
+    <Table class="sapUiSizeCompact" id="DecretoImpegno" items="{DecretoImpegno>/}" includeItemInSelection="true"  mode="SingleSelectLeft">
+        <headerToolbar >
+            <OverflowToolbar >
                 <content>
+                <Title text="Lista Decreti"/>
                     <ToolbarSpacer />
                     <Button icon="sap-icon://search" id="DettagliDE" press="onNavToDettagliDE" type="Emphasized" text="Dettaglio Decreto di Impegno" />
                     <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
@@ -20,10 +21,10 @@
             </OverflowToolbar>
         </headerToolbar>
         <columns>
-            <Column demandPopin="true" hAlign="Center" >
+            <Column demandPopin="true" hAlign="Center" width="10rem" >
                 <Label text="Esercizio Decreto" />
             </Column>
-            <Column demandPopin="true" hAlign="Center">
+            <Column demandPopin="true" hAlign="Center" width="10rem">
                 <Label text="Amminastrazione" />
             </Column>
             <Column demandPopin="true" hAlign="Center">
@@ -41,7 +42,7 @@
             <Column demandPopin="true" hAlign="Center">
                 <Label text="Ragioneria" />
             </Column>
-            <Column demandPopin="true" hAlign="Center">
+            <Column demandPopin="true" hAlign="Center" width="10rem">
                 <Label text="Tipologia impegno " />
             </Column>
              <Column demandPopin="true" hAlign="Center">

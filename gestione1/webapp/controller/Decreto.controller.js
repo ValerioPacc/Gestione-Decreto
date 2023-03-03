@@ -80,6 +80,7 @@ sap.ui.define(
                         UfficioLiv1:'UFF',
                         UfficioLiv2:'UFF',
                         CodiceStato: '01',
+                        Ragioneria: '0840',
                         TipologiaImpegno: N_tipo_impegno,
                         Esercizio: N_es_decreto,
                         Amministrazione: N_Amm,

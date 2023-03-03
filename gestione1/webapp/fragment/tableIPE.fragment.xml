@@ -1,0 +1,96 @@
+<core:FragmentDefinition
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:u="sap.ui.unified"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:menu="sap.m.MenuItem"
+    xmlns:menBtn="sap.m.Menu"
+    height="100%"
+>
+    <ScrollContainer>
+        <content>
+            <Table class="sapUiSizeCompact" id="tableIPE" items="{DecretoImpegno>/}" includeItemInSelection="true" mode="SingleSelectLeft" headerText="Lista Ipe">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                        <Title text="Lista IPE"/>
+                            <ToolbarSpacer />
+                            <!-- <Button icon="sap-icon://edit" id="rettificaIPE"  type="Emphasized" text="Rettifica IPE" press="navToWizard"/> -->
+                            <Button icon="sap-icon://search" id="DettaglioIPE" type="Emphasized" text="Dettaglio IPE" press="navToWizard" />
+                            <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="5rem" demandPopin="true" hAlign="Center">
+                        <Label text="Esercizio Decreto" wrapping="true" />
+                    </Column>
+                    <Column width="4rem" demandPopin="true" hAlign="Center">
+                        <Label text="Amm." />
+                    </Column>
+                    <Column width="6rem" demandPopin="true" hAlign="Center">
+                        <Label text="Uff. I livello" />
+                    </Column>
+                    <Column width="6rem" demandPopin="true" hAlign="Center">
+                        <Label text="Uff. II livello" />
+                    </Column>
+                    <Column width="6rem" demandPopin="true" hAlign="Center">
+                        <Label text="N. Decreto" />
+                    </Column>
+                    <Column width="7rem" demandPopin="true" hAlign="Center">
+                        <Label text="Data Decreto" wrapping="true" />
+                    </Column>
+                    <Column width="6rem" demandPopin="true" hAlign="Center">
+                        <Label text="Ragioneria" />
+                    </Column>
+                    <Column width="7rem" demandPopin="true" hAlign="Center">
+                        <Label text="Tipologia Impegno" wrapping="true" />
+                    </Column>
+                    <Column width="7rem">
+                        <Label text="Stato Decreto" wrapping="true" />
+                    </Column>
+                    <Column width="4rem" demandPopin="true" hAlign="Center">
+                        <Label text="N. IPE" />
+                    </Column>
+                    <Column width="5rem" demandPopin="true" hAlign="Center">
+                        <Label text="Tipo IPE" />
+                    </Column>
+                    <Column width="7rem" demandPopin="true" hAlign="Center">
+                        <Label text="Posizione finanziaria" wrapping="true" />
+                    </Column>
+                    <Column width="8rem" demandPopin="true" hAlign="Center">
+                        <Label text="Struttura Amministrativa Responsabile" wrapping="true" />
+                    </Column>
+                    <Column width="6rem" demandPopin="true" hAlign="Center">
+                        <Label text="Beneficiario" />
+                    </Column>
+                    <Column width="9rem" demandPopin="true" hAlign="Center">
+                        <Label text="Totale Impegnato" />
+                    </Column>
+                </columns>
+                <ColumnListItem>
+                    <Text text="{DecretoImpegno>EsercizioDecreto}" />
+                    <Text text="{DecretoImpegno>Amminastrazione}" />
+                    <Text text="{DecretoImpegno>UfficioLiv1}" />
+                    <Text text="{DecretoImpegno>UfficioLiv2}" />
+                    <Text text="{DecretoImpegno>NumeroDecreto}" />
+                    <Text text="{path:'DecretoImpegno>DataDecreto', formatter:'.formatter.convert'}" />
+                    <Text text="{DecretoImpegno>Ragioneria}" />
+                    <Text text="{DecretoImpegno>TipologiaImpegno}" />
+                    <Text text="{DecretoImpegno>CodiceStato}" />
+                    <Text text="{DecretoImpegno>NumeroIpe}" />
+                    <Text text="{DecretoImpegno>TipoIpe}" />
+                    <Text text="{DecretoImpegno>PosizioneFinanziaria}" />
+                    <Text text="{DecretoImpegno>StrutturaAmmResp}" />
+                    <Text text="{DecretoImpegno>Beneficiario}" />
+                    <Text text="{DecretoImpegno>TotaleImpegnato}" />
+                </ColumnListItem>
+            </Table>
+        </content>
+    </ScrollContainer>
+</core:FragmentDefinition>

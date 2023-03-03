@@ -19,7 +19,7 @@
             <f:DynamicPageHeader pinnable="false">
                     <layout:VerticalLayout class="sapUiMediumMarginEnd VL">
                         <Title text="Dati Decreto:" />
-                        <layout:HorizontalLayout wrapping="true">
+                        <layout:HorizontalLayout >
                         <Label text="Esercizio Decreto:" class="sapUiSmallMarginEnd" />
                         <Text  text="{temp>/SelectedDecree/Esercizio}" class="sapUiMediumMarginEnd"/>
                     <Label text="Amministrazione:" class="sapUiSmallMarginEnd" />
@@ -30,9 +30,9 @@
                     <Text  id="reData" text=""  class="sapUiMediumMarginEnd"/>
                      <Label text="Ragioneria:" class="sapUiSmallMarginEnd" />
                         <Text  text="{temp>/SelectedDecree/Ragioneria}" class="sapUiMediumMarginEnd"/>
-                    <Label text="Stato Decreto:" class="sapUiSmallMarginEnd"  />
+                    <Label text="Stato Decreto:" class="sapUiSmallMarginEnd" />
                     <Text  text="{temp>/SelectedDecree/CodiceStato}" class="sapUiMediumMarginEnd"/>
-               </layout:HorizontalLayout >
+               </layout:HorizontalLayout>
                 </layout:VerticalLayout>
            <Bar class="title">
 				<contentLeft>
@@ -51,7 +51,7 @@
 
         <!--IconTabBar id="idIconTabBar" class="sapUiLargeMarginStart" select="onSelect" alignItems="End" >
                 <items>
-                <IconTabFilter icon="sap-icon://list" text="Lista IPE"  > 
+                <IconTabFilter icon="sap-icon://list" text="Lista IPE" > 
                  <OverflowToolbar height="50%" width="100%">
        <ToolbarSpacer /-->
          <layout:Grid defaultSpan="XL12 L12 M12 S12" vSpacing="0" class="Grid">
@@ -65,7 +65,7 @@
 				</VBox>
                 <VBox>
 					<items>
-						<Button align="Center" type="Emphasized" text="Registra IPE di Variazione" press="navToWizard"/> 
+						<Button align="Center" type="Emphasized" text="Registra IPE di Variazione" press="navToIpeVariazione"/> 
 					</items>
 				<layoutData>
 					<layout:GridData span="XL4 L4 M4 S12"/>

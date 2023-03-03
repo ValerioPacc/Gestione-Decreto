@@ -137,6 +137,13 @@
                     "titleTarget": "",
                     "greedy": false,
                     "target": "TargetdettagliDE"
+                },
+                {
+                    "name": "ipeVariazione",
+                    "pattern": "ipeVariazione",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "TargetipeVariazione"
                 }
             ],
             "targets": {
@@ -186,6 +193,14 @@
                     "clearControlAggregation": false,
                     "viewId": "dettagliDE",
                     "viewName": "dettagliDE",
+                    "viewLevel": 1
+                },
+                "TargetipeVariazione": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "ipeVariazione",
+                    "viewName": "ipeVariazione",
                     "viewLevel": 1
                 }
             }

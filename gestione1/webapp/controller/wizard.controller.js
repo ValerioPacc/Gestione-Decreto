@@ -89,7 +89,8 @@ sap.ui.define(
             //console.log(this.getOwnerComponent().getRouter().navTo("View1"))
             this._iSelectedStepIndex = 0
             this.getOwnerComponent().getRouter().navTo("View1");
-            this.getView().byId("").setVisible(false);
+            location.reload();
+            //this.getView().byId("").setVisible(false);
             return;
         }
         var oNextStep = this._oWizard.getSteps()[this._iSelectedStepIndex - 1];
@@ -101,6 +102,7 @@ sap.ui.define(
         this._iSelectedStepIndex--
         this._oSelectedStep = oNextStep;
         this.controlHeader();
+
         //this.controlPreNI();
         //this.controlHeader()
     },
@@ -571,7 +573,7 @@ var self= this
                   var entity = {
                     Bukrs:oTempModel.getProperty("/SelectedDecree").Ente,
                     Fikrs:oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
-                    Zzanno: oTempModel.getProperty("/SelectedDecree").Esercizio,
+                    Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
                     Zregistrato: oTempModel.getProperty("/SelectedDecree").RegistratoBozza,
                     ZCodCla:'',
                     ZCodGius:oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo,

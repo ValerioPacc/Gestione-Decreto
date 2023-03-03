@@ -6,13 +6,13 @@
                  <content>
                 <HBox>
                 <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
-               <Input text="{}" editable="false"/>
+               <Input  editable="false"/>
                <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/>
-                <Input text="{}" editable="false"/>
+                <Input  editable="false"/>
                 <Label text="ERP:" class="sapUiSmallMargin" required="true" vAlign="Inherit" visible="{UIState>/visible}"/>
                <ComboBox value="" width="50%"  visible="{UIState>/visible}"/>
                 <Label text="PNI:" required="true" vAlign="Inherit"/>
-               <Input value=""  showValueHelp=""/>
+               <Input value=""  showValueHelp="true"/>
                 </HBox>
                 <VBox>
                 <CheckBox  text="Autorizzazione:" selected="true"/>
