@@ -1,8 +1,10 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/UIComponent",
-	"sap/m/library"
-], function (Controller, UIComponent, mobileLibrary) {
+	"sap/m/library",
+	"sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], function (Controller, UIComponent, mobileLibrary,Filter,FilterOperator) {
 	"use strict";
 
 	// shortcut for sap.m.URLHelper
@@ -48,6 +50,62 @@ sap.ui.define([
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
 
+		OnSelect: function (oEvent){
+            var self = this,
+			field = oEvent.getSource().data("field"),
+            item = oEvent.getSource().getSelectedKey();
+			self.getView().getModel("IpeEntitySet").setProperty("/"+ field, item);
+            
+        },
+
+		callIpeEntity:function () {
+   
+			var that = this,
+			oModel = that.getOwnerComponent().getModel(),
+			oTempModel = that.getOwnerComponent().getModel("temp"),
+			aFilters = [];
+
+			this.getOwnerComponent().getModel("IpeEntitySet").setProperty('/' ,[])
+		   
+			aFilters.push(
+			  new Filter({path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
+			  new Filter({path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
+			  new Filter({path: "Gjahr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Esercizio }),
+			  new Filter({path: "Zammin", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Amministrazione }),
+			  new Filter({path: "Zcoddecr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroDecreto }),
+			  new Filter({path: "Zufficioliv1", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1 }),
+			  new Filter({path: "Zufficioliv2", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv2 }),
+			  new Filter({path: "ZCodGius", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo })
+			  );
+	
+	
+			oModel.read("/IpeEntitySet", {
+				filters: aFilters,
+				urlParameters: "",
+				success: function (data) {
+					var results = data.results;
+					if(results.length > 0){
+						var mnth = ("0" + (results[0].Zzdatastipula.getMonth() + 1)).slice(-2),
+                        day = ("0" + results[0].Zzdatastipula.getDate()).slice(-2);
+
+						var nData = [results[0].Zzdatastipula.getFullYear(), mnth, day].join("-");
+						results[0].Zzdatastipula = nData.split("-").reverse().join(".");
+
+						that.getView().getModel("IpeEntitySet").setProperty('/', results[0]); 
+					}else{
+						that.getView().getModel("IpeEntitySet").setProperty('/',[]); 
+						that.getView().getModel("temp").setProperty('/NewIPE', "X");
+					}
+					
+				},
+				error: function (error) {
+					//that.getView().getModel("temp").setProperty(sProperty,[]);
+					//that.destroyBusyDialog();
+					console.log(error);
+				}
+			});
+		},
+
 		////////////////////////////////////////////////////////////
 		//	DIALOG
 		////////////////////////////////////////////////////////////
@@ -89,6 +147,7 @@ sap.ui.define([
 			if (oSelectedItem) {			
 				var sValueTitle = oSelectedItem.getTitle();
 				Input.setValue(sValueTitle);
+				this.getView().getModel("IpeEntitySet").setProperty('/Ebeln' ,sValueTitle); 
 				this.getOtherData(sValueTitle);
 			}
 			this.closeDialog();
@@ -108,12 +167,31 @@ sap.ui.define([
 				oItem = _.findWhere(oMock.getProperty("/Beneficiario"), {id: key});
 
 				Input.setValue(sValueTitle);
+				this._setBeneficiario(oItem);
+
+
 				oTempModel.setProperty("/Step2", oItem);
 				
 			
 			}
 			this.closeDialog();
 		},
+
+		_setBeneficiario: function (oItem) {
+
+			this.getView().getModel("IpeEntitySet").setProperty('/Lifnr' ,oItem.id); 
+			this.getView().getModel("IpeEntitySet").setProperty('/NameFirst' ,oItem.nome); 
+			this.getView().getModel("IpeEntitySet").setProperty('/NameLast' ,oItem.cognome);
+			this.getView().getModel("IpeEntitySet").setProperty('/ZzragSoc' ,oItem.Rsociale); 
+			this.getView().getModel("IpeEntitySet").setProperty('/Stcd1' ,oItem.cf); 
+			this.getView().getModel("IpeEntitySet").setProperty('/Stcd2' ,oItem.IVA); 
+			this.getView().getModel("IpeEntitySet").setProperty('/Taxnumxl' ,oItem.cfe); 
+			this.getView().getModel("IpeEntitySet").setProperty('/Zwels' ,oItem.id_pag); 
+			this.getView().getModel("IpeEntitySet").setProperty('/Iban' ,oItem.iban); 
+
+	
+		},
+		
 
 		_handleValueHelpClose : function (evt) {
 						

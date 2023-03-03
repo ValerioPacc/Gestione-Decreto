@@ -93,7 +93,7 @@ sap.ui.define([
                                 if(oEvent.getParameters().selectionSet[23].mProperties.value!= ''){
                                 datiGI.push(new Filter({
                                     path: "DataProtocolloRag",
-                                    operator: FilterOperator.BT,
+                                    operator: F-ilterOperator.BT,
                                     value1: oEvent.getParameters().selectionSet[23].mProperties.value,
                                     value2: oEvent.getParameters().selectionSet[24].mProperties.value
                                 }));
@@ -116,6 +116,7 @@ sap.ui.define([
                 //console.log(datiGI)
                
                 var oDataModel = that.getModel();
+                
                  that.getModel().metadataLoaded().then( function() { 
                     oDataModel.read("/DecretoImpegnoSet", {
                     filters: datiGI ,

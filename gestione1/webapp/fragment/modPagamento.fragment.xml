@@ -10,7 +10,7 @@
                         items="{comboBox>/items}" 
                         change="onListSelect" 
                         id="comboBox"
-                        selectedKey="{temp>/Step2/id_pag}">
+                        selectedKey="{IpeEntitySet>/Zwels}">
                             <core:Item key="{comboBox>id}" text="{comboBox>Modalita_pagamento}" />
                         </ComboBox>
                         <layoutData>
@@ -28,13 +28,13 @@
                      
                     <VBox>
                         <Label text="IBAN" labelFor="IBAN" />
-                        <Input value="{temp>/Step2/iban}" enabled="false"/>
+                        <Input value="{IpeEntitySet>/Iban}" enabled="false"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
                    
                         <Label text="ABI:" />
-                        <Input value="{temp>/Step2/abi}" enabled="false"/>
+                        <Input value="" enabled="false"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
@@ -55,7 +55,7 @@
                         </layoutData>
                     
                         <Label text="CAB:" />
-                       <Input value="{temp>/Step2/cab}" enabled="false"/>
+                       <Input value="" enabled="false"/>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>

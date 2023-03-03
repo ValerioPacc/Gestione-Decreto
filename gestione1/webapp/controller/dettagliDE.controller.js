@@ -43,25 +43,16 @@ sap.ui.define(
                    oDataModel.read(path, {
                      success: function(data, oResponse){
                          self.getView().getModel("temp").setProperty('/SelectedDecree', data); 
+                         
                         },
                          error: function(error){
                         var e = error;
                     }
                 });
             });
-                /* this.getView().bindElement(
-                     "/DecretoImpegnoSet('Esercizio='" + oEvent.getParameters().arguments.campo +
-                     "',Amministrazione='" + oEvent.getParameters().arguments.campo1 +
-                     "',UfficioLiv1='" + oEvent.getParameters().arguments.campo2 +
-                     "',UfficioLiv2='" + oEvent.getParameters().arguments.campo3 +
-                     "',NumeroDecreto='" + oEvent.getParameters().arguments.campo4 +
-                     "',DataDecreto='" + oEvent.getParameters().arguments.campo5 + 
-                     "',Ragioneria='" + oEvent.getParameters().arguments.campo6 + 
-                     "',TipologiaImpegno='" + oEvent.getParameters().arguments.campo7 + 
-                     "',CodiceStato='" + oEvent.getParameters().arguments.campo8 + "')"
-                 );*/
 
                 this.viewHeader(oEvent);
+                
             },
 
             viewHeader: function (oEvent) {

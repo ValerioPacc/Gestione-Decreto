@@ -23,10 +23,16 @@ sap.ui.define([
             var oModel = {
                 draft: "",
                 Step1:[],
-                Step2:[]
+                Step2:[],
+                NewIPE:""
             };
             
             return new JSONModel(oModel)
-        }
+        },
+
+        createIPEModel: function () {
+            var oModel = {};
+			return new JSONModel(oModel);
+		},
     };
 });

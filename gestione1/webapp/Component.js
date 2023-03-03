@@ -34,6 +34,8 @@ sap.ui.define([
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
                 this.setModel(models.createTempModel(), "temp");
+                // set the report model
+			    this.setModel(models.createIPEModel(),"IpeEntitySet");
             }
         });
     }
