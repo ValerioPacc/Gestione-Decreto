@@ -95,6 +95,9 @@ sap.ui.define(
   navToIpeVariazione: function (oEvent) {
     this.getOwnerComponent().getRouter().navTo("ipeVariazione");
 },
+navToAttoAnnullamento: function (oEvent) {
+  this.getOwnerComponent().getRouter().navTo("attoAnnullamento");
+},
   
       });
     }

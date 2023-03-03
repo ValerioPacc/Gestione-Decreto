@@ -144,6 +144,13 @@
                     "titleTarget": "",
                     "greedy": false,
                     "target": "TargetipeVariazione"
+                },
+                {
+                    "name": "attoAnnullamento",
+                    "pattern": "attoAnnullamento",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "TargetattoAnnullamento"
                 }
             ],
             "targets": {
@@ -201,6 +208,14 @@
                     "clearControlAggregation": false,
                     "viewId": "ipeVariazione",
                     "viewName": "ipeVariazione",
+                    "viewLevel": 1
+                },
+                "TargetattoAnnullamento": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "attoAnnullamento",
+                    "viewName": "attoAnnullamento",
                     "viewLevel": 1
                 }
             }

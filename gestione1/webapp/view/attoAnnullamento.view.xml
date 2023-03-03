@@ -11,7 +11,7 @@
     xmlns:menu="sap.m.MenuItem"
     xmlns:menBtn="sap.m.Menu"
     height="100%"
-    controllerName="gestione1.controller.ipeVariazione"
+    controllerName="gestione1.controller.attoAnnullamento"
 >
     <App id="app">
         <f:DynamicPage showFooter="true" >

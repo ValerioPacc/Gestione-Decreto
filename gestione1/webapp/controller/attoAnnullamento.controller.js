@@ -14,7 +14,7 @@ sap.ui.define([
         "use strict";
         var EdmType = sap.ui.export.EdmType
 
-        return BaseController.extend("gestione1.controller.ipeVariazione", {
+        return BaseController.extend("gestione1.controller.attoAnnullamento", {
             formatter: DateFormatter,
             onInit: function () {
                 

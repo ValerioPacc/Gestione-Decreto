@@ -14,7 +14,7 @@
 >
     <ScrollContainer>
         <content>
-            <Table class="sapUiSizeCompact" id="tableIPE" items="{DecretoImpegno>/}" includeItemInSelection="true" mode="SingleSelectLeft" headerText="Lista Ipe">
+            <Table class="sapUiSizeCompact" id="tableIPE" items="{DecretoImpegno>/}" includeItemInSelection="true" mode="MultiSelect" headerText="Lista Ipe">
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>

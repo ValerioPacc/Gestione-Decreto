@@ -73,7 +73,7 @@
 				</VBox>
                 <VBox>
 					<items>
-						<Button align="Center" type="Emphasized" text="Registra Atto di Annullamento" press="navToView1"/>
+						<Button align="Center" type="Emphasized" text="Registra Atto di Annullamento" press="navToAttoAnnullamento"/>
 					</items>
 				<layoutData>
 					<layout:GridData span="XL4 L4 M4 S12"/>
