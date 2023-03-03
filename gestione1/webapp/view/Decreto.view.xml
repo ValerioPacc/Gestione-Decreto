@@ -61,8 +61,7 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numProtocolloAmma" visibleInFilterBar="true" name="numProtocolloAmma" groupName="Group1" label="{i18n>numProtocolloAmma}">
                                 <fb:control>
-                                   <Input showSuggestion="false" id="numProtocolloAmma1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloAmm' }}">
-                                      <core:Item id="IdnumProtocolloAmma" key="{NProtocolloAmm}" text="{temp>/SelectedDecree/NProtocolloAmm}"/>
+                                   <Input id="numProtocolloAmma1" showValueHelp="false" value="">
                                     </Input>
                                 </fb:control>
                             </fb:FilterGroupItem>

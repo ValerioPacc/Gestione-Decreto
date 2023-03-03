@@ -75,6 +75,7 @@
             "nome": "Mario", 
             "cognome": "Rossi",
             "cf": "RSSMRA80A01H501U",
+            "cfe": "RSSMRA80A01H501U",
             "Rsociale": "Societa S.p.A.",
             "IVA": "00000000000000"
         },
@@ -89,6 +90,7 @@
             "nome": "Luigi", 
             "cognome": "Bianchi",
             "cf": "RSSMRA80A01H501U",
+            "cfe": "RSSMRA80A01H501U",
             "Rsociale": "Societa S.p.A.",
             "IVA": "00000000000000"
         },
@@ -103,6 +105,7 @@
             "nome": "Mario", 
             "cognome": "Verdi",
             "cf": "RSSMRA80A01H501U",
+            "cfe": "RSSMRA80A01H501U",
             "Rsociale": "Societa S.p.A.",
             "IVA": "00000000000000"
         }

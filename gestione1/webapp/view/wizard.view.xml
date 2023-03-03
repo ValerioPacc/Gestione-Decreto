@@ -71,7 +71,7 @@
                                     <l:content>
                                         <VBox>
                                             <Label text="{i18n>Eserc}" required="true" />
-                                            <ComboBox id="es_decreto" selectedKey="{temp>/SelectedDecree/Esercizio}" enabled="true" items="{comboBox>/Esercizio}">
+                                            <ComboBox id="es_decreto" change="OnSelect" app:field="Zzanno" selectedKey="{= ${IpeEntitySet>/Zbozza} === 'X' ? ${IpeEntitySet>/Zzanno} : ${temp>/SelectedDecree/Esercizio} }" enabled="true" items="{comboBox>/Esercizio}">
                                                 <core:Item id="es_decreto1" key="{comboBox>id}" text="{comboBox>id}" />
                                             </ComboBox>
                                             <layoutData>
@@ -93,6 +93,7 @@
                                                 app:FieldName="Contratto"
                                                 enabled="{/FilterSwitch1}"
                                                 valueHelpOnly="true"
+                                                value="{IpeEntitySet>/Ebeln}"
                                                 valueHelpRequest="handleValueHelp"
                                                 app:fieldName="ContrattoOrdine"
                                                 app:filterTableField="ContrattoOrdine"
@@ -105,7 +106,7 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Dstipula}" required="true" />
-                                            <Input id="Dstipula" showValueHelp="true" enabled="false" app:fieldName="DataStipula" app:filterTableField="DataStipula" class="sapUiSmallMarginBottom" />
+                                            <Input id="Dstipula" value="{IpeEntitySet>/Zzdatastipula}" showValueHelp="true" enabled="false" app:fieldName="DataStipula" app:filterTableField="DataStipula" class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
@@ -119,28 +120,28 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>beneficiarioH}" />
-                                            <Input id="beneficiario" enabled="false" />
+                                            <Input id="beneficiario" value="{IpeEntitySet>/NameFirst} {IpeEntitySet>/NameLast}" enabled="false" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>cig}" />
-                                            <Input id="cig" value="" enabled="false" />
+                                            <Input id="cig" value="{IpeEntitySet>/Zzcig}" enabled="false" />
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>cup}" />
-                                            <Input id="cup" showValueHelp="true" enabled="{= !${/FilterSwitch1} }" valueHelpOnly="true" valueHelpRequest="handleValueHelp" app:FieldName="CUP" app:filterTableField="CUP" class="sapUiSmallMarginBottom" />
+                                            <Input id="cup" showValueHelp="true" value="{IpeEntitySet>/Zzcup}" enabled="{= !${/FilterSwitch1} }" valueHelpOnly="true" valueHelpRequest="handleValueHelp" app:FieldName="CUP" app:filterTableField="CUP" class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>ImpTot}" wrapping="true" />
-                                            <Input id="importoCont" width="60%" enabled="false" />
+                                            <Input id="importoCont" value="{IpeEntitySet>/Ktwrt}" width="60%" enabled="false" />
                                             <layoutData>
                                                 <l:GridData span="L6 M3 S3" />
                                             </layoutData>
@@ -214,7 +215,7 @@
                         >
                             <VBox>
                                 <Label text="Beneficiario:" required="true" />
-                                <Input id="beneficiario1" showValueHelp="true" enabled="true" value="{temp>/Step2/nome} {temp>/Step2/cognome}" valueHelpOnly="true" valueHelpRequest="handleValueHelp" app:FieldName="Ben" app:filterTableField="beneficiario" class="sapUiSmallMarginBottom" />
+                                <Input id="beneficiario1" showValueHelp="true" enabled="true" value="{IpeEntitySet>/Lifnr}" valueHelpOnly="true" valueHelpRequest="handleValueHelp" app:FieldName="Ben" app:filterTableField="beneficiario" class="sapUiSmallMarginBottom" />
 
                                 <layoutData>
                                     <l:GridData span="L6 M3 S3" />
@@ -226,20 +227,20 @@
                             <items>
                                 <VBox class="sapUiLargeMarginBegin">
                                     <Label text="Codice Fiscale:" />
-                                    <Input id="cFiscale" enabled="false" value="{temp>/Step2/cf}" />
+                                    <Input id="cFiscale" enabled="false" value="{IpeEntitySet>/Stcd1}" />
                                     <Label text="Nome:" />
-                                    <Input id="nome" enabled="false" value="{temp>/Step2/nome}" />
+                                    <Input id="nome" enabled="false" value="{IpeEntitySet>/NameFirst}" />
                                     <Label text="Ragione Sociale:" />
-                                    <Input id="rSociale" enabled="false" value="{temp>/Step2/Rsociale}" />
+                                    <Input id="rSociale" enabled="false" value="{IpeEntitySet>/ZzragSoc}" />
                                 </VBox>
 
                                 <VBox class="sapUiLargeMarginBegin">
                                     <Label text="Codice Fiscale Estero:" />
-                                    <Input id="cFiscaleE" enabled="false" value="" />
+                                    <Input id="cFiscaleE" enabled="false" value="{= ${IpeEntitySet>/Zbozza} === 'X' ? ${IpeEntitySet>/Taxnumxl} : ${temp>/Step2/cfe} }" />
                                     <Label text="Cognome:" />
-                                    <Input id="cognome" enabled="false" value="{temp>/Step2/cognome}" />
+                                    <Input id="cognome" enabled="false" value="{= ${IpeEntitySet>/Zbozza} === 'X' ? ${IpeEntitySet>/NameLast} : ${temp>/Step2/cognome} }" />
                                     <Label text="Partita IVA:" />
-                                    <Input id="IVA" enabled="false" value="{temp>/Step2/IVA}" />
+                                    <Input id="IVA" enabled="false" value="{= ${IpeEntitySet>/Zbozza} === 'X' ? ${IpeEntitySet>/Stcd2} : ${temp>/Step2/IVA} }" />
                                 </VBox>
                             </items>
                         </HBox>

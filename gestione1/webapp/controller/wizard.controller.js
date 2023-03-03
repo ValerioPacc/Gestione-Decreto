@@ -28,6 +28,8 @@ sap.ui.define(
     return BaseController.extend("gestione1.controller.wizard", {
 
       onInit() {
+
+        
         this.callIpeEntity();
          var oProprietà = new JSONModel(),
                 oInitialModelState = Object.assign({}, oData);
@@ -51,32 +53,15 @@ sap.ui.define(
       },
 
       onListSelect: function (event) {
-
-        // console.log(event.getSource().getSelectedItem().getKey()); // works ok
-        // var path = event.getSource().getSelectedItem().getBindingContext().getPath(); // Fails
-        // console.log("Path=" + path)
-
-        // var oSelectedItemPath = oEvent.getSource().getParent().getBindingContextPath();
-        // var oSelectedItem = this.getOwnerComponent().getModel("comboBox").getObject(oSelectedItemPath);
-
-        // console.log(oSelectedItem);
-
-        //var selectedItem = this.getView().byId('comboBox').getSelectedItem().getText(); console.log("text item: " + this.getView().byId('comboBox').getSelectedItem().getText())
         var oSelectedKey = this.getView().byId('comboBox').getSelectedKey();
-        //var oModel = this.getOwnerComponent().getModel("comboBox");
+        
+        this.getView().getModel("IpeEntitySet").setProperty('/Zwels' ,oSelectedKey); 
 
-        // var text = oModel.getProperty(selectedItem)
-        // console.log("You selected " + text.Modalita_pagamento)
         if(oSelectedKey === '2'){
           this.getView().byId('labelCS').setRequired(true);
         }else{
           this.getView().byId('labelCS').setRequired(false);
         }
-
-       // var setReqField = this.getView().byId('labelCS').setRequired(true);
-        //console.log("text item: " + this.getView().byId('labelCS').setRequired(true))
-        // var fieldReq = oModel.getProperty(setReqField)
-        // console.log("field set required: "+fieldReq)
 
       },
 
@@ -200,14 +185,12 @@ sap.ui.define(
       rowSelected = _.findWhere(oModel.getProperty("/Contratto"), {id: value}),
       beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), {id: rowSelected.id_ben});
 
-      this.getView().byId("Dstipula").setValue(rowSelected.data);
-      this.getView().byId("descContratto").setValue(rowSelected.desc);
-      this.getView().byId("beneficiario").setValue(beneficiario.nome + " " + beneficiario.cognome);
-      this.getView().byId("cig").setValue(rowSelected.cig);
-      this.getView().byId("cup").setValue(rowSelected.cup);
-      this.getView().byId("importoCont").setValue(rowSelected.importo);
-      oTempModel.setProperty("/Step1", rowSelected);
-      oTempModel.setProperty("/Step2", beneficiario);
+      this._setBeneficiario(beneficiario);
+
+      this.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula' ,rowSelected.data); 
+      this.getView().getModel("IpeEntitySet").setProperty('/Zzcig' ,rowSelected.cig); 
+      this.getView().getModel("IpeEntitySet").setProperty('/Zzcup' ,rowSelected.cup);
+      this.getView().getModel("IpeEntitySet").setProperty('/Ktwrt' ,rowSelected.importo); 
 
 		},
     
@@ -511,27 +494,7 @@ onCloseDialog6 : function () {
         });
 
       },
-      callIpeEntity:function () {
-   
-        var that = this;
-        var oMdl = new sap.ui.model.json.JSONModel();
-        var aFilters = [];
-        aFilters.push(new Filter({path: "ZCodGius", operator: FilterOperator.EQ, value1: "2023-001-UFF-UFF-0000001" }));
-
-        this.getOwnerComponent().getModel().read("/IpeEntitySet", {
-            filters: aFilters,
-            urlParameters: "",
-            success: function (data) {
-                oMdl.setData(data.results);
-                that.getView().getModel("temp").setProperty('/IpeEntitySet', data.results)
-            },
-            error: function (error) {
-                //that.getView().getModel("temp").setProperty(sProperty,[]);
-                //that.destroyBusyDialog();
-                var e = error;
-            }
-        });
-    },
+      
      
 
       onChangeSelect: function () {
@@ -547,17 +510,14 @@ onCloseDialog6 : function () {
       onRegIpebozza: function (oEvent) {
         var oModel= this.getView().getModel("comboBox"),
         oTempModel = this.getView().getModel("temp"),
+        oIpeEntitySet = this.getView().getModel("IpeEntitySet"), 
         rowSelected = _.findWhere(oModel.getProperty("/Contratto"), ),
-        beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), );
-  
-        // this.getView().byId("Dstipula").getValue();
-        // this.getView().byId("descContratto").getValue();
-        // this.getView().byId("beneficiario").getValue();
-        // this.getView().byId("cig").getValue();
-        // this.getView().byId("cup").getValue();
-        // this.getView().byId("importoCont").getValue();
+        beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), ),
+        Zzanno = this.getView().byId("es_decreto").getSelectedKey();
+
         oTempModel.setProperty("/Step1", rowSelected);
         oTempModel.setProperty("/Step2", beneficiario);
+
 var self= this
         MessageBox.warning("Sei sicuro di voler salvare l'Ipe in Bozza ?", {
             actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
@@ -568,7 +528,8 @@ var self= this
                   var entity = {
                     Bukrs:oTempModel.getProperty("/SelectedDecree").Ente,
                     Fikrs:oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
-                    Zzanno: oTempModel.getProperty("/SelectedDecree").Esercizio,
+                    Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
+                    Zzanno: Zzanno,
                     Zregistrato: oTempModel.getProperty("/SelectedDecree").RegistratoBozza,
                     ZCodCla:'',
                     ZCodGius:oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo,
@@ -579,18 +540,19 @@ var self= this
                     ZidIpe:'',
                     Zufficioliv1:oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
                     Zufficioliv2:oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
-                    Zzdatastipula:new Date (oTempModel.getProperty("/Step1/").data),
-                    //ZzdataStipula:oTempModel.getProperty("/Step1/").data,
-                    Znumcontratt:oTempModel.getProperty("/Step1/").id,
-                    Lifnr:oTempModel.getProperty("/Step1/").id_ben,
-                    Zzcig:oTempModel.getProperty("/Step1/").cig,
-                    Zzcup:oTempModel.getProperty("/Step1/").cup,
-                    NameFirst:oTempModel.getProperty("/Step2/").nome,
-                    NameLast:oTempModel.getProperty("/Step2/").cognome,
-                    ZzragSoc:oTempModel.getProperty("/Step2/").Rsociale,
-                    Stcd1:oTempModel.getProperty("/Step2/").IVA,
-                    //Zwels:oTempModel.getProperty("/items/").Modalita_pagamento,
-                    Iban:oTempModel.getProperty("/Step2/").iban,
+                    Zzdatastipula: new Date (oIpeEntitySet.getProperty("/Zzdatastipula")), //new Date (oTempModel.getProperty("/Step1/").data),
+                    Ebeln: oIpeEntitySet.getProperty("/Ebeln"),//oTempModel.getProperty("/Step1/").id,
+                    Lifnr: oIpeEntitySet.getProperty("/Lifnr"),  //oTempModel.getProperty("/Step1/").id_ben,
+                    Zzcig: oIpeEntitySet.getProperty("/Zzcig"),  //oTempModel.getProperty("/Step1/").cig,
+                    Zzcup: oIpeEntitySet.getProperty("/Zzcup"), //oTempModel.getProperty("/Step1/").cup,
+                    NameFirst: oIpeEntitySet.getProperty("/NameFirst"), //oTempModel.getProperty("/Step2/").nome,
+                    NameLast: oIpeEntitySet.getProperty("/NameLast"), //oTempModel.getProperty("/Step2/").cognome,
+                    ZzragSoc: oIpeEntitySet.getProperty("/ZzragSoc"), //oTempModel.getProperty("/Step2/").Rsociale,
+                    Stcd1: oIpeEntitySet.getProperty("/Stcd1"), //oTempModel.getProperty("/Step2/").cf,
+                    Stcd2: "",//oIpeEntitySet.getProperty("/Stcd2"), //oTempModel.getProperty("/Step2/").IVA,
+                    Zwels: oIpeEntitySet.getProperty("/Zwels"), //oTempModel.getProperty("/items/").Modalita_pagamento,
+                    Iban: oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
+                    Zbozza: "X"
                     
 
 
@@ -612,6 +574,7 @@ var self= this
                                 if (oAction === sap.m.MessageBox.Action.OK) {
                                     self.getOwnerComponent().getRouter().navTo("View1")
                                     location.reload();
+                                    this.getView().getModel("temp").setProperty('/NewIPE', "");
                                 }
                             }
                         }) 
