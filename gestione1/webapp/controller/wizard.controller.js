@@ -557,7 +557,7 @@ onCloseDialog6 : function () {
                     Iban: oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
                     Zbozza: "X"
                     };
-                    if(oBozza){
+                    if(!oBozza){
 
                      oDataModel.create("/IpeEntitySet", entity,{
                        success: function(result){ 
@@ -567,9 +567,10 @@ onCloseDialog6 : function () {
                             emphasizedAction: MessageBox.Action.OK,
                             onClose: function (oAction) {
                                 if (oAction === sap.m.MessageBox.Action.OK) {
+                                    self.getView().getModel("temp").setProperty('/NewIPE', "");
                                     self.getOwnerComponent().getRouter().navTo("View1")
                                     location.reload();
-                                    this.getView().getModel("temp").setProperty('/NewIPE', "");
+                                    //self.getView().getModel("temp").setProperty('/NewIPE', "");
                                 }
                             }
                         }) 
@@ -582,7 +583,7 @@ onCloseDialog6 : function () {
                             async: true, 
                              urlParameters: {}  });
                   }else{
-                    this.onEditIpebozza(entity, oDataModel);
+                    self.onEditIpebozza(entity, oDataModel);
                   }
                  
                 }
@@ -592,15 +593,19 @@ onCloseDialog6 : function () {
     },
 
     onEditIpebozza: function (entry,oDataModel) {
-      var self = this
+      var self = this,
       oTempModel = self.getView().getModel("temp"),
       oIpeEntitySet = self.getView().getModel("IpeEntitySet"),
-      entry = self.getView().getModel("IpeEntitySet").getProperty('/'),
-      Stipula = self.getView().getModel("IpeEntitySet").getProperty('/Zzdatastipula');
+      Stipula = self.getView().getModel("IpeEntitySet").getProperty('/Zzdatastipula'),
+      DataStipula = Stipula.split(".");
 
-      self.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula', new Date (Stipula));
+      DataStipula = new Date(DataStipula[1] + "-" + DataStipula[0] + "-" + DataStipula[2])
+
+      self.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula', DataStipula);
+      self.getView().getModel("IpeEntitySet").setProperty('/Stcd2', "");
+      var entry = self.getView().getModel("IpeEntitySet").getProperty('/');
       
-      var path = oModel.createKey("/IpeEntitySet", {
+      var path = oDataModel.createKey("/IpeEntitySet", {
         Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
         Fikrs: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
         Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
@@ -616,7 +621,7 @@ onCloseDialog6 : function () {
         Zufficioliv2: oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
     });
 
-    oDataModel.update(path, editDecreto,  {
+    oDataModel.update(path, entry,  {
       success: function (data) {
           console.log("success");
           MessageBox.success("Operazione Eseguita con successo", {
