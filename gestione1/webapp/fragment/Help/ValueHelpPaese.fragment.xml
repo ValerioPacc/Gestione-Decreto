@@ -1,22 +1,20 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<SelectDialog
-		title="{i18n>HelpContratto}"
+		title="{i18n>Country}"
 		growing="true"
 		growingThreshold="9999"
 		class="sapUiPopupWithPadding"
-		items="{
-			path:'/ContrattoSet'
-			}"
+		items="{temp>/CountryMatchCodeSet}"
 		search="_handleValueHelpSearch"
 		confirm="_handleValueHelpContactClose"
 		cancel="_handleValueHelpClose"
-        app:filterTableField="Contratto"
+        app:filterTableField="Paese"
 		>
 		<StandardListItem
 			iconDensityAware="false"
 			iconInset="false"
-			title="{Ebeln}"
-			app:key="{Ebeln}"
+			title="{temp>Code}"
+			app:key="{temp>Code}"
 			 />
 	</SelectDialog>	
 </core:FragmentDefinition>

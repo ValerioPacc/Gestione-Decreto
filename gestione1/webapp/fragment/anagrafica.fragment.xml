@@ -38,6 +38,7 @@ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
                     valueHelpRequest="handleValueHelp"
                     app:FieldName="Paese"
                     app:filterTableField="Paese"
+                   
                     class="sapUiSmallMarginBottom validateFilter">
                         <layoutData>
                             <l:GridData span="XL1 L1 M1 S2" />

@@ -117,13 +117,14 @@ sap.ui.define([
                
                 var oDataModel = that.getModel();
                  that.getModel().metadataLoaded().then( function() { 
-                    oDataModel.read("/DecretoImpegnoSet", {
+                    oDataModel.read("/DecretoImpegnoSet", "/IpeEntitySet",{
                     filters: datiGI ,
                      urlParameters: "",
                       success: function(data, oResponse){
                         var oModelJson = new sap.ui.model.json.JSONModel();
                           oModelJson.setData(data.results);
-                           that.getView().getModel("temp").setProperty('/DecretoImpegnoSet', oModelJson); 
+                           that.getView().getModel("temp").setProperty('/DecretoImpegnoSet', oModelJson);
+                           that.getView().getModel("temp").setProperty('/IpeEntitySet', oModelJson);
                            that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
                          },
                           error: function(error){

@@ -4,17 +4,17 @@
 		growing="true"
 		growingThreshold="9999"
 		class="sapUiPopupWithPadding"
-		items="{comboBox>/Beneficiario}"
+		items="{temp>/BeneficiarioEntitySet}"
 		search="_handleValueHelpSearch"
 		confirm="_handleValueHelpCloseBen"
 		cancel="_handleValueHelpClose"
-        app:filterTableField="beneficiario1"
+        app:filterTableField="Ben"
 		>
 		<StandardListItem
 			iconDensityAware="false"
 			iconInset="false"
-			title="{comboBox>nome} {comboBox>cognome}"
-			app:key="{comboBox>id}"
+			title="{temp>NameFirst} {temp>NameLast}"
+			app:key="{temp>Lifnr}"
 			 />
 	</SelectDialog>	
 </core:FragmentDefinition>

@@ -105,7 +105,155 @@ sap.ui.define([
 				}
 			});
 		},
+callIpeEntity:function () {
+   
+			var that = this,
+			oModel = that.getOwnerComponent().getModel(),
+			oTempModel = that.getOwnerComponent().getModel("temp"),
+			aFilters = [];
 
+			this.getOwnerComponent().getModel("IpeEntitySet").setProperty('/' ,[])
+		   
+			aFilters.push(
+			  new Filter({path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
+			  new Filter({path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
+			  new Filter({path: "Gjahr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Esercizio }),
+			  new Filter({path: "Zammin", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Amministrazione }),
+			  new Filter({path: "Zcoddecr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroDecreto }),
+			  new Filter({path: "Zufficioliv1", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1 }),
+			  new Filter({path: "Zufficioliv2", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv2 }),
+			  new Filter({path: "ZCodGius", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo })
+			  );
+	
+	
+			oModel.read("/IpeEntitySet", {
+				filters: aFilters,
+				urlParameters: "",
+				success: function (data) {
+					var results = data.results;
+					if(results.length > 0){
+						var mnth = ("0" + (results[0].Zzdatastipula.getMonth() + 1)).slice(-2),
+                        day = ("0" + results[0].Zzdatastipula.getDate()).slice(-2);
+
+						var nData = [results[0].Zzdatastipula.getFullYear(), mnth, day].join("-");
+						results[0].Zzdatastipula = nData.split("-").reverse().join(".");
+
+						that.getView().getModel("IpeEntitySet").setProperty('/', results[0]); 
+					}else{
+						that.getView().getModel("IpeEntitySet").setProperty('/',[]); 
+						that.getView().getModel("temp").setProperty('/NewIPE', "X");
+					}
+					
+				},
+				error: function (error) {
+					//that.getView().getModel("temp").setProperty(sProperty,[]);
+					//that.destroyBusyDialog();
+					console.log(error);
+				}
+			});
+		},
+
+		callCountryEntity:function () {
+   
+			var that = this,
+			oModel = that.getOwnerComponent().getModel()
+			//oTempModel = that.getOwnerComponent().getModel("temp"),
+			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
+		   
+			
+	
+	
+			oModel.read("/CountryMatchCodeSet", {
+				urlParameters: "",
+				success: function(data, oResponse){
+					var oModelJson = new sap.ui.model.json.JSONModel();
+					  oModelJson.setData(data.results);
+					   that.getView().getModel("temp").setProperty('/CountryMatchCodeSet', oModelJson); 
+					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+					 },
+					  error: function(error){
+				var e = error;}
+			 });
+		 
+		},
+		callBeneficiarioEntity:function () {
+   
+			var that = this,
+			oModel = that.getOwnerComponent().getModel()
+			//oTempModel = that.getOwnerComponent().getModel("temp"),
+			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
+		   
+			
+	
+	
+			oModel.read("/BeneficiarioEntitySet", {
+				urlParameters: "",
+				success: function(data, oResponse){
+					var oModelJson = new sap.ui.model.json.JSONModel();
+					  oModelJson.setData(data.results);
+					   that.getView().getModel("temp").setProperty('/BeneficiarioEntitySet', oModelJson); 
+					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+					 },
+					  error: function(error){
+				var e = error;}
+			 });
+		 
+		},
+
+		// callAnnoAmm:function (entity) {
+		// 	var that = this,
+		// 	oModel = that.getOwnerComponent().getModel()
+		// 	//oTempModel = that.getOwnerComponent().getModel("temp"),
+		// 	//this.getOwnerComponent().getModel("CountryMatchCodeSet")
+		// 	a
+		//    for (let index = 0; index < array.length; index++) {
+		// 	const element = array[index];
+			
+		//    }
+			
+	
+	
+		// 	oModel.read("/ContrattoSet", {
+		// 		urlParameters: "",
+		// 		success: function(data, oResponse){
+		// 			var oModelJson = new sap.ui.model.json.JSONModel();
+		// 			  oModelJson.setData(data.results);
+		// 			   that.getView().getModel("temp").setProperty('/ContrattoSet', oModelJson); 
+		// 			   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+		// 			 },
+		// 			  error: function(error){
+		// 		var e = error;}
+		// 	 });
+		 	
+
+		// },
+
+		callContrattoEntity:function () {
+   
+			var that = this,
+			oModel = that.getOwnerComponent().getModel("IpeEntitySet")
+			//oTempModel = that.getOwnerComponent().getModel("temp");
+			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
+		    // var path = oModel.createKey("/ContrattoSet", {
+			// 	Ebeln: "4500000019"
+			// });
+			
+	
+	
+			oModel.read("/ContrattoSet", {
+				urlParameters: "",
+				success: function(data, oResponse){
+					var oModelJson = new sap.ui.model.json.JSONModel();
+					  oModelJson.setData(data.results);
+					   that.getView().getModel("temp").setProperty('/ContrattoSet', oModelJson); 
+					  that.callAnnoAmm(data.results);
+					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+					 },
+					  error: function(error){
+				var e = error;}
+			 });
+		 
+		},
 		////////////////////////////////////////////////////////////
 		//	DIALOG
 		////////////////////////////////////////////////////////////
@@ -132,6 +280,7 @@ sap.ui.define([
 				
 			var oSource = oEvent.getSource(),
 				oValue= oSource.getValue(),
+				//sField = oEvent.getSource().data("filterTableField"),
 				sName = oSource.data("FieldName");
 	
 			var oDialog = this.openDialog("gestione1.fragment.Help.ValueHelp" + sName).open();

@@ -28,9 +28,11 @@ sap.ui.define(
     return BaseController.extend("gestione1.controller.wizard", {
 
       onInit() {
-
-        
         this.callIpeEntity();
+        this.callBeneficiarioEntity();
+        this.callContrattoEntity();
+        this.callCountryEntity();
+        
          var oProprietà = new JSONModel(),
                 oInitialModelState = Object.assign({}, oData);
                 oProprietà.setData(oInitialModelState);
@@ -350,6 +352,8 @@ onCloseDialog6 : function () {
                 this.getView().byId("cup").setValue("");
                 this.getView().byId("importoCont").setValue("");
                 this.getView().byId("Ncontratto").setSelectedKey("");
+              
+
 
                 this.getView().getModel("temp").setProperty("/Step2", []);
                 
@@ -564,7 +568,7 @@ onCloseDialog6 : function () {
                      oDataModel.create("/IpeEntitySet", entity,{
                        success: function(result){ 
                         console.log('SUCCESS')
-                        MessageBox.success("Decreto Impegno creato correttamente", {
+                        MessageBox.success("Ipe in bozza creato correttamente", {
                             actions: [sap.m.MessageBox.Action.OK],
                             emphasizedAction: MessageBox.Action.OK,
                             onClose: function (oAction) {
@@ -580,7 +584,8 @@ onCloseDialog6 : function () {
 
                         error: function(err){
                            console.log(err); 
-                           MessageBox.error("Decreto Impegno non creato correttamente")
+                           MessageBox.error("Ipe in bozza non creato correttamente")
+                           location.reload();
                           },
                             async: true, 
                              urlParameters: {}  });
@@ -613,7 +618,7 @@ onCloseDialog6 : function () {
         Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
         ZCodCla: oIpeEntitySet.getProperty("/ZCodCla"),
         ZCodGius: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo,
-        ZCodIpe: oTempModel.getProperty("/SelectedDecree").CodiceIpe,
+        ZCodIpe: oIpeEntitySet.getProperty("/ZCodIpe"),
         ZNumCla: oIpeEntitySet.getProperty("/ZNumCla"),
         Zammin: oTempModel.getProperty("/SelectedDecree").Amministrazione,
         Zcoddecr: oTempModel.getProperty("/SelectedDecree").NumeroDecreto,
@@ -632,7 +637,7 @@ onCloseDialog6 : function () {
               onClose: function (oAction) {
                   if (oAction === sap.m.MessageBox.Action.OK) {
                       that.getOwnerComponent().getRouter().navTo("View1");
-                      location.reload();
+                      
                   }
               }
           })
@@ -640,6 +645,7 @@ onCloseDialog6 : function () {
       error: function (e) {
           //console.log("error");
           MessageBox.error("Operazione non eseguita")
+          
   }
 });
       
