@@ -58,6 +58,50 @@ sap.ui.define([
             
         },
 
+		getColsData: function (oYears){
+
+            var aColumnData = [
+				{columnLabel: "PNI",columnName:"Geber"},
+				{columnLabel: "Clausula" + oYears[0],columnName:"ZclausolaVar"+ oYears[0]}, 
+				{columnLabel: "Disponobilità PNI"+ oYears[0], columnName:"Wtfree"+ oYears[0]}, 
+				{columnLabel: ""+ oYears[0], columnName:"ZImpIpeCl"+ oYears[0]}, 
+				{columnLabel: "Disponobilità di cassa"+ oYears[0], columnName:"Zcassa"+ oYears[0]},
+				{columnLabel: "Clausula" + oYears[1],columnName:"ZclausolaVar"+ oYears[1]}, 
+				{columnLabel: "Disponobilità PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]}, 
+				{columnLabel: ""+ oYears[1], columnName:"ZImpIpeCl"+ oYears[1]}, 
+				{columnLabel: "Disponobilità di cassa"+ oYears[1], columnName:"Zcassa"+ oYears[1]},
+				{columnLabel: "Clausula" + oYears[2],columnName:"ZclausolaVar"+ oYears[2]}, 
+				{columnLabel: "Disponobilità PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]}, 
+				{columnLabel: ""+ oYears[2], columnName:"ZImpIpeCl"+ oYears[2]}, 
+				{columnLabel: "Disponobilità di cassa"+ oYears[2], columnName:"Zcassa"+ oYears[2]},
+				{columnLabel: "Clausula" + oYears[3],columnName:"ZclausolaVar"+ oYears[3]}, 
+				{columnLabel: "Disponobilità PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]}, 
+				{columnLabel: ""+ oYears[3], columnName:"ZImpIpeCl"+ oYears[3]}, 
+				{columnLabel: "Disponobilità di cassa"+ oYears[3], columnName:"Zcassa"+ oYears[3]}
+			  ];
+
+			  return aColumnData;
+            
+        },
+
+		getRowsData: function (Aut, cols){
+			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
+
+			oEsigModel.setProperty('/', []); 
+			var arr = [];
+			for( var i in cols){
+				var item = cols[i];
+				oEsigModel.setProperty("/"+ item.columnName, "pippo"); 
+				
+			}
+			
+			oEsigModel.setProperty('/Geber', Aut); 
+			arr.push(oEsigModel.getProperty('/'));
+			return arr;
+		},
+
+		
+
 		callIpeEntity:function () {
    
 			var that = this,

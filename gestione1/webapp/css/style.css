@@ -39,6 +39,17 @@
   padding-top: 1rem !important;
 }
 
+.Freeze .sapMLabel {
+
+  white-space: break-spaces !important;
+
+}
+
+.Freeze .sapUiTableCell[id*="colZcassa"], .Freeze .sapUiTableCell[aria-labelledby*="colZcassa"] {
+  border-right: 0.1rem solid #000 !important;
+}
+
+
 
   /* .sapMBtn{
     font-size:30px;

@@ -34,5 +34,10 @@ sap.ui.define([
             var oModel = {};
 			return new JSONModel(oModel);
 		},
+
+        createEsigModel: function () {
+            var oModel = {};
+			return new JSONModel(oModel);
+		},
     };
 });
