@@ -409,7 +409,15 @@
                             <Title text="IPE-impegno pluriennale ad esigibilità" textAlign="Center" />
                             <ToolbarSpacer />
                         </Toolbar>
-                       <core:Fragment fragmentName="gestione1.fragment.EsigTable" type="XML" />
+                        <IconTabBar id="idIconTabBar1" class="TabBar">
+                            <items>
+                                <IconTabFilter text="Competenza" key="info">
+                                    <core:Fragment fragmentName="gestione1.fragment.EsigTable" type="XML" />
+                                </IconTabFilter>
+                                <IconTabFilter text="Residui" key="results">
+                                </IconTabFilter>
+                            </items>
+                        </IconTabBar>
                         <OverflowToolbar>
                             <Button text="Indietro" type="Emphasized" press="onBackButton" />
                             <ToolbarSpacer />

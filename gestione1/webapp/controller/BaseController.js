@@ -91,7 +91,7 @@ sap.ui.define([
 			var arr = [];
 			for( var i in cols){
 				var item = cols[i];
-				oEsigModel.setProperty("/"+ item.columnName, "pippo"); 
+				oEsigModel.setProperty("/"+ item.columnName, ""); 
 				
 			}
 			
