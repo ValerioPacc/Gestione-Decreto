@@ -93,7 +93,7 @@
                                                 showValueHelp="true"
                                                 enabled="{/FilterSwitch1}"
                                                 valueHelpOnly="true"
-                                                valueHelpRequest="handleValueHelp"
+                                                valueHelpRequest="handleContractValueHelp"
                                                 app:FieldName="Contratto"
                                                 app:filterTableField="Contratto"
                                                 class="sapUiSmallMarginBottom"
@@ -214,7 +214,7 @@
                         >
                             <VBox>
                                 <Label text="Beneficiario:" required="true" />
-                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="true" valueHelpRequest="handleValueHelp" app:FieldName="Ben" app:filterTableField="Ben" class="sapUiSmallMarginBottom" />
+                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="true" valueHelpRequest="handleBenValueHelp" app:FieldName="Ben" app:filterTableField="Ben" class="sapUiSmallMarginBottom" />
 
                                 <layoutData>
                                     <l:GridData span="L6 M3 S3" />

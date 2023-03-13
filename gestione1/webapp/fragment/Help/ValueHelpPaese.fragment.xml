@@ -4,7 +4,9 @@
 		growing="true"
 		growingThreshold="9999"
 		class="sapUiPopupWithPadding"
-		items="{temp>/CountryMatchCodeSet}"
+		items="{
+			path:'/CountryMatchCodeSet'
+			}"
 		search="_handleValueHelpSearch"
 		confirm="_handleValueHelpContactClose"
 		cancel="_handleValueHelpClose"
@@ -13,8 +15,8 @@
 		<StandardListItem
 			iconDensityAware="false"
 			iconInset="false"
-			title="{temp>Code}"
-			app:key="{temp>Code}"
+			title="{Code}"
+			app:key="{Code}"
 			 />
 	</SelectDialog>	
 </core:FragmentDefinition>

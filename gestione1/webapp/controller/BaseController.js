@@ -105,88 +105,106 @@ sap.ui.define([
 				}
 			});
 		},
-callIpeEntity:function () {
+// callIpeEntity:function () {
    
-			var that = this,
-			oModel = that.getOwnerComponent().getModel(),
-			oTempModel = that.getOwnerComponent().getModel("temp"),
-			aFilters = [];
+// 			var that = this,
+// 			oModel = that.getOwnerComponent().getModel(),
+// 			oTempModel = that.getOwnerComponent().getModel("temp"),
+// 			aFilters = [];
 
-			this.getOwnerComponent().getModel("IpeEntitySet").setProperty('/' ,[])
+// 			this.getOwnerComponent().getModel("IpeEntitySet").setProperty('/' ,[])
 		   
-			aFilters.push(
-			  new Filter({path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
-			  new Filter({path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
-			  new Filter({path: "Gjahr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Esercizio }),
-			  new Filter({path: "Zammin", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Amministrazione }),
-			  new Filter({path: "Zcoddecr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroDecreto }),
-			  new Filter({path: "Zufficioliv1", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1 }),
-			  new Filter({path: "Zufficioliv2", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv2 }),
-			  new Filter({path: "ZCodGius", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo })
-			  );
+// 			aFilters.push(
+// 			  new Filter({path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
+// 			  new Filter({path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
+// 			  new Filter({path: "Gjahr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Esercizio }),
+// 			  new Filter({path: "Zammin", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Amministrazione }),
+// 			  new Filter({path: "Zcoddecr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroDecreto }),
+// 			  new Filter({path: "Zufficioliv1", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1 }),
+// 			  new Filter({path: "Zufficioliv2", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv2 }),
+// 			  new Filter({path: "ZCodGius", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo })
+// 			  );
 	
 	
-			oModel.read("/IpeEntitySet", {
-				filters: aFilters,
+// 			oModel.read("/IpeEntitySet", {
+// 				filters: aFilters,
+// 				urlParameters: "",
+// 				success: function (data) {
+// 					var results = data.results;
+// 					if(results.length > 0){
+// 						var mnth = ("0" + (results[0].Zzdatastipula.getMonth() + 1)).slice(-2),
+//                         day = ("0" + results[0].Zzdatastipula.getDate()).slice(-2);
+
+// 						var nData = [results[0].Zzdatastipula.getFullYear(), mnth, day].join("-");
+// 						results[0].Zzdatastipula = nData.split("-").reverse().join(".");
+
+// 						that.getView().getModel("IpeEntitySet").setProperty('/', results[0]); 
+// 					}else{
+// 						that.getView().getModel("IpeEntitySet").setProperty('/',[]); 
+// 						that.getView().getModel("temp").setProperty('/NewIPE', "X");
+// 					}
+					
+// 				},
+// 				error: function (error) {
+// 					//that.getView().getModel("temp").setProperty(sProperty,[]);
+// 					//that.destroyBusyDialog();
+// 					console.log(error);
+// 				}
+// 			});
+// 		},
+
+		callCountryEntity:function () {
+			var that = this;
+			var oMdl = new sap.ui.model.json.JSONModel();
+			this.getOwnerComponent().getModel().read("/CountryMatchCodeSet", {
+				filters: [],
 				urlParameters: "",
 				success: function (data) {
-					var results = data.results;
-					if(results.length > 0){
-						var mnth = ("0" + (results[0].Zzdatastipula.getMonth() + 1)).slice(-2),
-                        day = ("0" + results[0].Zzdatastipula.getDate()).slice(-2);
-
-						var nData = [results[0].Zzdatastipula.getFullYear(), mnth, day].join("-");
-						results[0].Zzdatastipula = nData.split("-").reverse().join(".");
-
-						that.getView().getModel("IpeEntitySet").setProperty('/', results[0]); 
-					}else{
-						that.getView().getModel("IpeEntitySet").setProperty('/',[]); 
-						that.getView().getModel("temp").setProperty('/NewIPE', "X");
-					}
-					
+					oMdl.setData(data.results);
+					that.getView().getModel("temp").setProperty('/CountryMatchCodeSet', data.results)
 				},
 				error: function (error) {
 					//that.getView().getModel("temp").setProperty(sProperty,[]);
 					//that.destroyBusyDialog();
-					console.log(error);
+					var e = error;
 				}
 			});
-		},
-
-		callCountryEntity:function () {
-   
-			var that = this,
-			oModel = that.getOwnerComponent().getModel()
-			//oTempModel = that.getOwnerComponent().getModel("temp"),
-			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
+		//},
+			// var that = this,
+			// oModel = that.getOwnerComponent().getModel()
+			// //oTempModel = that.getOwnerComponent().getModel("temp"),
+			// //this.getOwnerComponent().getModel("CountryMatchCodeSet")
 		   
 			
 	
 	
-			oModel.read("/CountryMatchCodeSet", {
-				urlParameters: "",
-				success: function(data, oResponse){
-					var oModelJson = new sap.ui.model.json.JSONModel();
-					  oModelJson.setData(data.results);
-					   that.getView().getModel("temp").setProperty('/CountryMatchCodeSet', oModelJson); 
-					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
-					 },
-					  error: function(error){
-				var e = error;}
-			 });
+			// oModel.read("/CountryMatchCodeSet", {
+			// 	urlParameters: "",
+			// 	success: function(data, oResponse){
+			// 		var oModelJson = new sap.ui.model.json.JSONModel();
+			// 		  oModelJson.setData(data.results);
+			// 		   that.getView().getModel("temp").setProperty('/CountryMatchCodeSet', oModelJson); 
+			// 		   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+			// 		 },
+			// 		  error: function(error){
+			// 	var e = error;}
+			//  });
 		 
 		},
 		callBeneficiarioEntity:function () {
    
 			var that = this,
 			oModel = that.getOwnerComponent().getModel()
+			var oTempModel = that.getOwnerComponent().getModel("temp");
+			var lifnr = oTempModel.getProperty("/ContrattoSet").Lifnr;
 			//oTempModel = that.getOwnerComponent().getModel("temp"),
 			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
-		   
-			
+			var path = oModel.createKey("/BeneficiarioEntitySet", {
+				Lifnr:lifnr
+			})
 	
 	
-			oModel.read("/BeneficiarioEntitySet", {
+			oModel.read(path, {
 				urlParameters: "",
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
@@ -228,25 +246,44 @@ callIpeEntity:function () {
 
 		// },
 
-		callContrattoEntity:function () {
-   
-			var that = this,
-			oModel = that.getOwnerComponent().getModel("IpeEntitySet")
-			//oTempModel = that.getOwnerComponent().getModel("temp");
+		callContrattoEntity:function (Zzanno) {
+			var that = this
+			var oModel = that.getOwnerComponent().getModel()
+			// var oTempModel = this.getView().getModel("temp")
+			// var oIpeEntitySet = this.getView().getModel("IpeEntitySet")
+			var oTempModel = that.getOwnerComponent().getModel("temp");
+			var Zzammin = oTempModel.getProperty("/SelectedDecree").Amministrazione;
+			//var Zzanno = oIpeEntitySet.Esercizio
+			// var oModel = that.getOwnerComponent().getModel()
+		    // var oTempModel = that.getOwnerComponent().getModel("NewIpe")
+		    // this.getOwnerComponent().getModel("IpeEntitySet");
+			
 			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
-		    // var path = oModel.createKey("/ContrattoSet", {
-			// 	Ebeln: "4500000019"
-			// });
+			var aFilters = [];
+		   
+			aFilters.push(
+			  new Filter({path: "Zzanno", operator: FilterOperator.EQ, value1: Zzanno }),
+			  new Filter({path: "Zzamministrazione", operator: FilterOperator.EQ, value1: Zzammin })
+
+			)
+				
+				
+			 
+			// var path = oModel.createKey('/ContrattoSet', {
+			// 	Ebeln:'4500000019'
+			// })
+	
 			
 	
 	
-			oModel.read("/ContrattoSet", {
+			oModel.read('/ContrattoSet', {
+				filters:aFilters,
 				urlParameters: "",
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
 					  oModelJson.setData(data.results);
 					   that.getView().getModel("temp").setProperty('/ContrattoSet', oModelJson); 
-					  that.callAnnoAmm(data.results);
+					  //that.callAnnoAmm(data.results);
 					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					 },
 					  error: function(error){
@@ -254,6 +291,8 @@ callIpeEntity:function () {
 			 });
 		 
 		},
+
+		
 		////////////////////////////////////////////////////////////
 		//	DIALOG
 		////////////////////////////////////////////////////////////
@@ -275,6 +314,56 @@ callIpeEntity:function () {
 				this.__dialog = null;
 			}
 		},
+		openExpandDialog: function (dialogPath) {
+            if (!this.__dialog2) {
+                this.__dialog2 = sap.ui.xmlfragment(dialogPath, this);
+                this.getView().addDependent(this.__dialog2);
+            }
+            return this.__dialog2;
+        },
+        closeExpandDialog: function() {
+            if (this.__dialog2) {
+                if( this.__dialog2.close ) {
+                    this.__dialog2.close();
+                }
+                this.__dialog2.destroy();
+                this.__dialog2 = null;
+            }
+        },
+		handleCountryValueHelp: function(oEvent){
+				
+			var oSource = oEvent.getSource(),
+				oValue= oSource.getValue(),
+				//sField = oEvent.getSource().data("filterTableField"),
+				sName = oSource.data("FieldName");
+				this.callCountryEntity();
+
+			var oDialog = this.openExpandDialog("gestione1.fragment.Help.ValueHelp" + sName).open();
+			
+		},
+		handleContractValueHelp: function(oEvent){
+				
+			var oSource = oEvent.getSource(),
+				oValue= oSource.getValue(),
+				//sField = oEvent.getSource().data("filterTableField"),
+				sName = oSource.data("FieldName");
+	            var Zzanno = this.getView().byId("es_decreto").getSelectedKey();
+				this.callContrattoEntity(Zzanno);
+
+			var oDialog = this.openDialog("gestione1.fragment.Help.ValueHelp" + sName).open();
+			
+		},
+		handleBenValueHelp: function(oEvent){
+				
+			var oSource = oEvent.getSource(),
+				oValue= oSource.getValue(),
+				//sField = oEvent.getSource().data("filterTableField"),
+				sName = oSource.data("FieldName");
+	            this.callBeneficiarioEntity();
+
+			var oDialog = this.openDialog("gestione1.fragment.Help.ValueHelp" + sName).open();
+			
+		},
 
 		handleValueHelp: function(oEvent){
 				
@@ -282,7 +371,7 @@ callIpeEntity:function () {
 				oValue= oSource.getValue(),
 				//sField = oEvent.getSource().data("filterTableField"),
 				sName = oSource.data("FieldName");
-	
+	            
 			var oDialog = this.openDialog("gestione1.fragment.Help.ValueHelp" + sName).open();
 			
 		},

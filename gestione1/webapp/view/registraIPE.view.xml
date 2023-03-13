@@ -21,7 +21,7 @@
                         <Title text="Dati Decreto:" />
                         <layout:HorizontalLayout >
                         <Label text="Esercizio Decreto:" class="sapUiSmallMarginEnd" />
-                        <Text  text="{temp>/SelectedDecree/Esercizio}" class="sapUiMediumMarginEnd"/>
+                        <Text id="EserDec" text="{temp>/SelectedDecree/Esercizio}" class="sapUiMediumMarginEnd"/>
                     <Label text="Amministrazione:" class="sapUiSmallMarginEnd" />
                     <Text  text="{temp>/SelectedDecree/Amministrazione}" class="sapUiMediumMarginEnd"/>
                      <Label text="N.Bozza:" class="sapUiSmallMarginEnd"/>

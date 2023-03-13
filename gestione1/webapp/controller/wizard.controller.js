@@ -29,9 +29,9 @@ sap.ui.define(
 
       onInit() {
         this.callIpeEntity();
-        this.callBeneficiarioEntity();
-        this.callContrattoEntity();
-        this.callCountryEntity();
+        
+        
+       
         
          var oProprietà = new JSONModel(),
                 oInitialModelState = Object.assign({}, oData);

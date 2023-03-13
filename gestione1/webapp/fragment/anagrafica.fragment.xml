@@ -35,7 +35,7 @@ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
                     showValueHelp="true"
                     enabled="true"
                     valueHelpOnly="true" 
-                    valueHelpRequest="handleValueHelp"
+                    valueHelpRequest="handleCountryValueHelp"
                     app:FieldName="Paese"
                     app:filterTableField="Paese"
                    
