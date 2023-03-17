@@ -29,7 +29,7 @@ sap.ui.define(
 
       onInit() {
         this.callIpeEntity();
-        
+        this.callNaturaAttoEntity();
         
        
         
@@ -432,7 +432,7 @@ onCloseDialog6 : function () {
             
         } 
         else {
-          oProprietà.setProperty("/header1Visible", false)
+          oProprietà.setProperty("/header1Visible", true)
         }           
       },
 
@@ -650,7 +650,9 @@ onCloseDialog6 : function () {
 });
       
 
-    }
+    },
+
+    
 
     });
   }

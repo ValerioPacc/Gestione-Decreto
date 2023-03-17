@@ -81,13 +81,16 @@ sap.ui.define(
         },
 
         onBackButton1: function () {
-          this.getOwnerComponent().getRouter().navTo("Decreto");
+          this.getOwnerComponent().getRouter().navTo("View1");
+          location.reload()
       },
       onBackButton2: function () {
         this.getOwnerComponent().getRouter().navTo("RegistraIPE");
       }, 
       navToWizard: function (oEvent) {
+        
         this.getOwnerComponent().getRouter().navTo("wizard");
+        
     },
     navToView1: function (oEvent) {
       this.getOwnerComponent().getRouter().navTo("View1");

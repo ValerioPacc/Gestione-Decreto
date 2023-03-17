@@ -13,6 +13,7 @@ sap.ui.define(
       return BaseController.extend("gestione1.controller.Decreto", {
         formatter: DateFormatter,
         onInit() {
+          
         //  var draft= this.getView().getModel("temp").getProperty("/draft");
         //  if (draft === "x") {
         //   oDataModel.read(sObjectPath, {
@@ -90,7 +91,8 @@ sap.ui.define(
                         CodiceUfficio: N_codiceUff,
                         ControlloCorteConti:B_CcConti
                      };
-
+                     //this.onSaveMessageDialogPress()
+                     
                      oDataModel.create("/DecretoImpegnoSet",DecretoImpegnoSet,{
                        success: function(result,response){ 
                         console.log('SUCCESS')
@@ -121,8 +123,56 @@ sap.ui.define(
             }
         })
     },
-    
-     
+    checkFields: function (fields) {
+      var self = this,
+          check = true,
+          sTipologia = this.getView().byId("TypeI"),
+          sEsercizio = this.getView().byId("es_decreto"),
+          sAmministrazione = this.getView().byId("AmministrazioneED"),
+          sDataDe = this.getView().byId("DataDE1");
+          
+
+          var checksTipologia = sTipologia.getSelectedItem() !== null ? true : false;
+          var checksEsercizio = sEsercizio.getSelectedItem() !== null ? true : false;
+          var checksAmministrazione = sAmministrazione.getSelectedItem() !== null ? true : false;
+          var checksDataDe = sDataDe.getValue() !== "" ? true : false;
+        
+
+          if (!checksTipologia) {
+              check = false;
+          }
+
+          if (!checksEsercizio) {
+              check = false;
+          }
+          if (!checksAmministrazione) {
+            check = false;
+        }
+
+        if (!checksDataDe) {
+            check = false;
+        }
+       
+
+      return check;
+  },
+  onSaveMessageDialogPress: function (oEvent) {
+
+    var sDecreto= oEvent.getSource().data("Decreto"),
+    check= this.checkFields(sDecreto);
+
+    if(!check){
+      sap.m.MessageBox.warning("Compilare i campi obbligatori!", {
+        title: "Attenzione",                                   // default
+        actions: [sap.m.MessageBox.Action.CLOSE],
+        styleClass: "",                                      // default
+        customIcon: "../img/kOnzy.gif",               // default
+        textDirection: sap.ui.core.TextDirection.Inherit,
+       
+      })
+
+    }  
+  }
     //  checkFields: function (view) {
     //    var self = this,
     //    check = false;

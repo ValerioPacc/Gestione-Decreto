@@ -324,8 +324,8 @@
                             <VBox>
                                 <HBox>
                                     <Label text="Natura Atto:" labelFor="Natura Atto:" />
-                                    <ComboBox id="naturAtto" items="{comboBox>/NaturaAtto}" >
-                                        <core:Item id="nAtto" key="{comboBox>Atto}" text="{comboBox>Atto} " />
+                                    <ComboBox id="naturAtto" items="{path: 'temp>/NaturaAttoSet', sorter: { path: 'Descrizione' }}" >
+                                        <core:Item id="nAtto" key="{temp>Descrizione}" text="{temp>Descrizione} " />
                                     </ComboBox>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
