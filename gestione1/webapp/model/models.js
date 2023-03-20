@@ -24,7 +24,8 @@ sap.ui.define([
                 draft: "",
                 Step1:[],
                 Step2:[],
-                NewIPE:""
+                NewIPE:"",
+                Esig: []
             };
             
             return new JSONModel(oModel)
@@ -36,7 +37,9 @@ sap.ui.define([
 		},
 
         createEsigModel: function () {
-            var oModel = {};
+            var oModel = {
+                List:[]
+            };
 			return new JSONModel(oModel);
 		},
     };

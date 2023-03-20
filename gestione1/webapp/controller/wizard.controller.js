@@ -632,9 +632,27 @@ onCloseDialog6 : function () {
           columnLabel = columnName.slice(0, -4) === "ZImpIpeCl" ? columnLabel : columnLabel.slice(0, -4);
           if(columnName.slice(0, -4) === "ZImpIpeCl"){
 
+            var oInput = new sap.m.Input("Txt" + columnName,{
+              value: templateBind
+            });
+
+            var oCustomData = new sap.ui.core.CustomData({
+              key: "FieldData",
+              value: columnLabel
+            });
+            
+            // Add the custom data to the Input control
+            oInput.addCustomData(oCustomData);
+          
+            oInput.attachChange(function(oEvent) {
+              var sNewValue = oEvent.getParameter("value");
+              var Anno = oEvent.getSource().data("app:FieldData");
+              console.log("Nuovo valore: " + sNewValue);
+          });
+
             return new sap.ui.table.Column("col" + columnName,{
               label: columnLabel,
-              template: new sap.m.Input({value: templateBind}), //columnName,
+              template: oInput,
               width:"8rem", 
             });
 
@@ -651,6 +669,11 @@ onCloseDialog6 : function () {
         oTable.bindRows("/rows");
 
 		},
+
+    onChangeZImpIpeCl: function (oEvent) {
+      var sNewValue = oEvent.getParameter("value");
+      console.log("Nuovo valore: " + sNewValue);
+    },
 
     onEditIpebozza: function (entry,oDataModel) {
       var self = this,

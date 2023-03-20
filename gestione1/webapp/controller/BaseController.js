@@ -86,17 +86,29 @@ sap.ui.define([
 
 		getRowsData: function (Aut, cols){
 			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
+			var oTempModel = this.getOwnerComponent().getModel("temp");
+			
+			
 
-			oEsigModel.setProperty('/', []); 
+			//oEsigModel.setProperty('/', []); 
 			var arr = [];
 			for( var i in cols){
 				var item = cols[i];
-				oEsigModel.setProperty("/"+ item.columnName, ""); 
-				
+				if(oEsigModel.getProperty("/List").length > 0){
+					var key = Object.keys(oEsigModel.getProperty("/List")[0]);
+					var oExist = _.contains(key, item.columnName);
+					if(!oExist){
+						oEsigModel.setProperty("/List/"+ item.columnName, "")
+					}
+				}else{
+					oEsigModel.setProperty("/List/"+ item.columnName, "")
+				}
+
 			}
 			
-			oEsigModel.setProperty('/Geber', Aut); 
-			arr.push(oEsigModel.getProperty('/'));
+			oEsigModel.setProperty('/List/Geber', Aut); 
+			arr.push(oEsigModel.getProperty('/List'));
+			oEsigModel.setProperty("/List",arr); 
 			return arr;
 		},
 
