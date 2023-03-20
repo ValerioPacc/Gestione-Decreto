@@ -57,7 +57,7 @@
 							<fb:FilterGroupItem id="DataDE" visibleInFilterBar="true" name="DataDE" groupName="Group1" label="{i18n>dataDE}">
                                 <fb:control>
                                     <DatePicker id="DataDE1" displayFormat="dd/MM/yyyy" value="{= ${path: 'temp>/SelectedDecree/DataDecreto' , formatter: '.formatter.convert' } !== null ? ${path: 'temp>/SelectedDecree/DataDecreto' , formatter: '.formatter.convert' } : '' }" />
-                                </fb:control>
+                                </fb:control>	
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numProtocolloAmma" visibleInFilterBar="true" name="numProtocolloAmma" groupName="Group1" label="{i18n>numProtocolloAmma}">
                                 <fb:control>

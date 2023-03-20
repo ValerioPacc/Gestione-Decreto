@@ -11,22 +11,11 @@
     xmlns:menu="sap.m.MenuItem"
     xmlns:menBtn="sap.m.Menu"
     height="100%"
-    controllerName="gestione1.controller.dettagliDE"
+    controllerName="gestione1.controller.firmaDecreto"
 >
    <f:DynamicPage id="dynamicPageId" showFooter="true">
         <f:header>
             <f:DynamicPageHeader pinnable="false" >
-                 <layout:VerticalLayout class="sapUiMediumMarginEnd">
-                        <Title text="Dati Amminastrazione" />
-                        <layout:HorizontalLayout >
-                        <Label text="Dirigente/Direttore Firmatario:" class="sapUiSmallMarginEnd" />
-                        <Text  id="DDFirmatario" class="sapUiMediumMarginEnd"/>
-                    <Label text="Data Firma:" class="sapUiSmallMarginEnd" />
-                    <Text  id="dataFirma" class="sapUiMediumMarginEnd"/>
-                     <Label text="Ufficio Amministrazione:" class="sapUiSmallMarginEnd"/>
-                        <Text  id="UffAmm" class="sapUiMediumMarginEnd"/>
-               </layout:HorizontalLayout >
-                </layout:VerticalLayout>
 
                 <layout:VerticalLayout class="sapUiLargeMarginTop">
                         <Title text="Dati Decreto" />
@@ -37,50 +26,33 @@
                     <Text  id="idAmm" class="sapUiMediumMarginEnd"/>
                      <Label text="N.Decreto:" class="sapUiSmallMarginEnd"/>
                         <Text  id="Ndecr" class="sapUiMediumMarginEnd"/>
-                    <Label text="N.IPE:" class="sapUiSmallMarginEnd" />
-                    <Text  id="Nipe" class="sapUiMediumMarginEnd"/>
                      <Label text="Data Decreto:" class="sapUiSmallMarginEnd" />
                         <Text  id="dataDecr" class="sapUiMediumMarginEnd"/>
-                    <Label text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
-                    <Text  id="NprotAmm" class="sapUiMediumMarginEnd"/>
-               </layout:HorizontalLayout >
-               <layout:HorizontalLayout   class="sapUiMediumMarginTop">
+                        <Label text="Tipologia Impegno:" class="sapUiSmallMarginEnd" />
+                    <Text  id="TipologiaImpegno" class="sapUiMediumMarginEnd"/>
                         <Label text="Stato Decreto:" class="sapUiSmallMarginEnd" />
                         <Text  id="StatoDecreto" class="sapUiMediumMarginEnd"/>
-                    <Label text="Tipologia Impegno:" class="sapUiSmallMarginEnd" />
-                    <Text  id="TipologiaImpegno" class="sapUiMediumMarginEnd"/>
-                     <Label text="Contratto:" class="sapUiSmallMarginEnd"/>
-                        <Text  id="Cordine" class="sapUiMediumMarginEnd"/>
-                    <Label text="Controllo preventivo Corte dei conti:" class="sapUiSmallMarginEnd" />
-                    <Text  id="CcConti" class="sapUiMediumMarginEnd"/>
-               </layout:HorizontalLayout >
-                <layout:HorizontalLayout   class="sapUiMediumMarginTop">
-                <Label text="Attesa documentazione aggiuntiva:" class="sapUiSmallMarginEnd"  />
-                    <Text  id="docAgg" class="sapUiMediumMarginEnd"/>  
-               </layout:HorizontalLayout >
-                </layout:VerticalLayout>
-                
-                <layout:VerticalLayout class="sapUiLargeMarginTop">
-                        <Title text="Dati Ragioneria" />
-                        <layout:HorizontalLayout >
                         <Label text="Ragioneria:" class="sapUiSmallMarginEnd" />
                         <Text  id="Rag" class="sapUiMediumMarginEnd"/>
-                    <Label text="Data Protocollo RGS:" class="sapUiSmallMarginEnd" />
-                    <Text  id="dataProtRag" class="sapUiMediumMarginEnd"/>
-                     <Label text="N.Protocollo RGS:" class="sapUiSmallMarginEnd"/>
-                        <Text  id="nProtRag" class="sapUiMediumMarginEnd"/>
+
+               </layout:HorizontalLayout >
+               <layout:HorizontalLayout   class="sapUiMediumMarginTop">
+                     <Label text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
+                    <Text  id="NprotAmm" class="sapUiMediumMarginEnd"/>  
+                     <Label text="Data Prot. Amm.:" class="sapUiSmallMarginEnd"/>
+                      
                </layout:HorizontalLayout >
                 </layout:VerticalLayout>
-                <!-- <OverflowToolbar>
+                <OverflowToolbar>
                 <ToolbarSpacer/>
                 <Button text="Inserisci dati per invio alla firma" type="Emphasized" press="onOpenInvFirmDialogModPag"/>
-                </OverflowToolbar> -->
+                </OverflowToolbar>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
             <IconTabBar id="IconTabBar" class="sapUiResponsiveContentPadding" select="onSelect"  expandable="true" expanded="false">
                 <items>
-                    <IconTabFilter icon="sap-icon://list" text="Lista IPE" key="ListaIPE">
+                    <IconTabFilter icon="sap-icon://list" text="Lista IPE" key="ListaIPE" >
                       <core:Fragment fragmentName="gestione1.fragment.listaIPE" type="XML"  />
                     </IconTabFilter>
                     <IconTabSeparator/>
@@ -109,4 +81,3 @@
         </f:footer>
     </f:DynamicPage>
 </mvc:View>
-   

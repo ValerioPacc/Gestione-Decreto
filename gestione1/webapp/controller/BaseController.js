@@ -55,8 +55,61 @@ sap.ui.define([
 			field = oEvent.getSource().data("field"),
             item = oEvent.getSource().getSelectedKey();
 			self.getView().getModel("IpeEntitySet").setProperty("/"+ field, item);
-
+            
         },
+		getColsData: function (oYears){
+
+            var aColumnData = [
+				{columnLabel: "PNI",columnName:"Geber"},
+				{columnLabel: "Clausula" + oYears[0],columnName:"ZclausolaVar"+ oYears[0]}, 
+				{columnLabel: "Disponobilità PNI"+ oYears[0], columnName:"Wtfree"+ oYears[0]}, 
+				{columnLabel: ""+ oYears[0], columnName:"ZImpIpeCl"+ oYears[0]}, 
+				{columnLabel: "Disponobilità di cassa"+ oYears[0], columnName:"Zcassa"+ oYears[0]},
+				{columnLabel: "Clausula" + oYears[1],columnName:"ZclausolaVar"+ oYears[1]}, 
+				{columnLabel: "Disponobilità PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]}, 
+				{columnLabel: ""+ oYears[1], columnName:"ZImpIpeCl"+ oYears[1]}, 
+				{columnLabel: "Disponobilità di cassa"+ oYears[1], columnName:"Zcassa"+ oYears[1]},
+				{columnLabel: "Clausula" + oYears[2],columnName:"ZclausolaVar"+ oYears[2]}, 
+				{columnLabel: "Disponobilità PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]}, 
+				{columnLabel: ""+ oYears[2], columnName:"ZImpIpeCl"+ oYears[2]}, 
+				{columnLabel: "Disponobilità di cassa"+ oYears[2], columnName:"Zcassa"+ oYears[2]},
+				{columnLabel: "Clausula" + oYears[3],columnName:"ZclausolaVar"+ oYears[3]}, 
+				{columnLabel: "Disponobilità PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]}, 
+				{columnLabel: ""+ oYears[3], columnName:"ZImpIpeCl"+ oYears[3]}, 
+				{columnLabel: "Disponobilità di cassa"+ oYears[3], columnName:"Zcassa"+ oYears[3]}
+			  ];
+
+			  return aColumnData;
+            
+        },
+
+		getRowsData: function (Aut, cols){
+			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
+			var oTempModel = this.getOwnerComponent().getModel("temp");
+			
+			
+
+			//oEsigModel.setProperty('/', []); 
+			var arr = [];
+			for( var i in cols){
+				var item = cols[i];
+				if(oEsigModel.getProperty("/List").length > 0){
+					var key = Object.keys(oEsigModel.getProperty("/List")[0]);
+					var oExist = _.contains(key, item.columnName);
+					if(!oExist){
+						oEsigModel.setProperty("/List/"+ item.columnName, "")
+					}
+				}else{
+					oEsigModel.setProperty("/List/"+ item.columnName, "")
+				}
+
+			}
+			
+			oEsigModel.setProperty('/List/Geber', Aut); 
+			arr.push(oEsigModel.getProperty('/List'));
+			oEsigModel.setProperty("/List",arr); 
+			return arr;
+		},
 
 		callIpeEntity:function () {
 
@@ -562,6 +615,7 @@ sap.ui.define([
 			this.getView().getModel("temp").setProperty("/SelectedDecree",[]);
 			var oTempModel = this.getView().getModel("temp");
 			oTempModel.setProperty("/draft","");
+			location.reload()
 		}
 
 		/**

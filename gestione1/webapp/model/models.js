@@ -24,7 +24,8 @@ sap.ui.define([
                 draft: "",
                 Step1:[],
                 Step2:[],
-                NewIPE:""
+                NewIPE:"",
+                Esig: []
             };
             
             return new JSONModel(oModel)
@@ -32,6 +33,13 @@ sap.ui.define([
 
         createIPEModel: function () {
             var oModel = {};
+			return new JSONModel(oModel);
+		},
+
+        createEsigModel: function () {
+            var oModel = {
+                List:[]
+            };
 			return new JSONModel(oModel);
 		},
     };

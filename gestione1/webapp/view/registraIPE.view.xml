@@ -65,7 +65,7 @@
 				</VBox>
                 <VBox>
 					<items>
-						<Button align="Center" type="Emphasized" text="Registra IPE di Variazione" press="navToIpeVariazione"/> 
+						<Button align="Center" type="Emphasized" text="Registra IPE di Variazione" /> 
 					</items>
 				<layoutData>
 					<layout:GridData span="XL4 L4 M4 S12"/>

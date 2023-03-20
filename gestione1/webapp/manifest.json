@@ -139,6 +139,13 @@
                     "target": "TargetdettagliDE"
                 },
                 {
+                    "name": "firmaDecreto",
+                    "pattern": "firmaDecreto",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "TargetfirmaDecreto"
+                },
+                {
                     "name": "ipeVariazione",
                     "pattern": "ipeVariazione",
                     "titleTarget": "",
@@ -216,6 +223,14 @@
                     "clearControlAggregation": false,
                     "viewId": "attoAnnullamento",
                     "viewName": "attoAnnullamento",
+                    "viewLevel": 1
+                },
+                "TargetfirmaDecreto": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "firmaDecreto",
+                    "viewName": "firmaDecreto",
                     "viewLevel": 1
                 }
             }

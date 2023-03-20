@@ -10,11 +10,13 @@ sap.ui.define(
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/SearchField",
-    'gestione1/model/DateFormatter'
+    'gestione1/model/DateFormatter',
+    "sap/m/Label",
+    "sap/m/Text"
 
 
   ],
-  function (BaseController,CoreLibrary,JSONModel,MessageBox,syncStyleClass,Fragment,Filter,FilterOperator,SearchField,DateFormatter) {
+  function (BaseController,CoreLibrary,JSONModel,MessageBox,syncStyleClass,Fragment,Filter,FilterOperator,SearchField,DateFormatter,Label,TextView) {
     "use strict";
     var iTimeoutId;
     var ValueState = CoreLibrary.ValueState,
@@ -432,7 +434,7 @@ onCloseDialog6 : function () {
             
         } 
         else {
-          oProprietà.setProperty("/header1Visible", true)
+          oProprietà.setProperty("/header1Visible", false)
         }           
       },
 
@@ -652,7 +654,87 @@ onCloseDialog6 : function () {
 
     },
 
-    
+    OnSelectYears: function(oEvent) {
+      var oValue =oEvent.getSource().getSelectedItem().getProperty("text"),
+      Aut = "Autorizzazione1",
+      oYears = oValue.split("-"),
+      oTable = this.getView().byId("EsigTable"),
+      colsData = this.getColsData(oYears),
+      rows = this.getRowsData(Aut,colsData,oYears),
+      model = new sap.ui.model.json.JSONModel({});
+
+
+      var oModel = new sap.ui.model.json.JSONModel();
+
+      oModel.setData({
+          columns: colsData,
+          rows: rows
+      });
+
+      this._buildUITableContent.apply(this, [oTable, oModel]);
+
+   
+
+    },
+
+    _buildUITableContent : function (oTable, oModel) {
+			var oController = this;
+			var crtView = oController.getView();
+
+			
+      oTable.setModel(oModel);
+
+      oTable.bindColumns("/columns", function(sId, oContext) {
+          var columnName = oContext.getObject().columnName;
+          var columnLabel = oContext.getObject().columnLabel;
+          var templateBind = "{" + columnName + "}";
+          var Column = "";
+          columnLabel = columnName.slice(0, -4) === "ZImpIpeCl" ? columnLabel : columnLabel.slice(0, -4);
+          if(columnName.slice(0, -4) === "ZImpIpeCl"){
+
+            var oInput = new sap.m.Input("Txt" + columnName,{
+              value: templateBind
+            });
+
+            var oCustomData = new sap.ui.core.CustomData({
+              key: "FieldData",
+              value: columnLabel
+            });
+            
+            // Add the custom data to the Input control
+            oInput.addCustomData(oCustomData);
+          
+            oInput.attachChange(function(oEvent) {
+              var sNewValue = oEvent.getParameter("value");
+              var Anno = oEvent.getSource().data("app:FieldData");
+              console.log("Nuovo valore: " + sNewValue);
+          });
+
+            return new sap.ui.table.Column("col" + columnName,{
+              label: columnLabel,
+              template: oInput,
+              width:"8rem", 
+            });
+
+          }else{
+            return new sap.ui.table.Column("col" + columnName,{
+              label: columnLabel,
+              template: columnName,
+              width: columnName.slice(0, -4) === "Geber" ? "22rem" : "8rem", 
+            });
+          }
+        
+        });
+
+        oTable.bindRows("/rows");
+
+		},
+
+    onChangeZImpIpeCl: function (oEvent) {
+      var sNewValue = oEvent.getParameter("value");
+      console.log("Nuovo valore: " + sNewValue);
+    },
+
 
     });
   }

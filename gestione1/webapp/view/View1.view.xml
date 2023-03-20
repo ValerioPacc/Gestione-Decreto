@@ -278,7 +278,7 @@
              <f:footer>
                 <OverflowToolbar>
                     <ToolbarSpacer />
-                    <Button text="{i18n>RegistrazioneDI}" type="Emphasized" press="navToDecreto" />
+                    <Button text="{i18n>RegistrazioneDI}" type="Emphasized" press="navToDecreto" id="registrazioneDI" enabled="true"/>
                 </OverflowToolbar>
             </f:footer>
         </f:DynamicPage>

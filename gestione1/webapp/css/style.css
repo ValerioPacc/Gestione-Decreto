@@ -1,63 +1,74 @@
 /* Enter your custom styles here */
 .header {
-    padding: 30px;
-    text-align: left;
-    color: black;
-    font-size: 15px;
-  }
-  .VL{
-    padding-bottom: 2rem !important; 
-  }
-  .title{
-    border-top: 1px solid #a3a3a4 !important;
-    font-size: 1.8rem !important;
-    padding: 1rem 0 1rem 0 !important;
-    box-shadow: none !important;
-  }
-  .Grid{
-    text-align:center !important; 
-  }
-  .sapUiSizeCompact .sapMSLI.sapMSLIThumbnail, .sapUiSizeCompact .sapMSLI.sapMSLINoIconInset, .sapUiSizeCompact .sapMSLI.sapMSLIWithDescription, .sapUiSizeCompact .sapMSLI.sapMSLINoTitleAdapt {
-    height: 2rem !important;
+  padding: 30px;
+  text-align: left;
+  color: black;
+  font-size: 15px;
 }
-  .btnList::before
-  {
-    /*background-image: url("../img/btn_listaPE.jpg");*/
-    content: url("../img/btn_listaPE.jpg");
-    background-repeat: none;
-    width:30px;
-    height:40px;
-  }
-  .marginRight
-  {
-    margin-right: 0.5rem !important;
-  }
-  .TabBar .sapMITBContent {
-    padding: 0 !important;
+.VL{
+  padding-bottom: 2rem !important; 
+}
+.title{
+  border-top: 1px solid #a3a3a4 !important;
+  font-size: 1.8rem !important;
+  padding: 1rem 0 1rem 0 !important;
+  box-shadow: none !important;
+}
+.Grid{
+  text-align:center !important; 
+}
+.sapUiSizeCompact .sapMSLI.sapMSLIThumbnail, .sapUiSizeCompact .sapMSLI.sapMSLINoIconInset, .sapUiSizeCompact .sapMSLI.sapMSLIWithDescription, .sapUiSizeCompact .sapMSLI.sapMSLINoTitleAdapt {
+  height: 2rem !important;
+}
+.btnList::before
+{
+  /*background-image: url("../img/btn_listaPE.jpg");*/
+  content: url("../img/btn_listaPE.jpg");
+  background-repeat: none;
+  width:30px;
+  height:40px;
+}
+.marginRight
+{
+  margin-right: 0.5rem !important;
+}
+.TabBar .sapMITBContent {
+  padding: 0 !important;
 }  
 .toolbar {
-  padding-top: 1rem !important;
+padding-top: 1rem !important;
+}
+
+.Freeze .sapMLabel {
+
+white-space: break-spaces !important;
+
+}
+
+.Freeze .sapUiTableCell[id*="colZcassa"], .Freeze .sapUiTableCell[aria-labelledby*="colZcassa"] {
+border-right: 0.1rem solid #000 !important;
 }
 
 
-  /* .sapMBtn{
-    font-size:30px;
-    height:20%;
-    width:5%;
-    }
-     */
-     /* .sapMITBFilter .sapMITBText {
 
-      width: 7rem;
-      
-      line-height: 0.9375rem;
-      
-      padding: 0.450rem 0 0;
-      
-      position: relative;
-      
-      color: #333;
-      
-      text-shadow: 0 0 0.125rem #fff;
-      
-      } */
+/* .sapMBtn{
+  font-size:30px;
+  height:20%;
+  width:5%;
+  }
+   */
+   /* .sapMITBFilter .sapMITBText {
+
+    width: 7rem;
+    
+    line-height: 0.9375rem;
+    
+    padding: 0.450rem 0 0;
+    
+    position: relative;
+    
+    color: #333;
+    
+    text-shadow: 0 0 0.125rem #fff;
+    
+    } */

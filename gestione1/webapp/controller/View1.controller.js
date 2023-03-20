@@ -131,7 +131,9 @@ sap.ui.define([
                     var e = error;}
                  });
              });
-          
+             this.getView().byId("Esporta").setEnabled(true);
+             this.getView().byId("DettagliDE").setEnabled(false);
+             this.getView().byId("registrazioneDI").setEnabled(true);
                 // var that = this;
                 // var oMdl = new sap.ui.model.json.JSONModel();
                 // this.getView().getModel().read("/DecretoImpegnoSet", {
@@ -153,6 +155,7 @@ sap.ui.define([
                 //sap.ui.getCore().TableModel = oMdlW;
                 // this.getView().byId("Esporta").setEnabled(true);
                 // this.getView().byId("PreimpostazioneNI").setEnabled(true);
+                
             },
 
             navToRegistraIpe: function (oEvent) {
@@ -253,6 +256,10 @@ sap.ui.define([
                     oSheet.destroy();
                 });
             },
+            onRowSelectionChange: function (oEvent) {
+                this.getView().byId("registrazioneDI").setEnabled(false);
+                this.getView().byId("DettagliDE").setEnabled(true);
+            }
         });
     });
 
