@@ -10,7 +10,7 @@ sap.ui.define([
 	// shortcut for sap.m.URLHelper
 	var URLHelper = mobileLibrary.URLHelper;
 
-	return Controller.extend("sap.btp.sapui5.controller.BaseController", {
+	return Controller.extend("gestione1.controller.BaseController", {
 		/**
 		 * Convenience method for accessing the router.
 		 * @public
