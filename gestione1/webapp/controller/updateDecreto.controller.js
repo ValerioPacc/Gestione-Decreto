@@ -106,6 +106,19 @@ sap.ui.define(
                                     ControlloCorteConti: that.getView().byId("CcorteConti").getSelected() === true ? '1' : '0'
                                 };
 
+                                var dataNuova = new Date(editDecreto.DataProtocolloAmm),
+            mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+            day = ("0" + dataNuova.getDate()).slice(-2);
+           var nData= [dataNuova.getFullYear(), mnth, day].join("-");
+           editDecreto.DataProtocolloAmm= new Date(nData)
+           
+           
+           var newDate = new Date(editDecreto.DataDecreto),
+           mnth = ("0" + (newDate.getMonth() + 1)).slice(-2),
+           day = ("0" + newDate.getDate()).slice(-2);
+          var nData= [newDate.getFullYear(), mnth, day].join("-");
+          editDecreto.DataDecreto= new Date(nData)
+
                                 oModel.update(path, editDecreto,  {
                                     success: function (data) {
                                         console.log("success");

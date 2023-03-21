@@ -57,14 +57,17 @@ sap.ui.define(
         var N_es_decreto = this.getView().byId("es_decreto").mProperties.value; 
         var N_Amm = this.getView().byId("AmministrazioneED").mProperties.value;  
         var N_codiceUff = this.getView().byId("UffApp1").mProperties.value;  
-        var N_Datade = new Date(this.getView().byId("DataDE1").mProperties.dateValue)  
+        var N_Datade = this.getView().byId("DataDE1").mProperties.dateValue
         var N_NprotAmm = this.getView().byId("numProtocolloAmma1").getValue();   
-        var N_DataprotAmm =new Date( this.getView().byId("dataProtocolloAmm1").mProperties.dateValue)  
+        var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").mProperties.dateValue 
         var N_CcConti = this.getView().byId("CcorteConti").getSelected();
         if (N_CcConti==true) 
         var B_CcConti = "1" 
         if (N_CcConti==false) 
         var B_CcConti = "0" 
+
+        
+
 
         MessageBox.warning("Sei sicuro di voler preimpostare il DI?", {
             actions: ["Si", "No"],
@@ -91,6 +94,18 @@ sap.ui.define(
                         CodiceUfficio: N_codiceUff,
                         ControlloCorteConti:B_CcConti
                      };
+                     var dataNuova = new Date(N_DataprotAmm),
+            mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+            day = ("0" + dataNuova.getDate()).slice(-2);
+           var nData= [dataNuova.getFullYear(), mnth, day].join("-");
+           DecretoImpegnoSet.DataProtocolloAmm= new Date(nData)
+           
+           
+           var newDate = new Date(N_Datade),
+           mnth = ("0" + (newDate.getMonth() + 1)).slice(-2),
+           day = ("0" + newDate.getDate()).slice(-2);
+          var nData= [newDate.getFullYear(), mnth, day].join("-");
+          DecretoImpegnoSet.DataDecreto= new Date(nData)
                      //this.onSaveMessageDialogPress()
                      
                      oDataModel.create("/DecretoImpegnoSet",DecretoImpegnoSet,{
