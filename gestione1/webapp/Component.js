@@ -27,6 +27,7 @@ function (UIComponent, Device, models) {
         
             /*** IMPORT CUSTOM LIBS ***/
             jQuery.getScript(sRootPath + "/utils/underscore-min.js");
+;
 
             // enable routing
             this.getRouter().initialize();
