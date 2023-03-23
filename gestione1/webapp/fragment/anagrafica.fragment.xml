@@ -31,13 +31,13 @@ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
                      <Label text="Paese" required= "true"/>
                   </f:label>
                   <f:fields>
-                   <Input id="inputPaese" 
+                   <Input id="ValueHelpPaese" 
                     showValueHelp="true"
                     enabled="true"
                     valueHelpOnly="true"
                     valueHelpRequest="handleCountryValueHelp"
-                    app:FieldName="Paese"
-                    app:filterTableField="Paese"
+                    app:FieldName="ValueHelpPaese"
+                    app:filterTableField="ValueHelpPaese"
                     class="sapUiSmallMarginBottom validateFilter">
                         <layoutData>
                             <l:GridData span="XL1 L1 M1 S2" />
@@ -46,7 +46,7 @@ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
                      <!--MultiInput id="inputPaese"  class="validateFilter" value="" width="10%">
                      <core:Item key="{comboBox>}" text="{comboBox>}" />
                      </MultiInput-->
-                      <Input id="input" class="validateFilter" value="CountryMatchCodeSet>/Description" >
+                      <Input id="input" class="validateFilter" value="" >
                        <layoutData>
                             <l:GridData span="XL2 L2 M6 S6" />
                         </layoutData>

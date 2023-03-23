@@ -44,6 +44,12 @@ height="100%"
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta"/>
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
             </m:OverflowToolbar>
+            <m:OverflowToolbar>
+            <m:Label text="{i18n>PosFin}"/>
+            <m:Text text=""/>
+            <m:Label text="{i18n>struttura_amm_resp}" class="marginRight"/>
+            <m:Text text=""/>
+            </m:OverflowToolbar>
         </extension>
         <columns>
         </columns>

@@ -97,10 +97,57 @@ sap.ui.define(
     },
 
     onNextButton: function () {
-        // this.onSearch()
-        // this.onCommunicationPress()
-        // var oModelP = new sap.ui.model.json.JSONModel("../mockdata/tabGestNI.json");
-        // this.getView().setModel(oModelP, "HeaderNIW");
+      var es_decreto = this.getView().byId("es_decreto").getSelectedKey()
+      var amm = this.getView().byId("ammin1").getValue()
+      //var Ncontratto = this.getView().byId("Ncontratto").getSelectedKey()
+      var Dstipula = this.getView().byId("Dstipula").getValue()
+      var beneficiario = this.getView().byId("beneficiario1").getValue()
+      var mPag = this.getView().byId("mPag").getSelectedItem()
+
+      if (es_decreto == "" && amm == "" && Dstipula=="") {
+          MessageBox.error("Campi obbligatori non inseriti!", {
+              actions: [sap.m.MessageBox.Action.OK],
+              emphasizedAction: MessageBox.Action.OK,
+          })
+      }
+      else if (es_decreto == "") {
+          MessageBox.error("Campo Esercizio obbligatorio non inserito!", {
+              actions: [sap.m.MessageBox.Action.OK],
+              emphasizedAction: MessageBox.Action.OK,
+          })
+      }
+      else if (amm == "") {
+          MessageBox.error("Campo Amministrazione obbligatorio non inserito!", {
+              actions: [sap.m.MessageBox.Action.OK],
+              emphasizedAction: MessageBox.Action.OK,
+          })
+      }
+    //   else if (beneficiario == "") {
+    //     MessageBox.error("Campo Beneficiario obbligatorio non inserito!", {
+    //         actions: [sap.m.MessageBox.Action.OK],
+    //         emphasizedAction: MessageBox.Action.OK,
+    //     })
+    // }
+  //   else if (mPag == "") {
+  //     MessageBox.error("Campo Modalità di Pagamento obbligatorio non inserito!", {
+  //         actions: [sap.m.MessageBox.Action.OK],
+  //         emphasizedAction: MessageBox.Action.OK,
+  //     })
+  // }
+    //   else if (Ncontratto == "") {
+    //     MessageBox.error("Campo N. Contratto obbligatorio non inserito!", {
+    //         actions: [sap.m.MessageBox.Action.OK],
+    //         emphasizedAction: MessageBox.Action.OK,
+    //     })
+    // }
+    else if (Dstipula == "") {
+      MessageBox.error("Campo Data Stipula obbligatorio non inserito!", {
+          actions: [sap.m.MessageBox.Action.OK],
+          emphasizedAction: MessageBox.Action.OK,
+      })
+  }
+
+  else{
         this._oWizard = this.byId("CreateProductWizard");
         this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
         this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);
@@ -111,7 +158,7 @@ sap.ui.define(
         } else {
             this._oWizard.nextStep();
         }
-
+      }
         this._iSelectedStepIndex++;
         this._oSelectedStep = oNextStep;
         this.controlHeader();
@@ -119,6 +166,7 @@ sap.ui.define(
         //this.controlPreNI()
         
         //this.getView().byId("tabGestNI").setVisible(false);
+
     },
 
     onOpenFragment : function () {
@@ -551,7 +599,7 @@ onCloseDialog6 : function () {
                     ZidIpe:'',
                     Zufficioliv1:oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
                     Zufficioliv2:oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
-                    Zzdatastipula: new Date (oIpeEntitySet.getProperty("/Zzdatastipula")), //new Date (oTempModel.getProperty("/Step1/").data),
+                    Zzdatastipula: oIpeEntitySet.getProperty("/Zzdatastipula"), //new Date (oTempModel.getProperty("/Step1/").data),
                     Ebeln: oIpeEntitySet.getProperty("/Ebeln"),//oTempModel.getProperty("/Step1/").id,
                     Lifnr: oIpeEntitySet.getProperty("/Lifnr"),  //oTempModel.getProperty("/Step1/").id_ben,
                     Zzcig: oIpeEntitySet.getProperty("/Zzcig"),  //oTempModel.getProperty("/Step1/").cig,
@@ -563,6 +611,8 @@ onCloseDialog6 : function () {
                     Stcd2: "",//oIpeEntitySet.getProperty("/Stcd2"), //oTempModel.getProperty("/Step2/").IVA,
                     Zwels: oIpeEntitySet.getProperty("/Zwels"), //oTempModel.getProperty("/items/").Modalita_pagamento,
                     Iban: oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
+
+
                     Zbozza: "X"
                     };
                     if(!oBozza){

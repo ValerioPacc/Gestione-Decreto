@@ -388,25 +388,25 @@ sap.ui.define([
 		    // this.getOwnerComponent().getModel("IpeEntitySet");
 
 			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
-			var aFilters = [];
+			// var aFilters = [];
 
-			aFilters.push(
-			  new Filter({path: "Zzanno", operator: FilterOperator.EQ, value1: Zzanno }),
-			  new Filter({path: "Zzamministrazione", operator: FilterOperator.EQ, value1: Zzammin })
+			// aFilters.push(
+			//   new Filter({path: "Zzanno", operator: FilterOperator.EQ, value1: Zzanno }),
+			//   new Filter({path: "Zzamministrazione", operator: FilterOperator.EQ, value1: Zzammin })
 
-			)
-
-
-
-			// var path = oModel.createKey('/ContrattoSet', {
-			// 	Ebeln:'4500000019'
-			// })
+			// )
 
 
 
+			var path = oModel.createKey('/ContrattoSet', {
+				Ebeln:'4500000019'
+			})
 
-			oModel.read('/ContrattoSet', {
-				filters:aFilters,
+
+
+
+			oModel.read(path, {
+				filters:[],
 				urlParameters: "",
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
@@ -496,7 +496,7 @@ sap.ui.define([
 				sName = oSource.data("FieldName");
 				this.callCountryEntity();
 
-			var oDialog = this.openExpandDialog("gestione1.fragment.Help.ValueHelp" + sName).open();
+			var oDialog = this.openExpandDialog("gestione1.fragment.Help." + sName).open();
 
 		},
 		handleContractValueHelp: function(oEvent){
@@ -543,11 +543,27 @@ sap.ui.define([
 			if (oSelectedItem) {
 				var sValueTitle = oSelectedItem.getTitle();
 				Input.setValue(sValueTitle);
-				this.getView().getModel("IpeEntitySet").setProperty('/Ebeln' ,sValueTitle);
+				this.getView().getModel("ContrattoSet").setProperty('/Ebeln' ,sValueTitle);
 				this.getOtherData(sValueTitle);
 			}
 			this.closeDialog();
 		},
+		_handleValueHelpContactCloseCountry : function (evt) {
+
+			var that = this,
+			oSelectedItem = evt.getParameter("selectedItem"),
+			sField = evt.getSource().data("filterTableField"),
+			Input = sap.ui.getCore().byId(sField);
+
+			if (oSelectedItem) {
+				var sValueTitle = oSelectedItem.getTitle();
+				Input.setValue(sValueTitle);
+				this.getView().getModel("CountryMatchCodeSet").setProperty('/Code' ,sValueTitle);
+				this.getOtherData(sValueTitle);
+			}
+			this.closeDialog();
+		},
+
 		_handleValueHelpCloseBen: function (evt) {
 
 			var that = this,

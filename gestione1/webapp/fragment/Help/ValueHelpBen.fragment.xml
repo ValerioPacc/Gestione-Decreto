@@ -4,7 +4,7 @@
 		growing="true"
 		growingThreshold="9999"
 		class="sapUiPopupWithPadding"
-		items="{path:'/BeneficiarioEntitySet'}"
+		items="{path:'temp>/BeneficiarioEntitySet'}"
 		search="_handleValueHelpSearch"
 		confirm="_handleValueHelpCloseBen"
 		cancel="_handleValueHelpClose"
@@ -13,8 +13,8 @@
 		<StandardListItem
 			iconDensityAware="false"
 			iconInset="false"
-			title="{NameFirst} {NameLast}"
-			app:key="{Lifnr}"
+			title="{temp>NameFirst} {temp>NameLast}"
+			app:key="{temp>Lifnr}"
 			 />
 	</SelectDialog>	
 </core:FragmentDefinition>

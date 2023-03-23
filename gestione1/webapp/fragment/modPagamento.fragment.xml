@@ -9,7 +9,7 @@
                         required="true" 
                         items="{comboBox>/items}" 
                         change="onListSelect" 
-                        id="comboBox"
+                        id="mPag"
                         selectedKey="{IpeEntitySet>/Zwels}">
                             <core:Item key="{comboBox>id}" text="{comboBox>Modalita_pagamento}" />
                         </ComboBox>

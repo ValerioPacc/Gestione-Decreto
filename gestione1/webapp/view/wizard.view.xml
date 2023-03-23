@@ -81,7 +81,7 @@
                                       
                                         <VBox>
                                             <Label text="{i18n>amministrazione}" required="true" />
-                                            <Input value="{temp>/SelectedDecree/Amministrazione}" enabled="true" />
+                                            <Input value="{temp>/SelectedDecree/Amministrazione}" enabled="true" id="ammin1"/>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
@@ -94,6 +94,7 @@
                                                 enabled="{/FilterSwitch1}"
                                                 valueHelpOnly="true"
                                                 valueHelpRequest="handleContractValueHelp"
+                                                value=""
                                                 app:FieldName="Contratto"
                                                 app:filterTableField="Contratto"
                                                 class="sapUiSmallMarginBottom"
@@ -181,7 +182,7 @@
                             <Button text="Indietro" type="Emphasized" press="onBackButton" />
                             <Button text="Avanti" type="Emphasized" press="onNextButton" />
                             <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" press="onSaveDraftIPE" />
+                            <Button type="Emphasized" text="Salva in bozza" press="onRegIpebozza" />
                         </OverflowToolbar>
                     </WizardStep>
                     <WizardStep id="Beneficiario1" validated="true" title="Beneficiario" activate="additionalInfoValidation">

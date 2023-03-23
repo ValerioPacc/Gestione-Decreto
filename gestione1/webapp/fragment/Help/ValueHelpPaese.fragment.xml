@@ -5,18 +5,18 @@
 		growingThreshold="9999"
 		class="sapUiPopupWithPadding"
 		items="{
-			path:'/CountryMatchCodeSet'
+			path:'temp>/CountryMatchCodeSet'
 			}"
 		search="_handleValueHelpSearch"
-		confirm="_handleValueHelpContactClose"
+		confirm="_handleValueHelpContactCloseCountry"
 		cancel="_handleValueHelpClose"
-        app:filterTableField="Paese"
+        app:filterTableField="ValueHelpPaese"
 		>
 		<StandardListItem
 			iconDensityAware="false"
 			iconInset="false"
-			title="{Code}"
-			app:key="{Code}"
+			title="{temp>Code}"
+			app:key="{temp>Code}"
 			 />
 	</SelectDialog>	
 </core:FragmentDefinition>
