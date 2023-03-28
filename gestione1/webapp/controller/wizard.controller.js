@@ -32,6 +32,7 @@ sap.ui.define(
       onInit() {
         this.callIpeEntity();
         this.callNaturaAttoEntity();
+        this.callModPagEntity()
         
        
         
@@ -57,9 +58,9 @@ sap.ui.define(
       },
 
       onListSelect: function (event) {
-        var oSelectedKey = this.getView().byId('comboBox').getSelectedKey();
+        var oSelectedKey = this.getView().byId('mPag').getSelectedKey();
         
-        this.getView().getModel("IpeEntitySet").setProperty('/Zwels' ,oSelectedKey); 
+        this.getView().getModel("ZwelsBenSet").setProperty('/Zwels' ,oSelectedKey); 
 
         if(oSelectedKey === '2'){
           this.getView().byId('labelCS').setRequired(true);
@@ -238,6 +239,7 @@ sap.ui.define(
       oTempModel = this.getView().getModel("temp"),
       rowSelected = _.findWhere(oModel.getProperty("/Contratto"), {id: value}),
       beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), {id: rowSelected.id_ben});
+      
 
       this._setBeneficiario(beneficiario);
 
@@ -611,7 +613,19 @@ onCloseDialog6 : function () {
                     Stcd2: "",//oIpeEntitySet.getProperty("/Stcd2"), //oTempModel.getProperty("/Step2/").IVA,
                     Zwels: oIpeEntitySet.getProperty("/Zwels"), //oTempModel.getProperty("/items/").Modalita_pagamento,
                     Iban: oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
-
+                    ZidRich: oIpeEntitySet.getProperty("/ZidRich"),
+                    Fipex: oIpeEntitySet.getProperty("/Fipex"),
+                    Fipex: oIpeEntitySet.getProperty("/Fipex"),
+                    Fistl: oIpeEntitySet.getProperty("/Fistl"),
+                    Ktext: oIpeEntitySet.getProperty("/Ktext"),
+                    Znaturaatto: oIpeEntitySet.getProperty("/Znaturaatto"),
+                    Znumcontratt: oIpeEntitySet.getProperty("/Znumcontratt"),
+                    Zdataatto: oIpeEntitySet.getProperty("/Zdataatto"),
+                    Bsart: oIpeEntitySet.getProperty("/Bsart"),
+                    Zzgara: oIpeEntitySet.getProperty("/Zzgara"),
+                    Zop: oIpeEntitySet.getProperty("/Zop"),
+                    Zoa: oIpeEntitySet.getProperty("/Zoa"),
+                    Zni: oIpeEntitySet.getProperty("/Zni"),
 
                     Zbozza: "X"
                     };
@@ -785,7 +799,26 @@ onCloseDialog6 : function () {
       console.log("Nuovo valore: " + sNewValue);
     },
 
+    callModPagEntity:function () {
+      var that = this;
+      var oMdl = new sap.ui.model.json.JSONModel();
+      this.getOwnerComponent().getModel().read("/ZwelsBenSet", {
+          filters: [],
+          urlParameters: "",
+          success: function (data) {
+              oMdl.setData(data.results);
+              that.getView().getModel("temp").setProperty('/ZwelsBenSet', data.results)
+              
+          },
+          error: function (error) {
+              //that.getView().getModel("temp").setProperty(sProperty,[]);
+              //that.destroyBusyDialog();
+              var e = error;
+          }
+      });
+  
 
+  },
     });
   }
 );

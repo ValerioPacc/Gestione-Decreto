@@ -10,7 +10,7 @@
 		search="_handleValueHelpSearch"
 		confirm="_handleValueHelpContactClose"
 		cancel="_handleValueHelpClose"
-        app:filterTableField="Contratto"
+        app:filterTableField="ValueHelpContratto"
 		>
 		<StandardListItem
 			iconDensityAware="false"

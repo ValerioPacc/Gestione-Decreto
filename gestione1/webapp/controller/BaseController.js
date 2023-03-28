@@ -503,12 +503,12 @@ sap.ui.define([
 
 			var oSource = oEvent.getSource(),
 				oValue= oSource.getValue(),
-				//sField = oEvent.getSource().data("filterTableField"),
-				sName = oSource.data("FieldName");
+				sField = oEvent.getSource().data("filterTableField"),
+				sName = oSource.data(sField);
 	            var Zzanno = this.getView().byId("es_decreto").getSelectedKey();
 				this.callContrattoEntity(Zzanno);
 
-			var oDialog = this.openDialog("gestione1.fragment.Help.ValueHelp" + sName).open();
+			var oDialog = this.openDialog("gestione1.fragment.Help." + sName).open();
 
 		},
 		handleBenValueHelp: function(oEvent){

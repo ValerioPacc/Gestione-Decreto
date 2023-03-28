@@ -13,7 +13,7 @@ sap.ui.define(
       return BaseController.extend("gestione1.controller.Decreto", {
         formatter: DateFormatter,
         onInit() {
-          
+          this.callTipoImpEntity()
         //  var draft= this.getView().getModel("temp").getProperty("/draft");
         //  if (draft === "x") {
         //   oDataModel.read(sObjectPath, {
@@ -45,7 +45,26 @@ sap.ui.define(
         onBackButton: function () {
           this.getOwnerComponent().getRouter().navTo("View1");
       },
-      
+
+      callTipoImpEntity:function () {
+        var that = this;
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/TipologiaImpegnoSet", {
+            filters: [],
+            urlParameters: "",
+            success: function (data) {
+                oMdl.setData(data.results);
+                that.getView().getModel("temp").setProperty('/TipologiaImpegnoSet', data.results)
+            },
+            error: function (error) {
+                //that.getView().getModel("temp").setProperty(sProperty,[]);
+                //that.destroyBusyDialog();
+                var e = error;
+            }
+        });
+    
+
+    },
    
 
 

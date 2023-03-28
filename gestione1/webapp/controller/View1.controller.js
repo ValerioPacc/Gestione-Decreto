@@ -17,7 +17,7 @@ sap.ui.define([
         return BaseController.extend("gestione1.controller.View1", {
             formatter: DateFormatter,
             onInit: function () {
-                
+                this.callTipoImpEntity()
                 var oFilter = this.getView().byId("filterID"),
 				that = this;
 				
@@ -47,7 +47,7 @@ sap.ui.define([
                 var path = ""
 
                 var numFilter = oEvent.getParameters().selectionSet.length;
-
+                
                 for (let i = 0; i < numFilter; i++) {
                     
                     bindingInfo = "items"
@@ -59,6 +59,7 @@ sap.ui.define([
                     var filtro = oEvent.getParameters().selectionSet[i]
                     if (filtro) {
                         if (filtro.mProperties.dateValue instanceof Date || !isNaN(filtro.mProperties.dateValue)) {
+
                             if (i == 11) {
                                 if(oEvent.getParameters().selectionSet[11].mProperties.value!= ''){
                                 datiGI.push(new Filter({
@@ -114,7 +115,7 @@ sap.ui.define([
                     }
                 }
                 //console.log(datiGI)
-               
+                
                 var oDataModel = that.getModel();
                 
                  that.getModel().metadataLoaded().then( function() { 
@@ -124,12 +125,14 @@ sap.ui.define([
                       success: function(data, oResponse){
                         var oModelJson = new sap.ui.model.json.JSONModel();
                           oModelJson.setData(data.results);
-                           that.getView().getModel("temp").setProperty('/DecretoImpegnoSet', oModelJson); 
+                           that.getView().getModel("temp").setProperty('/DecretoImpegnoSet', oModelJson);
                            that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
                          },
                           error: function(error){
                     var e = error;}
+                    
                  });
+                 
              });
              this.getView().byId("Esporta").setEnabled(true);
              this.getView().byId("DettagliDE").setEnabled(false);
@@ -259,7 +262,27 @@ sap.ui.define([
             onRowSelectionChange: function (oEvent) {
                 this.getView().byId("registrazioneDI").setEnabled(false);
                 this.getView().byId("DettagliDE").setEnabled(true);
-            }
+            },
+            callTipoImpEntity:function () {
+                var that = this;
+                var oMdl = new sap.ui.model.json.JSONModel();
+                this.getOwnerComponent().getModel().read("/TipologiaImpegnoSet", {
+                    filters: [],
+                    urlParameters: "",
+                    success: function (data) {
+                        oMdl.setData(data.results);
+                        that.getView().getModel("temp").setProperty('/TipologiaImpegnoSet', data.results)
+                        //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+                    },
+                    error: function (error) {
+                        //that.getView().getModel("temp").setProperty(sProperty,[]);
+                        //that.destroyBusyDialog();
+                        var e = error;
+                    }
+                });
+            
+    
+            },
         });
     });
 

@@ -46,7 +46,7 @@ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
                      <!--MultiInput id="inputPaese"  class="validateFilter" value="" width="10%">
                      <core:Item key="{comboBox>}" text="{comboBox>}" />
                      </MultiInput-->
-                      <Input id="input" class="validateFilter" value="" >
+                      <Input id="input" class="validateFilter" value="{temp>Description}" >
                        <layoutData>
                             <l:GridData span="XL2 L2 M6 S6" />
                         </layoutData>

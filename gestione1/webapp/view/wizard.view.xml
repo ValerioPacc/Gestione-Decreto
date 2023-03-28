@@ -89,14 +89,14 @@
                                         <VBox>
                                             <Label text="{i18n>Ncontratto}" required="true" />
                                             <Input
-                                                id="Ncontratto"
+                                                id="ValueHelpContratto"
                                                 showValueHelp="true"
                                                 enabled="{/FilterSwitch1}"
                                                 valueHelpOnly="true"
                                                 valueHelpRequest="handleContractValueHelp"
                                                 value=""
-                                                app:FieldName="Contratto"
-                                                app:filterTableField="Contratto"
+                                                app:FieldName="ValueHelpContratto"
+                                                app:filterTableField="ValueHelpContratto"
                                                 class="sapUiSmallMarginBottom"
                                             />
                                             <!--core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/-->
@@ -296,7 +296,7 @@
                             <VBox>
                                 <HBox>
                                     <Label text="ID Richiesta Assenso Preventivo:" labelFor="ID Richiesta Assenso Preventivo:" />
-                                    <Input id="IdAssPre" value="" showSuggestion="true"  showValueHelp="true" enabled="false" valueHelpOnly="true"/>
+                                    <Input id="IdAssPre" value="{IpeEntitySet>/ZidRich}" showSuggestion="true"  showValueHelp="true" enabled="false" valueHelpOnly="true"/>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3"  />
                                     </layoutData>
@@ -335,8 +335,8 @@
                                 <Title text="" />
                                 <HBox visible="{/FilterSwitch1}">
                                     <Label text="{i18n>tipoAtto}" labelFor="Tipo Atto:" />
-                                    <ComboBox id="idTypeCon" items="{>/}" >
-                                        <core:Item key="{}" text="{} {}" />
+                                    <ComboBox id="idTypeCon" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Bsart' }}" >
+                                        <core:Item key="{temp>Bsart}" text="{temp>Bsart}" />
                                     </ComboBox>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
@@ -346,8 +346,8 @@
                             <VBox>
                                 <HBox>
                                     <Label text="{i18n>Natto}" labelFor="{i18n>Natto}" />
-                                    <ComboBox id="numConAtt" enabled="false" items="{comboBox>/Contratto}">
-                                        <core:Item key="{comboBox>id}" text="{comboBox>id}" />
+                                    <ComboBox id="numConAtt" enabled="false" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Znumcontratt' }}">
+                                        <core:Item key="{temp>Znumcontratt}" text="{temp>Znumcontratt}" />
                                     </ComboBox>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
@@ -356,8 +356,8 @@
                                 <Title text="" />
                                 <HBox visible="{/FilterSwitch2}">
                                     <Label text="Forma di aggiudicazione:" labelFor="Forma di aggiudizazione:" />
-                                    <MultiComboBox id="formAgg" items="{>/}" selectionFinish="onSelectionFinish">
-                                        <core:Item key="{}" text="{} {}" />
+                                    <MultiComboBox id="formAgg" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Zzgara' }}" selectionFinish="onSelectionFinish">
+                                        <core:Item key="{temp>Zzgara}" text="{temp>Zzgara}" />
                                     </MultiComboBox>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
@@ -367,7 +367,7 @@
                             <VBox>
                                 <HBox>
                                     <Label text="Data Atto:" labelFor="Data Atto:" />
-                                    <DatePicker id="dataAtt" displayFormat="dd/MM/yyyy" enabled="false" />
+                                    <DatePicker id="dataAtt" displayFormat="dd/MM/yyyy" enabled="false"  value="{= ${path: 'temp>/IpeEntitySet/Zdataatto' , formatter: '.formatter.convert' } !== null ? ${path: 'temp>/IpeEntitySet/Zdataatto' , formatter: '.formatter.convert' } : '' }"/>
                                 </HBox>
                             </VBox>
                         </form:SimpleForm>
@@ -401,7 +401,7 @@
                             <Button text="Indietro" type="Emphasized" press="onBackButton" />
                             <Button text="Avanti" type="Emphasized" press="onNextButton" />
                             <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" />
+                            <Button type="Emphasized" text="Salva in bozza" press="onRegIpebozza"/>
                         </OverflowToolbar>
                     </WizardStep>
                      <WizardStep id="EsigiId" validated="true" activate="optionalStepActivation" title="Esigibilità">

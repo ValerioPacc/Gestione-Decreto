@@ -68,8 +68,8 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem groupName="gruppo1" name="typeI" label="{i18n>typeI}" tooltip="suggestion" visibleInFilterBar="true" >
                                 <fb:control>
-                                    <ComboBox id="TypeI" items="{path: '/DecretoImpegnoSet', sorter: { path: 'TipologiaImpegno' }}">
-                                        <core:Item id="typeI1" key="{TipologiaImpegno}" text="{TipologiaImpegno}" />
+                                    <ComboBox id="TypeI" items="{ path: 'temp>/TipologiaImpegnoSet', sorter: { path: 'Codice' }}">
+                                        <core:Item id="typeI1" key="{temp>Codice}" text="{temp>Codice}" />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
