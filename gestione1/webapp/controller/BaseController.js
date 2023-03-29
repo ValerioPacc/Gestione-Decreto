@@ -424,16 +424,6 @@ sap.ui.define([
 
 			var that = this,
 			oModel = that.getOwnerComponent().getModel()
-			// var oTempModel = that.getOwnerComponent().getModel("temp");
-			// //oBozza = oEvent.getSource().data("switch") === "X" ? true : false
-			// //var lifnr = oTempModel.getProperty("/ContrattoSet").Lifnr;
-			// //oTempModel = that.getOwnerComponent().getModel("temp"),
-			// //this.getOwnerComponent().getModel("CountryMatchCodeSet")
-			//  var path = oModel.createKey("/NaturaAttoSet", {
-            //     Codice:''
-			//  })
-
-
 			oModel.read('/NaturaAttoSet', {
 				urlParameters: "",
 				success: function(data, oResponse){
@@ -447,7 +437,26 @@ sap.ui.define([
 			 });
 
 		},
-
+		// callModPagEntity:function () {
+		// 	var that = this;
+		// 	var oMdl = new sap.ui.model.json.JSONModel();
+		// 	this.getOwnerComponent().getModel().read("/ZwelsBenSet", {
+		// 		filters: [],
+		// 		urlParameters: "",
+		// 		success: function (data) {
+		// 			oMdl.setData(data.results);
+		// 			that.getView().getModel("temp").setProperty('/ZwelsBenSet', data.results)
+					
+		// 		},
+		// 		error: function (error) {
+		// 			//that.getView().getModel("temp").setProperty(sProperty,[]);
+		// 			//that.destroyBusyDialog();
+		// 			var e = error;
+		// 		}
+		// 	});
+		
+	  
+		// },
 
 
 		////////////////////////////////////////////////////////////

@@ -32,7 +32,7 @@ sap.ui.define(
       onInit() {
         this.callIpeEntity();
         this.callNaturaAttoEntity();
-        this.callModPagEntity()
+        //this.callModPagEntity()
         
        
         
@@ -799,26 +799,7 @@ onCloseDialog6 : function () {
       console.log("Nuovo valore: " + sNewValue);
     },
 
-    callModPagEntity:function () {
-      var that = this;
-      var oMdl = new sap.ui.model.json.JSONModel();
-      this.getOwnerComponent().getModel().read("/ZwelsBenSet", {
-          filters: [],
-          urlParameters: "",
-          success: function (data) {
-              oMdl.setData(data.results);
-              that.getView().getModel("temp").setProperty('/ZwelsBenSet', data.results)
-              
-          },
-          error: function (error) {
-              //that.getView().getModel("temp").setProperty(sProperty,[]);
-              //that.destroyBusyDialog();
-              var e = error;
-          }
-      });
-  
-
-  },
+    
     });
   }
 );
