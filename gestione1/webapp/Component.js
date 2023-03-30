@@ -39,6 +39,8 @@ function (UIComponent, Device, models) {
             this.setModel(models.createIPEModel(),"IpeEntitySet");
             // set the Esig model
             this.setModel(models.createEsigModel(),"Esigibilita");
+
+            this.setModel(models.createcomboJSONModel(), "comboBox");
         }
     });
 }

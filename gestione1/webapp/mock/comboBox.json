@@ -109,11 +109,5 @@
             "Rsociale": "Societa S.p.A.",
             "IVA": "00000000000000"
         }
-    ],
-    "NaturaAtto" : [
-        {"Atto": "CONTRATTI1"},
-        {"Atto": "CONTRATTI2"},
-        {"Atto": "CONTRATTI3"}
-        
     ]
 }

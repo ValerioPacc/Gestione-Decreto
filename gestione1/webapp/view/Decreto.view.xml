@@ -29,7 +29,7 @@
                         <fb:FilterGroupItem groupName="gruppo2" name="TypeI" label="{i18n>typeI}" tooltip="suggestion" visibleInFilterBar="true" mandatory="true">
                                 <fb:control>
                                     <ComboBox id="TypeI" items="{ path: 'temp>/TipologiaImpegnoSet', sorter: { path: 'Codice' }}" selectedKey="{temp>/Codice}">
-                                        <core:Item id="typeI1" key="{temp>Codice}" text="{temp>Codice}" />
+                                        <core:Item id="typeI1" key="{temp>Codice} " text="{temp>Codice} " />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -56,7 +56,7 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="DataDE" visibleInFilterBar="true" name="DataDE" groupName="Group1" label="{i18n>dataDE}">
                                 <fb:control>
-                                    <DatePicker id="DataDE1" displayFormat="dd/MM/yyyy" value="{= ${path: 'temp>/SelectedDecree/DataDecreto' , formatter: '.formatter.convert' } !== null ? ${path: 'temp>/SelectedDecree/DataDecreto' , formatter: '.formatter.convert' } : '' }" />
+                                    <DatePicker id="DataDE1" displayFormat="dd/MM/yyyy"  />
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numProtocolloAmma" visibleInFilterBar="true" name="numProtocolloAmma" groupName="Group1" label="{i18n>numProtocolloAmma}">
@@ -67,7 +67,7 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="dataProtocolloAmm" visibleInFilterBar="true" name="dataProtocolloAmm" groupName="Group1" label="{i18n>dataProtocolloAmm}">
                                 <fb:control>
-                                    <DatePicker id="dataProtocolloAmm1" displayFormat="dd/MM/yyyy" value="{= ${path: 'temp>/SelectedDecree/DataProtocolloAmm' , formatter: '.formatter.convert' } !== null ? ${path: 'temp>/SelectedDecree/DataProtocolloAmm' , formatter: '.formatter.convert' } : '' }" />
+                                    <DatePicker id="dataProtocolloAmm1" displayFormat="dd/MM/yyyy"  />
                                 </fb:control>
                                 </fb:FilterGroupItem>
                         </fb:filterGroupItems>

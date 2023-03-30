@@ -17,8 +17,8 @@ xmlns:f="sap.ui.layout.form" xmlns:app="http://schemas.sap.com/sapui5/extension/
                     <VBox >
                         <Label class="sapUiLargeMarginStart" text="Modalità di Pagamento" labelFor="IBAN" required="true" />
                         <ComboBox id="RegModPag" required="true" items="" >
-                            <core:Item key="1" text="1" />
-                            <core:Item key="2" text="2" />
+                            <core:Item key="" text="" />
+                        
                         </ComboBox>
                     </VBox>
                     <VBox class="sapUiLargeMarginStart" >

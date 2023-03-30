@@ -119,7 +119,7 @@ sap.ui.define([
 			aFilters = [];
 
 			this.getOwnerComponent().getModel("IpeEntitySet").setProperty('/' ,[])
-
+            
 			aFilters.push(
 			  new Filter({path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
 			  new Filter({path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
@@ -512,8 +512,8 @@ sap.ui.define([
 
 			var oSource = oEvent.getSource(),
 				oValue= oSource.getValue(),
-				sField = oEvent.getSource().data("filterTableField"),
-				sName = oSource.data(sField);
+				//sField = oEvent.getSource().data("filterTableField"),
+				sName = oSource.data("FieldName");
 	            var Zzanno = this.getView().byId("es_decreto").getSelectedKey();
 				this.callContrattoEntity(Zzanno);
 

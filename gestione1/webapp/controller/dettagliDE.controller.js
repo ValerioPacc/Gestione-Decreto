@@ -219,9 +219,10 @@ sap.ui.define(
                         header[i].UfficioLiv1 == UfficioLiv1 &&
                         header[i].UfficioLiv2 == UfficioLiv2) {
                         var indice = i
-                        MessageBox.warning("Sei sicuro di voler rettificare il Decreto d'Impegno n° " + header[i].NumeroDecreto + "?", {
-                            actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-                            emphasizedAction: MessageBox.Action.YES,
+                        MessageBox.warning("Sei sicuro di voler cancellare il Decreto d'Impegno n° " + header[i].NumeroDecreto + "?", {
+                            title: "Attenzione",
+                            actions: ["Si", sap.m.MessageBox.Action.NO],
+                            emphasizedAction: "Si",
                             onClose: function (oAction) {
                                 if (oAction === sap.m.MessageBox.Action.YES) {
                                     7
@@ -244,7 +245,8 @@ sap.ui.define(
                                         success: function (data, response) {
                                             //console.log("success");
                                             MessageBox.success("Operazione eseguita con successo",{
-                                            actions: [sap.m.MessageBox.Action.OK],
+                                                title:"Esito Operazione",
+                                            actions: ["sap.m.MessageBox.Action.OK"],
                                             emphasizedAction: MessageBox.Action.OK,
                                             onClose: function (oAction) {
                                                 if (oAction === sap.m.MessageBox.Action.OK) {
@@ -256,8 +258,12 @@ sap.ui.define(
                             }, 
                                         error: function (e) {
                                             //console.log("error");
-                                            MessageBox.error("Operazione non eseguita")
-                                        }
+                                            
+                                            MessageBox.error("Operazione non eseguita",{
+                                            title : "Errore",
+                                            actions: ["Chiudi"]
+                                            })
+                                }
                                     });
                                 }
                             }

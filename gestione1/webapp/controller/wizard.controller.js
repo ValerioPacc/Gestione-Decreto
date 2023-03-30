@@ -33,7 +33,7 @@ sap.ui.define(
         this.callIpeEntity();
         this.callNaturaAttoEntity();
         //this.callModPagEntity()
-        
+        this.getView().getModel("comboBox")
        
         
          var oProprietà = new JSONModel(),
@@ -141,12 +141,12 @@ sap.ui.define(
     //         emphasizedAction: MessageBox.Action.OK,
     //     })
     // }
-    else if (Dstipula == "") {
-      MessageBox.error("Campo Data Stipula obbligatorio non inserito!", {
-          actions: [sap.m.MessageBox.Action.OK],
-          emphasizedAction: MessageBox.Action.OK,
-      })
-  }
+  //   else if (Dstipula == "") {
+  //     MessageBox.error("Campo Data Stipula obbligatorio non inserito!", {
+  //         actions: [sap.m.MessageBox.Action.OK],
+  //         emphasizedAction: MessageBox.Action.OK,
+  //     })
+  // }
 
   else{
         this._oWizard = this.byId("CreateProductWizard");

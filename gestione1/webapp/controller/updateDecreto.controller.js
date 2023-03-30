@@ -74,7 +74,8 @@ sap.ui.define(
                 header[i].UfficioLiv1 == UfficioLiv1 &&
                 header[i].UfficioLiv2 == UfficioLiv2) {
                 var indice = i
-                MessageBox.warning("Sei sicuro di voler modificare il DI?", {
+                MessageBox.warning("Sei sicuro di voler modificare il Decreto?", {
+                    title:"Attenzione",
                     actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
                     emphasizedAction: MessageBox.Action.YES,
                     onClose: function (oAction) {
@@ -123,6 +124,7 @@ sap.ui.define(
                                     success: function (data) {
                                         console.log("success");
                                         MessageBox.success("Operazione Eseguita con successo", {
+                                            title:"Esito Operazione",
                                             actions: [sap.m.MessageBox.Action.OK],
                                             emphasizedAction: MessageBox.Action.OK,
                                             onClose: function (oAction) {
@@ -135,7 +137,10 @@ sap.ui.define(
                                     },
                                     error: function (e) {
                                         //console.log("error");
-                                        MessageBox.error("Operazione non eseguita")
+                                               MessageBox.error("Operazione non eseguita",{
+                                            title : "Errore",
+                                            actions: ["Chiudi"]
+                                            })
                                 }
                             });
                         

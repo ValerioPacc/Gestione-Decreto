@@ -88,7 +88,8 @@ sap.ui.define(
         
 
 
-        MessageBox.warning("Sei sicuro di voler preimpostare il DI?", {
+        MessageBox.warning("Sei sicuro di voler preimpostare il Decreto?", {
+          title:"Attenzione",
             actions: ["Si", "No"],
             emphasizedAction: "Si",
             onClose: function (oAction) {
@@ -96,14 +97,14 @@ sap.ui.define(
                   var oDataModel = self.getOwnerComponent().getModel();
                  
                     var DecretoImpegnoSet = {
-                      ChiaveGiustificativo: '12345',
-                        AreaFinanziaria:'1234',
-                        Ente:'0001',
-                        RegistratoBozza:'B',
-                        UfficioLiv1:'UFF',
-                        UfficioLiv2:'UFF',
-                        CodiceStato: '01',
-                        Ragioneria: '0840',
+                      ChiaveGiustificativo: '',
+                        AreaFinanziaria:'',
+                        Ente:'',
+                        RegistratoBozza:'',
+                        UfficioLiv1:'',
+                        UfficioLiv2:'',
+                        CodiceStato: '',
+                        Ragioneria: '',
                         TipologiaImpegno: N_tipo_impegno,
                         Esercizio: N_es_decreto,
                         Amministrazione: N_Amm,
@@ -130,11 +131,11 @@ sap.ui.define(
                      oDataModel.create("/DecretoImpegnoSet",DecretoImpegnoSet,{
                        success: function(result,response){ 
                         console.log('SUCCESS')
-                        MessageBox.success("Decreto Impegno creato correttamente", {
-                            actions: ["Si"],
-                            emphasizedAction: "Si",
+                        MessageBox.success("Decreto creato correttamente", {
+                            actions: ["OK"],
+                            emphasizedAction: "OK",
                             onClose: function (oAction) {
-                                if (oAction === "Si") {
+                                if (oAction === "OK") {
                                     self.getOwnerComponent().getRouter().navTo("View1")
                                     location.reload();
                                 }
@@ -144,7 +145,10 @@ sap.ui.define(
 
                         error: function(err){
                            console.log(err); 
-                           MessageBox.error("Decreto Impegno non creato correttamente")
+                           MessageBox.error("Decreto non creato correttamente",{
+                            title:"Errore",
+                            actions:["Chiudi"]
+                           })
                           },
                             async: true, 
                              urlParameters: {}  });

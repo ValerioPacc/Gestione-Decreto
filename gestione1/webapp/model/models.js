@@ -44,5 +44,14 @@ sap.ui.define([
             };
 			return new JSONModel(oModel);
 		},
+        createcomboJSONModel: function() {
+
+             var sRootPath = jQuery.sap.getModulePath("gestione1");
+            
+             var oModel = new JSONModel(sRootPath + "/mock/comboBox.json");
+            
+             return oModel;
+            
+            },
     };
 });
