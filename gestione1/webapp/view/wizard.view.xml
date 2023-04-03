@@ -375,7 +375,7 @@
                             <Button text="Indietro" type="Emphasized" press="onBackButton" />
                             <Button text="Avanti" type="Emphasized" press="onNextButton" />
                             <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" />
+                            <Button type="Emphasized" text="Salva in bozza" press="onRegIpebozza"/>
                         </OverflowToolbar>
                     </WizardStep>
 

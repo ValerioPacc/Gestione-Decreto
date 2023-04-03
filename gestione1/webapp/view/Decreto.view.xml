@@ -29,7 +29,7 @@
                         <fb:FilterGroupItem groupName="gruppo2" name="TypeI" label="{i18n>typeI}" tooltip="suggestion" visibleInFilterBar="true" mandatory="true">
                                 <fb:control>
                                     <ComboBox id="TypeI" items="{ path: 'temp>/TipologiaImpegnoSet', sorter: { path: 'Codice' }}" selectedKey="{temp>/Codice}">
-                                        <core:Item id="typeI1" key="{temp>Codice} " text="{temp>Codice} " />
+                                        <core:Item id="typeI1" key="{temp>Codice} : {temp>Descrizione}" text="{temp>Codice} : {temp>Descrizione}" />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>

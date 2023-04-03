@@ -221,11 +221,11 @@ sap.ui.define(
                         var indice = i
                         MessageBox.warning("Sei sicuro di voler cancellare il Decreto d'Impegno n° " + header[i].NumeroDecreto + "?", {
                             title: "Attenzione",
-                            actions: ["Si", sap.m.MessageBox.Action.NO],
+                            actions: ["Si", "No"],
                             emphasizedAction: "Si",
                             onClose: function (oAction) {
-                                if (oAction === sap.m.MessageBox.Action.YES) {
-                                    7
+                                if (oAction === "Si") {
+                                    
                                     // var oModel = that.getOwnerComponent().getModel("temp");
                                     var oModel = that.getView().getModel();
 
@@ -246,7 +246,7 @@ sap.ui.define(
                                             //console.log("success");
                                             MessageBox.success("Operazione eseguita con successo",{
                                                 title:"Esito Operazione",
-                                            actions: ["sap.m.MessageBox.Action.OK"],
+                                            actions: [sap.m.MessageBox.Action.OK],
                                             emphasizedAction: MessageBox.Action.OK,
                                             onClose: function (oAction) {
                                                 if (oAction === sap.m.MessageBox.Action.OK) {

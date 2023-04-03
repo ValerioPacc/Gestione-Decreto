@@ -567,10 +567,10 @@ sap.ui.define([
 			if (oSelectedItem) {
 				var sValueTitle = oSelectedItem.getTitle();
 				Input.setValue(sValueTitle);
-				this.getView().getModel("CountryMatchCodeSet").setProperty('/Code' ,sValueTitle);
+				//sap.ui.getCore().getModel("CountryMatchCodeSet").setProperty('/Code' ,sValueTitle);
 				this.getOtherData(sValueTitle);
 			}
-			this.closeDialog();
+			this.closeExpandDialog();
 		},
 
 		_handleValueHelpCloseBen: function (evt) {

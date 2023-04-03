@@ -60,7 +60,7 @@ sap.ui.define(
       onListSelect: function (event) {
         var oSelectedKey = this.getView().byId('mPag').getSelectedKey();
         
-        this.getView().getModel("ZwelsBenSet").setProperty('/Zwels' ,oSelectedKey); 
+        this.getView().getModel("comboBox").setProperty('/Zwels' ,oSelectedKey); 
 
         if(oSelectedKey === '2'){
           this.getView().byId('labelCS').setRequired(true);
@@ -236,18 +236,24 @@ sap.ui.define(
     getOtherData: function (value) {
 
       var oModel= this.getView().getModel("comboBox"),
-      oTempModel = this.getView().getModel("temp"),
-      rowSelected = _.findWhere(oModel.getProperty("/Contratto"), {id: value}),
-      beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), {id: rowSelected.id_ben});
-      
+      oTempModel = this.getView().getModel("temp")
+      // rowSelected = _.findWhere(oModel.getProperty("/Contratto"), {id: value}),
+      // beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), {id: rowSelected.id_ben});
+      // //country= _.findWhere(oTempModel.getProperty("/CountryMatchCodeSet"));
+      var Codice = _.findWhere(oTempModel.getProperty("/CountryMatchCodeSet"), { Code: value })
+       if (Codice != undefined)
+        {
+          sap.ui.getCore().byId("input").setValue(Codice.Description); 
+        //valoriNuovi.push(KOSTL.Kostl) }
 
-      this._setBeneficiario(beneficiario);
+    }
+      // this._setBeneficiario(beneficiario);
 
-      this.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula' ,rowSelected.data); 
-      this.getView().getModel("IpeEntitySet").setProperty('/Zzcig' ,rowSelected.cig); 
-      this.getView().getModel("IpeEntitySet").setProperty('/Zzcup' ,rowSelected.cup);
-      this.getView().getModel("IpeEntitySet").setProperty('/Ktwrt' ,rowSelected.importo); 
-
+      // //this.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula' ,rowSelected.data); 
+      // this.getView().getModel("IpeEntitySet").setProperty('/Zzcig' ,rowSelected.cig); 
+      // this.getView().getModel("IpeEntitySet").setProperty('/Zzcup' ,rowSelected.cup);
+      // this.getView().getModel("IpeEntitySet").setProperty('/Ktwrt' ,rowSelected.importo); 
+      //this.getView().getModel("CountryMatchCodeSet").setProperty('/Description' ,country.Description); 
 		},
     
 

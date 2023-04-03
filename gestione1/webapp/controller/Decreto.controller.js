@@ -72,7 +72,7 @@ sap.ui.define(
         var self = this;
     
 
-        var N_tipo_impegno = this.getView().byId("TypeI").mProperties.value; 
+        var N_tipo_impegno = (this.getView().byId("TypeI").mProperties.value).split(":")[0] 
         var N_es_decreto = this.getView().byId("es_decreto").mProperties.value; 
         var N_Amm = this.getView().byId("AmministrazioneED").mProperties.value;  
         var N_codiceUff = this.getView().byId("UffApp1").mProperties.value;  
