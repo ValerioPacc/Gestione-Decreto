@@ -78,7 +78,7 @@ sap.ui.define(
         if (this._iSelectedStepIndex == 0) {
             //console.log(this.getOwnerComponent().getRouter().navTo("View1"))
             this._iSelectedStepIndex = 0
-            this.getOwnerComponent().getRouter().navTo("View1");
+            this.getOwnerComponent().getRouter().navTo("registraIPE");
             location.reload();
             //this.getView().byId("").setVisible(false);
             return;

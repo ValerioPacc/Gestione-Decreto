@@ -80,7 +80,7 @@
              </f:content>
             <f:footer>
                 <OverflowToolbar>
-                    <Button type="Emphasized" text="{i18n>Indietro}" press="navToHome" />
+                    <Button type="Emphasized" text="{i18n>Indietro}" press="onBackButton" />
                     <ToolbarSpacer/>
                     <Button id="create" type="Emphasized"  text="{i18n>SalvaBozza}" press="onRegDIbozza"/>
                     

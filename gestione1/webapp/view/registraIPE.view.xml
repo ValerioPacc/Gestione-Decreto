@@ -21,7 +21,7 @@
                         <Title text="Dati Decreto:" />
                         <layout:HorizontalLayout >
                         <Label text="Esercizio Decreto:" class="sapUiSmallMarginEnd" />
-                        <Text id="EserDec" text="{temp>/SelectedDecree/Esercizio}" class="sapUiMediumMarginEnd"/>
+                        <Text id="EsercizioDec" text="{temp>/SelectedDecree/Esercizio}" class="sapUiMediumMarginEnd"/>
                     <Label text="Amministrazione:" class="sapUiSmallMarginEnd" />
                     <Text  text="{temp>/SelectedDecree/Amministrazione}" class="sapUiMediumMarginEnd"/>
                      <Label text="N.Bozza:" class="sapUiSmallMarginEnd"/>
@@ -34,7 +34,7 @@
                     <Text  text="{temp>/SelectedDecree/CodiceStato}" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout>
                 </layout:VerticalLayout>
-           <Bar class="title">
+           <Bar >
 				<contentLeft>
 	               <Text text="Registrazione IPE" class="title" />
 	            </contentLeft>
@@ -57,7 +57,7 @@
          <layout:Grid defaultSpan="XL12 L12 M12 S12" vSpacing="0" class="Grid">
          <VBox>
 					<items>
-						<Button align="Center" type="Emphasized" text="Registra IPE Apertura" class="button"  press="navToWizard"/>
+						<Button  type="Emphasized" text="Registra IPE Apertura" class="button"  press="navToWizard"/>
 					</items>
 				<layoutData>
 					<layout:GridData span="XL4 L4 M4 S12"/>
@@ -65,7 +65,7 @@
 				</VBox>
                 <VBox>
 					<items>
-						<Button align="Center" type="Emphasized" text="Registra IPE di Variazione" /> 
+						<Button  type="Emphasized" text="Registra IPE di Variazione" /> 
 					</items>
 				<layoutData>
 					<layout:GridData span="XL4 L4 M4 S12"/>
@@ -73,7 +73,7 @@
 				</VBox>
                 <VBox>
 					<items>
-						<Button align="Center" type="Emphasized" text="Registra Atto di Annullamento" press="navToAttoAnnullamento"/>
+						<Button  type="Emphasized" text="Registra Atto di Annullamento" press="navToAttoAnnullamento"/>
 					</items>
 				<layoutData>
 					<layout:GridData span="XL4 L4 M4 S12"/>
