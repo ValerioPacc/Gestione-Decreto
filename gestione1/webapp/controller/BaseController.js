@@ -328,12 +328,12 @@ sap.ui.define([
 			//var lifnr = oTempModel.getProperty("/ContrattoSet").Lifnr;
 			//oTempModel = that.getOwnerComponent().getModel("temp"),
 			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
-			// var path = oModel.createKey("/BeneficiarioEntitySet", {
-			// 	Lifnr:'0010000030'
-			// })
+			var path = oModel.createKey("/BeneficiarioEntitySet", {
+				Lifnr:'0010000499'
+			})
 
 
-			oModel.read("/BeneficiarioEntitySet", {
+			oModel.read(path, {
 				urlParameters: "",
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
@@ -375,19 +375,19 @@ sap.ui.define([
 
 		// },
 
-		callContrattoEntity:function (Zzanno) {
+		callContrattoEntity:function () {
 			var that = this
 			var oModel = that.getOwnerComponent().getModel()
 			// var oTempModel = this.getView().getModel("temp")
-			// var oIpeEntitySet = this.getView().getModel("IpeEntitySet")
+			 //var oIpeEntitySet = this.getView().getModel("IpeEntitySet")
 			var oTempModel = that.getOwnerComponent().getModel("temp");
-			var Zzammin = oTempModel.getProperty("/SelectedDecree").Amministrazione;
-			//var Zzanno = oIpeEntitySet.Esercizio
+			//var Zzammin = oTempModel.getProperty("/SelectedDecree").Amministrazione;
+		    // var Zzanno = oIpeEntitySet.Esercizio
 			// var oModel = that.getOwnerComponent().getModel()
 		    // var oTempModel = that.getOwnerComponent().getModel("NewIpe")
 		    // this.getOwnerComponent().getModel("IpeEntitySet");
 
-			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
+			
 			// var aFilters = [];
 
 			// aFilters.push(
@@ -399,9 +399,9 @@ sap.ui.define([
 
 
 			var path = oModel.createKey('/ContrattoSet', {
-				Ebeln:'4500000019'
+				Ebeln: this.getView().byId("ValueHelpContratto").getValue()
 			})
-
+            var Ebeln=this.getView().byId("ValueHelpContratto").getValue()
 
 
 
@@ -410,8 +410,9 @@ sap.ui.define([
 				urlParameters: "",
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
-					  oModelJson.setData(data.results);
-					   that.getView().getModel("temp").setProperty('/ContrattoSet', data.results);
+					  oModelJson.setData(data);
+					   that.getView().getModel("temp").setProperty('/ContrattoSet', data);
+					   that.getOtherData(Ebeln)
 					  //that.callAnnoAmm(data.results);
 					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					 },
@@ -437,26 +438,26 @@ sap.ui.define([
 			 });
 
 		},
-		// callModPagEntity:function () {
-		// 	var that = this;
-		// 	var oMdl = new sap.ui.model.json.JSONModel();
-		// 	this.getOwnerComponent().getModel().read("/ZwelsBenSet", {
-		// 		filters: [],
-		// 		urlParameters: "",
-		// 		success: function (data) {
-		// 			oMdl.setData(data.results);
-		// 			that.getView().getModel("temp").setProperty('/ZwelsBenSet', data.results)
+		callModPagEntity:function () {
+			var that = this;
+			var oMdl = new sap.ui.model.json.JSONModel();
+			this.getOwnerComponent().getModel().read("/ZwelsBenSet", {
+				filters: [],
+				urlParameters: "",
+				success: function (data) {
+					oMdl.setData(data.results);
+					that.getView().getModel("temp").setProperty('/ZwelsBenSet', data.results)
 					
-		// 		},
-		// 		error: function (error) {
-		// 			//that.getView().getModel("temp").setProperty(sProperty,[]);
-		// 			//that.destroyBusyDialog();
-		// 			var e = error;
-		// 		}
-		// 	});
+				},
+				error: function (error) {
+					//that.getView().getModel("temp").setProperty(sProperty,[]);
+					//that.destroyBusyDialog();
+					var e = error;
+				}
+			});
 		
 	  
-		// },
+		},
 
 
 		////////////////////////////////////////////////////////////
@@ -542,7 +543,7 @@ sap.ui.define([
 			var oDialog = this.openDialog("gestione1.fragment.Help.ValueHelp" + sName).open();
 
 		},
-		_handleValueHelpContactClose : function (evt) {
+		_handleValueHelpContractClose : function (evt) {
 
 			var that = this,
 			oSelectedItem = evt.getParameter("selectedItem"),

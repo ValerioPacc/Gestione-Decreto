@@ -8,15 +8,15 @@
 			path:'temp>/ContrattoSet'
 			}"
 		search="_handleValueHelpSearch"
-		confirm="_handleValueHelpContactClose"
+		confirm="_handleValueHelpContractClose"
 		cancel="_handleValueHelpClose"
         app:filterTableField="ValueHelpContratto"
 		>
 		<StandardListItem
 			iconDensityAware="false"
 			iconInset="false"
-			title="{temp>Ebeln}"
-			app:key="{temp>Ebeln}"
+			title="{4500001128}"
+			app:key="{4500001128}"
 			 />
 	</SelectDialog>	
 </core:FragmentDefinition>

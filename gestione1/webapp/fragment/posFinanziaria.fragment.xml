@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
-    >
+    
     <Dialog id="PosFinanziaria" title="Ricerca Posizione Finanziaria" draggable="true" showHeader="true" titleAlignment="Start" afterClose="onAfterClose" contentWidth="100%" contentHeight="100%">
 
  <Toolbar>

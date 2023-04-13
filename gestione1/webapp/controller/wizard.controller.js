@@ -32,7 +32,8 @@ sap.ui.define(
       onInit() {
         this.callIpeEntity();
         this.callNaturaAttoEntity();
-        //this.callModPagEntity()
+        this.callModPagEntity()
+        this.callContrattoEntity()
         this.getView().getModel("comboBox")
        
         
@@ -78,7 +79,7 @@ sap.ui.define(
         if (this._iSelectedStepIndex == 0) {
             //console.log(this.getOwnerComponent().getRouter().navTo("View1"))
             this._iSelectedStepIndex = 0
-            this.getOwnerComponent().getRouter().navTo("registraIPE");
+            this.getOwnerComponent().getRouter().navTo("View1");
             location.reload();
             //this.getView().byId("").setVisible(false);
             return;
@@ -100,7 +101,7 @@ sap.ui.define(
     onNextButton: function () {
       var es_decreto = this.getView().byId("es_decreto").getSelectedKey()
       var amm = this.getView().byId("ammin1").getValue()
-      //var Ncontratto = this.getView().byId("Ncontratto").getSelectedKey()
+      var Ncontratto = this.getView().byId("ValueHelpContratto").getValue()
       var Dstipula = this.getView().byId("Dstipula").getValue()
       var beneficiario = this.getView().byId("beneficiario1").getValue()
       var mPag = this.getView().byId("mPag").getSelectedItem()
@@ -135,18 +136,18 @@ sap.ui.define(
   //         emphasizedAction: MessageBox.Action.OK,
   //     })
   // }
-    //   else if (Ncontratto == "") {
-    //     MessageBox.error("Campo N. Contratto obbligatorio non inserito!", {
-    //         actions: [sap.m.MessageBox.Action.OK],
-    //         emphasizedAction: MessageBox.Action.OK,
-    //     })
-    // }
-  //   else if (Dstipula == "") {
-  //     MessageBox.error("Campo Data Stipula obbligatorio non inserito!", {
-  //         actions: [sap.m.MessageBox.Action.OK],
-  //         emphasizedAction: MessageBox.Action.OK,
-  //     })
-  // }
+      else if (Ncontratto == "") {
+        MessageBox.error("Campo N. Contratto obbligatorio non inserito!", {
+            actions: [sap.m.MessageBox.Action.OK],
+            emphasizedAction: MessageBox.Action.OK,
+        })
+    }
+    else if (Dstipula == "") {
+      MessageBox.error("Campo Data Stipula obbligatorio non inserito!", {
+          actions: [sap.m.MessageBox.Action.OK],
+          emphasizedAction: MessageBox.Action.OK,
+      })
+  }
 
   else{
         this._oWizard = this.byId("CreateProductWizard");
@@ -163,6 +164,11 @@ sap.ui.define(
         this._iSelectedStepIndex++;
         this._oSelectedStep = oNextStep;
         this.controlHeader();
+        if (this.getView().byId("ValueHelpContratto").getValue() != ""){ 
+          var ben = this.getView().byId("beneficiario").getValue()
+          this.getView().byId("beneficiario1").setValue(ben)
+    
+        }
         // console.log(this._iSelectedStepIndex)
         //this.controlPreNI()
         
@@ -243,12 +249,36 @@ sap.ui.define(
       var Codice = _.findWhere(oTempModel.getProperty("/CountryMatchCodeSet"), { Code: value })
        if (Codice != undefined)
         {
-          sap.ui.getCore().byId("input").setValue(Codice.Description); 
+          sap.ui.getCore().byId("input").setValue(Codice.Description);
+          
+          
         //valoriNuovi.push(KOSTL.Kostl) }
 
     }
       // this._setBeneficiario(beneficiario);
+      var nContr = oTempModel.getProperty("/ContrattoSet").Ebeln
+      
+      if (nContr == value)
+        {
+        //   var Dstip  = oTempModel.getProperty("/ContrattoSet").Zzdatastipula
+        //   var dataNuova = new Date(Dstip),
+        //   mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+        //   day = ("0" + dataNuova.getDate()).slice(-2);
+        // var nData = [dataNuova.getFullYear(), mnth, day].join("-");
+        // Dstip = new Date(nData)
 
+          
+          this.getView().byId("Dstipula").setValue(oTempModel.getProperty("/ContrattoSet").Zzdatastipula);
+          this.getView().byId("cig").setValue(oTempModel.getProperty("/ContrattoSet").Zzcig);
+          this.getView().byId("beneficiario").setValue(oTempModel.getProperty("/ContrattoSet").Lifnr);
+          this.getView().byId("importoCont").setValue(oTempModel.getProperty("/ContrattoSet").Ktwrt);
+          this.getView().byId("numConAtt").setValue(oTempModel.getProperty("/ContrattoSet").Ebeln);
+          this.getView().byId("dataAtt").setValue(oTempModel.getProperty("/SelectedDecree").Esercizio);
+          
+        //valoriNuovi.push(KOSTL.Kostl)
+    }
+    
+    
       // //this.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula' ,rowSelected.data); 
       // this.getView().getModel("IpeEntitySet").setProperty('/Zzcig' ,rowSelected.cig); 
       // this.getView().getModel("IpeEntitySet").setProperty('/Zzcup' ,rowSelected.cup);
@@ -397,8 +427,11 @@ onCloseDialog6 : function () {
                 var oProprietà = this.getView().getModel();
                 var stato= this.getView().byId("switch").getState();
                 if (stato) {
+                  //var oTempModel = this.getOwnerComponent().getModel("temp")
+                  //var nContr = oTempModel.getProperty("/ContrattoSet").Ebeln
                   oProprietà.setProperty("/FilterSwitch1", true);
                   oProprietà.setProperty("/FilterSwitch2", true);
+                  //this.getOtherData(nContr)
                 }
              else {
                 oProprietà.setProperty("/FilterSwitch1", false);
@@ -409,7 +442,7 @@ onCloseDialog6 : function () {
                 this.getView().byId("cig").setValue("");
                 this.getView().byId("cup").setValue("");
                 this.getView().byId("importoCont").setValue("");
-                this.getView().byId("Ncontratto").setSelectedKey("");
+                this.getView().byId("ValueHelpContratto").setValue("");
               
 
 
