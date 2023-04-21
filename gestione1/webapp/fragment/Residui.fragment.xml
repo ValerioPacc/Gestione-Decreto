@@ -1,0 +1,58 @@
+<core:FragmentDefinition 
+height="100%"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:m="sap.m"
+    xmlns="sap.ui.table"
+    controllerName="gestione1.controller.wizard">
+
+    
+
+    <Table id="Residui"
+        class="Freeze"
+        selectionMode="MultiToggle"
+        fixedColumnCount="1"
+        visibleRowCount="7"
+        ariaLabelledBy="title">
+        <extension>
+            <m:OverflowToolbar style="Clear">
+                <m:Label text="Seleziona periodi:" labelFor="suggestionsMultiComboBox" vAlign="Inherit" 
+                class="marginRight sapUiLargeMarginStart"/>
+                <m:ComboBox id="Anni" class="marginRight" change="OnSelectYears">
+                    <m:items>
+                        <core:Item text="2023-2024-2025-2026" />
+                        <core:Item text="2027-2028-2029-2030" />
+                        <core:Item text="2031-2033-2034-2035" />
+                        <core:Item text="2036-2037-2038-2039" />
+                        <core:Item text="2040-2041-2042-2043" />
+                        <core:Item text="2044-2045-2046-2047" />
+                        <core:Item text="2048-2049-2050-2051" />
+                        <core:Item text="2052-2053-2054-2056" />
+                        <core:Item text="2057-2058-2059-2060" />
+                        <core:Item text="2061-2062-2063-2064" />
+
+                    </m:items>
+                </m:ComboBox> 
+                <m:ToolbarSpacer/>
+               <m:Button id="idEPR" type="Emphasized" class="marginRight" icon="sap-icon://add" text=" EPR/Autorizzazione" press="onOpenDialog1"/>
+               <m:Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight"/>
+               <m:Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta"/>
+               <m:Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
+            </m:OverflowToolbar>
+            <m:OverflowToolbar>
+            <m:Label text="{i18n>PosFin}"/>
+            <m:Text text=""/>
+            <m:Label text="{i18n>struttura_amm_resp}" class="marginRight"/>
+            <m:Text text=""/>
+            </m:OverflowToolbar>
+        </extension>
+        <columns>
+        </columns>
+
+    </Table>
+</core:FragmentDefinition>

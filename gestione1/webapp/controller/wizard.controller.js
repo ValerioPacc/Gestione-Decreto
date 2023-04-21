@@ -24,7 +24,8 @@ sap.ui.define(
                 FilterSwitch1: false,
                 FilterSwitch2: true,
                 header1Visible: true,
-                 HeaderNIWstep3Visible: true
+                 HeaderNIWstep3Visible: true,
+                 ReiscrSwitch: false
             };
 
     return BaseController.extend("gestione1.controller.wizard", {
@@ -34,6 +35,8 @@ sap.ui.define(
         this.callNaturaAttoEntity();
         this.callModPagEntity()
         this.callContrattoEntity()
+        this.callPniEntity()
+        //this.callEsigibilitaEntity()
         this.getView().getModel("comboBox")
        
         
@@ -71,6 +74,20 @@ sap.ui.define(
 
       },
 
+      handleChange: function () {
+      var oProprietà = this.getView().getModel();
+      var stato= this.getView().byId("IndReiscrizione").getState();
+      if (stato) {
+        oProprietà.setProperty("/ReiscrSwitch", true);
+        
+        
+        
+ 
+  }
+  else {
+    oProprietà.setProperty("/ReiscrSwitch", false);
+  }
+      },
       onBackButton: function () {
         this._oWizard = this.byId("CreateProductWizard");
         this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
@@ -79,7 +96,7 @@ sap.ui.define(
         if (this._iSelectedStepIndex == 0) {
             //console.log(this.getOwnerComponent().getRouter().navTo("View1"))
             this._iSelectedStepIndex = 0
-            this.getOwnerComponent().getRouter().navTo("View1");
+            this.navToHome();
             location.reload();
             //this.getView().byId("").setVisible(false);
             return;
@@ -106,7 +123,7 @@ sap.ui.define(
       var beneficiario = this.getView().byId("beneficiario1").getValue()
       var mPag = this.getView().byId("mPag").getSelectedItem()
 
-      if (es_decreto == "" && amm == "" && Dstipula=="") {
+      if (es_decreto == "" && amm == "" && Ncontratto == "" && Dstipula=="") {
           MessageBox.error("Campi obbligatori non inseriti!", {
               actions: [sap.m.MessageBox.Action.OK],
               emphasizedAction: MessageBox.Action.OK,
@@ -197,23 +214,23 @@ sap.ui.define(
 			}.bind(this));
 		},
     onOpenDialog1 : function () {
-
-			if (!this.sFragment) {
-				this.sFragment = this.loadFragment({
-					name: "gestione1.fragment.listaPNI",
-          controller: this
-				}).then(function (oFragment) {
-          this.getView().addDependent(oFragment);
-          return oFragment;
-        }.bind(this));
-			}
-      var UIStateModel= this.getView().getModel("UIState");
-      var UIStateData= UIStateModel.getData();
-      UIStateData.visible = false;
-      UIStateModel.setData(UIStateData);
-			this.sFragment.then(function(oFragment) {
-				oFragment.open();
-			}.bind(this));
+      var oDialog = this.openDialog("gestione1.fragment.listaPNI").open();
+		// 	if (!this.sFragment) {
+		// 		this.sFragment = this.loadFragment({
+		// 			name: "gestione1.fragment.listaPNI",
+    //       controller: this
+		// 		}).then(function (oFragment) {
+    //       this.getView().addDependent(oFragment);
+    //       return oFragment;
+    //     }.bind(this));
+		// 	}
+    //   var UIStateModel= this.getView().getModel("UIState");
+    //   var UIStateData= UIStateModel.getData();
+    //   UIStateData.visible = false;
+    //   UIStateModel.setData(UIStateData);
+		// 	this.sFragment.then(function(oFragment) {
+		// 		oFragment.open();
+		// 	}.bind(this));
 		},
     onOpenDialog2 : function () {
 
@@ -260,20 +277,21 @@ sap.ui.define(
       
       if (nContr == value)
         {
-        //   var Dstip  = oTempModel.getProperty("/ContrattoSet").Zzdatastipula
-        //   var dataNuova = new Date(Dstip),
-        //   mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
-        //   day = ("0" + dataNuova.getDate()).slice(-2);
-        // var nData = [dataNuova.getFullYear(), mnth, day].join("-");
-        // Dstip = new Date(nData)
-
+          var date = new Date(oTempModel.getProperty("/ContrattoSet").Zzdatastipula),
+          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+          day = ("0" + date.getDate()).slice(-2);
+         var nData= [date.getFullYear(), mnth, day].join("-");
+         var nDate = nData.split("-").reverse().join(".");
+         
           
-          this.getView().byId("Dstipula").setValue(oTempModel.getProperty("/ContrattoSet").Zzdatastipula);
+          this.getView().byId("Dstipula").setValue(nDate);
           this.getView().byId("cig").setValue(oTempModel.getProperty("/ContrattoSet").Zzcig);
           this.getView().byId("beneficiario").setValue(oTempModel.getProperty("/ContrattoSet").Lifnr);
           this.getView().byId("importoCont").setValue(oTempModel.getProperty("/ContrattoSet").Ktwrt);
           this.getView().byId("numConAtt").setValue(oTempModel.getProperty("/ContrattoSet").Ebeln);
-          this.getView().byId("dataAtt").setValue(oTempModel.getProperty("/SelectedDecree").Esercizio);
+          this.getView().byId("dataAtt").setValue(nDate);
+          this.getView().byId("idTypeCon").setValue(oTempModel.getProperty("/ContrattoSet").Bsart);
+          this.getView().byId("formAgg").setValue(oTempModel.getProperty("/ContrattoSet").Zzgara);
           
         //valoriNuovi.push(KOSTL.Kostl)
     }
@@ -407,7 +425,7 @@ sap.ui.define(
 		 	this.byId("Anagrafica").close();
 		},
      onCloseDialog2 : function () {
-      this.byId("listaPNI").close();
+      var oDialog = this.openDialog("gestione1.fragment.listaPNI").close();
    },
    onCloseDialog3 : function () {
     this.byId("regModPag").close();
@@ -518,13 +536,32 @@ onCloseDialog6 : function () {
         this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
         this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);
 
-        if (this._iSelectedStepIndex == 5 ) {
-          oProprietà.setProperty("/header1Visible", true)
+        if (this._iSelectedStepIndex == 0 ) {
+          oProprietà.setProperty("/header1Visible", false)
             
         } 
-        else {
+        else if (this._iSelectedStepIndex == 0) {
           oProprietà.setProperty("/header1Visible", false)
-        }           
+        }
+        else if (this._iSelectedStepIndex == 1) {
+          oProprietà.setProperty("/header1Visible", false)
+        }
+        else if (this._iSelectedStepIndex == 2) {
+          oProprietà.setProperty("/header1Visible", false)
+        }
+        else if (this._iSelectedStepIndex == 3) {
+          oProprietà.setProperty("/header1Visible", false)
+        }
+        else if (this._iSelectedStepIndex == 4) {
+          oProprietà.setProperty("/header1Visible", false)
+        }
+        else  {
+          oProprietà.setProperty("/header1Visible", true)
+        }
+
+        // else {
+        //   oProprietà.setProperty("/header1Visible", false)
+        // }           
       },
 
       onValueHelpRequest: function (oEvent) {
@@ -644,7 +681,8 @@ onCloseDialog6 : function () {
                     Ebeln: oIpeEntitySet.getProperty("/Ebeln"),//oTempModel.getProperty("/Step1/").id,
                     Lifnr: oIpeEntitySet.getProperty("/Lifnr"),  //oTempModel.getProperty("/Step1/").id_ben,
                     Zzcig: oIpeEntitySet.getProperty("/Zzcig"),  //oTempModel.getProperty("/Step1/").cig,
-                    Zzcup: oIpeEntitySet.getProperty("/Zzcup"), //oTempModel.getProperty("/Step1/").cup,
+                    Zzcup: oIpeEntitySet.getProperty("/Zzcup"),
+                    Ktwrt: oIpeEntitySet.getProperty("/Ktwrt"), //oTempModel.getProperty("/Step1/").cup,
                     NameFirst: oIpeEntitySet.getProperty("/NameFirst"), //oTempModel.getProperty("/Step2/").nome,
                     NameLast: oIpeEntitySet.getProperty("/NameLast"), //oTempModel.getProperty("/Step2/").cognome,
                     ZzragSoc: oIpeEntitySet.getProperty("/ZzragSoc"), //oTempModel.getProperty("/Step2/").Rsociale,
@@ -653,7 +691,6 @@ onCloseDialog6 : function () {
                     Zwels: oIpeEntitySet.getProperty("/Zwels"), //oTempModel.getProperty("/items/").Modalita_pagamento,
                     Iban: oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
                     ZidRich: oIpeEntitySet.getProperty("/ZidRich"),
-                    Fipex: oIpeEntitySet.getProperty("/Fipex"),
                     Fipex: oIpeEntitySet.getProperty("/Fipex"),
                     Fistl: oIpeEntitySet.getProperty("/Fistl"),
                     Ktext: oIpeEntitySet.getProperty("/Ktext"),
@@ -680,7 +717,6 @@ onCloseDialog6 : function () {
                                 if (oAction === sap.m.MessageBox.Action.OK) {
                                     self.getView().getModel("temp").setProperty('/NewIPE', "");
                                     self.getOwnerComponent().getRouter().navTo("View1")
-                                    location.reload();
                                     //self.getView().getModel("temp").setProperty('/NewIPE', "");
                                 }
                             }
@@ -690,7 +726,7 @@ onCloseDialog6 : function () {
                         error: function(err){
                            console.log(err); 
                            MessageBox.error("Ipe in bozza non creato correttamente")
-                           location.reload();
+                           
                           },
                             async: true, 
                              urlParameters: {}  });
@@ -707,14 +743,15 @@ onCloseDialog6 : function () {
     onEditIpebozza: function (entry,oDataModel) {
       var self = this,
       oTempModel = self.getView().getModel("temp"),
-      oIpeEntitySet = self.getView().getModel("IpeEntitySet"),
-      Stipula = self.getView().getModel("IpeEntitySet").getProperty('/Zzdatastipula'),
-      DataStipula = Stipula.split(".");
+      oIpeEntitySet = self.getView().getModel("IpeEntitySet")
+      // Stipula = self.getView().getModel("IpeEntitySet").getProperty('/Zzdatastipula'),
+      // DataStipula = Stipula.split(".");
 
-      DataStipula = new Date(DataStipula[1] + "-" + DataStipula[0] + "-" + DataStipula[2])
+      // DataStipula = new Date(DataStipula[1] + "-" + DataStipula[0] + "-" + DataStipula[2])
 
-      self.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula', DataStipula);
-      self.getView().getModel("IpeEntitySet").setProperty('/Stcd2', "");
+      // self.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula', DataStipula);
+      // self.getView().getModel("IpeEntitySet").setProperty('/Stcd2', "");
+      
       var entry = self.getView().getModel("IpeEntitySet").getProperty('/');
       
       var path = oDataModel.createKey("/IpeEntitySet", {
@@ -732,8 +769,8 @@ onCloseDialog6 : function () {
         Zufficioliv1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
         Zufficioliv2: oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
     });
-
-    oDataModel.update(path, entry,  {
+    //entry.Ktwrt = parseFloat(oIpeEntitySet.getProperty("/Ktwrt"))
+    oDataModel.update(path, {
       success: function (data) {
           console.log("success");
           MessageBox.success("Operazione Eseguita con successo", {
@@ -838,6 +875,106 @@ onCloseDialog6 : function () {
       console.log("Nuovo valore: " + sNewValue);
     },
 
+    OnSelectAnni: function(oEvent) {
+      var oValue =oEvent.getSource().getSelectedItem().getProperty("text"),
+      Mese = "Gennaio",
+      Mese1 ="Febbraio"
+    //   "Marzo"
+    //   "Aprile"
+    //   "Maggio"
+    //   "Giugno"
+    //   "Luglio"
+    //   "Agosto"
+    //   "Settembre"
+    //   "Ottobre"
+    //   "Novembre"
+    //   "Dicembre"
+    // "Totale previsioni pagamenti"
+    // var TotalRows = this.getView().byId("preTable").getAggregation("rows").length
+    //   for (let i = 0; i < TotalRows; i++) {
+    //     var Month = Mese[i];
+    //     this.getRowsData(Month,colsData,oYears)
+
+        
+    //   }
+      var oYears = oValue.split("-"),
+      oTable = this.getView().byId("preTable"),
+      colsData = this.getColsPrevisioni(oYears),
+      rows = this.getRowsData(Mese,Mese1,colsData,oYears),
+      model = new sap.ui.model.json.JSONModel({});
+
+
+      var oModel = new sap.ui.model.json.JSONModel();
+
+      oModel.setData({
+          columns: colsData,
+          rows: rows
+      });
+
+      this._buildUIPreTableContent.apply(this, [oTable, oModel]);
+
+   
+
+    },
+
+    _buildUIPreTableContent : function (oTable, oModel) {
+			var oController = this;
+			var crtView = oController.getView();
+
+			
+      oTable.setModel(oModel);
+
+      oTable.bindColumns("/columns", function(sId, oContext) {
+          var columnName = oContext.getObject().columnName;
+          var columnLabel = oContext.getObject().columnLabel;
+          var templateBind = "{" + columnName + "}";
+          var Column = "";
+          columnLabel = columnName.slice(0, -4) === "ZImpIpeCl" ? columnLabel : columnLabel.slice(0, -4);
+          if(columnName.slice(0, -4) === "ZImpIpeCl"){
+
+            var oInput = new sap.m.Input("Tst" + columnName,{
+              value: templateBind
+            });
+
+            var oCustomData = new sap.ui.core.CustomData({
+              key: "FieldData",
+              value: columnLabel
+            });
+            
+            // Add the custom data to the Input control
+            oInput.addCustomData(oCustomData);
+          
+            oInput.attachChange(function(oEvent) {
+              var sNewValue = oEvent.getParameter("value");
+              var Anno = oEvent.getSource().data("app:FieldData");
+              console.log("Nuovo valore: " + sNewValue);
+          });
+
+            return new sap.ui.table.Column("colm" + columnName,{
+              label: columnLabel,
+              template: oInput,
+              width:"8rem", 
+            });
+
+          }else{
+            return new sap.ui.table.Column("colm" + columnName,{
+              label: columnLabel,
+              template: columnName,
+              width: columnName.slice(0, -4) === "Geber" ? "22rem" : "8rem",
+            
+            });
+          }
+        
+        });
+
+        oTable.bindRows("/rows");
+
+		},
+
+    onChangeZImpIpeCl: function (oEvent) {
+      var sNewValue = oEvent.getParameter("value");
+      console.log("Nuovo valore: " + sNewValue);
+    },
     
     });
   }

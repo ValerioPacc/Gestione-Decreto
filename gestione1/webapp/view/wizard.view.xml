@@ -266,7 +266,7 @@
                             <VBox>
                                 <HBox>
                                     <Label text="Sottoposto a richiesta di Assenso Preventivo" labelFor="Sottoposto a richiesta di Assenso Preventivo" />
-                                    <Switch  customTextOff="No" customTextOn="Si" change="handleChange" />
+                                    <Switch  customTextOff="No" customTextOn="Si" change="" />
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>
@@ -281,8 +281,8 @@
                                 </HBox>
                                 <Title text="" />
                                 <HBox>
-                                    <Label text="PNI" labelFor="PNI" />
-                                    <Switch  customTextOff="No" customTextOn="Si" change="handleChange" enabled="false"/>
+                                    <Label text="Indicazione Reiscrizione:" labelFor="Reiscrizione" />
+                                    <Switch id="IndReiscrizione" customTextOff="No" customTextOn="Si" change="handleChange" enabled="true"/>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>
@@ -310,13 +310,14 @@
                                     </layoutData>
                                 </HBox>
                             </VBox>
-                        </form:SimpleForm>
 
+                        </form:SimpleForm>
+                          <core:Fragment fragmentName="gestione1.fragment.Reiscrizione" type="XML" />
                         <OverflowToolbar>
                             <Button text="Indietro" type="Emphasized" press="onBackButton" />
                             <Button text="Avanti" type="Emphasized" press="onNextButton" />
                             <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" />
+                            <Button type="Emphasized" text="Salva in bozza"  press="onRegIpebozza"/>
                         </OverflowToolbar>
                     </WizardStep>
 
@@ -375,7 +376,7 @@
                             <Button text="Indietro" type="Emphasized" press="onBackButton" />
                             <Button text="Avanti" type="Emphasized" press="onNextButton" />
                             <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" press="onRegIpebozza"/>
+                            <Button type="Emphasized" text="Salva in bozza" app:Bozza="{IpeEntitySet>/Zbozza}" press="onRegIpebozza"/>
                         </OverflowToolbar>
                     </WizardStep>
 
@@ -401,7 +402,7 @@
                             <Button text="Indietro" type="Emphasized" press="onBackButton" />
                             <Button text="Avanti" type="Emphasized" press="onNextButton" />
                             <ToolbarSpacer />
-                            <Button type="Emphasized" text="Salva in bozza" press="onRegIpebozza"/>
+                            <Button type="Emphasized" text="Salva in bozza" app:Bozza="{IpeEntitySet>/Zbozza}" press="onRegIpebozza"/>
                         </OverflowToolbar>
                     </WizardStep>
                      <WizardStep id="EsigiId" validated="true" activate="optionalStepActivation" title="Esigibilità">
@@ -416,6 +417,7 @@
                                     <core:Fragment fragmentName="gestione1.fragment.EsigTable" type="XML" />
                                 </IconTabFilter>
                                 <IconTabFilter text="Residui" key="results">
+                                 <core:Fragment fragmentName="gestione1.fragment.Residui" type="XML" />
                                 </IconTabFilter>
                             </items>
                         </IconTabBar>

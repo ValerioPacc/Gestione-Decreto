@@ -57,26 +57,27 @@ sap.ui.define([
 			self.getView().getModel("IpeEntitySet").setProperty("/"+ field, item);
             
         },
+	
 		getColsData: function (oYears){
 
             var aColumnData = [
 				{columnLabel: "PNI",columnName:"Geber"},
-				{columnLabel: "Clausula" + oYears[0],columnName:"ZclausolaVar"+ oYears[0]}, 
-				{columnLabel: "Disponobilità PNI"+ oYears[0], columnName:"Wtfree"+ oYears[0]}, 
+				{columnLabel: "Clausola" + oYears[0],columnName:"ZclausolaVar"+ oYears[0]}, 
+				{columnLabel: "Disponibilità PNI"+ oYears[0], columnName:"Wtfree"+ oYears[0]}, 
 				{columnLabel: ""+ oYears[0], columnName:"ZImpIpeCl"+ oYears[0]}, 
-				{columnLabel: "Disponobilità di cassa"+ oYears[0], columnName:"Zcassa"+ oYears[0]},
-				{columnLabel: "Clausula" + oYears[1],columnName:"ZclausolaVar"+ oYears[1]}, 
-				{columnLabel: "Disponobilità PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]}, 
+				{columnLabel: "Disponibilità di cassa"+ oYears[0], columnName:"Zcassa"+ oYears[0]},
+				{columnLabel: "Clausola" + oYears[1],columnName:"ZclausolaVar"+ oYears[1]}, 
+				{columnLabel: "Disponibilità PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]}, 
 				{columnLabel: ""+ oYears[1], columnName:"ZImpIpeCl"+ oYears[1]}, 
-				{columnLabel: "Disponobilità di cassa"+ oYears[1], columnName:"Zcassa"+ oYears[1]},
-				{columnLabel: "Clausula" + oYears[2],columnName:"ZclausolaVar"+ oYears[2]}, 
-				{columnLabel: "Disponobilità PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]}, 
+				{columnLabel: "Disponibilità di cassa"+ oYears[1], columnName:"Zcassa"+ oYears[1]},
+				{columnLabel: "Clausola" + oYears[2],columnName:"ZclausolaVar"+ oYears[2]}, 
+				{columnLabel: "Disponibilità PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]}, 
 				{columnLabel: ""+ oYears[2], columnName:"ZImpIpeCl"+ oYears[2]}, 
-				{columnLabel: "Disponobilità di cassa"+ oYears[2], columnName:"Zcassa"+ oYears[2]},
-				{columnLabel: "Clausula" + oYears[3],columnName:"ZclausolaVar"+ oYears[3]}, 
-				{columnLabel: "Disponobilità PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]}, 
+				{columnLabel: "Disponibilità di cassa"+ oYears[2], columnName:"Zcassa"+ oYears[2]},
+				{columnLabel: "Clausola" + oYears[3],columnName:"ZclausolaVar"+ oYears[3]}, 
+				{columnLabel: "Disponibilità PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]}, 
 				{columnLabel: ""+ oYears[3], columnName:"ZImpIpeCl"+ oYears[3]}, 
-				{columnLabel: "Disponobilità di cassa"+ oYears[3], columnName:"Zcassa"+ oYears[3]}
+				{columnLabel: "Disponibilità di cassa"+ oYears[3], columnName:"Zcassa"+ oYears[3]}
 			  ];
 
 			  return aColumnData;
@@ -84,6 +85,54 @@ sap.ui.define([
         },
 
 		getRowsData: function (Aut, cols){
+			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
+			var oTempModel = this.getOwnerComponent().getModel("temp");
+			
+			
+
+			//oEsigModel.setProperty('/', []); 
+			var arr = [];
+			for( var i in cols){
+				var item = cols[i];
+				if(oEsigModel.getProperty("/List").length > 0){
+					var key = Object.keys(oEsigModel.getProperty("/List")[0]);
+					var oExist = _.contains(key, item.columnName);
+					if(!oExist){
+						oEsigModel.setProperty("/List/"+ item.columnName, "")
+					}
+				}else {
+					oEsigModel.setProperty("/List/"+ item.columnName, "")
+				}
+
+			}
+			
+			oEsigModel.setProperty('/List/Geber', Aut); 
+			arr.push(oEsigModel.getProperty('/List'));
+			oEsigModel.setProperty("/List",arr); 
+			return arr;
+		},
+
+
+		getColsPrevisioni: function (oYears){
+
+            var aColumnData = [
+				{columnLabel: "Esigibilità annuale",columnName:"Geber"},
+				{columnLabel: "Previsioni PNI"+ oYears[0], columnName:"ZprePni"+ oYears[0]}, 
+				{columnLabel: ""+ oYears[0], columnName:"ZImpIpeCl"+ oYears[0]},  
+				{columnLabel: "Previsioni PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]}, 
+				{columnLabel: ""+ oYears[1], columnName:"ZImpIpeCl"+ oYears[1]}, 
+				{columnLabel: "Previsioni PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]}, 
+				{columnLabel: ""+ oYears[2], columnName:"ZImpIpeCl"+ oYears[2]},  
+				{columnLabel: "Previsioni PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]}, 
+				{columnLabel: ""+ oYears[3], columnName:"ZImpIpeCl"+ oYears[3]}, 
+			  ];
+
+			  return aColumnData;
+            
+        },
+
+
+		getPreRowsData: function (Aut, cols){
 			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
 			var oTempModel = this.getOwnerComponent().getModel("temp");
 			
@@ -110,6 +159,7 @@ sap.ui.define([
 			oEsigModel.setProperty("/List",arr); 
 			return arr;
 		},
+
 
 		callIpeEntity:function () {
 
@@ -138,11 +188,11 @@ sap.ui.define([
 				success: function (data) {
 					var results = data.results;
 					if(results.length > 0){
-						var mnth = ("0" + (results[0].Zzdatastipula.getMonth() + 1)).slice(-2),
-                        day = ("0" + results[0].Zzdatastipula.getDate()).slice(-2);
+						// var mnth = ("0" + (results[0].Zzdatastipula.getMonth() + 1)).slice(-2),
+                        // day = ("0" + results[0].Zzdatastipula.getDate()).slice(-2);
 
-						var nData = [results[0].Zzdatastipula.getFullYear(), mnth, day].join("-");
-						results[0].Zzdatastipula = nData.split("-").reverse().join(".");
+						// var nData = [results[0].Zzdatastipula.getFullYear(), mnth, day].join("-");
+						// results[0].Zzdatastipula = nData.split("-").reverse().join(".");
 
 						that.getView().getModel("IpeEntitySet").setProperty('/', results[0]);
 					}else{
@@ -282,6 +332,7 @@ sap.ui.define([
 // 			});
 // 		},
 
+
 		callCountryEntity:function () {
 			var that = this;
 			var oMdl = new sap.ui.model.json.JSONModel();
@@ -374,6 +425,23 @@ sap.ui.define([
 
 
 		// },
+		callEsigibilitaEntity:function (oEvent) {
+
+			var that = this,
+			oModel = that.getOwnerComponent().getModel()
+			oModel.read('/EsigibilitaSet', {
+				urlParameters: "",
+				success: function(data, oResponse){
+					var oModelJson = new sap.ui.model.json.JSONModel();
+					  oModelJson.setData(data.results);
+					   that.getView().getModel("temp").setProperty('/EsigibilitaSet', data.results);
+					   
+					 },
+					  error: function(error){
+				var e = error;}
+			 });
+
+		},
 
 		callContrattoEntity:function () {
 			var that = this
@@ -420,6 +488,20 @@ sap.ui.define([
 				var e = error;}
 			 });
 
+		},
+
+		callPniEntity:function () {
+			var that = this
+			var oModel = that.getOwnerComponent().getModel()
+			var oTempModel = that.getOwnerComponent().getModel("temp");
+			var Anno = oTempModel.getData().SelectedDecree.Esercizio
+			var PosFin = this.getView().byId("pFin").getValue();
+		        oModel = that.getOwnerComponent().getModel().callFunction("/DeterminaEsigibilita", { // function import name
+				method: "GET", // http method
+				urlParameters: {"Esercizio" : Anno, "PosizioneFinanziaria" : PosFin }, // function import parameters
+				success: function(oData, response) { }, // callback function for success
+				error: function(oError){ } // callback function for error });
+			})
 		},
 		callNaturaAttoEntity:function (oEvent) {
 

@@ -4,7 +4,7 @@
       
      
                 <content>
-                <OverflowToolbar height="100%" class="sapUiMediumMarginBottom">
+                <!-- <OverflowToolbar height="100%" class="sapUiMediumMarginBottom">
                 
                     <ToolbarSpacer />
 				 <Label text="Seleziona periodi:" labelFor="suggestionsMultiComboBox" vAlign="Inherit"/>
@@ -62,28 +62,10 @@
 
                 
                 
-                </HBox>
-               <!-- <HBox>
-                <Label text="Importo clausola" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
-               <Input text="{}" class="sapUiSmallMarginStart"/>
-               <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
-                <Input text="{}" class="sapUiSmallMarginStart"/>
-                <Label text="" class="sapUiLargeMarginEnd"/>
-               <Input text="" class="sapUiSmallMarginStart"/>
-                <Label text="" class="sapUiLargeMarginEnd"/>
-               <Input text="" class="sapUiSmallMarginStart"/>
-                </HBox>
-                <HBox>
-                <Label text="PNI" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
-               <Input text="{}" class="sapUiSmallMarginStart"/>
-               <Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
-                <Input text="{}" class="sapUiSmallMarginStart"/>
-                <Label text="" class="sapUiLargeMarginEnd"/>
-               <Input text="" class="sapUiSmallMarginStart"/>
-                <Label text="" class="sapUiLargeMarginEnd"/>
-               <Input text="" class="sapUiSmallMarginStart"/>
                 </HBox> -->
+              
                 <core:Fragment fragmentName="gestione1.fragment.preTable" type="XML" />
+                
                 </content>
                 
                 

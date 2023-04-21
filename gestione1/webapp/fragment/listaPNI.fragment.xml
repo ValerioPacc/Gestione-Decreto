@@ -6,12 +6,12 @@
                  <content>
                 <HBox>
                 <Label text="Struttura Finanziaria:" vAlign="Inherit"/>
-               <Input  editable="false"/>
+               <Input  />
                <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/>
-                <Input  editable="false"/>
+                <Input  />
                 <Label text="ERP:" class="sapUiSmallMargin" required="true" vAlign="Inherit" visible="{UIState>/visible}"/>
                <ComboBox value="" width="50%"  visible="{UIState>/visible}"/>
-                <Label text="PNI:" required="true" vAlign="Inherit"/>
+                <!-- <Label text="PNI:" required="true" vAlign="Inherit"/> -->
                <Input value=""  showValueHelp="true"/>
                 </HBox>
                 <VBox>

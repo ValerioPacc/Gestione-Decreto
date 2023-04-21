@@ -40,7 +40,8 @@ sap.ui.define([
 								"tileType": "sap.ushell.ui.tile.StaticTile",
 								"properties": {
 									"title": "Gestione Decreto Impegno",
-									"targetURL": "#gestione1-display"
+									"targetURL": "#gestione1-display",
+									"sap-icon" : "//action-settings"
 								}
 							}]
 						}]

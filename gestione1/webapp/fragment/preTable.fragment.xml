@@ -1,122 +1,90 @@
-    <core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc"
-
-    xmlns:fb="sap.ui.comp.filterbar"
-    xmlns:u="sap.ui.unified"
-    xmlns:html="http://www.w3.org/1999/xhtml"
-    xmlns:layout="sap.ui.layout"
-    xmlns:form="sap.ui.layout.form"
+    <core:FragmentDefinition 
+height="100%"
     xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
     xmlns:core="sap.ui.core"
-    xmlns:menu="sap.m.MenuItem"
-    xmlns:menBtn="sap.m.Menu" height="100%"
+    xmlns:u="sap.ui.unified"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:m="sap.m"
     xmlns="sap.ui.table"
-	xmlns:c="sap.ui.core"
-	xmlns:m="sap.m"
-    >
-			<Table
-				selectionMode="MultiToggle"
-				visibleRowCount="7"
-				ariaLabelledBy="title">
-				
-				<columns>
-					<Column width="11rem">
-						<m:Label text="Esegibilità Annuale" />
-						<template>
-							<m:Text text="{}" wrapping="false" />
-						</template>
-					</Column>
-					<Column width="11rem">
-						<m:Label text="2023" />
-						<template>
-							<m:Input value="{}"/>
-						</template>
-					</Column>
-					<Column width="6rem" hAlign="End">
-						<m:Label text="Previsioni PNI" />
-						<template>
-							<m:Label text="{}" />
-						</template>
-					</Column>
-					<Column width="9rem">
-						<m:Label text="2024" />
-						<template>
-							<m:ObjectStatus text="{}" state="{
-								
-							}"/>
-						</template>
-					</Column>
-					<Column width="">
-						<m:Label text="Previsioni PNI" />
-						<template>
-							<u:Currency value="{}" currency="{}"/>
-						</template>
-					</Column>
-					<Column width="12rem">
-						<m:Label text="2025" />
-						<template>
-							<m:ComboBox value="{}" items="{/}">
-								<c:Item text="{}"/>
-							</m:ComboBox>
-						</template>
-					</Column>
-					<Column width="9rem">
-						<m:Label text="2026" />
-						<template>
-							<m:Link text="" href="{}" target="_blank"/>
-						</template>
-					</Column>
-					<Column width="9rem">
-						<m:Label text="Previsioni PNI" />
-						<template>
-							<m:Button text="Show Details" />
-						</template>
-					</Column>
-					<Column width="7rem">
-						<m:Label text="2027" />
-						<template>
-							<m:CheckBox selected="{
-							
-							}"/>
-						</template>
-					</Column>
-					<Column width="12rem">
-						<m:Label text="Previsioni PNI" />
-						<template>
-							<m:Select selectedKey="{}" items="{/}">
-								<c:Item text="{}" key="{}"/>
-							</m:Select>
-						</template>
-					</Column>
-					<Column width="12rem">
-						<m:Label text="2028" />
-						<template>
-							<m:MultiInput
-								value="{}"
-								tokens="{}"
-								suggestionItems="{
-									
-								}"
-								showValueHelp="false"
-								>
-								<m:tokens>
-									<m:Token key="{}" text="{}"/>
-								</m:tokens>
-								<m:suggestionItems>
-									<c:Item key="{}" text="{}" />
-								</m:suggestionItems>
-							</m:MultiInput>
-						</template>
-					</Column>
-					<Column width="6rem" hAlign="Center">
-						<m:Label text="Previsioni PNI" />
-						<template>
-							<c:Icon src="{
-							
-							}"/>
-						</template>
-					</Column>
-					
-				</columns>
-			</Table>
-	
-    </core:FragmentDefinition>
+    controllerName="gestione1.controller.wizard">
+
+    
+
+    <Table id="preTable"
+        class="Freeze"
+        selectionMode="None"
+        fixedColumnCount="1"
+        visibleRowCount="13"
+        ariaLabelledBy="title">
+        <extension>
+           <m:OverflowToolbar height="100%" class="sapUiMediumMarginBottom">
+                
+                    <m:ToolbarSpacer />
+				<m:Label text="Seleziona periodi:" labelFor="suggestionsMultiComboBox" vAlign="Inherit" 
+                class="marginRight sapUiLargeMarginStart"/>
+                <m:ComboBox id="SelAnni" class="marginRight" change="OnSelectAnni">
+                    <m:items>
+                        <core:Item text="2023-2024-2025-2026" />
+                        <core:Item text="2027-2028-2029-2030" />
+                        <core:Item text="2031-2033-2034-2035" />
+                        <core:Item text="2036-2037-2038-2039" />
+                        <core:Item text="2040-2041-2042-2043" />
+                        <core:Item text="2044-2045-2046-2047" />
+                        <core:Item text="2048-2049-2050-2051" />
+                        <core:Item text="2052-2053-2054-2056" />
+                        <core:Item text="2057-2058-2059-2060" />
+                        <core:Item text="2061-2062-2063-2064" />
+
+                    </m:items>
+                </m:ComboBox> 
+              
+               <m:Button type="Emphasized" icon="sap-icon://excel-attachment" text="Esporta"/>
+               <m:Button type="Emphasized" icon="sap-icon://edit" text="Ribalta previsioni" />
+               
+            </m:OverflowToolbar>
+             <m:HBox>
+                <m:VBox class="sapUiSmallMarginBegin">
+                <m:Label text="Clausola" vAlign="Inherit" class="sapUiLargeMarginEnd" width="120%"/>
+                <m:Label text="Importo clausola" vAlign="Inherit" class="sapUiMediumMarginTop"/>
+                <m:Label text="PNI" vAlign="Inherit" class="sapUiMediumMarginTop"/>
+                </m:VBox>
+              
+                <m:VBox class="sapUiSmallMarginBegin">
+               <m:Input value="{}" class="sapUiLargeMarginBegin"/>
+               <m:Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <m:Input value="{}" class="sapUiLargeMarginBegin"/>
+
+                </m:VBox>
+
+                <m:VBox class="sapUiLargeMarginBegin">
+               <m:Input value="{}" class="sapUiLargeMarginBegin"/>
+               <m:Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <m:Input value="{}" class="sapUiLargeMarginBegin"/>
+                </m:VBox>
+                
+                <m:VBox class="sapUiLargeMarginBegin">
+               <m:Input value="{}" class="sapUiLargeMarginBegin"/>
+               <m:Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <m:Input value="{}" class="sapUiLargeMarginBegin"/>
+                </m:VBox>
+
+                <m:VBox class="sapUiLargeMarginBegin">
+               <m:Input  value="{}" class="sapUiLargeMarginBegin"/>
+               <m:Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
+                <m:Input value="{}" class="sapUiLargeMarginBegin"/>
+                </m:VBox>
+
+                
+                
+                </m:HBox>
+        </extension>
+        <columns>
+        </columns>
+
+    </Table>
+
+	 
+</core:FragmentDefinition>

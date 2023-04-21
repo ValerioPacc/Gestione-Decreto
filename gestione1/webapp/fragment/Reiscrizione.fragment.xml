@@ -1,0 +1,63 @@
+<core:FragmentDefinition controllerName="gestione1.controller.wizard" height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+    
+                     <Panel headerText="Estremi Reiscrizione" id="EstReiscrizione" accessibleRole="Form"  visible="{/ReiscrSwitch}">
+        <content>
+            <l:Grid>
+                <l:content>
+                <HBox>
+                     
+                    <VBox>
+                        <Label text="Esercizio"/>
+                        <Input value="{}" enabled="false"/>
+                      
+                   
+                        <Label text="Codice Amministrazione:" />
+                        <Input value="" enabled="false"/>
+
+                         <Label text="Ufficio I livello:" />
+                        <Input value="" enabled="false"/>
+
+                        <Label text="Ufficio II livello:" />
+                        <Input value="" enabled="false"/>
+
+                        <Label text="Numero Decreto:" />
+                        <Input value="" enabled="false"/>
+
+                          <Label text="Numero IPE:" />
+                        <Input value="" enabled="false"/>
+
+                          <Label text="Numero Clausola:" />
+                        <Input value="" enabled="false"/>
+
+                   
+                        <!--
+                        <Label text="Casuale valutaria:" id="labelCS"/>
+                        <Input value="" id="CasualeVal"/>
+                        <layoutData>
+                            <l:GridData span="L3 M3 S3" />
+                        </layoutData>
+                        -->
+                    </VBox>
+                    <VBox>
+                        <Label text="Esercizio Reiscrizione:" />
+                        <Input value="{}" enabled="false"/>
+                      
+                    
+                        <Label text="Decreto Reiscrizione:" />
+                       <Input value="" enabled="false"/>
+                       
+                    </VBox>
+                   </HBox>
+                     
+                </l:content>
+            </l:Grid>
+          
+        </content>
+    </Panel>
+  <!-- <OverflowToolbar>
+                            <Button text="Indietro" type="Emphasized" visible="{/BackButtonVisible}" press="onBackButton" />
+                            <Button text="Avanti" type="Emphasized" visible="{/NextButtonVisible}" press="onNextButton" />
+                            <ToolbarSpacer />
+                            <Button type="Emphasized" text="Salva in bozza" visible="{/PNIButtonVisible}" />
+                        </OverflowToolbar> -->
+</core:FragmentDefinition>
