@@ -186,6 +186,19 @@ sap.ui.define(
           this.getView().byId("beneficiario1").setValue(ben)
     
         }
+        this._oWizard = this.byId("CreateProductWizard");
+        this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
+        this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);
+
+        if (this._iSelectedStepIndex == 5) {
+          var oTempModel = this.getOwnerComponent().getModel("temp");
+          var Auth = oTempModel.getData().Autorizzazioni.Value
+          if (Auth == "A") {
+            this.getView().byId("idPNI").setText("Autorizzazioni")
+            
+          }
+        
+        }
         // console.log(this._iSelectedStepIndex)
         //this.controlPreNI()
         

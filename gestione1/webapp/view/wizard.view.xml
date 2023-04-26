@@ -274,7 +274,7 @@
                                 <Title text="" />
                                 <HBox>
                                     <Label text="Posizione Finanziaria:" labelFor="Posizione Finanziaria:" required="true" />
-                                    <Input id="pFin" value="S020144014.290603.020201" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest" valueHelpOnly="true"/>
+                                    <Input id="pFin" value="S020100701.320201.010301" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest" valueHelpOnly="true"/>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>
@@ -304,7 +304,7 @@
                                 <Title text="" />
                                 <HBox>
                                     <Label text="Struttura Amministrativa Responsabile:" labelFor="Struttura Amministrativa Responsabile:" wrapping="true" required="true"/>
-                                    <Input  showSuggestion="true" value="S020000308400000" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" valueHelpOnly="true" />
+                                    <Input  showSuggestion="true" value="S020000108400000" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" valueHelpOnly="true" />
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>

@@ -1,13 +1,11 @@
 <core:FragmentDefinition controllerName="gestione1.controller.wizard" height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
     
-                     <Panel headerText="Estremi Reiscrizione" id="EstReiscrizione" accessibleRole="Form"  visible="{/ReiscrSwitch}">
-        <content>
-            <l:Grid>
-                <l:content>
-                <HBox>
+                   
+       
+                <HBox visible="{/ReiscrSwitch}">
                      
                     <VBox>
-                        <Label text="Esercizio"/>
+                        <Label text="Esercizio" textAlign= "Begin"/>
                         <Input value="{}" enabled="false"/>
                       
                    
@@ -38,22 +36,19 @@
                         </layoutData>
                         -->
                     </VBox>
-                    <VBox>
+                    <VBox class="sapUiLargeMarginBegin">
+       
                         <Label text="Esercizio Reiscrizione:" />
                         <Input value="{}" enabled="false"/>
                       
                     
-                        <Label text="Decreto Reiscrizione:" />
+                         <Label text="Decreto Reiscrizione:" />
                        <Input value="" enabled="false"/>
                        
                     </VBox>
                    </HBox>
                      
-                </l:content>
-            </l:Grid>
-          
-        </content>
-    </Panel>
+           
   <!-- <OverflowToolbar>
                             <Button text="Indietro" type="Emphasized" visible="{/BackButtonVisible}" press="onBackButton" />
                             <Button text="Avanti" type="Emphasized" visible="{/NextButtonVisible}" press="onNextButton" />

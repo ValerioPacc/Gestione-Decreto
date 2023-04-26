@@ -499,7 +499,9 @@ sap.ui.define([
 		        oModel = that.getOwnerComponent().getModel().callFunction("/DeterminaEsigibilita", { // function import name
 				method: "GET", // http method
 				urlParameters: {"Esercizio" : Anno, "PosizioneFinanziaria" : PosFin }, // function import parameters
-				success: function(oData, response) { }, // callback function for success
+				success: function(Value, response) { 
+					that.getView().getModel("temp").setProperty('/Autorizzazioni', Value);
+				}, // callback function for success
 				error: function(oError){ } // callback function for error });
 			})
 		},
