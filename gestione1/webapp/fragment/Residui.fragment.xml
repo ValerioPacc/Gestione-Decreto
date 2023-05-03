@@ -39,7 +39,7 @@ height="100%"
                     </m:items>
                 </m:ComboBox> 
                 <m:ToolbarSpacer/>
-               <m:Button id="idEPR" type="Emphasized" class="marginRight" icon="sap-icon://add" text=" EPR/Autorizzazione" press="onOpenDialog1"/>
+               <m:Button id="idEPR" type="Emphasized" class="marginRight" icon="sap-icon://add" text=" EPR/Autorizzazione" press="onOpenDialog2"/>
                <m:Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight"/>
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta"/>
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>

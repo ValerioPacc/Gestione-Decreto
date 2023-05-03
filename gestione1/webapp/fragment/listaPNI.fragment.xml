@@ -1,25 +1,38 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
      <Dialog id="listaPNI" title="Lista PNI - Autorizzazioni" draggable="true" showHeader="true" titleAlignment="Center"
       afterClose="onAfterClose" contentWidth="100%" contentHeight="100%">
-      
-      
-                 <content>
+      <Table mode="MultiSelect" items="{temp>/AutorizzazioneSet}" >
+      <headerToolbar >
+            <OverflowToolbar >
+                <content>
+                 
                 <HBox>
                 <Label text="Posizione Finanziaria:" vAlign="Inherit"/>
-               
-               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit"/>
-               
-                <Label text="ERP:" class="sapUiSmallMargin" required="true" vAlign="Inherit" visible="{UIState>/visible}"/>
+               <Text id="PosizFin" text=""/>
+               <Label text="Struttura Amministrativa Responsabile:" vAlign="Inherit" class="sapUiSmallMarginBegin"/>
+               <Text id="StruttAmmin" text=""/>
+                <Label text="EPR:" class="sapUiSmallMargin" required="true" vAlign="Inherit" visible="{UIState>/visible}"/>
                <ComboBox value="" width="50%"  visible="{UIState>/visible}"/>
                 <!-- <Label text="PNI:" required="true" vAlign="Inherit"/> -->
-               <Input value=""  showValueHelp="true"/>
+               <!-- <Input value=""  showValueHelp="true"/> -->
                 </HBox>
-                <VBox>
-                <CheckBox  text="Autorizzazione:" selected="true"/>
-                <CheckBox  text="Autorizzazione:" selected="true"/>
-                </VBox>
-                </content>
                 
+               
+           
+                </content>
+ </OverflowToolbar >
+                 </headerToolbar >
+                 <columns>
+            <Column demandPopin="true" hAlign="Begin" width="10rem" >
+                <Label text=""/>
+            </Column>
+            
+        </columns>
+        <ColumnListItem type="Active">
+            <Text text="Autorizzazione: {temp>Beschr}" textAlign="Begin"/>
+            <Text text="Autorizzazione:" textAlign="Begin"/>
+        </ColumnListItem>
+                </Table>
       <beginButton>
        <Button text="Indietro" type="Emphasized" press="onCloseDialog2"/>
       </beginButton>

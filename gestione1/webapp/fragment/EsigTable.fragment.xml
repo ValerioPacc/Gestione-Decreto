@@ -46,9 +46,9 @@ height="100%"
             </m:OverflowToolbar>
             <m:OverflowToolbar>
             <m:Label text="{i18n>PosFin}"/>
-            <m:Text text=""/>
+            <m:Text id="PsFin" text=""/>
             <m:Label text="{i18n>struttura_amm_resp}" class="marginRight"/>
-            <m:Text text=""/>
+            <m:Text id="strAmm" text=""/>
             </m:OverflowToolbar>
         </extension>
         <columns>

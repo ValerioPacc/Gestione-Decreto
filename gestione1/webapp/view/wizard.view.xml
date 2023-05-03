@@ -106,7 +106,7 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Dstipula}" required="true" />
-                                            <Input id="Dstipula"  showValueHelp="true" enabled="false" app:fieldName="DataStipula" app:filterTableField="DataStipula" class="sapUiSmallMarginBottom" />
+                                            <DatePicker id="Dstipula" value="{IpeEntitySet>/Zzdatastipula}"  displayFormat="dd/MM/yyyy" enabled="false" app:fieldName="DataStipula" app:filterTableField="DataStipula" class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
@@ -120,7 +120,7 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>beneficiarioH}" />
-                                            <Input id="beneficiario" value="{IpeEntitySet>/NameFirst} {IpeEntitySet>/NameLast}" enabled="false" />
+                                            <Input id="beneficiario" value="" enabled="false" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
@@ -281,8 +281,8 @@
                                 </HBox>
                                 <Title text="" />
                                 <HBox>
-                                    <Label text="Indicazione Reiscrizione:" labelFor="Reiscrizione" />
-                                    <Switch id="IndReiscrizione" customTextOff="No" customTextOn="Si" change="handleChange" enabled="true"/>
+                                    <Label id="IndR" text="Indicazione Reiscrizione:" labelFor="Reiscrizione" visible="false"/>
+                                    <Switch id="IndReiscrizione" customTextOff="No" customTextOn="Si" change="handleChange" enabled="true" visible="false"/>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>
@@ -304,7 +304,7 @@
                                 <Title text="" />
                                 <HBox>
                                     <Label text="Struttura Amministrativa Responsabile:" labelFor="Struttura Amministrativa Responsabile:" wrapping="true" required="true"/>
-                                    <Input  showSuggestion="true" value="S020000108400000" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" valueHelpOnly="true" />
+                                    <Input id="StrAmm" showSuggestion="true" value="S020000108400000" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" valueHelpOnly="true" />
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>

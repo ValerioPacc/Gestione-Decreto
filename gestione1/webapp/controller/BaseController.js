@@ -505,6 +505,59 @@ sap.ui.define([
 				error: function(oError){ } // callback function for error });
 			})
 		},
+		callAuthEntity:function () {
+			var that = this
+			var oModel = that.getOwnerComponent().getModel()
+			// var oTempModel = this.getView().getModel("temp")
+			//  var oIpeEntitySet = this.getView().getModel("")
+			var oTempModel = that.getOwnerComponent().getModel("temp");
+			var Pfinanz = that.getView().byId("pFin").getValue()
+			var StrAmm = that.getView().byId("StrAmm").getValue()
+		    var Zzanno = oTempModel.getData().SelectedDecree.Esercizio
+
+			// var oModel = that.getOwnerComponent().getModel()
+		    // var oTempModel = that.getOwnerComponent().getModel("NewIpe")
+		    // this.getOwnerComponent().getModel("IpeEntitySet");
+
+			
+			var aFilters = [];
+
+			aFilters.push(
+			  new Filter({path: "Anno", operator: FilterOperator.EQ, value1: Zzanno }),
+			  new Filter({path: "Fipex", operator: FilterOperator.EQ, value1: Pfinanz }),
+			  new Filter({path: "Fictr", operator: FilterOperator.EQ, value1: StrAmm })
+
+			)
+
+
+
+			// var path = oModel.createKey('/ContrattoSet', {
+			// 	Ebeln: this.getView().byId("ValueHelpContratto").getValue()
+			// })
+            // var Ebeln=this.getView().byId("ValueHelpContratto").getValue()
+
+
+
+			oModel.read("/AutorizzazioneSet", {
+				filters:aFilters,
+				urlParameters: "",
+				success: function(data, oResponse){
+					var oModelJson = new sap.ui.model.json.JSONModel();
+					  oModelJson.setData(data);
+					   that.getView().getModel("temp").setProperty('/AutorizzazioneSet', data.results);
+					   var risultati=data.results
+					   that.getPosStr(risultati)
+					  //that.callAnnoAmm(data.results);
+					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+					 },
+					 
+					  error: function(error){
+				var e = error;}
+				
+			 });
+			 
+			 
+		},
 		callNaturaAttoEntity:function (oEvent) {
 
 			var that = this,
@@ -543,6 +596,27 @@ sap.ui.define([
 	  
 		},
 
+		callIndReiscrizioneEntity:function (oEvent) {
+
+			var that = this,
+			oModel = that.getOwnerComponent().getModel()
+			var path = oModel.createKey('/IndReiscrizioneSet', {
+				Fipex: this.getView().byId("pFin").getValue()
+			})
+
+			oModel.read(path, {
+				urlParameters: "",
+				success: function(data){
+					var oModelJson = new sap.ui.model.json.JSONModel();
+					  oModelJson.setData(data.results);
+					   that.getView().getModel("temp").setProperty('/IndReiscrizione', data);
+					   
+					 },
+					  error: function(error){
+				var e = error;}
+			 });
+
+			},
 
 		////////////////////////////////////////////////////////////
 		//	DIALOG

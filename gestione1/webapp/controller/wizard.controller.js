@@ -36,6 +36,8 @@ sap.ui.define(
         this.callModPagEntity()
         this.callContrattoEntity()
         this.callPniEntity()
+        this.callIndReiscrizioneEntity()
+        
         //this.callEsigibilitaEntity()
         this.getView().getModel("comboBox")
        
@@ -197,6 +199,22 @@ sap.ui.define(
             this.getView().byId("idPNI").setText("Autorizzazioni")
             
           }
+          var Pf=this.getView().byId("pFin").getValue()
+          var StrAmm = this.getView().byId("StrAmm").getValue()
+
+          this.getView().byId("PsFin").setText(Pf)
+          this.getView().byId("strAmm").setText(StrAmm)
+          
+        }
+        if (this._iSelectedStepIndex == 2) {
+          
+          var oTempModel = this.getOwnerComponent().getModel("temp");
+          var Reiscr = oTempModel.getData().IndReiscrizione.CodicePg
+          if (Reiscr >= "80") {
+            this.getView().byId("IndR").setVisible(true)
+            this.getView().byId("IndReiscrizione").setVisible(true)
+            
+          }
         
         }
         // console.log(this._iSelectedStepIndex)
@@ -208,7 +226,7 @@ sap.ui.define(
 
     onOpenFragment : function () {
 
-      var oDialog = this.openDialog("gestione1.fragment.anagrafica").open();
+      var oDialog2 = this.openDialog("gestione1.fragment.anagrafica").open();
 		},
 
     onOpenGridTable : function () {
@@ -227,23 +245,25 @@ sap.ui.define(
 			}.bind(this));
 		},
     onOpenDialog1 : function () {
-      var oDialog = this.openDialog("gestione1.fragment.listaPNI").open();
-		// 	if (!this.sFragment) {
-		// 		this.sFragment = this.loadFragment({
-		// 			name: "gestione1.fragment.listaPNI",
-    //       controller: this
-		// 		}).then(function (oFragment) {
-    //       this.getView().addDependent(oFragment);
-    //       return oFragment;
-    //     }.bind(this));
-		// 	}
-    //   var UIStateModel= this.getView().getModel("UIState");
-    //   var UIStateData= UIStateModel.getData();
-    //   UIStateData.visible = false;
-    //   UIStateModel.setData(UIStateData);
-		// 	this.sFragment.then(function(oFragment) {
-		// 		oFragment.open();
-		// 	}.bind(this));
+      //var oDialog1 = this.openDialog("gestione1.fragment.listaPNI").open();
+			if (!this.sFragment) {
+				this.sFragment = this.loadFragment({
+					name: "gestione1.fragment.listaPNI",
+          controller: this
+				}).then(function (oFragment) {
+          this.getView().addDependent(oFragment);
+          return oFragment;
+        }.bind(this));
+			}
+      var UIStateModel= this.getView().getModel("UIState");
+      var UIStateData= UIStateModel.getData();
+      UIStateData.visible = false;
+      UIStateModel.setData(UIStateData);
+			this.sFragment.then(function(oFragment) {
+				oFragment.open();
+			}.bind(this));
+      this.callAuthEntity()
+
 		},
     onOpenDialog2 : function () {
 
@@ -266,7 +286,7 @@ sap.ui.define(
 		},
     onOpenDialogModPag : function () {
 
-      var oDialog = this.openDialog("gestione1.fragment.regModPag").open();
+      var oDialog3 = this.openDialog("gestione1.fragment.regModPag").open();
 		},
 
     getOtherData: function (value) {
@@ -293,8 +313,8 @@ sap.ui.define(
           var date = new Date(oTempModel.getProperty("/ContrattoSet").Zzdatastipula),
           mnth = ("0" + (date.getMonth() + 1)).slice(-2),
           day = ("0" + date.getDate()).slice(-2);
-         var nData= [date.getFullYear(), mnth, day].join("-");
-         var nDate = nData.split("-").reverse().join(".");
+         var nData= [date.getFullYear(), day, mnth].join("-");
+         var nDate = nData.split("-").reverse().join("/");
          
           
           this.getView().byId("Dstipula").setValue(nDate);
@@ -309,15 +329,21 @@ sap.ui.define(
         //valoriNuovi.push(KOSTL.Kostl)
     }
     
-    
       // //this.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula' ,rowSelected.data); 
       // this.getView().getModel("IpeEntitySet").setProperty('/Zzcig' ,rowSelected.cig); 
       // this.getView().getModel("IpeEntitySet").setProperty('/Zzcup' ,rowSelected.cup);
       // this.getView().getModel("IpeEntitySet").setProperty('/Ktwrt' ,rowSelected.importo); 
       //this.getView().getModel("CountryMatchCodeSet").setProperty('/Description' ,country.Description); 
 		},
-    
 
+    getPosStr : function(risultati){
+     var oTempModel = this.getView().getModel("temp")
+    var PosizioneFIN = risultati[0].Fipex
+    var StrutturaAmmRes = risultati[0].Fictr
+    this.getView().byId("PosizFin").setText(PosizioneFIN);
+    this.getView().byId("StruttAmmin").setText(StrutturaAmmRes);
+    
+    },
     
    
     //  onClickButton1 : function(){
@@ -438,7 +464,7 @@ sap.ui.define(
 		 	this.byId("Anagrafica").close();
 		},
      onCloseDialog2 : function () {
-      var oDialog = this.openDialog("gestione1.fragment.listaPNI").close();
+      this.byId("listaPNI").close();
    },
    onCloseDialog3 : function () {
     this.byId("regModPag").close();
@@ -656,13 +682,19 @@ onCloseDialog6 : function () {
       
       onRegIpebozza: function (oEvent) {
         var oModel= this.getView().getModel("comboBox"),
-        oBozza = oEvent.getSource().data("Bozza") === "X" ? true : false,
         oTempModel = this.getView().getModel("temp"),
-        oIpeEntitySet = this.getView().getModel("IpeEntitySet"), 
-        rowSelected = _.findWhere(oModel.getProperty("/Contratto"), ),
+        oIpeEntitySet = this.getView().getModel("IpeEntitySet")
+        if (oIpeEntitySet == undefined) {
+          var oBozza = false
+        } 
+        else {
+          var oBozza = this.getView().getModel("IpeEntitySet").oData.Zbozza === "X" ? true : false
+        }
+        //oBozza = this.getView().getModel("IpeEntitySet").oData.Zbozza === "X" ? true : false,
+        var rowSelected = _.findWhere(oModel.getProperty("/Contratto"), ),
         beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"), ),
         Zzanno = this.getView().byId("es_decreto").getSelectedKey();
-
+        
         //oTempModel.setProperty("/Step1", rowSelected);
         //oTempModel.setProperty("/Step2", beneficiario);
         
@@ -670,10 +702,10 @@ onCloseDialog6 : function () {
         
         var self= this
         MessageBox.warning("Sei sicuro di voler salvare l'Ipe in Bozza ?", {
-            actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
-            emphasizedAction: sap.m.MessageBox.Action.YES,
+            actions: ["Si", sap.m.MessageBox.Action.NO],
+            emphasizedAction: "Si",
             onClose: function (oAction) {
-                if (oAction === sap.m.MessageBox.Action.YES) {
+                if (oAction === "Si") {
                   var oDataModel = self.getOwnerComponent().getModel();
                   var entity = {
                     Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
@@ -691,7 +723,7 @@ onCloseDialog6 : function () {
                     Zufficioliv1:oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
                     Zufficioliv2:oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
                     Zzdatastipula: oIpeEntitySet.getProperty("/Zzdatastipula"), //new Date (oTempModel.getProperty("/Step1/").data),
-                    Ebeln: oIpeEntitySet.getProperty("/Ebeln"),//oTempModel.getProperty("/Step1/").id,
+                    Ebeln: self.getView().byId("beneficiario").getValue(),//oTempModel.getProperty("/Step1/").id,
                     Lifnr: oIpeEntitySet.getProperty("/Lifnr"),  //oTempModel.getProperty("/Step1/").id_ben,
                     Zzcig: oIpeEntitySet.getProperty("/Zzcig"),  //oTempModel.getProperty("/Step1/").cig,
                     Zzcup: oIpeEntitySet.getProperty("/Zzcup"),
@@ -704,8 +736,8 @@ onCloseDialog6 : function () {
                     Zwels: oIpeEntitySet.getProperty("/Zwels"), //oTempModel.getProperty("/items/").Modalita_pagamento,
                     Iban: oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
                     ZidRich: oIpeEntitySet.getProperty("/ZidRich"),
-                    Fipex: oIpeEntitySet.getProperty("/Fipex"),
-                    Fistl: oIpeEntitySet.getProperty("/Fistl"),
+                    Fipex:  self.getView().byId("pFin").getValue(),
+                    Fistl: self.getView().byId("StrAmm").getValue(),
                     Ktext: oIpeEntitySet.getProperty("/Ktext"),
                     Znaturaatto: oIpeEntitySet.getProperty("/Znaturaatto"),
                     Znumcontratt: oIpeEntitySet.getProperty("/Znumcontratt"),
@@ -719,17 +751,21 @@ onCloseDialog6 : function () {
                     Zbozza: "X"
                     };
                     if(!oBozza){
-
+                      var dataNuova = new Date(entity.Zzdatastipula),
+                      mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+                      day = ("0" + dataNuova.getDate()).slice(-2);
+                    var nData = [dataNuova.getFullYear(), mnth, day].join("-");
+                    entity.Zzdatastipula = new Date(nData)
                      oDataModel.create("/IpeEntitySet", entity,{
                        success: function(result){ 
                         console.log('SUCCESS')
                         MessageBox.success("Ipe in bozza creato correttamente", {
-                            actions: [sap.m.MessageBox.Action.OK],
-                            emphasizedAction: MessageBox.Action.OK,
+                            actions: ["OK"],
+                            emphasizedAction: "OK",
                             onClose: function (oAction) {
-                                if (oAction === sap.m.MessageBox.Action.OK) {
-                                    self.getView().getModel("temp").setProperty('/NewIPE', "");
-                                    self.getOwnerComponent().getRouter().navTo("View1")
+                                if (oAction === "OK") {
+                                    self.getView().getModel("temp").setProperty('/IpeEntitySet', result);
+                                    //self.getOwnerComponent().getRouter().navTo("View1")
                                     //self.getView().getModel("temp").setProperty('/NewIPE', "");
                                 }
                             }
@@ -757,16 +793,19 @@ onCloseDialog6 : function () {
       var self = this,
       oTempModel = self.getView().getModel("temp"),
       oIpeEntitySet = self.getView().getModel("IpeEntitySet")
-      // Stipula = self.getView().getModel("IpeEntitySet").getProperty('/Zzdatastipula'),
-      // DataStipula = Stipula.split(".");
+       //var Stipula = self.getView().getModel("IpeEntitySet").getProperty('/Zzdatastipula')
+      // // DataStipula = Stipula.split(".");
 
-      // DataStipula = new Date(DataStipula[1] + "-" + DataStipula[0] + "-" + DataStipula[2])
+      // DataStipula = new Date(Stipula[1] + "-" + Stipula[0] + "-" + Stipula[2])
 
       // self.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula', DataStipula);
       // self.getView().getModel("IpeEntitySet").setProperty('/Stcd2', "");
       
       var entry = self.getView().getModel("IpeEntitySet").getProperty('/');
-      
+      var date = new Date(entry.Zzdatastipula)
+    
+     entry.Zzdatastipula = date
+
       var path = oDataModel.createKey("/IpeEntitySet", {
         Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
         Fikrs: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
@@ -783,15 +822,15 @@ onCloseDialog6 : function () {
         Zufficioliv2: oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
     });
     //entry.Ktwrt = parseFloat(oIpeEntitySet.getProperty("/Ktwrt"))
-    oDataModel.update(path, {
+    oDataModel.update(path, entry, {
       success: function (data) {
           console.log("success");
           MessageBox.success("Operazione Eseguita con successo", {
-              actions: [sap.m.MessageBox.Action.OK],
-              emphasizedAction: MessageBox.Action.OK,
+              actions: ["OK"],
+              emphasizedAction: "OK",
               onClose: function (oAction) {
-                  if (oAction === sap.m.MessageBox.Action.OK) {
-                      that.getOwnerComponent().getRouter().navTo("View1");
+                  if (oAction === "OK") {
+                      //that.getOwnerComponent().getRouter().navTo("View1");
                       
                   }
               }
@@ -889,9 +928,9 @@ onCloseDialog6 : function () {
     },
 
     OnSelectAnni: function(oEvent) {
-      var oValue =oEvent.getSource().getSelectedItem().getProperty("text"),
-      Mese = "Gennaio",
-      Mese1 ="Febbraio"
+      var oValue =oEvent.getSource().getSelectedItem().getProperty("text")
+      var Mese = "Gennaio"
+      // Mese1 ="Febbraio"
     //   "Marzo"
     //   "Aprile"
     //   "Maggio"
@@ -913,7 +952,7 @@ onCloseDialog6 : function () {
       var oYears = oValue.split("-"),
       oTable = this.getView().byId("preTable"),
       colsData = this.getColsPrevisioni(oYears),
-      rows = this.getRowsData(Mese,Mese1,colsData,oYears),
+      rows = this.getRowsData(Mese,colsData,oYears),
       model = new sap.ui.model.json.JSONModel({});
 
 
