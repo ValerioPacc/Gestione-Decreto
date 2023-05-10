@@ -283,6 +283,27 @@ sap.ui.define([
             
     
             },
+            // callConiAuthEntity:function () {
+            //     var that = this;
+            //     var oMdl = new sap.ui.model.json.JSONModel();
+            //     this.getOwnerComponent().getModel().read("ZES_CONIAUTH_SET", {
+            //         filters: [],
+            //         urlParameters: "",
+            //         success: function (data) {
+            //             oMdl.setData(data.results);
+            //             that.getView().getModel("temp").setProperty('ZES_CONIAUTH_SET', data.results)
+            //             //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+            //         },
+            //         error: function (error) {
+            //             //that.getView().getModel("temp").setProperty(sProperty,[]);
+            //             //that.destroyBusyDialog();
+            //             var e = error;
+            //         }
+            //     });
+            
+    
+            // },
+
         });
     });
 

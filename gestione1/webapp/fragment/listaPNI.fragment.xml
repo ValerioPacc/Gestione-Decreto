@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
      <Dialog id="listaPNI" title="Lista PNI - Autorizzazioni" draggable="true" showHeader="true" titleAlignment="Center"
       afterClose="onAfterClose" contentWidth="100%" contentHeight="100%">
-      <Table mode="MultiSelect" items="{temp>/AutorizzazioneSet}" >
+      <Table mode="MultiSelect" items="{temp>/AutorizzazioneSet}" id="PniAuth">
       <headerToolbar >
             <OverflowToolbar >
                 <content>
@@ -34,10 +34,10 @@
         </ColumnListItem>
                 </Table>
       <beginButton>
-       <Button text="Indietro" type="Emphasized" press="onCloseDialog2"/>
+       <Button text="Indietro" type="Emphasized" press="closeDialog"/>
       </beginButton>
       <endButton>
-        <Button text="Seleziona" type="Emphasized" press=""/>
+        <Button text="Seleziona" type="Emphasized" press="onSelctionAuth"/>
       </endButton>
    </Dialog>
 </core:FragmentDefinition>

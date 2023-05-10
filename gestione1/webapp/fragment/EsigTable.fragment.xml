@@ -18,7 +18,9 @@ height="100%"
         selectionMode="MultiToggle"
         fixedColumnCount="1"
         visibleRowCount="7"
-        ariaLabelledBy="title">
+        ariaLabelledBy="title"
+        
+       >
         <extension>
             <m:OverflowToolbar style="Clear">
                 <m:Label text="Seleziona periodi:" labelFor="suggestionsMultiComboBox" vAlign="Inherit" 

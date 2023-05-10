@@ -70,7 +70,7 @@
                 
                 
       <beginButton>
-       <Button text="Annulla" type="Emphasized" press="onCloseDialog4"/>
+       <Button text="Annulla" type="Emphasized" press="closeDialog"/>
       </beginButton>
       <endButton>
         <Button text="Conferma" type="Emphasized" press=""/>

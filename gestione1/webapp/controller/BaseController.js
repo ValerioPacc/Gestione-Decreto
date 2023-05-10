@@ -526,7 +526,6 @@ sap.ui.define([
 			  new Filter({path: "Anno", operator: FilterOperator.EQ, value1: Zzanno }),
 			  new Filter({path: "Fipex", operator: FilterOperator.EQ, value1: Pfinanz }),
 			  new Filter({path: "Fictr", operator: FilterOperator.EQ, value1: StrAmm })
-
 			)
 
 
@@ -629,6 +628,30 @@ sap.ui.define([
 			}
 			return this.__dialog;
 		},
+		
+		// openDialog1: function (dialogPath) {
+		// 	if (!this.__dialog) {
+		// 		this.__dialog = sap.ui.xmlfragment(dialogPath, this);
+		// 		this.getView().addDependent(this.__dialog);
+		// 	}
+		// 	return this.__dialog;
+		// },
+
+		// openDialog2: function (dialogPath) {
+		// 	if (!this.__dialog) {
+		// 		this.__dialog = sap.ui.xmlfragment(dialogPath, this);
+		// 		this.getView().addDependent(this.__dialog);
+		// 	}
+		// 	return this.__dialog;
+		// },
+
+		// openDialog3: function (dialogPath) {
+		// 	if (!this.__dialog) {
+		// 		this.__dialog = sap.ui.xmlfragment(dialogPath, this);
+		// 		this.getView().addDependent(this.__dialog);
+		// 	}
+		// 	return this.__dialog;
+		// },
 
 		closeDialog: function() {
 			if (this.__dialog) {
@@ -639,6 +662,7 @@ sap.ui.define([
 				this.__dialog = null;
 			}
 		},
+	
 		openExpandDialog: function (dialogPath) {
             if (!this.__dialog2) {
                 this.__dialog2 = sap.ui.xmlfragment(dialogPath, this);

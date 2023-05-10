@@ -19,7 +19,7 @@
                      <Label text="Struttura Amministrativa" />
                   </f:label>
                   <f:fields>
-                     <Input id="strAmm" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'PosizioneFinanziaria' }}">
+                     <Input id="posizFinan" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'PosizioneFinanziaria' }}">
                       <core:Item key="{PosizioneFinanziaria}" text="{PosizioneFinanziaria}"/>
                       </Input>
                   </f:fields>

@@ -282,7 +282,7 @@
                                 <Title text="" />
                                 <HBox>
                                     <Label id="IndR" text="Indicazione Reiscrizione:" labelFor="Reiscrizione" visible="false"/>
-                                    <Switch id="IndReiscrizione" customTextOff="No" customTextOn="Si" change="handleChange" enabled="true" visible="false"/>
+                                    <Switch id="IndReiscrizione" customTextOff="No" customTextOn="Si" change="handleChange" enabled="true" visible="true"/>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>
@@ -310,9 +310,10 @@
                                     </layoutData>
                                 </HBox>
                             </VBox>
-
+                          
                         </form:SimpleForm>
                           <core:Fragment fragmentName="gestione1.fragment.Reiscrizione" type="XML" />
+                           <!-- <core:Fragment fragmentName="gestione1.fragment.posFinTable" type="XML" /> -->
                         <OverflowToolbar>
                             <Button text="Indietro" type="Emphasized" press="onBackButton" />
                             <Button text="Avanti" type="Emphasized" press="onNextButton" />

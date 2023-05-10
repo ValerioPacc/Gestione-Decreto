@@ -37,7 +37,6 @@ sap.ui.define(
         this.callContrattoEntity()
         this.callPniEntity()
         this.callIndReiscrizioneEntity()
-        
         //this.callEsigibilitaEntity()
         this.getView().getModel("comboBox")
        
@@ -206,17 +205,17 @@ sap.ui.define(
           this.getView().byId("strAmm").setText(StrAmm)
           
         }
-        if (this._iSelectedStepIndex == 2) {
+        // if (this._iSelectedStepIndex == 2) {
           
-          var oTempModel = this.getOwnerComponent().getModel("temp");
-          var Reiscr = oTempModel.getData().IndReiscrizione.CodicePg
-          if (Reiscr >= "80") {
-            this.getView().byId("IndR").setVisible(true)
-            this.getView().byId("IndReiscrizione").setVisible(true)
+        //   var oTempModel = this.getOwnerComponent().getModel("temp");
+        //   var Reiscr = oTempModel.getData().IndReiscrizione.CodicePg
+        //   if (Reiscr >= "80") {
+        //     this.getView().byId("IndR").setVisible(true)
+        //     this.getView().byId("IndReiscrizione").setVisible(true)
             
-          }
+        //   }
         
-        }
+        // }
         // console.log(this._iSelectedStepIndex)
         //this.controlPreNI()
         
@@ -230,59 +229,60 @@ sap.ui.define(
 		},
 
     onOpenGridTable : function () {
-
-			if (!this.eFragment) {
-				this.eFragment = this.loadFragment({
-					name: "gestione1.fragment.impPre",
-          controller: this
-				}).then(function (oFragment) {
-          this.getView().addDependent(oFragment);
-          return oFragment;
-        }.bind(this));
-			} 
-			this.eFragment.then(function(oFragment) {
-				oFragment.open();
-			}.bind(this));
+      var oDialog4 = this.openDialog("gestione1.fragment.impPre").open();
+			// if (!this.eFragment) {
+			// 	this.eFragment = this.loadFragment({
+			// 		name: "gestione1.fragment.impPre",
+      //     controller: this
+			// 	}).then(function (oFragment) {
+      //     this.getView().addDependent(oFragment);
+      //     return oFragment;
+      //   }.bind(this));
+			// } 
+			// this.eFragment.then(function(oFragment) {
+			// 	oFragment.open();
+			// }.bind(this));
 		},
     onOpenDialog1 : function () {
-      //var oDialog1 = this.openDialog("gestione1.fragment.listaPNI").open();
-			if (!this.sFragment) {
-				this.sFragment = this.loadFragment({
-					name: "gestione1.fragment.listaPNI",
-          controller: this
-				}).then(function (oFragment) {
-          this.getView().addDependent(oFragment);
-          return oFragment;
-        }.bind(this));
-			}
-      var UIStateModel= this.getView().getModel("UIState");
-      var UIStateData= UIStateModel.getData();
-      UIStateData.visible = false;
-      UIStateModel.setData(UIStateData);
-			this.sFragment.then(function(oFragment) {
-				oFragment.open();
-			}.bind(this));
-      this.callAuthEntity()
+       this.callAuthEntity()
+      var oDialog1 = this.openDialog("gestione1.fragment.listaPNI").open();
+			// if (!this.sFragment) {
+			// 	this.sFragment = this.loadFragment({
+			// 		name: "gestione1.fragment.listaPNI",
+      //     controller: this
+			// 	}).then(function (oFragment) {
+      //     this.getView().addDependent(oFragment);
+      //     return oFragment;
+      //   }.bind(this));
+			// }
+      // var UIStateModel= this.getView().getModel("UIState");
+      // var UIStateData= UIStateModel.getData();
+      // UIStateData.visible = false;
+      // UIStateModel.setData(UIStateData);
+			// this.sFragment.then(function(oFragment) {
+			// 	oFragment.open();
+			// }.bind(this));
+      // this.callAuthEntity()
 
 		},
     onOpenDialog2 : function () {
-
-			if (!this.dFragment) {
-				this.dFragment = this.loadFragment({
-					name: "gestione1.fragment.listaERP",
-          controller: this
-				}).then(function (oFragment) {
-          this.getView().addDependent(oFragment);
-          return oFragment;
-        }.bind(this));
-			} 
-      var UIStateModel= this.getView().getModel("UIState");
-      var UIStateData= UIStateModel.getData();
-      UIStateData.visible = true;
-      UIStateModel.setData(UIStateData);
-			this.dFragment.then(function(oFragment) {
-				oFragment.open();
-			}.bind(this));
+      var oDialog3 = this.openDialog("gestione1.fragment.listaERP").open();
+			// if (!this.dFragment) {
+			// 	this.dFragment = this.loadFragment({
+			// 		name: "gestione1.fragment.listaERP",
+      //     controller: this
+			// 	}).then(function (oFragment) {
+      //     this.getView().addDependent(oFragment);
+      //     return oFragment;
+      //   }.bind(this));
+			// } 
+      // var UIStateModel= this.getView().getModel("UIState");
+      // var UIStateData= UIStateModel.getData();
+      // UIStateData.visible = true;
+      // UIStateModel.setData(UIStateData);
+			// this.dFragment.then(function(oFragment) {
+			// 	oFragment.open();
+			// }.bind(this));
 		},
     onOpenDialogModPag : function () {
 
@@ -848,7 +848,7 @@ onCloseDialog6 : function () {
 
     OnSelectYears: function(oEvent) {
       var oValue =oEvent.getSource().getSelectedItem().getProperty("text"),
-      Aut = "Autorizzazione1",
+      Aut = "Autorizzazione:",
       oYears = oValue.split("-"),
       oTable = this.getView().byId("EsigTable"),
       colsData = this.getColsData(oYears),
@@ -950,7 +950,7 @@ onCloseDialog6 : function () {
         
     //   }
       var oYears = oValue.split("-"),
-      oTable = this.getView().byId("preTable"),
+      oTable = sap.ui.getCore().byId("preTable"),
       colsData = this.getColsPrevisioni(oYears),
       rows = this.getRowsData(Mese,colsData,oYears),
       model = new sap.ui.model.json.JSONModel({});
@@ -1027,7 +1027,18 @@ onCloseDialog6 : function () {
       var sNewValue = oEvent.getParameter("value");
       console.log("Nuovo valore: " + sNewValue);
     },
-    
+    onSelctionAuth: function() {
+    var rows= sap.ui.getCore().byId("PniAuth").getSelectedItems()
+    var array=[]
+    var oMdlAuth = new sap.ui.model.json.JSONModel();
+for (let i = 0; i < rows.length; i++) {
+  var campo = rows[i].getBindingContext("PniAuth").getObject()
+  array.push(campo)
+}
+oMdlAuth.setData(array);
+this.getView().setModel(oMdlAuth, "EsigTable");
+    }
+
     });
   }
 );
