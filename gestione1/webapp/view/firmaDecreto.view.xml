@@ -74,9 +74,9 @@
             <OverflowToolbar>
                 <Button text="Indietro" type="Emphasized" press="navToHome" />
                 <ToolbarSpacer />
-                <Button type="Emphasized" text="Registra IPE"  press="navToRegistraIPE" />
-                <Button type="Emphasized" id="rettificaDE" text="Rettifica Decreto"  press="onNavToupdateDecreto" />
-                <Button type="Emphasized" id="cancellaDE" text="Cancella Decreto" press="onDeleteRow" />
+                 <Button type="Emphasized" id="revFirma" text="Revoca Invio alla Firma" visible="false" />
+                <Button type="Emphasized" id="Annulla" text="Annulla"   />
+                <Button type="Emphasized" id="invFirma" text="Invio alla Firma"  />
             </OverflowToolbar>
         </f:footer>
     </f:DynamicPage>

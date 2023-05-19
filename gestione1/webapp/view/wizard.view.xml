@@ -290,7 +290,7 @@
                                 <Title text="" />
                                 <HBox>
                                     <Label text="Oggetto della spesa:" labelFor="Oggetto della spesa:" />
-                                    <Input value="{IpeEntitySet>/Ktext}" />
+                                    <Input id="oggSpesa" value="{IpeEntitySet>/Ktext}" />
                                 </HBox>
                             </VBox>
                             <VBox>
@@ -358,9 +358,9 @@
                                 <Title text="" />
                                 <HBox visible="{/FilterSwitch2}">
                                     <Label text="Forma di aggiudicazione:" labelFor="Forma di aggiudizazione:" />
-                                    <MultiComboBox id="formAgg" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Zzgara' }}" selectionFinish="onSelectionFinish">
+                                    <ComboBox id="formAgg" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Zzgara' }}" >
                                         <core:Item key="{temp>Zzgara}" text="{temp>Zzgara}" />
-                                    </MultiComboBox>
+                                    </ComboBox>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>

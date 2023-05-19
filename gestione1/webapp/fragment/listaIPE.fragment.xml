@@ -9,11 +9,13 @@
     xmlns:core="sap.ui.core"
     xmlns:menu="sap.m.MenuItem"
     xmlns:menBtn="sap.m.Menu" height="100%">
-    <Table class="sapUiSizeCompact" id="ListaIPE" items="{IpeEntity>/}" includeItemInSelection="true"  mode="SingleSelect">
+    <Table class="sapUiSizeCompact" id="ListaIPE" items="{IpeEntitySet>/}" includeItemInSelection="true"  mode="SingleSelect">
         <headerToolbar>
             <OverflowToolbar>
                 <content>
                     <ToolbarSpacer />
+                    <Button  id="antStampa"  type="Emphasized" text="Anteprima di Stampa" visible="false"/>
+                    <Button icon="sap-icon://print" id="stampa" type="Emphasized" text="Stampa" visible="false"/>
                     <Button icon="sap-icon://edit" id="rettificaIPE"  type="Emphasized" text="Rettifica IPE" press="navToWizard"/>
                     <Button icon="sap-icon://search" id="DettaglioIPE" type="Emphasized" text="Dettaglio IPE" />
                     <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
@@ -50,15 +52,15 @@
             </Column>
         </columns>
         <ColumnListItem>
-            <Text text="{DecretoGI>Esercizio Decreto}" />
-            <Text text="{DecretoGI>Amminastrazione}" />
-            <Text text="{DecretoGI>Uff. I Livello}" />
-            <Text text="{DecretoGI>Uff. II Livello}" />
-            <Text text="{DecretoGI>N. Decreto}" />
-            <Text text="{DecretoGI>Data Decreto}" />
-            <Text text="{DecretoGI>Ragioneria}" />
-            <Text text="{DecretoGI>Oggetto della spesa}" />
-            <Text text="{DecretoGI>Totale Impegnato}" />
+            <Text text="{IpeEntitySet>Esercizio Decreto}" />
+            <Text text="{IpeEntitySet>Amminastrazione}" />
+            <Text text="{IpeEntitySet>Uff. I Livello}" />
+            <Text text="{IpeEntitySet>Uff. II Livello}" />
+            <Text text="{IpeEntitySet>N. Decreto}" />
+            <Text text="{IpeEntitySet>Data Decreto}" />
+            <Text text="{IpeEntitySet>Ragioneria}" />
+            <Text text="{IpeEntitySet>Oggetto della spesa}" />
+            <Text text="{IpeEntitySet>Totale Impegnato}" />
 
         </ColumnListItem>
     </Table>

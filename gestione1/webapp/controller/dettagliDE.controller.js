@@ -10,7 +10,9 @@ sap.ui.define(
     ],
     function (DateFormatter, BaseController, MessageBox,) {
         "use strict";
-
+        var oData = {
+            VisibleButton: true,
+        };
         return BaseController.extend("gestione1.controller.dettagliDE", {
 
             formatter: DateFormatter,
@@ -19,6 +21,10 @@ sap.ui.define(
             onInit() {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.getRoute("dettagliDE").attachPatternMatched(this._onObjectMatched, this);
+                //var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
+                // if (row.CodiceStato == "01") {
+                //     this.getView().byId("invFirma").setEnabled(false)
+                // }
 
 
             },
@@ -43,7 +49,13 @@ sap.ui.define(
                    oDataModel.read(path, {
                      success: function(data, oResponse){
                          self.getView().getModel("temp").setProperty('/SelectedDecree', data); 
-                         
+                         var stato= data.CodiceStato
+                         if (stato == "01") {
+                            
+                            //var oProprietà = self.getView().getModel();
+                            var state= self.getView().byId("invFirma");
+                            state.setVisible(false)
+                             }
                         },
                          error: function(error){
                         var e = error;

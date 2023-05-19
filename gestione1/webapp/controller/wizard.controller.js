@@ -684,6 +684,7 @@ onCloseDialog6 : function () {
         var oModel= this.getView().getModel("comboBox"),
         oTempModel = this.getView().getModel("temp"),
         oIpeEntitySet = this.getView().getModel("IpeEntitySet")
+        //oNaturaAtto = this.getView().getModel("NaturaAttoSet")
         if (oIpeEntitySet == undefined) {
           var oBozza = false
         } 
@@ -738,15 +739,15 @@ onCloseDialog6 : function () {
                     ZidRich: oIpeEntitySet.getProperty("/ZidRich"),
                     Fipex:  self.getView().byId("pFin").getValue(),
                     Fistl: self.getView().byId("StrAmm").getValue(),
-                    Ktext: oIpeEntitySet.getProperty("/Ktext"),
-                    Znaturaatto: oIpeEntitySet.getProperty("/Znaturaatto"),
-                    Znumcontratt: oIpeEntitySet.getProperty("/Znumcontratt"),
+                    Ktext: self.getView().byId("oggSpesa").getValue(),
+                    Znaturaatto: self.getView().byId("naturAtto").getValue(), 
+                    Znumcontratt: self.getView().byId("numConAtt").getValue(),
                     Zdataatto: oIpeEntitySet.getProperty("/Zdataatto"),
-                    Bsart: oIpeEntitySet.getProperty("/Bsart"),
-                    Zzgara: oIpeEntitySet.getProperty("/Zzgara"),
-                    Zop: oIpeEntitySet.getProperty("/Zop"),
-                    Zoa: oIpeEntitySet.getProperty("/Zoa"),
-                    Zni: oIpeEntitySet.getProperty("/Zni"),
+                    Bsart: self.getView().byId("idTypeCon").getValue(),
+                    Zzgara: self.getView().byId("formAgg").getValue(),
+                    Zop: self.getView().byId("CB1").getSelected(),
+                    Zoa: self.getView().byId("CB2").getSelected(),
+                    Zni: self.getView().byId("CB3").getSelected(),
 
                     Zbozza: "X"
                     };
@@ -848,7 +849,7 @@ onCloseDialog6 : function () {
 
     OnSelectYears: function(oEvent) {
       var oValue =oEvent.getSource().getSelectedItem().getProperty("text"),
-      Aut = "Autorizzazione:",
+      Aut = "Autorizzazione: {Esig>Beschr}",
       oYears = oValue.split("-"),
       oTable = this.getView().byId("EsigTable"),
       colsData = this.getColsData(oYears),
@@ -1032,13 +1033,14 @@ onCloseDialog6 : function () {
     var array=[]
     var oMdlAuth = new sap.ui.model.json.JSONModel();
 for (let i = 0; i < rows.length; i++) {
-  var campo = rows[i].getBindingContext("PniAuth").getObject()
+  var campo = rows[i].getBindingContext("temp").getObject()
   array.push(campo)
 }
 oMdlAuth.setData(array);
-this.getView().setModel(oMdlAuth, "EsigTable");
+this.getView().setModel(oMdlAuth, "Esig");
+sap.ui.getCore().byId("listaPNI").close();
     }
-
+    
     });
   }
 );

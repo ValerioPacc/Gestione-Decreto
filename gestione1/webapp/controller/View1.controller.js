@@ -1,44 +1,68 @@
 sap.ui.define([
     //"sap/ui/core/mvc/Controller",
     "./BaseController",
+    "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     'sap/ui/export/Spreadsheet',
     'gestione1/model/DateFormatter'
-    
+
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (BaseController,Filter,FilterOperator,Spreadsheet,DateFormatter) {
+    function (BaseController, ODataModel, Filter, FilterOperator, Spreadsheet, DateFormatter) {
         "use strict";
         var EdmType = sap.ui.export.EdmType
 
         return BaseController.extend("gestione1.controller.View1", {
             formatter: DateFormatter,
             onInit: function () {
+                // this.callVisibilità()
                 //this.callTipoImpEntity()
                 var oFilter = this.getView().byId("filterID"),
-				that = this;
-				
-			oFilter.addEventDelegate({
-				"onAfterRendering": function(oEvent) {
-					var oResourceBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
+                    that = this;
+
+                oFilter.addEventDelegate({
+                    "onAfterRendering": function (oEvent) {
+                        var oResourceBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
 
 
-					var oButton = oEvent.srcControl._oSearchButton;
-					oButton.setText(oResourceBundle.getText("Avvio"));         
-                       
-				}
-			});
-               
+                        var oButton = oEvent.srcControl._oSearchButton;
+                        oButton.setText(oResourceBundle.getText("Avvio"));
+
+                    }
+                });
+
             },
+
+            // callVisibilità: function () {
+            //     var that = this 
+            //     var filters = []
+            //      filters.push
+            //      (new Filter({ path: "SEM_OBJ", operator: FilterOperator.EQ, value1: "COSP_R3_FIORI_E022" }),
+            //       new Filter({ path: "AUTH_OBJ", operator: FilterOperator.EQ, value1: "Z_GEST_IMP" })) 
+            //           // "ODataModel" required from module "sap/ui/model/odata/v2/ODataModel" 
+            //           var visibilità = new ODataModel("http://10.38.125.80:8000/sap/opu/odata/sap/ZSS4_CA_CONI_VISIBILITA_SRV/"); 
+            //           visibilità.read("/ZES_CONIAUTH_SET", {
+            //              filters: filters, 
+            //              urlParameters: "",
+            //               success: function (data) { 
+            //                 console.log("success")
+            //                  //oMdl.setData(data.results);
+            //                   that.getView().getModel("temp").setProperty('/Visibilità', data.results)},
+            //                     error: function (error) {
+            //                          console.log(error)
+            //                           //that.getView().getModel("temp").setProperty(sProperty,[]);
+            //                            //that.destroyBusyDialog();
+            //                           var e = error; } }); },
+
             navToDecreto: function (oEvent) {
                 this.getOwnerComponent().getRouter().navTo("Decreto");
             },
-           
+
             onSearch: function (oEvent) {
-                 var that = this;
+                var that = this;
                 var datiGI = [];
 
                 // var abc=this.getView().byId("filterbar").getAllFilterItems();
@@ -47,9 +71,9 @@ sap.ui.define([
                 var path = ""
 
                 var numFilter = oEvent.getParameters().selectionSet.length;
-                
+
                 for (let i = 0; i < numFilter; i++) {
-                    
+
                     bindingInfo = "items"
                     path = oEvent.getParameters().selectionSet[i].getBindingInfo(bindingInfo)
                     if (path == undefined) {
@@ -61,82 +85,83 @@ sap.ui.define([
                         if (filtro.mProperties.dateValue instanceof Date || !isNaN(filtro.mProperties.dateValue)) {
 
                             if (i == 11) {
-                                if(oEvent.getParameters().selectionSet[11].mProperties.value!= ''){
-                                datiGI.push(new Filter({
-                                    path: "DataDecreto",
-                                    operator: FilterOperator.BT,
-                                    value1: oEvent.getParameters().selectionSet[11].mProperties.value,
-                                    value2: oEvent.getParameters().selectionSet[12].mProperties.value
-                                }));
-                            }
+                                if (oEvent.getParameters().selectionSet[11].mProperties.value != '') {
+                                    datiGI.push(new Filter({
+                                        path: "DataDecreto",
+                                        operator: FilterOperator.BT,
+                                        value1: oEvent.getParameters().selectionSet[11].mProperties.value,
+                                        value2: oEvent.getParameters().selectionSet[12].mProperties.value
+                                    }));
+                                }
                             }
                             if (i == 17) {
-                                if(oEvent.getParameters().selectionSet[17].mProperties.value!= ''){
-                                datiGI.push(new Filter({
-                                    path: "DataFirma",
-                                    operator: FilterOperator.BT,
-                                    value1: oEvent.getParameters().selectionSet[17].mProperties.value,
-                                    value2: oEvent.getParameters().selectionSet[18].mProperties.value
-                                }));
-                            }
+                                if (oEvent.getParameters().selectionSet[17].mProperties.value != '') {
+                                    datiGI.push(new Filter({
+                                        path: "DataFirma",
+                                        operator: FilterOperator.BT,
+                                        value1: oEvent.getParameters().selectionSet[17].mProperties.value,
+                                        value2: oEvent.getParameters().selectionSet[18].mProperties.value
+                                    }));
+                                }
                             }
                             if (i == 19) {
-                                if(oEvent.getParameters().selectionSet[19].mProperties.value!= ''){
-                                datiGI.push(new Filter({
-                                    path: "DataProtocolloAmm",
-                                    operator: FilterOperator.BT,
-                                    value1: oEvent.getParameters().selectionSet[19].mProperties.value,
-                                    value2: oEvent.getParameters().selectionSet[20].mProperties.value
-                                }));
-                            }
+                                if (oEvent.getParameters().selectionSet[19].mProperties.value != '') {
+                                    datiGI.push(new Filter({
+                                        path: "DataProtocolloAmm",
+                                        operator: FilterOperator.BT,
+                                        value1: oEvent.getParameters().selectionSet[19].mProperties.value,
+                                        value2: oEvent.getParameters().selectionSet[20].mProperties.value
+                                    }));
+                                }
                             }
                             if (i == 23) {
-                                if(oEvent.getParameters().selectionSet[23].mProperties.value!= ''){
-                                datiGI.push(new Filter({
-                                    path: "DataProtocolloRag",
-                                    operator: F-ilterOperator.BT,
-                                    value1: oEvent.getParameters().selectionSet[23].mProperties.value,
-                                    value2: oEvent.getParameters().selectionSet[24].mProperties.value
-                                }));
-                            }
+                                if (oEvent.getParameters().selectionSet[23].mProperties.value != '') {
+                                    datiGI.push(new Filter({
+                                        path: "DataProtocolloRag",
+                                        operator: F - ilterOperator.BT,
+                                        value1: oEvent.getParameters().selectionSet[23].mProperties.value,
+                                        value2: oEvent.getParameters().selectionSet[24].mProperties.value
+                                    }));
+                                }
                             }
                         }
-                        else if(oEvent.getParameters().selectionSet[i].mProperties.value != ''){
+                        else if (oEvent.getParameters().selectionSet[i].mProperties.value != '') {
                             datiGI.push(new Filter({
                                 path: path.sorter.sPath,
                                 operator: FilterOperator.EQ,
-                                value1: filtro.getValue()                           
+                                value1: filtro.getValue()
                             }));
-                         //datiGI.push("?$filter= "+path.sorter.sPath+" eq '" + filtro.getValue() + "'");
+                            //datiGI.push("?$filter= "+path.sorter.sPath+" eq '" + filtro.getValue() + "'");
                         }
-                        else if(i==12 || i==18 || i==20 || i==24){
+                        else if (i == 12 || i == 18 || i == 20 || i == 24) {
                             continue
                         }
                     }
                 }
                 //console.log(datiGI)
-                
+
                 var oDataModel = that.getModel();
-                
-                 that.getModel().metadataLoaded().then( function() { 
+
+                that.getModel().metadataLoaded().then(function () {
                     oDataModel.read("/DecretoImpegnoSet", {
-                    filters: datiGI ,
-                     urlParameters: "",
-                      success: function(data, oResponse){
-                        var oModelJson = new sap.ui.model.json.JSONModel();
-                          oModelJson.setData(data.results);
-                           that.getView().getModel("temp").setProperty('/DecretoImpegnoSet', oModelJson);
-                           that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
-                         },
-                          error: function(error){
-                    var e = error;}
-                    
-                 });
-                 
-             });
-             this.getView().byId("Esporta").setEnabled(true);
-             this.getView().byId("DettagliDE").setEnabled(false);
-             this.getView().byId("registrazioneDI").setEnabled(true);
+                        filters: datiGI,
+                        urlParameters: "",
+                        success: function (data, oResponse) {
+                            var oModelJson = new sap.ui.model.json.JSONModel();
+                            oModelJson.setData(data.results);
+                            that.getView().getModel("temp").setProperty('/DecretoImpegnoSet', oModelJson);
+                            that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+                        },
+                        error: function (error) {
+                            var e = error;
+                        }
+
+                    });
+
+                });
+                this.getView().byId("Esporta").setEnabled(true);
+                this.getView().byId("DettagliDE").setEnabled(false);
+                this.getView().byId("registrazioneDI").setEnabled(true);
                 // var that = this;
                 // var oMdl = new sap.ui.model.json.JSONModel();
                 // this.getView().getModel().read("/DecretoImpegnoSet", {
@@ -158,22 +183,27 @@ sap.ui.define([
                 //sap.ui.getCore().TableModel = oMdlW;
                 // this.getView().byId("Esporta").setEnabled(true);
                 // this.getView().byId("PreimpostazioneNI").setEnabled(true);
-                
+
             },
 
             navToRegistraIpe: function (oEvent) {
                 this.getOwnerComponent().getRouter().navTo("registraIPE");
             },
-            onNavToDettagliDE: function(){
+            onNavToDettagliDE: function () {
                 var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
                 //this.getModel("temp").setProperty("/SelectedDecree", row);
                 if (row.CodiceStato == "01") {
-                this.getOwnerComponent().getRouter().navTo("dettagliDE", {campo:row.Amministrazione, campo1:row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3:row.Ente, campo4:row.Esercizio, campo5:row.NumeroDecreto, campo6:row.RegistratoBozza, campo7:row.UfficioLiv1, campo8:row.UfficioLiv2 })
-              }
-           
+                    
+                    this.getOwnerComponent().getRouter().navTo("dettagliDE", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
+                    
+                }
+                else if (row.CodiceStato == "02") {
+
+                    this.getOwnerComponent().getRouter().navTo("dettagliDE", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
+                }
             },
 
-       
+
 
             createColumnConfig: function () {
                 var aCols = [];
@@ -263,7 +293,7 @@ sap.ui.define([
                 this.getView().byId("registrazioneDI").setEnabled(false);
                 this.getView().byId("DettagliDE").setEnabled(true);
             },
-            callTipoImpEntity:function () {
+            callTipoImpEntity: function () {
                 var that = this;
                 var oMdl = new sap.ui.model.json.JSONModel();
                 this.getOwnerComponent().getModel().read("/TipologiaImpegnoSet", {
@@ -280,9 +310,13 @@ sap.ui.define([
                         var e = error;
                     }
                 });
-            
-    
+
+
             },
+
+            navTodocAgg: function() {
+                this.getOwnerComponent().getRouter().navTo("documentazioneAgg");
+            }
             // callConiAuthEntity:function () {
             //     var that = this;
             //     var oMdl = new sap.ui.model.json.JSONModel();
@@ -300,12 +334,12 @@ sap.ui.define([
             //             var e = error;
             //         }
             //     });
-            
-    
+
+
             // },
 
         });
     });
 
-    
-     
+
+
