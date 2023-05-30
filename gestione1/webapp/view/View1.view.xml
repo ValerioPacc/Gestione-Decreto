@@ -26,7 +26,7 @@
                         <fb:filterGroupItems>
                             <fb:FilterGroupItem groupName="gruppo1" name="Esercizio" label="{i18n>es_decreto}" tooltip="suggestion" visibleInFilterBar="true" mandatory="true">
                                 <fb:control>
-                                    <ComboBox id="es_decreto" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}">
+                                    <ComboBox id="es_decreto" items="{path: '/FiltroEsercizioSet', sorter: { path: 'Esercizio' }}">
                                         <core:Item id="es_decreto1" key="{Esercizio}" text="{Esercizio}" />
                                     </ComboBox>
                                 </fb:control>
@@ -278,7 +278,7 @@
              <f:footer>
                 <OverflowToolbar>
                     <ToolbarSpacer />
-                    <Button text="{i18n>RegistrazioneDI}" type="Emphasized" press="navTodocAgg" id="registrazioneDI" enabled="true"/>
+                    <Button text="{i18n>RegistrazioneDI}" type="Emphasized" press="navToDecreto" id="registrazioneDI" enabled="true"/>
                 </OverflowToolbar>
             </f:footer>
         </f:DynamicPage>

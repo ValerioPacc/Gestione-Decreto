@@ -37,7 +37,7 @@ sap.ui.define(
         this.callContrattoEntity()
         this.callPniEntity()
         this.callIndReiscrizioneEntity()
-        //this.callEsigibilitaEntity()
+        
         this.getView().getModel("comboBox")
        
         
@@ -340,8 +340,8 @@ sap.ui.define(
      var oTempModel = this.getView().getModel("temp")
     var PosizioneFIN = risultati[0].Fipex
     var StrutturaAmmRes = risultati[0].Fictr
-    this.getView().byId("PosizFin").setText(PosizioneFIN);
-    this.getView().byId("StruttAmmin").setText(StrutturaAmmRes);
+    sap.ui.getCore().byId("PosizFin").setText(PosizioneFIN);
+    sap.ui.getCore().byId("StruttAmmin").setText(StrutturaAmmRes);
     
     },
     
@@ -1039,6 +1039,7 @@ for (let i = 0; i < rows.length; i++) {
 oMdlAuth.setData(array);
 this.getView().setModel(oMdlAuth, "Esig");
 sap.ui.getCore().byId("listaPNI").close();
+this.callEsigibilitaEntity()
     }
     
     });

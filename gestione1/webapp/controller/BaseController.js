@@ -426,10 +426,25 @@ sap.ui.define([
 
 		// },
 		callEsigibilitaEntity:function (oEvent) {
-
 			var that = this,
 			oModel = that.getOwnerComponent().getModel()
-			oModel.read('/EsigibilitaSet', {
+           var oTempModel = that.getOwnerComponent().getModel("temp");
+		   var Auth=oTempModel.getData().AutorizzazioneSet[0].Fincode
+			var Anno = oTempModel.getData().SelectedDecree.Esercizio
+			var Pfinan = sap.ui.getCore().byId("PosizFin").getText()
+			var StramminRes = sap.ui.getCore().byId("StruttAmmin").getText()
+			
+            var path = oModel.createKey("/EsigibilitaSet", {
+				Autorizzazione:Auth,
+				//NumeroPni:'',
+				Epr:'',
+				Gjahr:Anno,
+				Fdatk:'',
+				Fipex:Pfinan,
+				Fistl:StramminRes
+			})
+
+			oModel.read(path, {
 				urlParameters: "",
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();

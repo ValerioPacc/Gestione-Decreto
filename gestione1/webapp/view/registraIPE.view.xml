@@ -57,7 +57,7 @@
          <layout:Grid defaultSpan="XL12 L12 M12 S12" vSpacing="0" class="Grid">
          <VBox>
 					<items>
-						<Button  type="Emphasized" text="Registra IPE Apertura" class="button"  press="navToWizard"/>
+						<Button type="Emphasized" text="Registra IPE Apertura" class="sapMBtnInner"  press="navToWizard"/>
 					</items>
 				<layoutData>
 					<layout:GridData span="XL4 L4 M4 S12"/>
@@ -65,7 +65,7 @@
 				</VBox>
                 <VBox>
 					<items>
-						<Button  type="Emphasized" text="Registra IPE di Variazione" /> 
+						<Button  type="Emphasized" text="Registra IPE di Variazione" press="navToIpeVariazione"/> 
 					</items>
 				<layoutData>
 					<layout:GridData span="XL4 L4 M4 S12"/>

@@ -18,6 +18,7 @@ sap.ui.define([
         return BaseController.extend("gestione1.controller.View1", {
             formatter: DateFormatter,
             onInit: function () {
+                //this.callConiAuthEntity()
                 // this.callVisibilità()
                 //this.callTipoImpEntity()
                 var oFilter = this.getView().byId("filterID"),
@@ -314,14 +315,42 @@ sap.ui.define([
 
             },
 
+            callEsercizioEntity: function () {
+                var that = this;
+                var oMdl = new sap.ui.model.json.JSONModel();
+                this.getOwnerComponent().getModel().read("/FiltroEsercizioSet", {
+                    filters: [],
+                    urlParameters: "",
+                    success: function (data) {
+                        oMdl.setData(data.results);
+                        that.getView().getModel("temp").setProperty('/FiltroEsercizioSet', data.results)
+                        //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+                    },
+                    error: function (error) {
+                        //that.getView().getModel("temp").setProperty(sProperty,[]);
+                        //that.destroyBusyDialog();
+                        var e = error;
+                    }
+                });
+
+
+            },
+
             navTodocAgg: function() {
                 this.getOwnerComponent().getRouter().navTo("documentazioneAgg");
-            }
+            },
             // callConiAuthEntity:function () {
-            //     var that = this;
+            //     var that = this
             //     var oMdl = new sap.ui.model.json.JSONModel();
-            //     this.getOwnerComponent().getModel().read("ZES_CONIAUTH_SET", {
-            //         filters: [],
+            //     var filters = []
+            //     filters.push(
+            //         new Filter({ path: "SEM_OBJ", operator: FilterOperator.EQ, value1: "ZS4_DECRETOIMPEGNO_SRV" }),
+            //         new Filter({ path: "AUTH_OBJ", operator: FilterOperator.EQ, value1: "Z_GEST_IMP" })
+            //     )
+            //     // "ODataModel" required from module "sap/ui/model/odata/v2/ODataModel"
+            //     var visibilità = new ODataModel("http://10.38.125.80:8000/sap/opu/odata/sap/ZSS4_CA_CONI_VISIBILITA_SRV/");
+            //     visibilità.read("/ZES_CONIAUTH_SET", {
+            //         filters: filters,
             //         urlParameters: "",
             //         success: function (data) {
             //             oMdl.setData(data.results);

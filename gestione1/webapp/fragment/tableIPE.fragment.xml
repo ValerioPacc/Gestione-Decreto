@@ -14,14 +14,14 @@
 >
     <ScrollContainer>
         <content>
-            <Table class="sapUiSizeCompact" id="tableIPE" items="{DecretoImpegno>/}" includeItemInSelection="true" mode="MultiSelect" headerText="Lista Ipe">
+            <Table class="sapUiSizeCompact" id="tableIPE" items="{DecretoImpegno>/}" includeItemInSelection="true" mode="MultiSelect" headerText="Lista Ipe" itemPress="onRowSelectionChange">
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>
                         <Title text="Lista IPE"/>
                             <ToolbarSpacer />
                             <!-- <Button icon="sap-icon://edit" id="rettificaIPE"  type="Emphasized" text="Rettifica IPE" press="navToWizard"/> -->
-                            <Button icon="sap-icon://search" id="DettaglioIPE" type="Emphasized" text="Dettaglio IPE" press="navToWizard" />
+                            <Button icon="sap-icon://search" id="DettaglioIPE" type="Emphasized" text="Dettaglio IPE" press="navToWizard" enabled="false"/>
                             <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
                         </content>
                     </OverflowToolbar>

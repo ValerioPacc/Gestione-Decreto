@@ -76,7 +76,7 @@
                 <ToolbarSpacer />
                  <Button type="Emphasized" id="revFirma" text="Revoca Invio alla Firma" visible="false" />
                 <Button type="Emphasized" id="Annulla" text="Annulla"   />
-                <Button type="Emphasized" id="invFirma" text="Invio alla Firma"  />
+                <Button type="Emphasized" id="invFirma" text="Invio alla Firma" enabled="false" />
             </OverflowToolbar>
         </f:footer>
     </f:DynamicPage>

@@ -29,7 +29,7 @@
             
         </columns>
         <ColumnListItem type="Active">
-            <Text text="Autorizzazione: {temp>Beschr}" textAlign="Begin"/>
+            <Text id="Auth1" text="Autorizzazione: {temp>Beschr}" textAlign="Begin"/>
             <Text text="Autorizzazione:" textAlign="Begin"/>
         </ColumnListItem>
                 </Table>

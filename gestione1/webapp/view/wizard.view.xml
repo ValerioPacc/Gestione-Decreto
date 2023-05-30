@@ -61,7 +61,7 @@
                 </f:DynamicPageHeader>
             </f:header>
             <f:content>
-                <Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" showNextButton="false" navigationChange="handleNavigationChange" renderMode="Page">
+                <Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" showNextButton="false" navigationChange="handleNavigationChange" renderMode="Page" width="auto">
                     <WizardStep id="SelezioneTitoliStep" title="Contratto" validated="true">
                         <Label text="{i18n>Ccontratto}" />
                         <Switch  state="true" customTextOff="No" customTextOn="Si" change="controlSwitch" id="switch" />
@@ -415,7 +415,7 @@
                         <IconTabBar id="idIconTabBar1" class="TabBar">
                             <items>
                                 <IconTabFilter text="Competenza" key="info">
-                                    <core:Fragment fragmentName="gestione1.fragment.EsigTable" type="XML" />
+                                    <core:Fragment fragmentName="gestione1.fragment.tableEsigi" type="XML" />
                                 </IconTabFilter>
                                 <IconTabFilter text="Residui" key="results">
                                  <core:Fragment fragmentName="gestione1.fragment.Residui" type="XML" />

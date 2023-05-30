@@ -33,9 +33,7 @@ sap.ui.define([
 			});
                
             },
-            navToDecreto: function (oEvent) {
-                this.getOwnerComponent().getRouter().navTo("Decreto");
-            },
+           
            
             onSearch1: function (oEvent) {
                  var that = this;
@@ -156,7 +154,10 @@ sap.ui.define([
             },
 
             navToWizard: function (oEvent) {
-                this.getOwnerComponent().getRouter().navTo("wizard");
+                this._oWizard = this.byId("CreateProductWizard");
+                this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
+                this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);
+                this.getOwnerComponent().getRouter().navTo("wizard").iSelectedStepIndex[5];
             },
             // onNavToDettagliDE: function(){
             //     var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
@@ -253,5 +254,11 @@ sap.ui.define([
                     oSheet.destroy();
                 });
             },
+
+            onRowSelectionChange: function (oEvent) {
+                // this.getView().byId("registrazioneDI").setEnabled(false);
+                this.getView().byId("DettaglioIPE").setEnabled(true);
+            },
+
         });
     });

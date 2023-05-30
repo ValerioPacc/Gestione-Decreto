@@ -74,7 +74,27 @@ sap.ui.define(
 
 
       },
+      callEsercizioDeEntity: function () {
+        var that = this;
+        var TipImp=that.getView().byId("TypeI").getValue().split(":")
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/EsercizioDecretoSet", {
+            filters: [],
+            urlParameters: {"TipoImpegno": TipImp[0]},
+            success: function (data) {
+                oMdl.setData(data.results);
+                that.getView().getModel("temp").setProperty('/EsercizioDecretoSet', data.results)
+                //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+            },
+            error: function (error) {
+                //that.getView().getModel("temp").setProperty(sProperty,[]);
+                //that.destroyBusyDialog();
+                var e = error;
+            }
+        });
 
+
+    },
 
 
       onRegDIbozza: function (oEvent) {

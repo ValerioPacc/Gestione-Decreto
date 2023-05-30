@@ -48,6 +48,12 @@ white-space: break-spaces !important;
 border-right: 0.1rem solid #000 !important;
 }
 
+.sapMBtn{
+  height:100px;
+  font-size: 30px;
+}
+
+
 
 
 /* .sapMBtn{
