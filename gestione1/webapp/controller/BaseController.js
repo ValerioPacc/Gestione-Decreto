@@ -433,15 +433,22 @@ sap.ui.define([
 			var Anno = oTempModel.getData().SelectedDecree.Esercizio
 			var Pfinan = sap.ui.getCore().byId("PosizFin").getText()
 			var StramminRes = sap.ui.getCore().byId("StruttAmmin").getText()
+			var dataScad = '12.31.' + Anno
+			var DataScadenza = new Date(dataScad),
+			mnth = ("0" + (DataScadenza.getMonth() + 1)).slice(-2),
+			day = ("0" + DataScadenza.getDate()).slice(-2);
+		  var nData = [DataScadenza.getFullYear(), mnth, day].join("-");
+		  dataScad = new Date(nData)
 			
+
             var path = oModel.createKey("/EsigibilitaSet", {
 				Autorizzazione:Auth,
-				//NumeroPni:'',
+				NumeroPni:'',
 				Epr:'',
 				Gjahr:Anno,
-				Fdatk:'',
-				Fipex:Pfinan,
-				Fistl:StramminRes
+				Fdatk: nData  ,
+				Fipex: Pfinan,
+				Fistl: StramminRes
 			})
 
 			oModel.read(path, {

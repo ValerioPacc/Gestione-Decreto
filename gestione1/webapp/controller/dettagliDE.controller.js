@@ -177,6 +177,7 @@ sap.ui.define(
                     // var oProprietà = this.getView().getModel();
                     // oProprietà.setProperty("/TableVisible", true)
                     {
+                        
                         this.getOwnerComponent().getRouter().navTo("firmaDecreto")
                     }
 

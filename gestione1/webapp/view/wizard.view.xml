@@ -71,8 +71,8 @@
                                     <l:content>
                                         <VBox>
                                             <Label text="{i18n>Eserc}" required="true" />
-                                            <ComboBox id="es_decreto" change="OnSelect" app:field="Zzanno" selectedKey="{= ${IpeEntitySet>/Zbozza} === 'X' ? ${IpeEntitySet>/Zzanno} : ${temp>/SelectedDecree/Esercizio} }" enabled="true" items="{comboBox>/Esercizio}">
-                                                <core:Item id="es_decreto1" key="{comboBox>id}" text="{comboBox>id}" />
+                                            <ComboBox id="es_decreto"  selectedKey="{= ${IpeEntitySet>/Zbozza} === 'X' ? ${IpeEntitySet>/Zzanno} : ${temp>/SelectedDecree/Esercizio} }" enabled="true" items="{path: 'temp>/FiltroEsercizioSet', sorter: { path: 'Esercizio' }}">
+                                                <core:Item id="es_decreto1" key="{temp>Esercizio}" text="{temp>Esercizio}" />
                                             </ComboBox>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />

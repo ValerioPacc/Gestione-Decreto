@@ -10,8 +10,7 @@
     xmlns:menu="sap.m.MenuItem"
      xmlns="sap.ui.table"
     xmlns:menBtn="sap.m.Menu" height="100%">
- <m:ScrollContainer>
-        <m:content>
+
  <Table id="EsigTable"
         class="Freeze"
         selectionMode="MultiToggle"
@@ -22,17 +21,19 @@
        >
         <extension>
             <m:OverflowToolbar style="Clear">
-              <m:Label text="{i18n>PosFin}"/>
-            <m:Text id="PsFin" text=""/>
-            <m:Label text="{i18n>struttura_amm_resp}" class="marginRight"/>
-            <m:Text id="strAmm" text=""/>
+              
                 <m:ToolbarSpacer/>
                <m:Button id="idPNI" type="Emphasized" class="marginRight" icon="sap-icon://add" text=" PNI/Autorizzazione" press="onOpenDialog1"/>
                <m:Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight"/>
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta"/>
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
             </m:OverflowToolbar>
-            
+            <m:OverflowToolbar style="Clear">
+            <m:Label text="{i18n>PosFin}"/>
+            <m:Text id="PsFin" text=""/>
+            <m:Label text="{i18n>struttura_amm_resp}" class="marginRight"/>
+            <m:Text id="strAmm" text=""/>
+            </m:OverflowToolbar>
         </extension>
         <columns>
         <Column width="11rem">
@@ -43,63 +44,90 @@
 					</Column>
 					<Column width="11rem">
 						<m:Label text="Disponibilità PNI" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
 					<Column width="6rem" hAlign="End">
 						<m:Label text="2023" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
 					<Column width="9rem">
 						<m:Label text="Disponibilità cassa" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
 					<Column width="11rem">
 						<m:Label text="Clausola" />
+                        <template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
 					<Column width="11rem">
 						<m:Label text="Disponibilità PNI" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
 					<Column width="6rem" hAlign="End">
 						<m:Label text="2024" />
-						
+						<template>
+							<m:Input value=""  />
+						</template>
 					</Column>
 					<Column width="9rem">
 						<m:Label text="Disponibilità cassa" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
                     <Column width="11rem">
 						<m:Label text="Clausola" />
 					</Column>
 					<Column width="11rem">
 						<m:Label text="Disponibilità PNI" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
 					<Column width="6rem" hAlign="End">
 						<m:Label text="2025" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
 					<Column width="9rem">
 						<m:Label text="Disponibilità cassa" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
                     <Column width="11rem">
 						<m:Label text="Clausola" />
 					</Column>
 					<Column width="11rem">
 						<m:Label text="Disponibilità PNI" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
 					<Column width="6rem" hAlign="End">
 						<m:Label text="2026" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
 					<Column width="9rem">
 						<m:Label text="Disponibilità cassa" />
-						
+						<template>
+							<m:Text text="" wrapping="false" />
+						</template>
 					</Column>
         </columns>
- <!-- <m:ColumnListItem>
+ <!-- <ColumnListItem>
                     <Text text="Autorizzazione:{}" />
                     <Text text="{}" />
                     <Text text="{}" />
@@ -117,10 +145,9 @@
                     <Text text="{}" />
                     <Input value="{}" />
                     <Text text="{}" />
-                </m:ColumnListItem> -->
+                </ColumnListItem> -->
     </Table>
-     </m:content>
-    </m:ScrollContainer>
+     
     <!-- <ScrollContainer>
 
     <Table id="TableEsigi"

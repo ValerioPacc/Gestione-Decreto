@@ -76,8 +76,8 @@
                 <ColumnListItem>
                     <Text text="{DecretoImpegno>EsercizioDecreto}" />
                     <Text text="{DecretoImpegno>Amminastrazione}" />
-                    <Text text="{DecretoImpegno>UfficioLiv1}" />
-                    <Text text="{DecretoImpegno>UfficioLiv2}" />
+                    <Text text="{DecretoImpegno>Esercizio}" />
+                    <Text text="{DecretoImpegno>PosizioneFinanziaria}" />
                     <Text text="{DecretoImpegno>NumeroDecreto}" />
                     <Text text="{path:'DecretoImpegno>DataDecreto', formatter:'.formatter.convert'}" />
                     <Text text="{DecretoImpegno>Ragioneria}" />

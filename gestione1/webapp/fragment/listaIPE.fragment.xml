@@ -9,7 +9,7 @@
     xmlns:core="sap.ui.core"
     xmlns:menu="sap.m.MenuItem"
     xmlns:menBtn="sap.m.Menu" height="100%">
-    <Table class="sapUiSizeCompact" id="ListaIPE" items="{IpeEntitySet>/}" includeItemInSelection="true"  mode="SingleSelect">
+    <Table class="sapUiSizeCompact" id="ListaIPE" items="{DecretoImpegno>/}" includeItemInSelection="true"  mode="SingleSelectLeft">
         <headerToolbar>
             <OverflowToolbar>
                 <content>
@@ -52,15 +52,15 @@
             </Column>
         </columns>
         <ColumnListItem>
-            <Text text="{IpeEntitySet>Esercizio Decreto}" />
-            <Text text="{IpeEntitySet>Amminastrazione}" />
-            <Text text="{IpeEntitySet>Uff. I Livello}" />
-            <Text text="{IpeEntitySet>Uff. II Livello}" />
-            <Text text="{IpeEntitySet>N. Decreto}" />
-            <Text text="{IpeEntitySet>Data Decreto}" />
-            <Text text="{IpeEntitySet>Ragioneria}" />
-            <Text text="{IpeEntitySet>Oggetto della spesa}" />
-            <Text text="{IpeEntitySet>Totale Impegnato}" />
+            <Text text="{DecretoImpegno>NumeroIpe}" />
+            <Text text="{DecretoImpegno>TipoIpe}" />
+            <Text text="{DecretoImpegno>Esercizio}" />
+            <Text text="{DecretoImpegno>PosizioneFinanziaria}" />
+            <Text text="{DecretoImpegno>StrutturaAmmResp}" />
+            <Text text="{DecretoImpegno>ContrattoOrdine}" />
+            <Text text="{DecretoImpegno>Beneficiario}" />
+            <Text text="{DecretoImpegno>}" />
+            <Text text="{DecretoImpegno>}" />
 
         </ColumnListItem>
     </Table>

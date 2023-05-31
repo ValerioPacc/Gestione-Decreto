@@ -31,7 +31,9 @@ sap.ui.define(
     return BaseController.extend("gestione1.controller.wizard", {
 
       onInit() {
+        this.callEsercizioEntity()
         this.callIpeEntity();
+        this.callModPagEntity()
         this.callNaturaAttoEntity();
         this.callModPagEntity()
         this.callContrattoEntity()
@@ -61,6 +63,29 @@ sap.ui.define(
         this.checkStep1Fields;
 
       },
+
+      callEsercizioEntity: function () {
+        var that = this;
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/FiltroEsercizioSet", {
+            filters: [],
+            urlParameters: "",
+            success: function (data) {
+                oMdl.setData(data.results);
+                that.getView().getModel("temp").setProperty('/FiltroEsercizioSet', data.results)
+                //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+            },
+            error: function (error) {
+                //that.getView().getModel("temp").setProperty(sProperty,[]);
+                //that.destroyBusyDialog();
+                var e = error;
+            }
+        });
+
+
+    },
+  
+
 
       onListSelect: function (event) {
         var oSelectedKey = this.getView().byId('mPag').getSelectedKey();
