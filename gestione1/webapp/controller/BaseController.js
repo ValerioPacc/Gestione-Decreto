@@ -65,10 +65,10 @@ sap.ui.define([
 			for (var i = 0; i< 40; i++ ){
                  var anno = oYears+i
                  aColumnData.push(
-				 {columnLabel: "Clausola " + anno,columnName: "ZclausolaVar " + anno},
-				 {columnLabel: "Disponibilità PNI "+ anno, columnName:"Wtfree "+ anno},
-				 {columnLabel: ""+ anno, columnName:"ZImpIpeCl "+ anno},
-				 {columnLabel: "Disponibilità di cassa "+ anno, columnName:"Zcassa "+ anno}
+				 {columnLabel: "Clausola" + anno,columnName: "ZclausolaVar" + anno},
+				 {columnLabel: "Disponibilità PNI"+ anno, columnName:"Wtfree"+ anno},
+				 {columnLabel: ""+ anno, columnName:"ZImpIpeCl"+ anno},
+				 {columnLabel: "Disponibilità di cassa"+ anno, columnName:"Zcassa"+ anno}
 				 )
 
 				// {columnLabel: "Clausola" + oYears[1],columnName:"ZclausolaVar"+ oYears[1]},
