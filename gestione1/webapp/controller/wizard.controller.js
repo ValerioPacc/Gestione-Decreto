@@ -220,6 +220,7 @@ sap.ui.define(
           var oTempModel = this.getOwnerComponent().getModel("temp");
           var Auth = oTempModel.getData().Autorizzazioni.Value
           if (Auth == "A") {
+            //this.OnSelectYears()
             this.getView().byId("idPNI").setText("Autorizzazioni")
             
           }
@@ -873,9 +874,11 @@ onCloseDialog6 : function () {
     },
 
     OnSelectYears: function(oEvent) {
-      var oValue =oEvent.getSource().getSelectedItem().getProperty("text"),
-      Aut = "Autorizzazione: {Esig>Beschr}",
-      oYears = oValue.split("-"),
+      var oTempModel = this.getOwnerComponent().getModel("temp");
+      var arr1 = [],
+      //var oValue =oEvent.getSource().getSelectedItem().getProperty("text"),
+      Aut = "",
+      oYears =parseInt(oTempModel.getData().SelectedDecree.Esercizio),
       oTable = this.getView().byId("EsigTable"),
       colsData = this.getColsData(oYears),
       rows = this.getRowsData(Aut,colsData,oYears),
@@ -986,7 +989,7 @@ onCloseDialog6 : function () {
 
       oModel.setData({
           columns: colsData,
-          rows: rows
+          rows: rows[0]
       });
 
       this._buildUIPreTableContent.apply(this, [oTable, oModel]);
@@ -1065,6 +1068,7 @@ oMdlAuth.setData(array);
 this.getView().setModel(oMdlAuth, "Esig");
 sap.ui.getCore().byId("listaPNI").close();
 this.callEsigibilitaEntity()
+this.OnSelectYears()
     }
     
     });

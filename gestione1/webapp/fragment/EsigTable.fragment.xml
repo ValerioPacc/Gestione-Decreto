@@ -13,7 +13,7 @@ height="100%"
 
     
 
-    <Table id="EsigTable"
+    <Table id="EsigTable1"
         class="Freeze"
         selectionMode="MultiToggle"
         fixedColumnCount="1"

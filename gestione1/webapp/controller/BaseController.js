@@ -55,48 +55,54 @@ sap.ui.define([
 			field = oEvent.getSource().data("field"),
             item = oEvent.getSource().getSelectedKey();
 			self.getView().getModel("IpeEntitySet").setProperty("/"+ field, item);
-            
+
         },
-	
+
 		getColsData: function (oYears){
+			var aColumnData = [
+				{columnLabel: "PNI",columnName:"Geber"}
+			]
+			for (var i = 0; i< 40; i++ ){
+                 var anno = oYears+i
+                 aColumnData.push(
+				 {columnLabel: "Clausola " + anno,columnName: "ZclausolaVar " + anno},
+				 {columnLabel: "Disponibilità PNI "+ anno, columnName:"Wtfree "+ anno},
+				 {columnLabel: ""+ anno, columnName:"ZImpIpeCl "+ anno},
+				 {columnLabel: "Disponibilità di cassa "+ anno, columnName:"Zcassa "+ anno}
+				 )
 
-            var aColumnData = [
-				{columnLabel: "PNI",columnName:"Geber"},
-				{columnLabel: "Clausola" + oYears[0],columnName:"ZclausolaVar"+ oYears[0]}, 
-				{columnLabel: "Disponibilità PNI"+ oYears[0], columnName:"Wtfree"+ oYears[0]}, 
-				{columnLabel: ""+ oYears[0], columnName:"ZImpIpeCl"+ oYears[0]}, 
-				{columnLabel: "Disponibilità di cassa"+ oYears[0], columnName:"Zcassa"+ oYears[0]},
-				{columnLabel: "Clausola" + oYears[1],columnName:"ZclausolaVar"+ oYears[1]}, 
-				{columnLabel: "Disponibilità PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]}, 
-				{columnLabel: ""+ oYears[1], columnName:"ZImpIpeCl"+ oYears[1]}, 
-				{columnLabel: "Disponibilità di cassa"+ oYears[1], columnName:"Zcassa"+ oYears[1]},
-				{columnLabel: "Clausola" + oYears[2],columnName:"ZclausolaVar"+ oYears[2]}, 
-				{columnLabel: "Disponibilità PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]}, 
-				{columnLabel: ""+ oYears[2], columnName:"ZImpIpeCl"+ oYears[2]}, 
-				{columnLabel: "Disponibilità di cassa"+ oYears[2], columnName:"Zcassa"+ oYears[2]},
-				{columnLabel: "Clausola" + oYears[3],columnName:"ZclausolaVar"+ oYears[3]}, 
-				{columnLabel: "Disponibilità PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]}, 
-				{columnLabel: ""+ oYears[3], columnName:"ZImpIpeCl"+ oYears[3]}, 
-				{columnLabel: "Disponibilità di cassa"+ oYears[3], columnName:"Zcassa"+ oYears[3]}
-			  ];
+				// {columnLabel: "Clausola" + oYears[1],columnName:"ZclausolaVar"+ oYears[1]},
+				// {columnLabel: "Disponibilità PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]},
+				// {columnLabel: ""+ oYears[1], columnName:"ZImpIpeCl"+ oYears[1]},
+				// {columnLabel: "Disponibilità di cassa"+ oYears[1], columnName:"Zcassa"+ oYears[1]},
+				// {columnLabel: "Clausola" + oYears[2],columnName:"ZclausolaVar"+ oYears[2]},
+				// {columnLabel: "Disponibilità PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]},
+				// {columnLabel: ""+ oYears[2], columnName:"ZImpIpeCl"+ oYears[2]},
+				// {columnLabel: "Disponibilità di cassa"+ oYears[2], columnName:"Zcassa"+ oYears[2]},
+				// {columnLabel: "Clausola" + oYears[3],columnName:"ZclausolaVar"+ oYears[3]},
+				// {columnLabel: "Disponibilità PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]},
+				// {columnLabel: ""+ oYears[3], columnName:"ZImpIpeCl"+ oYears[3]},
+				// {columnLabel: "Disponibilità di cassa"+ oYears[3], columnName:"Zcassa"+ oYears[3]}
 
+
+			}
 			  return aColumnData;
-            
+
         },
 
 		getRowsData: function (Aut, cols){
 			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
 			var oTempModel = this.getOwnerComponent().getModel("temp");
-			
-			
 
-			//oEsigModel.setProperty('/', []); 
+
+
+			//oEsigModel.setProperty('/', []);
 			var arr = [];
 			for( var i in cols){
 				var item = cols[i];
 				if(oEsigModel.getProperty("/List").length > 0){
 					var key = Object.keys(oEsigModel.getProperty("/List")[0]);
-					var oExist = _.contains(key, item.columnName);
+					 var oExist = _.contains(key, item.columnName);
 					if(!oExist){
 						oEsigModel.setProperty("/List/"+ item.columnName, "")
 					}
@@ -105,10 +111,10 @@ sap.ui.define([
 				}
 
 			}
-			
-			oEsigModel.setProperty('/List/Geber', Aut); 
+
+			oEsigModel.setProperty('/List/Geber', Aut);
 			arr.push(oEsigModel.getProperty('/List'));
-			oEsigModel.setProperty("/List",arr); 
+			oEsigModel.setProperty("/List",arr);
 			return arr;
 		},
 
@@ -117,28 +123,28 @@ sap.ui.define([
 
             var aColumnData = [
 				{columnLabel: "Esigibilità annuale",columnName:"Geber"},
-				{columnLabel: "Previsioni PNI"+ oYears[0], columnName:"ZprePni"+ oYears[0]}, 
-				{columnLabel: ""+ oYears[0], columnName:"ZImpIpeCl"+ oYears[0]},  
-				{columnLabel: "Previsioni PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]}, 
-				{columnLabel: ""+ oYears[1], columnName:"ZImpIpeCl"+ oYears[1]}, 
-				{columnLabel: "Previsioni PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]}, 
-				{columnLabel: ""+ oYears[2], columnName:"ZImpIpeCl"+ oYears[2]},  
-				{columnLabel: "Previsioni PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]}, 
-				{columnLabel: ""+ oYears[3], columnName:"ZImpIpeCl"+ oYears[3]}, 
+				{columnLabel: "Previsioni PNI"+ oYears[0], columnName:"ZprePni"+ oYears[0]},
+				{columnLabel: ""+ oYears[0], columnName:"ZImpIpeCl"+ oYears[0]},
+				{columnLabel: "Previsioni PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]},
+				{columnLabel: ""+ oYears[1], columnName:"ZImpIpeCl"+ oYears[1]},
+				{columnLabel: "Previsioni PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]},
+				{columnLabel: ""+ oYears[2], columnName:"ZImpIpeCl"+ oYears[2]},
+				{columnLabel: "Previsioni PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]},
+				{columnLabel: ""+ oYears[3], columnName:"ZImpIpeCl"+ oYears[3]},
 			  ];
 
 			  return aColumnData;
-            
+
         },
 
 
 		getPreRowsData: function (Aut, cols){
 			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
 			var oTempModel = this.getOwnerComponent().getModel("temp");
-			
-			
 
-			//oEsigModel.setProperty('/', []); 
+
+
+			//oEsigModel.setProperty('/', []);
 			var arr = [];
 			for( var i in cols){
 				var item = cols[i];
@@ -153,10 +159,10 @@ sap.ui.define([
 				}
 
 			}
-			
-			oEsigModel.setProperty('/List/Geber', Aut); 
+
+			oEsigModel.setProperty('/List/Geber', Aut);
 			arr.push(oEsigModel.getProperty('/List'));
-			oEsigModel.setProperty("/List",arr); 
+			oEsigModel.setProperty("/List",arr);
 			return arr;
 		},
 
@@ -169,7 +175,7 @@ sap.ui.define([
 			aFilters = [];
 
 			this.getOwnerComponent().getModel("IpeEntitySet").setProperty('/' ,[])
-            
+
 			aFilters.push(
 			  new Filter({path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
 			  new Filter({path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
@@ -206,7 +212,7 @@ sap.ui.define([
 					//that.destroyBusyDialog();
 					console.log(error);
 				}
-				
+
 			});
 			//this.viewHeaderIpe();
 		},
@@ -214,7 +220,7 @@ sap.ui.define([
 			var url = location.href
 			var sUrl = url.split("/wizard/")[1]
 			var aValori = sUrl.split(",")
-	
+
 			var Zammin = aValori[0]
 			var Fikrs = aValori[1]
 			var ZCodGius = aValori[2]
@@ -225,7 +231,7 @@ sap.ui.define([
 			var ZCodIpe = aValori[7]
 			var Zufficioliv1 = aValori[8]
 			var Zufficioliv2 = aValori[9]
-			
+
 			// var header = this.getView().getModel("temp").getData().IpeEntitySet.oData
 			// for (var i = 0; i < header.length; i++) {
 			// 	if (header[i].Zammin == Zammin &&
@@ -439,7 +445,7 @@ sap.ui.define([
 			day = ("0" + DataScadenza.getDate()).slice(-2);
 		  var nData = [DataScadenza.getFullYear(), mnth, day].join("-");
 		  dataScad = new Date(nData)
-			
+
 
             var path = oModel.createKey("/EsigibilitaSet", {
 				Autorizzazione:Auth,
@@ -457,7 +463,7 @@ sap.ui.define([
 					var oModelJson = new sap.ui.model.json.JSONModel();
 					  oModelJson.setData(data.results);
 					   that.getView().getModel("temp").setProperty('/EsigibilitaSet', data.results);
-					   
+
 					 },
 					  error: function(error){
 				var e = error;}
@@ -477,7 +483,7 @@ sap.ui.define([
 		    // var oTempModel = that.getOwnerComponent().getModel("NewIpe")
 		    // this.getOwnerComponent().getModel("IpeEntitySet");
 
-			
+
 			// var aFilters = [];
 
 			// aFilters.push(
@@ -521,7 +527,7 @@ sap.ui.define([
 		        oModel = that.getOwnerComponent().getModel().callFunction("/DeterminaEsigibilita", { // function import name
 				method: "GET", // http method
 				urlParameters: {"Esercizio" : Anno, "PosizioneFinanziaria" : PosFin }, // function import parameters
-				success: function(Value, response) { 
+				success: function(Value, response) {
 					that.getView().getModel("temp").setProperty('/Autorizzazioni', Value);
 				}, // callback function for success
 				error: function(oError){ } // callback function for error });
@@ -541,7 +547,7 @@ sap.ui.define([
 		    // var oTempModel = that.getOwnerComponent().getModel("NewIpe")
 		    // this.getOwnerComponent().getModel("IpeEntitySet");
 
-			
+
 			var aFilters = [];
 
 			aFilters.push(
@@ -571,13 +577,13 @@ sap.ui.define([
 					  //that.callAnnoAmm(data.results);
 					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					 },
-					 
+
 					  error: function(error){
 				var e = error;}
-				
+
 			 });
-			 
-			 
+
+
 		},
 		callNaturaAttoEntity:function (oEvent) {
 
@@ -589,7 +595,7 @@ sap.ui.define([
 					var oModelJson = new sap.ui.model.json.JSONModel();
 					  oModelJson.setData(data.results);
 					   that.getView().getModel("temp").setProperty('/NaturaAttoSet', data.results);
-					   
+
 					 },
 					  error: function(error){
 				var e = error;}
@@ -605,7 +611,7 @@ sap.ui.define([
 				success: function (data) {
 					oMdl.setData(data.results);
 					that.getView().getModel("temp").setProperty('/ZwelsBenSet', data.results)
-					
+
 				},
 				error: function (error) {
 					//that.getView().getModel("temp").setProperty(sProperty,[]);
@@ -613,8 +619,8 @@ sap.ui.define([
 					var e = error;
 				}
 			});
-		
-	  
+
+
 		},
 
 		callIndReiscrizioneEntity:function (oEvent) {
@@ -631,7 +637,7 @@ sap.ui.define([
 					var oModelJson = new sap.ui.model.json.JSONModel();
 					  oModelJson.setData(data.results);
 					   that.getView().getModel("temp").setProperty('/IndReiscrizione', data);
-					   
+
 					 },
 					  error: function(error){
 				var e = error;}
@@ -650,7 +656,7 @@ sap.ui.define([
 			}
 			return this.__dialog;
 		},
-		
+
 		// openDialog1: function (dialogPath) {
 		// 	if (!this.__dialog) {
 		// 		this.__dialog = sap.ui.xmlfragment(dialogPath, this);
@@ -684,7 +690,7 @@ sap.ui.define([
 				this.__dialog = null;
 			}
 		},
-	
+
 		openExpandDialog: function (dialogPath) {
             if (!this.__dialog2) {
                 this.__dialog2 = sap.ui.xmlfragment(dialogPath, this);
@@ -701,7 +707,7 @@ sap.ui.define([
                 this.__dialog2 = null;
             }
         },
-		
+
 		handleCountryValueHelp: function(oEvent){
 
 			var oSource = oEvent.getSource(),
