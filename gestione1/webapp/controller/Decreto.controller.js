@@ -14,6 +14,7 @@ sap.ui.define(
       formatter: DateFormatter,
       onInit() {
         this.callTipoImpEntity()
+        this.callEsercizioEntity()
         //  var draft= this.getView().getModel("temp").getProperty("/draft");
         //  if (draft === "x") {
         //   oDataModel.read(sObjectPath, {
@@ -270,7 +271,27 @@ sap.ui.define(
           })
 
         }
-      }
+      },
+      callEsercizioEntity: function () {
+        var that = this;
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/FiltroEsercizioSet", {
+            filters: [],
+            urlParameters: "",
+            success: function (data) {
+                oMdl.setData(data.results);
+                that.getView().getModel("temp").setProperty('/FiltroEsercizioSet', data.results)
+                //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+            },
+            error: function (error) {
+                //that.getView().getModel("temp").setProperty(sProperty,[]);
+                //that.destroyBusyDialog();
+                var e = error;
+            }
+        });
+
+
+    },
       //  checkFields: function (view) {
       //    var self = this,
       //    check = false;

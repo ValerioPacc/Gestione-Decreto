@@ -13,6 +13,8 @@ sap.ui.define(
       return BaseController.extend("gestione1.controller.updateDecreto", {
         formatter: DateFormatter,
         onInit() {
+            this.callEsercizioEntity()
+            this.callEsercizioDeEntity()
         //  var draft= this.getView().getModel("temp").getProperty("/draft");
         //  if (draft === "x") {
         //   oDataModel.read(sObjectPath, {
@@ -44,6 +46,48 @@ sap.ui.define(
         onBackButton: function () {
           this.getOwnerComponent().getRouter().navTo("View1");
       },
+      callEsercizioDeEntity: function () {
+        var that = this;
+        var TipImp=that.getView().byId("TypeI").getValue().split(":")
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/EsercizioDecretoSet", {
+            filters: [],
+            urlParameters: {"TipoImpegno": TipImp[0]},
+            success: function (data) {
+                oMdl.setData(data.results);
+                that.getView().getModel("temp").setProperty('/EsercizioDecretoSet', data.results)
+                //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+            },
+            error: function (error) {
+                //that.getView().getModel("temp").setProperty(sProperty,[]);
+                //that.destroyBusyDialog();
+                var e = error;
+            }
+        });
+
+
+    },
+
+      callEsercizioEntity: function () {
+        var that = this;
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/FiltroEsercizioSet", {
+            filters: [],
+            urlParameters: "",
+            success: function (data) {
+                oMdl.setData(data.results);
+                that.getView().getModel("temp").setProperty('/FiltroEsercizioSet', data.results)
+                //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+            },
+            error: function (error) {
+                //that.getView().getModel("temp").setProperty(sProperty,[]);
+                //that.destroyBusyDialog();
+                var e = error;
+            }
+        });
+
+
+    },
       
       onModDIbozza: function (oEvent) {
         var that = this;

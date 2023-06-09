@@ -37,7 +37,7 @@
        <Button text="Indietro" type="Emphasized" press="closeDialog"/>
       </beginButton>
       <endButton>
-        <Button text="Seleziona" type="Emphasized" press="onSelctionAuth"/>
+        <Button text="Seleziona" type="Emphasized" press="OnSelectYears"/>
       </endButton>
    </Dialog>
 </core:FragmentDefinition>

@@ -91,11 +91,12 @@ sap.ui.define([
         },
 
 		getRowsData: function (Aut, cols){
+
 			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
 			var oTempModel = this.getOwnerComponent().getModel("temp");
 
 
-
+             
 			//oEsigModel.setProperty('/', []);
 			var arr = [];
 			for( var i in cols){
@@ -110,9 +111,15 @@ sap.ui.define([
 					oEsigModel.setProperty("/List/"+ item.columnName, "")
 				}
 
-			}
-
+			} 
 			oEsigModel.setProperty('/List/Geber', Aut);
+			var arr2= []
+			var Aut1=oEsigModel.getProperty('/List/Geber', Aut).split(':')[1].split(',')
+			for (var x = 0; x<Aut1.length; x++) {
+                var Auth = "Autorizzazione: " + Aut1[x]
+				arr2.push(Auth)
+			}
+			oEsigModel.setProperty('/List/Geber', arr2)
 			arr.push(oEsigModel.getProperty('/List'));
 			oEsigModel.setProperty("/List",arr);
 			return arr;

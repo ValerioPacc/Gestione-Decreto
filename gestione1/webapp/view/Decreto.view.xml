@@ -35,8 +35,8 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem groupName="gruppo2" name="Esercizio" label="{i18n>esercizio}" tooltip="suggestion" visibleInFilterBar="true" mandatory="true">
                                 <fb:control>
-                                    <ComboBox id="es_decreto" items="{path: 'temp>/EsercizioDecretoSet', sorter: { path: 'Esercizio' }}" selectedKey="{temp>/SelectedDecree/Esercizio}" enabled="{= ${temp>/draft} === 'x' ? false : true}">
-                                        <core:Item id="es_decreto1" key="{temp>Esercizio}" text="{temp>Esercizio}" />
+                                    <ComboBox id="es_decreto" items="{path: '/FiltroEsercizioSet', sorter: { path: 'Esercizio' }}"  enabled="{= ${temp>/draft} === 'x' ? false : true}">
+                                        <core:Item id="es_decreto1" key="{Esercizio}" text="{Esercizio}" />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>

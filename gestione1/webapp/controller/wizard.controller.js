@@ -873,11 +873,22 @@ onCloseDialog6 : function () {
 
     },
 
-    OnSelectYears: function(oEvent) {
+    OnSelectYears: function() {
       var oTempModel = this.getOwnerComponent().getModel("temp");
-      var arr1 = [],
+      var rows= sap.ui.getCore().byId("PniAuth").getSelectedItems()
+      var array=[]
+      var oMdlAuth = new sap.ui.model.json.JSONModel();
+  for (let i = 0; i < rows.length; i++) {
+    var campo = rows[i].getBindingContext("temp").getObject().Beschr
+    array.push(campo)
+  }
+  oMdlAuth.setData(array);
+  this.getView().setModel(oMdlAuth, "Esig");
+  sap.ui.getCore().byId("listaPNI").close();
+  this.callEsigibilitaEntity()
+  
       //var oValue =oEvent.getSource().getSelectedItem().getProperty("text"),
-      Aut = "",
+      var Aut = "Autorizzazione:"+ array,
       oYears =parseInt(oTempModel.getData().SelectedDecree.Esercizio),
       oTable = this.getView().byId("EsigTable"),
       colsData = this.getColsData(oYears),
@@ -1056,20 +1067,20 @@ onCloseDialog6 : function () {
       var sNewValue = oEvent.getParameter("value");
       console.log("Nuovo valore: " + sNewValue);
     },
-    onSelctionAuth: function() {
-    var rows= sap.ui.getCore().byId("PniAuth").getSelectedItems()
-    var array=[]
-    var oMdlAuth = new sap.ui.model.json.JSONModel();
-for (let i = 0; i < rows.length; i++) {
-  var campo = rows[i].getBindingContext("temp").getObject()
-  array.push(campo)
-}
-oMdlAuth.setData(array);
-this.getView().setModel(oMdlAuth, "Esig");
-sap.ui.getCore().byId("listaPNI").close();
-this.callEsigibilitaEntity()
-this.OnSelectYears()
-    }
+//     onSelctionAuth: function() {
+//     var rows= sap.ui.getCore().byId("PniAuth").getSelectedItems()
+//     var array=[]
+//     var oMdlAuth = new sap.ui.model.json.JSONModel();
+// for (let i = 0; i < rows.length; i++) {
+//   var campo = rows[i].getBindingContext("temp").getObject()
+//   array.push(campo)
+// }
+// oMdlAuth.setData(array);
+// this.getView().setModel(oMdlAuth, "Esig");
+// sap.ui.getCore().byId("listaPNI").close();
+// this.callEsigibilitaEntity()
+// this.OnSelectYears(array)
+//     }
     
     });
   }
