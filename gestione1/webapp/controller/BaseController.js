@@ -91,38 +91,31 @@ sap.ui.define([
         },
 
 		getRowsData: function (Aut, cols){
-
+            var ClausMod = this.getOwnerComponent().getModel("EsigibilitaSet");
 			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
 			var oTempModel = this.getOwnerComponent().getModel("temp");
 
 
              
 			//oEsigModel.setProperty('/', []);
-			var arr = [];
-			for( var i in cols){
-				var item = cols[i];
-				if(oEsigModel.getProperty("/List").length > 0){
-					var key = Object.keys(oEsigModel.getProperty("/List")[0]);
-					 var oExist = _.contains(key, item.columnName);
-					if(!oExist){
-						oEsigModel.setProperty("/List/"+ item.columnName, "")
+			
+				var arr = [];
+	
+				for (var j = 0; j < Aut.length; j++) {
+					var row = {};
+					for (var k = 0; k < cols.length; k++) {
+					  var item = cols[k].columnName;
+					  row[item] = "";
 					}
-				}else {
-					oEsigModel.setProperty("/List/"+ item.columnName, "")
-				}
-
-			} 
-			oEsigModel.setProperty('/List/Geber', Aut);
-			var arr2= []
-			var Aut1=oEsigModel.getProperty('/List/Geber', Aut).split(':')[1].split(',')
-			for (var x = 0; x<Aut1.length; x++) {
-                var Auth = "Autorizzazione: " + Aut1[x]
-				arr2.push(Auth)
-			}
-			oEsigModel.setProperty('/List/Geber', arr2)
-			arr.push(oEsigModel.getProperty('/List'));
+					row["Geber"] = Aut[j]; // Assegnazione del valore "aut" alla proprietà "Geber"
+					arr.push(row);
+				  }
+		
+			// oEsigModel.setProperty('/List/Geber', arr)
+			//arr.push(oEsigModel.getProperty('/List'));
 			oEsigModel.setProperty("/List",arr);
 			return arr;
+			var ClausMod = this.getOwnerComponent().getModel("EsigibilitaSet");
 		},
 
 
@@ -223,6 +216,27 @@ sap.ui.define([
 			});
 			//this.viewHeaderIpe();
 		},
+
+		callPrevisioniEntity:function () {
+			var that = this;
+			var oMdl = new sap.ui.model.json.JSONModel();
+			this.getOwnerComponent().getModel().read("/PrevisioneImpegnoSet", {
+				filters: [],
+				urlParameters: "",
+				success: function (data) {
+					oMdl.setData(data.results);
+					that.getView().getModel("temp").setProperty('/PrevisioneImpegnoSet', data.results)
+				},
+				error: function (error) {
+					//that.getView().getModel("temp").setProperty(sProperty,[]);
+					//that.destroyBusyDialog();
+					var e = error;
+				}
+			});
+		
+
+		},
+
 		viewHeaderIpe: function (oEvent) {
 			var url = location.href
 			var sUrl = url.split("/wizard/")[1]

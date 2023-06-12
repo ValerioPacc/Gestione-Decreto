@@ -39,7 +39,9 @@ sap.ui.define(
         this.callContrattoEntity()
         this.callPniEntity()
         this.callIndReiscrizioneEntity()
-        
+        this.callPrevisioniEntity()
+
+
         this.getView().getModel("comboBox")
        
         
@@ -886,9 +888,15 @@ onCloseDialog6 : function () {
   this.getView().setModel(oMdlAuth, "Esig");
   sap.ui.getCore().byId("listaPNI").close();
   this.callEsigibilitaEntity()
-  
+  var arr2 =[]
       //var oValue =oEvent.getSource().getSelectedItem().getProperty("text"),
-      var Aut = "Autorizzazione:"+ array,
+      // var Aut1=oEsigModel.getProperty('/List/Geber', Aut).split(':')[1].split(',')
+			for (var x = 0; x<array.length; x++) {
+                var Auth = "Autorizzazione: " + array[x]
+                arr2.push(Auth)
+
+			}
+      var Aut = arr2,
       oYears =parseInt(oTempModel.getData().SelectedDecree.Esercizio),
       oTable = this.getView().byId("EsigTable"),
       colsData = this.getColsData(oYears),

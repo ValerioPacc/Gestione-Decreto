@@ -24,6 +24,18 @@
                     "localUri": "localService/metadata.xml",
                     "odataVersion": "2.0"
                 }
+             
+            },
+            "ZSS4_CA_CONI_VISIBILITA_SRV": {
+
+                "uri": "/sap/opu/odata/sap/ZSS4_CA_CONI_VISIBILITA_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/ZSS4_CA_CONI_VISIBILITA_SRV/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+
             }
         }
     },
@@ -77,6 +89,23 @@
                     "defaultCountMode": "Inline",
                     "refreshAfterChange": false
                 }
+            },
+            "ZSS4_CA_CONI_VISIBILITA_SRV": {
+
+                "dataSource": "ZSS4_CA_CONI_VISIBILITA_SRV",
+
+                "preload": true,
+
+                "settings": {
+
+                    "defaultBindingMode": "OneWay",
+
+                    "defaultCountMode": "Inline",
+
+                    "refreshAfterChange": false
+
+                }
+
             }
         },
         "resources": {
