@@ -59,7 +59,7 @@ height="100%"
 
                 </m:VBox>
 
-                <m:VBox class="sapUiLargeMarginBegin">
+                <!-- <m:VBox class="sapUiLargeMarginBegin">
                <m:Input value="{}" class="sapUiLargeMarginBegin"/>
                <m:Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
                 <m:Input value="{}" class="sapUiLargeMarginBegin"/>
@@ -69,13 +69,13 @@ height="100%"
                <m:Input value="{}" class="sapUiLargeMarginBegin"/>
                <m:Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
                 <m:Input value="{}" class="sapUiLargeMarginBegin"/>
-                </m:VBox>
+                </m:VBox> -->
 
-                <m:VBox class="sapUiLargeMarginBegin">
+                <!-- <m:VBox class="sapUiLargeMarginBegin">
                <m:Input  value="{}" class="sapUiLargeMarginBegin"/>
                <m:Label text="" vAlign="Inherit" class="sapUiLargeMarginEnd"/>
                 <m:Input value="{}" class="sapUiLargeMarginBegin"/>
-                </m:VBox>
+                </m:VBox> -->
 
                 
                 

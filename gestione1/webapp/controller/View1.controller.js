@@ -5,21 +5,22 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     'sap/ui/export/Spreadsheet',
+    "sap/m/MessageBox",
     'gestione1/model/DateFormatter'
 
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (BaseController, ODataModel, Filter, FilterOperator, Spreadsheet, DateFormatter) {
+    function (BaseController, ODataModel, Filter, FilterOperator, Spreadsheet,MessageBox, DateFormatter) {
         "use strict";
         var EdmType = sap.ui.export.EdmType
 
         return BaseController.extend("gestione1.controller.View1", {
             formatter: DateFormatter,
             onInit: function () {
-                this.callConiAuthEntity()
-                // this.callVisibilità()
+                //is.callConiAuthEntity()
+                 //this.callVisibilità()
                 //this.callTipoImpEntity()
                 var oFilter = this.getView().byId("filterID"),
                     that = this;
@@ -63,6 +64,8 @@ sap.ui.define([
             },
 
             onSearch: function (oEvent) {
+
+                //var visibilità = this.getView().getModel("temp").getData().Visibilità[0]
                 var that = this;
                 var datiGI = [];
 
@@ -137,8 +140,17 @@ sap.ui.define([
                         else if (i == 12 || i == 18 || i == 20 || i == 24) {
                             continue
                         }
+                        else if (i == 0) {
+                            if (oEvent.getParameters().selectionSet[i].mProperties.value == '') {
+                                MessageBox.error("Valorizzare Esercizio Decreto", {
+                                    actions: [sap.m.MessageBox.Action.OK],
+                                    emphasizedAction: MessageBox.Action.OK,
+                                })
+                            }
+                        }
                     }
                 }
+                if (datiGI[0].sPath == 'Esercizio') {
                 //console.log(datiGI)
 
                 var oDataModel = that.getModel();
@@ -146,7 +158,7 @@ sap.ui.define([
                 that.getModel().metadataLoaded().then(function () {
                     oDataModel.read("/DecretoImpegnoSet", {
                         filters: datiGI,
-                        urlParameters: "",
+                        //urlParameters:{ "AutorityRole": visibilità.AGR_NAME, "AutorityFikrs": visibilità.FIKRS, "AutorityPrctr": visibilità.PRCTR },
                         success: function (data, oResponse) {
                             var oModelJson = new sap.ui.model.json.JSONModel();
                             oModelJson.setData(data.results);
@@ -155,11 +167,16 @@ sap.ui.define([
                         },
                         error: function (error) {
                             var e = error;
+                            MessageBox.error("Errore durante l'estrazione della tabella", {
+                                actions: [sap.m.MessageBox.Action.OK],
+                                emphasizedAction: MessageBox.Action.OK,
+                            })
                         }
 
                     });
 
                 });
+            }
                 this.getView().byId("Esporta").setEnabled(true);
                 this.getView().byId("DettagliDE").setEnabled(false);
                 this.getView().byId("registrazioneDI").setEnabled(true);
@@ -349,12 +366,12 @@ sap.ui.define([
                     new Filter({ path: "AUTH_OBJ", operator: FilterOperator.EQ, value1: "Z_GEST_IMP" })
                 )
                 // "ODataModel" required from module "sap/ui/model/odata/v2/ODataModel"
-                self.getOwnerComponent().getModel("ZSS4_CA_CONI_VISIBILITA_SRV").read("/ZES_CONIAUTH_SET", {
+                self.getOwnerComponent().getModel("ZSS4_CA_CONI_VISIBILITA_SRV").read("/ZET_CONIAUTH_SET", {
                     filters: filters,
                     urlParameters: "",
                     success: function (data) {
                         oMdl.setData(data.results);
-                        that.getView().getModel("temp").setProperty('ZES_CONIAUTH_SET', data.results)
+                        that.getView().getModel("temp").setProperty('/Visibilità', data.results)
                         //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
                     },
                     error: function (error) {

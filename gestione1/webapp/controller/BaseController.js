@@ -91,31 +91,35 @@ sap.ui.define([
         },
 
 		getRowsData: function (Aut, cols){
-            var ClausMod = this.getOwnerComponent().getModel("EsigibilitaSet");
+            // var ClausMod = this.getOwnerComponent().getModel("EsigibilitaSet");
 			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
 			var oTempModel = this.getOwnerComponent().getModel("temp");
 
 
-             
+
 			//oEsigModel.setProperty('/', []);
-			
+
 				var arr = [];
-	
+				var year = 2023
 				for (var j = 0; j < Aut.length; j++) {
 					var row = {};
 					for (var k = 0; k < cols.length; k++) {
 					  var item = cols[k].columnName;
 					  row[item] = "";
 					}
+					// var annualità = year + j
 					row["Geber"] = Aut[j]; // Assegnazione del valore "aut" alla proprietà "Geber"
+					// row["Wtfree"+annualità] =oTempModel.getData().EsigibilitaSet.Wtfree
+					// row["Zcassa"+annualità] =oTempModel.getData().EsigibilitaSet.Cassa
 					arr.push(row);
 				  }
-		
+
 			// oEsigModel.setProperty('/List/Geber', arr)
 			//arr.push(oEsigModel.getProperty('/List'));
 			oEsigModel.setProperty("/List",arr);
+
 			return arr;
-			var ClausMod = this.getOwnerComponent().getModel("EsigibilitaSet");
+
 		},
 
 
@@ -217,25 +221,25 @@ sap.ui.define([
 			//this.viewHeaderIpe();
 		},
 
-		callPrevisioniEntity:function () {
-			var that = this;
-			var oMdl = new sap.ui.model.json.JSONModel();
-			this.getOwnerComponent().getModel().read("/PrevisioneImpegnoSet", {
-				filters: [],
-				urlParameters: "",
-				success: function (data) {
-					oMdl.setData(data.results);
-					that.getView().getModel("temp").setProperty('/PrevisioneImpegnoSet', data.results)
-				},
-				error: function (error) {
-					//that.getView().getModel("temp").setProperty(sProperty,[]);
-					//that.destroyBusyDialog();
-					var e = error;
-				}
-			});
-		
+		// callPrevisioniEntity:function () {
+		// 	var that = this;
+		// 	var oMdl = new sap.ui.model.json.JSONModel();
+		// 	this.getOwnerComponent().getModel().read("/PrevisioneImpegnoSet", {
+		// 		filters: [],
+		// 		urlParameters: "",
+		// 		success: function (data) {
+		// 			oMdl.setData(data.results);
+		// 			that.getView().getModel("temp").setProperty('/PrevisioneImpegnoSet', data.results)
+		// 		},
+		// 		error: function (error) {
+		// 			//that.getView().getModel("temp").setProperty(sProperty,[]);
+		// 			//that.destroyBusyDialog();
+		// 			var e = error;
+		// 		}
+		// 	});
 
-		},
+
+		// },
 
 		viewHeaderIpe: function (oEvent) {
 			var url = location.href
@@ -452,11 +456,11 @@ sap.ui.define([
 
 
 		// },
-		callEsigibilitaEntity:function (oEvent) {
+		callEsigibilitaEntity:function (risultati) {
 			var that = this,
 			oModel = that.getOwnerComponent().getModel()
            var oTempModel = that.getOwnerComponent().getModel("temp");
-		   var Auth=oTempModel.getData().AutorizzazioneSet[0].Fincode
+		   var Auth=risultati[0].Fincode
 			var Anno = oTempModel.getData().SelectedDecree.Esercizio
 			var Pfinan = sap.ui.getCore().byId("PosizFin").getText()
 			var StramminRes = sap.ui.getCore().byId("StruttAmmin").getText()
@@ -482,8 +486,8 @@ sap.ui.define([
 				urlParameters: "",
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
-					  oModelJson.setData(data.results);
-					   that.getView().getModel("temp").setProperty('/EsigibilitaSet', data.results);
+					  oModelJson.setData(data);
+					   that.getView().getModel("temp").setProperty('/EsigibilitaSet', data);
 
 					 },
 					  error: function(error){
@@ -595,6 +599,7 @@ sap.ui.define([
 					   that.getView().getModel("temp").setProperty('/AutorizzazioneSet', data.results);
 					   var risultati=data.results
 					   that.getPosStr(risultati)
+					/    that.callEsigibilitaEntity(risultati)
 					  //that.callAnnoAmm(data.results);
 					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					 },
