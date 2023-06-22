@@ -88,17 +88,19 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Ncontratto}" required="true" />
+                                          
                                             <Input
                                                 id="ValueHelpContratto"
                                                 showValueHelp="true"
                                                 enabled="{/FilterSwitch1}"
-                                                valueHelpOnly="true"
+                                                valueHelpOnly="false"
                                                 value="4500001128"
                                                 valueHelpRequest="handleContractValueHelp"
                                                 app:FieldName="ValueHelpContratto"
                                                 app:filterTableField="ValueHelpContratto"
                                                 class="sapUiSmallMarginBottom"
                                             />
+                                            <!-- 4500001128 -->
                                             <!--core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/-->
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
@@ -106,7 +108,7 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Dstipula}" required="true" />
-                                            <DatePicker id="Dstipula" value="{IpeEntitySet>/Zzdatastipula}"  displayFormat="dd/MM/yyyy" enabled="false" app:fieldName="DataStipula" app:filterTableField="DataStipula" class="sapUiSmallMarginBottom" />
+                                            <DatePicker id="Dstipula" value="{IpeEntitySet>/Zzdatastipula}"  displayFormat="dd/MM/yyyy" enabled="true" app:fieldName="DataStipula" app:filterTableField="DataStipula" class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
@@ -215,7 +217,7 @@
                         >
                             <VBox>
                                 <Label text="Beneficiario:" required="true" />
-                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="true" valueHelpRequest="handleBenValueHelp" app:FieldName="Ben" app:filterTableField="Ben" class="sapUiSmallMarginBottom" />
+                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" valueHelpRequest="handleBenValueHelp" app:FieldName="Ben" app:filterTableField="Ben" class="sapUiSmallMarginBottom" />
 
                                 <layoutData>
                                     <l:GridData span="L6 M3 S3" />
@@ -265,7 +267,7 @@
                         <form:SimpleForm id="form" editable="true" width="100%">
                             <VBox>
                                 <HBox>
-                                    <Label text="Sottoposto a richiesta di Assenso Preventivo" labelFor="Sottoposto a richiesta di Assenso Preventivo" />
+                                    <Label text="Sottoposto a richiesta di Assenso Preventivo:" labelFor="Sottoposto a richiesta di Assenso Preventivo" />
                                     <Switch  customTextOff="No" customTextOn="Si" change="" />
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
@@ -281,7 +283,7 @@
                                 </HBox>
                                 <Title text="" />
                                 <HBox>
-                                    <Label id="IndR" text="Indicazione Reiscrizione:" labelFor="Reiscrizione" visible="false"/>
+                                    <Label id="IndR" text="Indicazione Reiscrizione:" labelFor="Reiscrizione" visible="true" />
                                     <Switch id="IndReiscrizione" customTextOff="No" customTextOn="Si" change="handleChange" enabled="true" visible="true"/>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
@@ -327,8 +329,8 @@
                             <VBox>
                                 <HBox>
                                     <Label text="Natura Atto:" labelFor="Natura Atto:" />
-                                    <ComboBox id="naturAtto" items="{path: 'temp>/NaturaAttoSet', sorter: { path: 'Descrizione' }}" >
-                                        <core:Item id="nAtto" key="{temp>Descrizione}" text="{temp>Descrizione} " />
+                                    <ComboBox id="naturAtto" items="{path: 'temp>/NaturaAttoSet', sorter: { path: 'Codice' }}" >
+                                        <core:Item id="nAtto" key="{temp>Codice} : {temp>Descrizione}" text="{temp>Codice} : {temp>Descrizione}" />
                                     </ComboBox>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
@@ -348,9 +350,10 @@
                             <VBox>
                                 <HBox>
                                     <Label text="{i18n>Natto}" labelFor="{i18n>Natto}" />
-                                    <ComboBox id="numConAtt" enabled="false" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Znumcontratt' }}">
+                                    <Input id="numConAtt" enabled="true" value="{IpeEntitySet>Znumcontratt}" valueHelpOnly="false" showValueHelp="true"/>
+                                    <!-- <ComboBox id="numConAtt" enabled="false" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Znumcontratt' }}">
                                         <core:Item key="{temp>Znumcontratt}" text="{temp>Znumcontratt}" />
-                                    </ComboBox>
+                                    </ComboBox> -->
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>
@@ -369,7 +372,7 @@
                             <VBox>
                                 <HBox>
                                     <Label text="Data Atto:" labelFor="Data Atto:" />
-                                    <DatePicker id="dataAtt" displayFormat="dd/MM/yyyy" enabled="false"  value="{= ${path: 'temp>/IpeEntitySet/Zdataatto' , formatter: '.formatter.convert' } !== null ? ${path: 'temp>/IpeEntitySet/Zdataatto' , formatter: '.formatter.convert' } : '' }"/>
+                                    <DatePicker id="dataAtt" displayFormat="dd/MM/yyyy" enabled="true"  value="{= ${path: 'temp>/IpeEntitySet/Zdataatto' , formatter: '.formatter.convert' } !== null ? ${path: 'temp>/IpeEntitySet/Zdataatto' , formatter: '.formatter.convert' } : '' }"/>
                                 </HBox>
                             </VBox>
                         </form:SimpleForm>

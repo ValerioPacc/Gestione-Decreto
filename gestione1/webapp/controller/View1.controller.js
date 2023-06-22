@@ -19,7 +19,7 @@ sap.ui.define([
         return BaseController.extend("gestione1.controller.View1", {
             formatter: DateFormatter,
             onInit: function () {
-                //is.callConiAuthEntity()
+                //this.callConiAuthEntity()
                  //this.callVisibilità()
                 //this.callTipoImpEntity()
                 var oFilter = this.getView().byId("filterID"),

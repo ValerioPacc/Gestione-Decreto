@@ -124,24 +124,22 @@ sap.ui.define([
 
 
 		getColsPrevisioni: function (oYears){
-
-            var aColumnData = [
-				{columnLabel: "Esigibilità annuale",columnName:"Geber"},
-				{columnLabel: "Previsioni PNI"+ oYears[0], columnName:"ZprePni"+ oYears[0]},
-				{columnLabel: ""+ oYears[0], columnName:"ZImpIpeCl"+ oYears[0]},
-				{columnLabel: "Previsioni PNI"+ oYears[1], columnName:"Wtfree"+ oYears[1]},
-				{columnLabel: ""+ oYears[1], columnName:"ZImpIpeCl"+ oYears[1]},
-				{columnLabel: "Previsioni PNI"+ oYears[2], columnName:"Wtfree"+ oYears[2]},
-				{columnLabel: ""+ oYears[2], columnName:"ZImpIpeCl"+ oYears[2]},
-				{columnLabel: "Previsioni PNI"+ oYears[3], columnName:"Wtfree"+ oYears[3]},
-				{columnLabel: ""+ oYears[3], columnName:"ZImpIpeCl"+ oYears[3]},
-			  ];
-
+			var aColumnData = [
+			{columnLabel: "Esigibilità annuale",columnName:"Annuale"}
+			]
+			for (var i = 0; i< 40; i++ ){
+				var anno = oYears+i
+                aColumnData.push(
+				// {columnLabel: "Esigibilità annuale",columnName:"Annuale"},
+				{columnLabel: "Previsioni PNI"+ anno, columnName:"ZprePni"+ anno},
+				{columnLabel: ""+ anno, columnName:"ZImpIpeCl"+ anno},
+				);
+			}
 			  return aColumnData;
 
-        },
+        
 
-
+	},
 		getPreRowsData: function (Aut, cols){
 			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
 			var oTempModel = this.getOwnerComponent().getModel("temp");
@@ -164,7 +162,7 @@ sap.ui.define([
 
 			}
 
-			oEsigModel.setProperty('/List/Geber', Aut);
+			oEsigModel.setProperty('/List/Annuale', Aut);
 			arr.push(oEsigModel.getProperty('/List'));
 			oEsigModel.setProperty("/List",arr);
 			return arr;
@@ -178,9 +176,12 @@ sap.ui.define([
 			oTempModel = that.getOwnerComponent().getModel("temp"),
 			aFilters = [];
 
-			this.getOwnerComponent().getModel("IpeEntitySet").setProperty('/' ,[])
+			that.getOwnerComponent().getModel("IpeEntitySet").setProperty('/' ,[])
 
 			aFilters.push(
+			  new Filter({path: "Zregistrato", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").RegistratoBozza }),
+			  new Filter({path: "ZCodIpe", operator: FilterOperator.EQ, value1:  oTempModel.getProperty("/SelectedDecree").CodiceIpe}),
+			  new Filter({path: "ZNumCla", operator: FilterOperator.EQ, value1:  oTempModel.getProperty("/SelectedDecree").NumeroClausola}),
 			  new Filter({path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
 			  new Filter({path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
 			  new Filter({path: "Gjahr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Esercizio }),
@@ -188,7 +189,9 @@ sap.ui.define([
 			  new Filter({path: "Zcoddecr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroDecreto }),
 			  new Filter({path: "Zufficioliv1", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1 }),
 			  new Filter({path: "Zufficioliv2", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv2 }),
-			  new Filter({path: "ZCodGius", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo })
+			  new Filter({path: "ZCodGius", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo }),
+			  new Filter({path: "ZidIpe", operator: FilterOperator.EQ, value1: "" }),
+			  new Filter({path: "ZCodCla", operator: FilterOperator.EQ, value1: "" })
 			  );
 
 
@@ -631,8 +634,17 @@ sap.ui.define([
 		callModPagEntity:function () {
 			var that = this;
 			var oMdl = new sap.ui.model.json.JSONModel();
-			this.getOwnerComponent().getModel().read("/ZwelsBenSet", {
-				filters: [],
+            var Lifnr= "0010000621"
+			var aFilters = [];
+
+			aFilters.push(
+			  new Filter({path: "Lifnr", operator: FilterOperator.EQ, value1: Lifnr })
+			
+			)
+			
+			
+			this.getOwnerComponent().getModel().read( '/ZwelsBenSet',{
+				filters: aFilters,
 				urlParameters: "",
 				success: function (data) {
 					oMdl.setData(data.results);

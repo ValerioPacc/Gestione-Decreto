@@ -28,7 +28,9 @@
                      
                     <VBox>
                         <Label text="IBAN" labelFor="IBAN" />
-                        <Input value="{IpeEntitySet>/Iban}" enabled="false"/>
+                        <ComboBox id="Iban1" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Iban' }}" >
+                                        <core:Item key="{temp>Iban}" text="{temp>Iban}" />
+                                    </ComboBox>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
