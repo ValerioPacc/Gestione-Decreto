@@ -514,31 +514,30 @@ sap.ui.define([
 		    // this.getOwnerComponent().getModel("IpeEntitySet");
 
 
-			var aFilters = [];
+			// var aFilters = [];
 
-			aFilters.push(
-			  new Filter({path: "Zzanno", operator: FilterOperator.EQ, value1: Zzanno }),
-			  new Filter({path: "Zzamministrazione", operator: FilterOperator.EQ, value1: Zzammin })
+			// aFilters.push(
+			//   new Filter({path: "Zzanno", operator: FilterOperator.EQ, value1: Zzanno }),
+			//   new Filter({path: "Zzamministrazione", operator: FilterOperator.EQ, value1: Zzammin })
 
-			)
-
-
-
-			// var path = oModel.createKey('/ContrattoSet', {
-			// 	Ebeln: this.getView().byId("ValueHelpContratto").getValue()
-			// })
-            // var Ebeln=this.getView().byId("ValueHelpContratto").getValue()
+			// )
 
 
+			var contratto=this.getView().byId("ValueHelpContratto").getValue()
+			var path = oModel.createKey('/ContrattoSet', {
+				Ebeln: contratto
+			})
 
-			oModel.read('/ContrattoSet', {
-				filters:aFilters,
+
+
+			oModel.read(path, {
+				filters:[],
 				urlParameters: "",
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
 					  oModelJson.setData(data);
 					   that.getView().getModel("temp").setProperty('/ContrattoSet', data);
-					   that.getOtherData(Ebeln)
+					   that.getContratto(data)
 					  //that.callAnnoAmm(data.results);
 					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					 },
