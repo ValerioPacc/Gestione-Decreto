@@ -343,30 +343,7 @@ sap.ui.define(
 
         }
         // this._setBeneficiario(beneficiario);
-        var nContr = oTempModel.getProperty("/ContrattoSet").Ebeln
-        var stato = this.getView().byId("switch").getState();
-
-        if (stato == true) {
-        if (nContr == value) {
-          var date = new Date(oTempModel.getProperty("/ContrattoSet").Zzdatastipula),
-            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-            day = ("0" + date.getDate()).slice(-2);
-          var nData = [date.getFullYear(), day, mnth].join("-");
-          var nDate = nData.split("-").reverse().join("/");
-
-
-          this.getView().byId("Dstipula").setValue(nDate);
-          this.getView().byId("cig").setValue(oTempModel.getProperty("/ContrattoSet").Zzcig);
-          this.getView().byId("beneficiario").setValue(oTempModel.getProperty("/ContrattoSet").Lifnr);
-          this.getView().byId("importoCont").setValue(oTempModel.getProperty("/ContrattoSet").Ktwrt);
-          this.getView().byId("numConAtt").setValue(oTempModel.getProperty("/ContrattoSet").Ebeln);
-          this.getView().byId("dataAtt").setValue(nDate);
-          this.getView().byId("idTypeCon").setValue(oTempModel.getProperty("/ContrattoSet").Bsart);
-          this.getView().byId("formAgg").setValue(oTempModel.getProperty("/ContrattoSet").Zzgara);
-
-          //valoriNuovi.push(KOSTL.Kostl)
-        }
-      }
+        
       //   if (stato == false) {
       //     this.getView().byId("numConAtt").setValue("");
       //     this.getView().byId("dataAtt").setValue("");
@@ -377,6 +354,34 @@ sap.ui.define(
         // this.getView().getModel("IpeEntitySet").setProperty('/Zzcup' ,rowSelected.cup);
         // this.getView().getModel("IpeEntitySet").setProperty('/Ktwrt' ,rowSelected.importo); 
         //this.getView().getModel("CountryMatchCodeSet").setProperty('/Description' ,country.Description); 
+      },
+
+      getContratto : function (data) {
+        var nContr = data.Ebeln
+        var oTempModel = this.getView().getModel("temp");
+        var stato = this.getView().byId("switch").getState();
+
+        if (stato == true) {
+        
+          var date = new Date(oTempModel.getProperty("/ContrattoSet").Zzdatastipula),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + date.getDate()).slice(-2);
+          var nData = [date.getFullYear(), day, mnth].join("-");
+          var nDate = nData.split("-").reverse().join("/");
+
+
+          this.getView().byId("Dstipula").setValue(nDate);
+          this.getView().byId("cig").setValue(data.Zzcig);
+          this.getView().byId("beneficiario").setValue(data.Lifnr);
+          this.getView().byId("importoCont").setValue(data.Ktwrt);
+          this.getView().byId("numConAtt").setValue(data.Ebeln);
+          this.getView().byId("dataAtt").setValue(nDate);
+          this.getView().byId("idTypeCon").setValue(data.Bsart);
+          this.getView().byId("formAgg").setValue(data.Zzgara);
+
+          //valoriNuovi.push(KOSTL.Kostl)
+        
+      }
       },
 
       getPosStr: function (risultati) {
@@ -766,11 +771,11 @@ controlswitch2: function () {
          var Zni = self.getView().byId("CB3").getSelected()
          
          
-          if (Zop == true ) 
-          var B_Zop = "1"
+        //   if (Zop == true ) 
+        //   var B_Zop = "1"
          
-        if (Zop == false )
-        var B_Zop = "0"
+        // if (Zop == false )
+        // var B_Zop = "0"
        
               var entity = {
                 Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
@@ -792,7 +797,7 @@ controlswitch2: function () {
                 Lifnr: self.getView().byId("beneficiario1").getValue(),//oIpeEntitySet.getProperty("/Lifnr"),  //oTempModel.getProperty("/Step1/").id_ben,
                 Zzcig: self.getView().byId("cig").getValue(),  //oTempModel.getProperty("/Step1/").cig,
                 Zzcup: self.getView().byId("cup").getValue(),//oIpeEntitySet.getProperty("/Zzcup"),
-                Ktwrt: self.getView().byId("importoCont").getValue(),//oIpeEntitySet.getProperty("/Ktwrt"), //oTempModel.getProperty("/Step1/").cup,
+                Ktwrt: self.getView().byId("importoCont").getValue()!==""?self.getView().byId("importoCont").getValue():0,//oIpeEntitySet.getProperty("/Ktwrt"), //oTempModel.getProperty("/Step1/").cup,
                 NameFirst: self.getView().byId("nome").getValue(),//oIpeEntitySet.getProperty("/NameFirst"), //oTempModel.getProperty("/Step2/").nome,
                 NameLast: self.getView().byId("cognome").getValue(),//oIpeEntitySet.getProperty("/NameLast"), //oTempModel.getProperty("/Step2/").cognome,
                 ZzragSoc: self.getView().byId("rSociale").getValue(),//oIpeEntitySet.getProperty("/ZzragSoc"), //oTempModel.getProperty("/Step2/").Rsociale,
@@ -809,15 +814,15 @@ controlswitch2: function () {
                 Zdataatto: self.getView().byId("dataAtt").getValue(),
                 Bsart: self.getView().byId("idTypeCon").getValue(),
                 Zzgara: self.getView().byId("formAgg").getValue(),
-                Zop: B_Zop,
+                Zop:  self.getView().byId("CB1").getSelected(),
                 Zoa: self.getView().byId("CB2").getSelected(),
                 Zni: self.getView().byId("CB3").getSelected(),
                 Zbozza: "X"
               };
-              var stato = self.getView().byId("switch").getState();
-              if (stato = false) {
-                entity.Ktwrt=null
-              }
+              // var stato = self.getView().byId("switch").getState();
+              // if (stato = false) {
+              //   entity.Ktwrt=null
+              // }
               if (oBozza == false) {
                  if (entity.Zzdatastipula != "") {
                   var dataNuova = new Date(entity.Zzdatastipula),

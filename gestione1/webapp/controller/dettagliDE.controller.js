@@ -323,10 +323,11 @@ sap.ui.define(
 
 
             onBackButton: function () {
-                this.getOwnerComponent().getRouter().navTo("View1");
+                // this.getOwnerComponent().getRouter().navTo("View1");
                 this.getView().getModel("temp").setProperty("/SelectedDecree",[]);
                 var oTempModel = this.getView().getModel("temp");
                 oTempModel.setProperty("/draft","");
+                window.history.go(-1);
                 
             },
 

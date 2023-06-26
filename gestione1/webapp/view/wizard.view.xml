@@ -136,7 +136,7 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>cup}" />
-                                            <Input id="cup" showValueHelp="true" value="{IpeEntitySet>/Zzcup}" enabled="{= !${/FilterSwitch1} }" valueHelpOnly="true" valueHelpRequest="handleValueHelp" app:FieldName="CUP" app:filterTableField="CUP" class="sapUiSmallMarginBottom" />
+                                            <Input id="cup" showValueHelp="true" value="{IpeEntitySet>/Zzcup}" enabled="{= !${/FilterSwitch1} }" valueHelpOnly="false" valueHelpRequest="handleValueHelp" app:FieldName="CUP" app:filterTableField="CUP" class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L4 M3 S3" />
                                             </layoutData>
@@ -330,8 +330,8 @@
                             <VBox>
                                 <HBox>
                                     <Label text="Natura Atto:" labelFor="Natura Atto:" />
-                                    <ComboBox id="naturAtto" items="{path: 'temp>/NaturaAttoSet', sorter: { path: 'Codice' }}" >
-                                        <core:Item id="nAtto" key="{temp>Codice} : {temp>Descrizione}" text="{temp>Codice} : {temp>Descrizione}" />
+                                    <ComboBox id="naturAtto" items="{path: 'temp>/NaturaAttoSet', sorter: { path: 'Codice' }}" selectedKey="{IpeEntitySet>/Znaturaatto}" >
+                                        <core:Item id="nAtto" key="{temp>Codice}" text="{temp>Codice} : {temp>Descrizione}" />
                                     </ComboBox>
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
@@ -351,7 +351,7 @@
                             <VBox>
                                 <HBox>
                                     <Label text="{i18n>Natto}" labelFor="{i18n>Natto}" />
-                                    <Input id="numConAtt" enabled="true" value="{IpeEntitySet>Znumcontratt}" valueHelpOnly="false" showValueHelp="true"/>
+                                    <Input id="numConAtt" enabled="true" value="{temp>/Znumcontratt}" valueHelpOnly="false" showValueHelp="true"/>
                                     <!-- <ComboBox id="numConAtt" enabled="false" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Znumcontratt' }}">
                                         <core:Item key="{temp>Znumcontratt}" text="{temp>Znumcontratt}" />
                                     </ComboBox> -->
