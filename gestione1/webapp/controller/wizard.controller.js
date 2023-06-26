@@ -125,8 +125,8 @@ sap.ui.define(
         if (this._iSelectedStepIndex == 0) {
           //console.log(this.getOwnerComponent().getRouter().navTo("View1"))
           this._iSelectedStepIndex = 0
-          this.navToHome();
-          location.reload();
+          //this.navToHome();
+          window.history.go(-1);
           //this.getView().byId("").setVisible(false);
           return;
         }
@@ -545,6 +545,7 @@ sap.ui.define(
           this.getView().byId("ValueHelpContratto").setValue("");
           this.getView().byId("numConAtt").setValue("");
           this.getView().byId("dataAtt").setValue("");
+          this.getView().byId("es_decreto").setValue("");
           // this.getView().byId("numConAtt").setEnabled(true);
           // this.getView().byId("dataAtt").setEnabled(true);
 
@@ -613,7 +614,16 @@ sap.ui.define(
 
         return check;
       },
-
+controlswitch2: function () {
+  var stato = this.getView().byId("RicPre").getState();
+  if (stato) {
+    this.getView().byId("IdAssPre").setEnabled(true);
+    
+  }
+  else {
+    this.getView().byId("IdAssPre").setEnabled(false);
+  }
+},
 
       controlHeader: function () {
         var oProprietà = this.getView().getModel();
@@ -755,14 +765,13 @@ sap.ui.define(
          var Zoa =self.getView().byId("CB2").getSelected()
          var Zni = self.getView().byId("CB3").getSelected()
          
-          if (Zop == true && Zoa == true && Zni == true) 
+         
+          if (Zop == true ) 
           var B_Zop = "1"
-          var B_Zoa = "1"
-          var B_Zni = "1"
-        if (Zop == false && Zoa == false && Zni == false)
+         
+        if (Zop == false )
         var B_Zop = "0"
-        var B_Zoa = "0"
-        var B_Zni = "0"
+       
               var entity = {
                 Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
                 Fikrs: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
@@ -778,12 +787,12 @@ sap.ui.define(
                 ZidIpe: '',
                 Zufficioliv1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
                 Zufficioliv2: oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
-                Zzdatastipula: oIpeEntitySet.getProperty("/Zzdatastipula"), //new Date (oTempModel.getProperty("/Step1/").data),
-                Ebeln: self.getView().byId("beneficiario").getValue(),//oTempModel.getProperty("/Step1/").id,
+                Zzdatastipula: self.getView().byId("Dstipula").getValue(),//oIpeEntitySet.getProperty("/Zzdatastipula"), //new Date (oTempModel.getProperty("/Step1/").data),
+                Ebeln: self.getView().byId("ValueHelpContratto").getValue(),//oTempModel.getProperty("/Step1/").id,
                 Lifnr: self.getView().byId("beneficiario1").getValue(),//oIpeEntitySet.getProperty("/Lifnr"),  //oTempModel.getProperty("/Step1/").id_ben,
-                Zzcig: oIpeEntitySet.getProperty("/Zzcig"),  //oTempModel.getProperty("/Step1/").cig,
+                Zzcig: self.getView().byId("cig").getValue(),  //oTempModel.getProperty("/Step1/").cig,
                 Zzcup: self.getView().byId("cup").getValue(),//oIpeEntitySet.getProperty("/Zzcup"),
-                Ktwrt: oIpeEntitySet.getProperty("/Ktwrt"), //oTempModel.getProperty("/Step1/").cup,
+                Ktwrt: self.getView().byId("importoCont").getValue(),//oIpeEntitySet.getProperty("/Ktwrt"), //oTempModel.getProperty("/Step1/").cup,
                 NameFirst: self.getView().byId("nome").getValue(),//oIpeEntitySet.getProperty("/NameFirst"), //oTempModel.getProperty("/Step2/").nome,
                 NameLast: self.getView().byId("cognome").getValue(),//oIpeEntitySet.getProperty("/NameLast"), //oTempModel.getProperty("/Step2/").cognome,
                 ZzragSoc: self.getView().byId("rSociale").getValue(),//oIpeEntitySet.getProperty("/ZzragSoc"), //oTempModel.getProperty("/Step2/").Rsociale,
@@ -801,11 +810,14 @@ sap.ui.define(
                 Bsart: self.getView().byId("idTypeCon").getValue(),
                 Zzgara: self.getView().byId("formAgg").getValue(),
                 Zop: B_Zop,
-                Zoa: B_Zoa,
-                Zni: B_Zni,
+                Zoa: self.getView().byId("CB2").getSelected(),
+                Zni: self.getView().byId("CB3").getSelected(),
                 Zbozza: "X"
               };
-              
+              var stato = self.getView().byId("switch").getState();
+              if (stato = false) {
+                entity.Ktwrt=null
+              }
               if (oBozza == false) {
                  if (entity.Zzdatastipula != "") {
                   var dataNuova = new Date(entity.Zzdatastipula),

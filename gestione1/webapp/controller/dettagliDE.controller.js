@@ -31,7 +31,7 @@ sap.ui.define(
             _onObjectMatched: function (oEvent) {
 
                 var self = this;
-                var oDataModel = self.getModel();
+                var oDataModel = self.getOwnerComponent().getModel();
                 var path = oDataModel.createKey("/DecretoImpegnoSet", {
                     Amministrazione: oEvent.getParameters().arguments.campo,
                     AreaFinanziaria: oEvent.getParameters().arguments.campo1,
@@ -45,29 +45,33 @@ sap.ui.define(
                 });
 
                 
-                oDataModel.metadataLoaded().then( function() { 
+                //oDataModel.metadataLoaded().then( function() { 
                    oDataModel.read(path, {
                      success: function(data, oResponse){
                          self.getView().getModel("temp").setProperty('/SelectedDecree', data); 
+                         
                          var stato= data.CodiceStato
                          if (stato == "01") {
                             
                             //var oProprietà = self.getView().getModel();
                             var state= self.getView().byId("invFirma");
-                            state.setVisible(false)
+                            state.setVisible(false) 
                              }
+                             self.viewHeader(data);
+                            //  self.onDeleteRow(data);
+                            //  self.onNavToupdateDecreto(data)
                         },
                          error: function(error){
                         var e = error;
                     }
                 });
-            });
+            //});
 
-                this.viewHeader(oEvent);
+                
                 
             },
 
-            viewHeader: function (oEvent) {
+            viewHeader: function (data) {
                 // console.log(this.getView().getModel("temp").getData(
                 // "/HeaderNISet('"+ oEvent.getParameters().arguments.campo +
                 // "','"+ oEvent.getParameters().arguments.campo1 +
@@ -76,61 +80,61 @@ sap.ui.define(
                 // "','"+ oEvent.getParameters().arguments.campo4 +
                 // "','"+ oEvent.getParameters().arguments.campo5 + "')"))
 
-                var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
-                for (var i = 0; i < header.length; i++) {
+                // var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
+                // for (var i = 0; i < header.length; i++) {
 
-                    var dataNuova = new Date(header[i].DataProtocolloRag),
+                    var dataNuova = new Date(data.DataProtocolloRag),
                         mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
                         day = ("0" + dataNuova.getDate()).slice(-2);
                     var nData = [dataNuova.getFullYear(), mnth, day].join("-");
                     var nDate = nData.split("-").reverse().join(".");
-                    //var dataProtocolloRag = header[i].DataProtocolloRag
+                    //var dataProtocolloRag = data.DataProtocolloRag
                     this.getView().byId("dataProtRag").setText(nDate)
 
 
-                    if (header[i].Amministrazione == oEvent.getParameters().arguments.campo &&
-                        header[i].AreaFinanziaria == oEvent.getParameters().arguments.campo1 &&
-                        header[i].ChiaveGiustificativo == oEvent.getParameters().arguments.campo2 &&
-                        header[i].Ente == oEvent.getParameters().arguments.campo3 &&
-                        header[i].Esercizio == oEvent.getParameters().arguments.campo4 &&
-                        header[i].NumeroDecreto == oEvent.getParameters().arguments.campo5 &&
-                        header[i].RegistratoBozza == oEvent.getParameters().arguments.campo6 &&
-                        header[i].UfficioLiv1 == oEvent.getParameters().arguments.campo7 &&
-                        header[i].UfficioLiv2 == oEvent.getParameters().arguments.campo8) {
+                    // if (data.Amministrazione == oEvent.getParameters().arguments.campo &&
+                    //     data.AreaFinanziaria == oEvent.getParameters().arguments.campo1 &&
+                    //     data.ChiaveGiustificativo == oEvent.getParameters().arguments.campo2 &&
+                    //     data.Ente == oEvent.getParameters().arguments.campo3 &&
+                    //     data.Esercizio == oEvent.getParameters().arguments.campo4 &&
+                    //     data.NumeroDecreto == oEvent.getParameters().arguments.campo5 &&
+                    //     data.RegistratoBozza == oEvent.getParameters().arguments.campo6 &&
+                    //     data.UfficioLiv1 == oEvent.getParameters().arguments.campo7 &&
+                    //     data.UfficioLiv2 == oEvent.getParameters().arguments.campo8) {
 
-                            var dataNuova = new Date(header[i].DataProtocolloRag),
+                            var dataNuova = new Date(data.DataProtocolloRag),
                             mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
                             day = ("0" + dataNuova.getDate()).slice(-2);
                         var nData = [dataNuova.getFullYear(), mnth, day].join("-");
                         var nDate = nData.split("-").reverse().join(".");
-                        //var dataProtocolloRag = header[i].DataProtocolloRag
+                        //var dataProtocolloRag = data.DataProtocolloRag
                         this.getView().byId("dataProtRag").setText(nDate)
 
 
 
-                        var dirigDirFirm = header[i].DirigenteDirettoreFirmatario
+                        var dirigDirFirm = data.DirigenteDirettoreFirmatario
                         this.getView().byId("DDFirmatario").setText(dirigDirFirm)
 
-                        var dataFirm = header[i].DataFirma
+                        var dataFirm = data.DataFirma
                         this.getView().byId("dataFirma").setText(dataFirm)
 
-                        var ufficioAmm = header[i].CodiceUffico
+                        var ufficioAmm = data.CodiceUffico
                         this.getView().byId("UffAmm").setText(ufficioAmm)
 
 
-                        var esrcDE = header[i].Esercizio
+                        var esrcDE = data.Esercizio
                         this.getView().byId("esercizio").setText(esrcDE)
 
-                        var amminstr = header[i].Amministrazione
+                        var amminstr = data.Amministrazione
                         this.getView().byId("idAmm").setText(amminstr)
 
-                        var Ndecreto = header[i].NumeroDecreto
+                        var Ndecreto = data.NumeroDecreto
                         this.getView().byId("Ndecr").setText(Ndecreto)
 
-                        var NumIpe = header[i].NumeroIpe
+                        var NumIpe = data.NumeroIpe
                         this.getView().byId("Nipe").setText(NumIpe)
 
-                        var dataDecr = header[i].DataDecreto
+                        var dataDecr = data.DataDecreto
                         var dataNuova = new Date(dataDecr),
                             mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
                             day = ("0" + dataNuova.getDate()).slice(-2);
@@ -138,37 +142,37 @@ sap.ui.define(
                         var nDate = nData.split("-").reverse().join(".");
                         this.getView().byId("dataDecr").setText(nDate)
 
-                        var numProtAmm = header[i].NProtocolloAmm
+                        var numProtAmm = data.NProtocolloAmm
                         this.getView().byId("NprotAmm").setText(numProtAmm)
 
-                        var decrState = header[i].CodiceStato
+                        var decrState = data.CodiceStato
                         this.getView().byId("StatoDecreto").setText(decrState)
 
-                        var ImpgnType = header[i].TipologiaImpegno
+                        var ImpgnType = data.TipologiaImpegno
                         this.getView().byId("TipologiaImpegno").setText(ImpgnType)
 
-                        var contratto = header[i].ContrattoOrdine
+                        var contratto = data.ContrattoOrdine
                         this.getView().byId("Cordine").setText(contratto)
 
-                        var CCConti = header[i].ControlloCorteConti
+                        var CCConti = data.ControlloCorteConti
                         this.getView().byId("CcConti").setText(CCConti)
 
-                        var DocAggiuntiva = header[i].DocumentazioneAgg
+                        var DocAggiuntiva = data.DocumentazioneAgg
                         this.getView().byId("docAgg").setText(DocAggiuntiva)
 
-                        var Ragion = header[i].Ragioneria
+                        var Ragion = data.Ragioneria
                         this.getView().byId("Rag").setText(Ragion)
 
-                        // var dataProtocolloRag = header[i].DataProtocolloRag
+                        // var dataProtocolloRag = data.DataProtocolloRag
                         // this.getView().byId("dataProtRag").setText(dataProtocolloRag)
 
-                        var NumProtRag = header[i].NProtocolloRag
+                        var NumProtRag = data.NProtocolloRag
                         this.getView().byId("nProtRag").setText(NumProtRag)
 
 
 
-                    }
-                }
+                    //}
+                //}
 
             },
             onSelect: function (oEvent) {
@@ -203,36 +207,36 @@ sap.ui.define(
 
             onDeleteRow: function (oEvent) {
                 var that = this;
+                var data = that.getView().getModel("temp").oData.SelectedDecree
+                // var url = location.href
+                // var sUrl = url.split("/dettagliDE/")[1]
+                // var aValori = sUrl.split(",")
 
-                var url = location.href
-                var sUrl = url.split("/dettagliDE/")[1]
-                var aValori = sUrl.split(",")
-
-                var Amministrazione = aValori[0]
-                var AreaFinanziaria = aValori[1]
-                var ChiaveGiustificativo = aValori[2]
-                var Ente = aValori[3]
-                var Esercizio = aValori[4]
-                var NumeroDecreto = aValori[5]
-                var RegistratoBozza = aValori[6]
-                var UfficioLiv1 = aValori[7]
-                var UfficioLiv2 = aValori[8]
+                var Amministrazione = data.Amministrazione
+                var AreaFinanziaria = data.AreaFinanziaria
+                var ChiaveGiustificativo = data.ChiaveGiustificativo
+                var Ente = data.Ente
+                var Esercizio = data.Esercizio
+                var NumeroDecreto = data.NumeroDecreto
+                var RegistratoBozza = data.RegistratoBozza
+                var UfficioLiv1 = data.UfficioLiv1
+                var UfficioLiv2 = data.UfficioLiv2
 
 
 
-                var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
-                for (var i = 0; i < header.length; i++) {
-                    if (header[i].Amministrazione == Amministrazione &&
-                        header[i].AreaFinanziaria == AreaFinanziaria &&
-                        header[i].ChiaveGiustificativo == ChiaveGiustificativo &&
-                        header[i].Ente == Ente &&
-                        header[i].Esercizio == Esercizio &&
-                        header[i].NumeroDecreto == NumeroDecreto &&
-                        header[i].RegistratoBozza == RegistratoBozza &&
-                        header[i].UfficioLiv1 == UfficioLiv1 &&
-                        header[i].UfficioLiv2 == UfficioLiv2) {
-                        var indice = i
-                        MessageBox.warning("Sei sicuro di voler cancellare il Decreto d'Impegno n° " + header[i].NumeroDecreto + "?", {
+                // var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
+                // for (var i = 0; i < header.length; i++) {
+                    if (data.Amministrazione == Amministrazione &&
+                        data.AreaFinanziaria == AreaFinanziaria &&
+                        data.ChiaveGiustificativo == ChiaveGiustificativo &&
+                        data.Ente == Ente &&
+                        data.Esercizio == Esercizio &&
+                        data.NumeroDecreto == NumeroDecreto &&
+                        data.RegistratoBozza == RegistratoBozza &&
+                        data.UfficioLiv1 == UfficioLiv1 &&
+                        data.UfficioLiv2 == UfficioLiv2) {
+                        //var indice = i
+                        MessageBox.warning("Sei sicuro di voler cancellare il Decreto d'Impegno n° " + data.NumeroDecreto + "?", {
                             title: "Attenzione",
                             actions: ["Si", "No"],
                             emphasizedAction: "Si",
@@ -243,15 +247,15 @@ sap.ui.define(
                                     var oModel = that.getView().getModel();
 
                                     var path = oModel.createKey("/DecretoImpegnoSet", {
-                                        Amministrazione: header[indice].Amministrazione,
-                                        AreaFinanziaria: header[indice].AreaFinanziaria,
-                                        ChiaveGiustificativo: header[indice].ChiaveGiustificativo,
-                                        Ente: header[indice].Ente,
-                                        Esercizio: header[indice].Esercizio,
-                                        NumeroDecreto: header[indice].NumeroDecreto,
-                                        RegistratoBozza: header[indice].RegistratoBozza,
-                                        UfficioLiv1: header[indice].UfficioLiv1,
-                                        UfficioLiv2: header[indice].UfficioLiv2,
+                                        Amministrazione: data.Amministrazione,
+                                        AreaFinanziaria: data.AreaFinanziaria,
+                                        ChiaveGiustificativo: data.ChiaveGiustificativo,
+                                        Ente: data.Ente,
+                                        Esercizio: data.Esercizio,
+                                        NumeroDecreto: data.NumeroDecreto,
+                                        RegistratoBozza: data.RegistratoBozza,
+                                        UfficioLiv1: data.UfficioLiv1,
+                                        UfficioLiv2: data.UfficioLiv2,
                                     });
 
                                     oModel.remove(path, {
@@ -282,7 +286,7 @@ sap.ui.define(
                             }
                         });
                     }
-                }
+                //}
             },
 
             // onConfirmationCancelMessageBoxPress: function () {
@@ -318,48 +322,49 @@ sap.ui.define(
             },
 
 
-            // onBackButton: function () {
-            //     this.getOwnerComponent().getRouter().navTo("View1");
-            //     this.getView().getModel("temp").setProperty("/SelectedDecree",[]);
-            //     var oTempModel = this.getView().getModel("temp");
-            //     oTempModel.setProperty("/draft","");
-            // },
+            onBackButton: function () {
+                this.getOwnerComponent().getRouter().navTo("View1");
+                this.getView().getModel("temp").setProperty("/SelectedDecree",[]);
+                var oTempModel = this.getView().getModel("temp");
+                oTempModel.setProperty("/draft","");
+                
+            },
 
-            onNavToupdateDecreto: function(){
+            onNavToupdateDecreto: function(oEvent){
             //var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
                 //this.getModel("temp").setProperty("/SelectedDecree", row);
-                
-        var url = location.href
-        var sUrl = url.split("/dettagliDE/")[1]
-        var aValori = sUrl.split(",")
+                var data = this.getView().getModel("temp").oData.SelectedDecree    
+        // var url = location.href
+        // var sUrl = url.split("/dettagliDE/")[1]
+        // var aValori = sUrl.split(",")
 
-        var Amministrazione = aValori[0]
-        var AreaFinanziaria = aValori[1]
-        var ChiaveGiustificativo = aValori[2]
-        var Ente = aValori[3]
-        var Esercizio = aValori[4]
-        var NumeroDecreto = aValori[5]
-        var RegistratoBozza = aValori[6]
-        var UfficioLiv1 = aValori[7]
-        var UfficioLiv2 = aValori[8]
+        var Amministrazione = data.Amministrazione
+        var AreaFinanziaria = data.AreaFinanziaria
+        var ChiaveGiustificativo = data.ChiaveGiustificativo
+        var Ente = data.Ente
+        var Esercizio = data.Esercizio
+        var NumeroDecreto = data.NumeroDecreto
+        var RegistratoBozza = data.RegistratoBozza
+        var UfficioLiv1 = data.UfficioLiv1
+        var UfficioLiv2 = data.UfficioLiv2
        
         
-        var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
-        for (var i = 0; i < header.length; i++) {
-            if (header[i].Amministrazione == Amministrazione &&
-                header[i].AreaFinanziaria == AreaFinanziaria &&
-                header[i].ChiaveGiustificativo == ChiaveGiustificativo &&
-                header[i].Ente == Ente &&
-                header[i].Esercizio == Esercizio &&
-                header[i].NumeroDecreto == NumeroDecreto &&
-                header[i].RegistratoBozza == RegistratoBozza &&
-                header[i].UfficioLiv1 == UfficioLiv1 &&
-                header[i].UfficioLiv2 == UfficioLiv2) {
+        // var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
+        // for (var i = 0; i < header.length; i++) {
+            if (data.Amministrazione == Amministrazione &&
+                data.AreaFinanziaria == AreaFinanziaria &&
+                data.ChiaveGiustificativo == ChiaveGiustificativo &&
+                data.Ente == Ente &&
+                data.Esercizio == Esercizio &&
+                data.NumeroDecreto == NumeroDecreto &&
+                data.RegistratoBozza == RegistratoBozza &&
+                data.UfficioLiv1 == UfficioLiv1 &&
+                data.UfficioLiv2 == UfficioLiv2) {
                 var oTempModel = this.getView().getModel("temp");
                 oTempModel.setProperty("/draft","x");
-                this.getOwnerComponent().getRouter().navTo("updateDecreto", {campo:header[i].Amministrazione, campo1:header[i].AreaFinanziaria, campo2: header[i].ChiaveGiustificativo, campo3:header[i].Ente, campo4:header[i].Esercizio, campo5:header[i].NumeroDecreto, campo6:header[i].RegistratoBozza, campo7:header[i].UfficioLiv1, campo8:header[i].UfficioLiv2 })
+                this.getOwnerComponent().getRouter().navTo("updateDecreto", {campo:data.Amministrazione, campo1:data.AreaFinanziaria, campo2: data.ChiaveGiustificativo, campo3:data.Ente, campo4:data.Esercizio, campo5:data.NumeroDecreto, campo6:data.RegistratoBozza, campo7:data.UfficioLiv1, campo8:data.UfficioLiv2 })
                 }
-            }     
+            //}     
             },
 
         

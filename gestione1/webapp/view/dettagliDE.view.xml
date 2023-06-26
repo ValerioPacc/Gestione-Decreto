@@ -100,7 +100,7 @@
         </f:content>
         <f:footer>
             <OverflowToolbar>
-                <Button text="Indietro" type="Emphasized" press="navToHome" />
+                <Button text="Indietro" type="Emphasized" press="onBackButton" />
                 <ToolbarSpacer />
                 <Button type="Emphasized" text="Registra IPE"  press="navToRegistraIPE" />
                 <Button type="Emphasized" id="rettificaDE" text="Rettifica Decreto"  press="onNavToupdateDecreto" />

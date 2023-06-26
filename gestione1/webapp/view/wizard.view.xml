@@ -71,7 +71,7 @@
                                     <l:content>
                                         <VBox>
                                             <Label text="{i18n>Eserc}" required="true" />
-                                            <ComboBox id="es_decreto"  selectedKey="{= ${IpeEntitySet>/Zbozza} === 'X' ? ${IpeEntitySet>/Zzanno} : ${temp>/SelectedDecree/Esercizio} }" enabled="true" items="{path: 'temp>/FiltroEsercizioSet', sorter: { path: 'Esercizio' }}">
+                                            <ComboBox id="es_decreto"  selectedKey="{= ${IpeEntitySet>/Zbozza} === 'X' ? ${IpeEntitySet>/Zzanno} : ${temp>/SelectedDecree/Esercizio} }" enabled="false" items="{path: 'temp>/FiltroEsercizioSet', sorter: { path: 'Esercizio' }}">
                                                 <core:Item id="es_decreto1" key="{temp>Esercizio}" text="{temp>Esercizio}" />
                                             </ComboBox>
                                             <layoutData>
@@ -81,7 +81,7 @@
                                       
                                         <VBox>
                                             <Label text="{i18n>amministrazione}" required="true" />
-                                            <Input value="{temp>/SelectedDecree/Amministrazione}" enabled="true" id="ammin1"/>
+                                            <Input value="{temp>/SelectedDecree/Amministrazione}" enabled="false" id="ammin1"/>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
@@ -108,7 +108,7 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Dstipula}" required="true" />
-                                            <DatePicker id="Dstipula" value="{IpeEntitySet>/Zzdatastipula}"  displayFormat="dd/MM/yyyy" enabled="true" app:fieldName="DataStipula" app:filterTableField="DataStipula" class="sapUiSmallMarginBottom" />
+                                            <DatePicker id="Dstipula" value="{IpeEntitySet>/Zzdatastipula}"  displayFormat="dd/MM/yyyy" enabled="false" app:fieldName="DataStipula" app:filterTableField="DataStipula" class="sapUiSmallMarginBottom" />
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>
@@ -216,9 +216,10 @@
                             singleContainerFullSize="false"
                         >
                             <VBox>
-                                <Label text="Beneficiario:" required="true" />
-                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" valueHelpRequest="handleBenValueHelp" app:FieldName="Ben" app:filterTableField="Ben" class="sapUiSmallMarginBottom" />
-
+                                <!-- <Label text="Beneficiario:" required="true" />
+                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" valueHelpRequest="handleBenValueHelp" app:FieldName="Ben" app:filterTableField="Ben" class="sapUiSmallMarginBottom" change="callBeneficiarioEntity"/> -->
+<Label text="Beneficiario:" required="true" />
+                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" value="{beneficiario>Lifnr}" class="sapUiSmallMarginBottom" change="callBeneficiarioEntity"/>
                                 <layoutData>
                                     <l:GridData span="L6 M3 S3" />
                                 </layoutData>
@@ -268,7 +269,7 @@
                             <VBox>
                                 <HBox>
                                     <Label text="Sottoposto a richiesta di Assenso Preventivo:" labelFor="Sottoposto a richiesta di Assenso Preventivo" />
-                                    <Switch  customTextOff="No" customTextOn="Si" change="" />
+                                    <Switch id="RicPre" customTextOff="No" customTextOn="Si" change="controlswitch2" />
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>

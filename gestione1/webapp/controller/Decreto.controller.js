@@ -187,7 +187,7 @@ sap.ui.define(
 
                             else {
                               that.navToHome();
-                              location.reload
+                              
 
                             }
 
@@ -197,7 +197,7 @@ sap.ui.define(
                       }
                       else {
                         that.navToHome();
-                        location.reload
+                       
                       }
                     }
                   })

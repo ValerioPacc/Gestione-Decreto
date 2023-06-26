@@ -88,6 +88,12 @@ sap.ui.define(
 
 
     },
+
+    onBackButton: function () {
+        window.history.go(-1);
+        //this.getOwnerComponent().getRouter().navTo("DettagliDE");
+        
+    },
       
       onModDIbozza: function (oEvent) {
         var that = this;
@@ -174,7 +180,7 @@ sap.ui.define(
                                             onClose: function (oAction) {
                                                 if (oAction === sap.m.MessageBox.Action.OK) {
                                                     that.getOwnerComponent().getRouter().navTo("View1");
-                                                    location.reload();
+                                                    
                                                 }
                                             }
                                         })

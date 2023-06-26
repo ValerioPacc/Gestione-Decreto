@@ -81,8 +81,9 @@ sap.ui.define(
         },
 
         onBackButton1: function () {
-          this.getOwnerComponent().getRouter().navTo("View1");
-          location.reload()
+          window.history.go(-1);
+          //this.getOwnerComponent().getRouter().navTo("DettagliDE");
+          
       },
       onBackButton2: function () {
         this.getOwnerComponent().getRouter().navTo("RegistraIPE");

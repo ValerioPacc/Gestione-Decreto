@@ -81,7 +81,7 @@
              </f:content>
             <f:footer>
                 <OverflowToolbar>
-                    <Button type="Emphasized" text="{i18n>Indietro}" press="navToHome" />
+                    <Button type="Emphasized" text="{i18n>Indietro}" press="onBackButton" />
                     <ToolbarSpacer/>
                     <Button id="update" type="Emphasized" visible="{= ${temp>/SelectedDecree/CodiceStato} === '01' ? true : false}" text="{i18n>SalvaBozza}" press="onModDIbozza"/>
                     <!-- <Button type="Emphasized" text="{i18n>SalvaBozza}" press="{= ${temp>/SelectedDecree/CodiceStato} === '01' ? 'onModDIbozza' : 'onRegDIbozza' }" />

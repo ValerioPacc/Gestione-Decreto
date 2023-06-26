@@ -409,12 +409,14 @@ sap.ui.define([
 
 			var that = this,
 			oModel = that.getOwnerComponent().getModel()
+			var lifnr = this.getView().byId("beneficiario1").getValue()
 			//var oTempModel = that.getOwnerComponent().getModel("temp");
 			//var lifnr = oTempModel.getProperty("/ContrattoSet").Lifnr;
 			//oTempModel = that.getOwnerComponent().getModel("temp"),
 			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
 			var path = oModel.createKey("/BeneficiarioEntitySet", {
-				Lifnr:'0010000499'
+				// Lifnr:'0010000499'
+				Lifnr: lifnr
 			})
 
 
@@ -423,7 +425,7 @@ sap.ui.define([
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
 					  oModelJson.setData(data.results);
-					   that.getView().getModel("temp").setProperty('/BeneficiarioEntitySet', data.results);
+					   that.getView().getModel("Beneficiario").setProperty('/beneficiario', data.results);
 					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					 },
 					  error: function(error){
@@ -502,35 +504,35 @@ sap.ui.define([
 		callContrattoEntity:function () {
 			var that = this
 			var oModel = that.getOwnerComponent().getModel()
-			// var oTempModel = this.getView().getModel("temp")
-			 //var oIpeEntitySet = this.getView().getModel("IpeEntitySet")
+			 var oTempModel = this.getView().getModel("temp")
+			 var oIpeEntitySet = this.getView().getModel("IpeEntitySet")
 			var oTempModel = that.getOwnerComponent().getModel("temp");
-			//var Zzammin = oTempModel.getProperty("/SelectedDecree").Amministrazione;
-		    // var Zzanno = oIpeEntitySet.Esercizio
+			var Zzammin = oTempModel.getProperty("/SelectedDecree").Amministrazione;
+		    var Zzanno = oTempModel.getProperty("/SelectedDecree").Esercizio
 			// var oModel = that.getOwnerComponent().getModel()
 		    // var oTempModel = that.getOwnerComponent().getModel("NewIpe")
 		    // this.getOwnerComponent().getModel("IpeEntitySet");
 
 
-			// var aFilters = [];
+			var aFilters = [];
 
-			// aFilters.push(
-			//   new Filter({path: "Zzanno", operator: FilterOperator.EQ, value1: Zzanno }),
-			//   new Filter({path: "Zzamministrazione", operator: FilterOperator.EQ, value1: Zzammin })
+			aFilters.push(
+			  new Filter({path: "Zzanno", operator: FilterOperator.EQ, value1: Zzanno }),
+			  new Filter({path: "Zzamministrazione", operator: FilterOperator.EQ, value1: Zzammin })
 
-			// )
-
-
-
-			var path = oModel.createKey('/ContrattoSet', {
-				Ebeln: this.getView().byId("ValueHelpContratto").getValue()
-			})
-            var Ebeln=this.getView().byId("ValueHelpContratto").getValue()
+			)
 
 
 
-			oModel.read(path, {
-				filters:[],
+			// var path = oModel.createKey('/ContrattoSet', {
+			// 	Ebeln: this.getView().byId("ValueHelpContratto").getValue()
+			// })
+            // var Ebeln=this.getView().byId("ValueHelpContratto").getValue()
+
+
+
+			oModel.read('/ContrattoSet', {
+				filters:aFilters,
 				urlParameters: "",
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
