@@ -28,8 +28,34 @@ sap.ui.define(
         formatter: DateFormatter,
 
         onInit() {
+          var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+          oRouter.getRoute("registraIPE").attachPatternMatched(this._onObjectMatched, this);
+          // var view= this.getView();
+          // var dataDecr = this.getOwnerComponent().getModel("temp").getData().SelectedDecree.DataDecreto;
+          //       var dataNuova = new Date(dataDecr),
+          //           mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+          //           day = ("0" + dataNuova.getDate()).slice(-2);
+          //       var nData = [dataNuova.getFullYear(), mnth, day].join("-");
+          //       var nDate = nData.split("-").reverse().join(".");
+          //       this.getView().byId("reData").setText(nDate);
+                
+        },
+        _onObjectMatched: function (oEvent) {
 
-          var view= this.getView();
+          var self = this;
+          var oDataModel = self.getOwnerComponent().getModel();
+          var path = oDataModel.createKey("/DecretoImpegnoSet", {
+              Amministrazione: oEvent.getParameters().arguments.campo,
+              AreaFinanziaria: oEvent.getParameters().arguments.campo1,
+              ChiaveGiustificativo: oEvent.getParameters().arguments.campo2,
+              Ente: oEvent.getParameters().arguments.campo3,
+              Esercizio: oEvent.getParameters().arguments.campo4,
+              NumeroDecreto: oEvent.getParameters().arguments.campo5,
+              RegistratoBozza: oEvent.getParameters().arguments.campo6,
+              UfficioLiv1: oEvent.getParameters().arguments.campo7,
+              UfficioLiv2: oEvent.getParameters().arguments.campo8,
+          });
+
           var dataDecr = this.getOwnerComponent().getModel("temp").getData().SelectedDecree.DataDecreto;
                 var dataNuova = new Date(dataDecr),
                     mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
@@ -37,9 +63,26 @@ sap.ui.define(
                 var nData = [dataNuova.getFullYear(), mnth, day].join("-");
                 var nDate = nData.split("-").reverse().join(".");
                 this.getView().byId("reData").setText(nDate);
-                
-        },
 
+          
+          //oDataModel.metadataLoaded().then( function() { 
+             oDataModel.read(path, {
+               success: function(data, oResponse){
+                   self.getView().getModel("temp").setProperty('/SelectedDecree', data); 
+                   
+                   
+                      //  self.onDeleteRow(data);
+                      //  self.onNavToupdateDecreto(data)
+                  },
+                   error: function(error){
+                  var e = error;
+              }
+          });
+      //});
+
+          
+          
+      },
         // onSuccessMessageDialogPress: function () {
         //   MessageBox.confirm("Vuoi registrare il Decreto in provvisorio?", {
         //     actions: ["OK", "Annulla"],

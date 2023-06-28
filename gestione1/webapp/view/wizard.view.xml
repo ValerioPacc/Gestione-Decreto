@@ -22,9 +22,9 @@
             <f:header>
                 <f:DynamicPageHeader id="h1" pinnable="false">
                     <l:HorizontalLayout allowWrapping="true">
-                        <l:VerticalLayout class="sapUiMediumMarginEnd" visible="{/header1Visible}">
-                            <HBox id="idHBox1">
-                                <VBox id="idIpe" class="sapUiSmallMargin" width="50%">
+                        <l:VerticalLayout class="sapUiMediumMarginEnd" visible="false">
+                            <HBox id="idHBox1" visible="false">
+                                <VBox id="idIpe" class="sapUiSmallMargin" width="50%" visible="false">
                                     <Label id="IpeH" text="{i18n>Ipe}" design="Bold" />
                                     <Text id="Ipe1H" text="{}" />
                                 </VBox>
@@ -94,11 +94,12 @@
                                                 showValueHelp="true"
                                                 enabled="{/FilterSwitch1}"
                                                 valueHelpOnly="false"
-                                                value="4500001128"
+                                                value="{IpeEntitySet>/Ebeln}"
                                                 valueHelpRequest="handleContractValueHelp"
                                                 app:FieldName="ValueHelpContratto"
                                                 app:filterTableField="ValueHelpContratto"
                                                 class="sapUiSmallMarginBottom"
+                                                change="callContrattoEntity"
                                             />
                                             <!-- 4500001128 -->
                                             <!--core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/-->
@@ -218,8 +219,8 @@
                             <VBox>
                                 <!-- <Label text="Beneficiario:" required="true" />
                                 <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" valueHelpRequest="handleBenValueHelp" app:FieldName="Ben" app:filterTableField="Ben" class="sapUiSmallMarginBottom" change="callBeneficiarioEntity"/> -->
-<Label text="Beneficiario:" required="true" />
-                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" value="{beneficiario>Lifnr}" class="sapUiSmallMarginBottom" change="callBeneficiarioEntity"/>
+                                <Label text="Beneficiario:" required="true" />
+                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" value="{beneficiario>/Lifnr}" class="sapUiSmallMarginBottom" change="callBeneficiarioEntity"/>
                                 <layoutData>
                                     <l:GridData span="L6 M3 S3" />
                                 </layoutData>

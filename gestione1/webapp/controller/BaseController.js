@@ -208,10 +208,18 @@ sap.ui.define([
 						// results[0].Zzdatastipula = nData.split("-").reverse().join(".");
 
 						that.getView().getModel("IpeEntitySet").setProperty('/', results[0]);
+						
 					}else{
 						that.getView().getModel("IpeEntitySet").setProperty('/',[]);
 						that.getView().getModel("temp").setProperty('/NewIPE', "X");
 					}
+					//that.controlSwitch(results);
+					// if (results.ZFlContOrd == "X") {
+					// 	that.getView().byId("switch").setState(true) 
+						
+					// }else{
+					// 	that.getView().byId("switch").setState(false) 
+					// }
 
 				},
 				error: function (error) {

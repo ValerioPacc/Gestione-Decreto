@@ -10,7 +10,7 @@
     xmlns="sap.m">
     
                    
-       <form:SimpleForm id="Reiscrizione" editable="true" width="100%" visible="{/ReiscrSwitch}" title="Estremi Reiscrizione">
+       <form:SimpleForm id="Reiscrizione" editable="true" width="100%" visible="false" title="Estremi Reiscrizione">
                             <VBox>
                                 <Title text="" />
                                 <HBox>

@@ -180,7 +180,8 @@ sap.ui.define(
                               var oTempModel = that.getView().getModel("temp");
                               oTempModel.setProperty("/draft", "x");
                               oTempModel.setProperty("/SelectedDecree", result)
-                              that.getOwnerComponent().getRouter().navTo("registraIPE")
+                              var Decr = result;
+                              that.getOwnerComponent().getRouter().navTo("registraIPE" , { campo: Decr.Amministrazione, campo1: Decr.AreaFinanziaria, campo2: Decr.ChiaveGiustificativo, campo3: Decr.Ente, campo4: Decr.Esercizio, campo5: Decr.NumeroDecreto, campo6: Decr.RegistratoBozza, campo7: Decr.UfficioLiv1, campo8: Decr.UfficioLiv2 });
 
 
                             }

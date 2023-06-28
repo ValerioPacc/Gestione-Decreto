@@ -20,13 +20,16 @@ sap.ui.define(
     "use strict";
     var iTimeoutId;
     var ValueState = CoreLibrary.ValueState,
-      oData = {
+
+      oData = new JSONModel  ({
         FilterSwitch1: false,
         FilterSwitch2: true,
         header1Visible: true,
         HeaderNIWstep3Visible: true,
         ReiscrSwitch: false
-      };
+});
+
+
 
     return BaseController.extend("gestione1.controller.wizard", {
 
@@ -107,14 +110,15 @@ sap.ui.define(
         var oProprietà = this.getView().getModel();
         var stato = this.getView().byId("IndReiscrizione").getState();
         if (stato) {
-          oProprietà.setProperty("/ReiscrSwitch", true);
-
+          //oProprietà.setProperty("/ReiscrSwitch", true);
+          this.getView().byId("Reiscrizione").setVisible(true)
 
 
 
         }
         else {
-          oProprietà.setProperty("/ReiscrSwitch", false);
+          //oProprietà.setProperty("/ReiscrSwitch");
+          this.getView().byId("Reiscrizione").setVisible(false)
         }
       },
       onBackButton: function () {
@@ -138,7 +142,7 @@ sap.ui.define(
         }
         this._iSelectedStepIndex--
         this._oSelectedStep = oNextStep;
-        this.controlHeader();
+        //this.controlHeader();
 
         //this.controlPreNI();
         //this.controlHeader()
@@ -211,7 +215,7 @@ sap.ui.define(
         }
         this._iSelectedStepIndex++;
         this._oSelectedStep = oNextStep;
-        this.controlHeader();
+        //this.controlHeader();
         if (this.getView().byId("ValueHelpContratto").getValue() != "") {
           var ben = this.getView().byId("beneficiario").getValue()
           this.getView().byId("beneficiario1").setValue(ben)
@@ -528,7 +532,7 @@ sap.ui.define(
       },
 
 
-      controlSwitch: function () {
+      controlSwitch: function (results) {
         var oProprietà = this.getView().getModel();
         var stato = this.getView().byId("switch").getState();
         if (stato) {
@@ -545,7 +549,7 @@ sap.ui.define(
           this.getView().byId("descContratto").setValue("");
           this.getView().byId("beneficiario").setValue("");
           this.getView().byId("cig").setValue("");
-          this.getView().byId("cup").setValue("");
+          //this.getView().byId("cup").setValue("");
           this.getView().byId("importoCont").setValue("");
           this.getView().byId("ValueHelpContratto").setValue("");
           this.getView().byId("numConAtt").setValue("");
@@ -640,9 +644,7 @@ controlswitch2: function () {
           oProprietà.setProperty("/header1Visible", false)
 
         }
-        else if (this._iSelectedStepIndex == 0) {
-          oProprietà.setProperty("/header1Visible", false)
-        }
+       
         else if (this._iSelectedStepIndex == 1) {
           oProprietà.setProperty("/header1Visible", false)
         }
@@ -792,12 +794,13 @@ controlswitch2: function () {
                 ZidIpe: '',
                 Zufficioliv1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
                 Zufficioliv2: oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
-                Zzdatastipula: self.getView().byId("Dstipula").getValue(),//oIpeEntitySet.getProperty("/Zzdatastipula"), //new Date (oTempModel.getProperty("/Step1/").data),
+                ZFlContOrd: self.getView().byId("switch").getState()?'X' : '',
+                Zzdatastipula: self.getView().byId("Dstipula").getValue()!== ""?self.getView().byId("Dstipula").getValue():null,//oIpeEntitySet.getProperty("/Zzdatastipula"), //new Date (oTempModel.getProperty("/Step1/").data),
                 Ebeln: self.getView().byId("ValueHelpContratto").getValue(),//oTempModel.getProperty("/Step1/").id,
                 Lifnr: self.getView().byId("beneficiario1").getValue(),//oIpeEntitySet.getProperty("/Lifnr"),  //oTempModel.getProperty("/Step1/").id_ben,
                 Zzcig: self.getView().byId("cig").getValue(),  //oTempModel.getProperty("/Step1/").cig,
                 Zzcup: self.getView().byId("cup").getValue(),//oIpeEntitySet.getProperty("/Zzcup"),
-                Ktwrt: self.getView().byId("importoCont").getValue()!==""?self.getView().byId("importoCont").getValue():0,//oIpeEntitySet.getProperty("/Ktwrt"), //oTempModel.getProperty("/Step1/").cup,
+                Ktwrt: self.getView().byId("importoCont").getValue()!==""?self.getView().byId("importoCont").getValue():"0",//oIpeEntitySet.getProperty("/Ktwrt"), //oTempModel.getProperty("/Step1/").cup,
                 NameFirst: self.getView().byId("nome").getValue(),//oIpeEntitySet.getProperty("/NameFirst"), //oTempModel.getProperty("/Step2/").nome,
                 NameLast: self.getView().byId("cognome").getValue(),//oIpeEntitySet.getProperty("/NameLast"), //oTempModel.getProperty("/Step2/").cognome,
                 ZzragSoc: self.getView().byId("rSociale").getValue(),//oIpeEntitySet.getProperty("/ZzragSoc"), //oTempModel.getProperty("/Step2/").Rsociale,
@@ -811,12 +814,12 @@ controlswitch2: function () {
                 Ktext: self.getView().byId("oggSpesa").getValue(),
                 Znaturaatto: self.getView().byId("naturAtto").getValue().split(":")[0],
                 Znumcontratt: self.getView().byId("numConAtt").getValue(),
-                Zdataatto: self.getView().byId("dataAtt").getValue(),
+                Zdataatto: self.getView().byId("dataAtt").getValue()!== ""?self.getView().byId("dataAtt").getValue():null,
                 Bsart: self.getView().byId("idTypeCon").getValue(),
                 Zzgara: self.getView().byId("formAgg").getValue(),
-                Zop:  self.getView().byId("CB1").getSelected(),
-                Zoa: self.getView().byId("CB2").getSelected(),
-                Zni: self.getView().byId("CB3").getSelected(),
+                Zop:  self.getView().byId("CB1").getSelected()?'X' : '',
+                Zoa: self.getView().byId("CB2").getSelected()?'X' : '',
+                Zni: self.getView().byId("CB3").getSelected()?'X' : '',
                 Zbozza: "X"
               };
               // var stato = self.getView().byId("switch").getState();
@@ -895,9 +898,13 @@ controlswitch2: function () {
         // self.getView().getModel("IpeEntitySet").setProperty('/Stcd2', "");
 
         var entry = self.getView().getModel("IpeEntitySet").getProperty('/');
-        var date = new Date(entry.Zzdatastipula)
+        var importo = self.getView().byId("importoCont").getValue()!==""?self.getView().byId("importoCont").getValue():"0"
+        entry.Ktwrt=importo;
+        var date = self.getView().byId("Dstipula").getValue()!== ""?self.getView().byId("Dstipula").getValue():null
+        entry.Zzdatastipula = new Date(date)
 
-        entry.Zzdatastipula = date
+        var data = self.getView().byId("dataAtt").getValue()!== ""?self.getView().byId("dataAtt").getValue():null
+        entry.Zdataatto=new Date (data)
 
         var path = oDataModel.createKey("/IpeEntitySet", {
           Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
