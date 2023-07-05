@@ -5,10 +5,10 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("gestione1.controller.documentazioneAgg", {
+      return BaseController.extend("gestione1.controller.Osservazioni", {
         onInit() {
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-          oRouter.getRoute("documentazioneAgg").attachPatternMatched(this._onObjectMatched, this);
+          oRouter.getRoute("Osservazioni").attachPatternMatched(this._onObjectMatched, this);
 
 
         },
@@ -160,18 +160,10 @@ sap.ui.define(
         //}
 
     },
-    navToRegDocAgg: function (oEvent) {
-      this.getOwnerComponent().getRouter().navTo("docAgg");
-  },
 
-  navToRiscontri: function (oEvent) {
-    this.getOwnerComponent().getRouter().navTo("Riscontri");
-},
-
-navToOsservazioni: function (oEvent) {
-  this.getOwnerComponent().getRouter().navTo("Osservazioni");
-},
-
+    onBackButton: function (oEvent) {
+        window.history.go(-1);
+    },
       });
     }
   );

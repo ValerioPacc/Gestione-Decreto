@@ -44,6 +44,20 @@ sap.ui.define([
             };
 			return new JSONModel(oModel);
 		},
+
+        createClausModel: function () {
+            var oModel = {
+                ImpClausola:[]
+            };
+			return new JSONModel(oModel);
+		},
+        createPrevModel: function () {
+            var oModel = {
+                ListPrev:[]
+            };
+			return new JSONModel(oModel);
+		},
+
         createcomboJSONModel: function() {
 
              var sRootPath = jQuery.sap.getModulePath("gestione1");

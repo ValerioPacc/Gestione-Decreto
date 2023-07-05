@@ -1,0 +1,254 @@
+<mvc:View xmlns:f="sap.f"
+	height="100%"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:layout="sap.ui.layout"
+	xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+     controllerName="gestione1.controller.Riscontri"
+     >
+    <f:DynamicPage id="dynamicPageId" showFooter="true">
+    <f:title>
+    <f:DynamicPageTitle>
+                
+    <f:heading>
+             <Title text="Registrazione Riscontri"/>   
+              </f:heading>
+              </f:DynamicPageTitle>
+            </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false" >
+             <!-- <layout:VerticalLayout class="sapUiMediumMargin">
+                        
+<Title text="Registrazione Osservazioni"/>
+              
+</layout:VerticalLayout> -->
+                <layout:VerticalLayout class="sapUiMediumMarginTop">
+                        <Title text="Dati Decreto" />
+                        <layout:HorizontalLayout >
+                        <Label text="Esercizio Decreto:" class="sapUiSmallMarginEnd" />
+                        <Text  id="esercizio" class="sapUiMediumMarginEnd"/>
+                    <Label text="Amminstrazione:" class="sapUiSmallMarginEnd" />
+                    <Text  id="idAmm" class="sapUiMediumMarginEnd"/>
+                     <Label text="N.Decreto:" class="sapUiSmallMarginEnd"/>
+                        <Text  id="Ndecr" class="sapUiMediumMarginEnd"/>
+                    <Label text="N.IPE:" class="sapUiSmallMarginEnd" />
+                    <Text  id="Nipe" class="sapUiMediumMarginEnd"/>
+                     <Label text="Data Decreto:" class="sapUiSmallMarginEnd" />
+                        <Text  id="dataDecr" class="sapUiMediumMarginEnd"/>
+                    <Label text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
+                    <Text  id="NprotAmm" class="sapUiMediumMarginEnd"/>
+               </layout:HorizontalLayout >
+               <layout:HorizontalLayout   class="sapUiMediumMarginTop">
+                        <Label text="Stato Decreto:" class="sapUiSmallMarginEnd" />
+                        <Text  id="StatoDecreto" class="sapUiMediumMarginEnd"/>
+                    <Label text="Tipologia Impegno:" class="sapUiSmallMarginEnd" />
+                    <Text  id="TipologiaImpegno" class="sapUiMediumMarginEnd"/>
+                     <Label text="Contratto:" class="sapUiSmallMarginEnd"/>
+                        <Text  id="Cordine" class="sapUiMediumMarginEnd"/>
+                    <Label text="Controllo preventivo Corte dei conti:" class="sapUiSmallMarginEnd" />
+                    <Text  id="CcConti" class="sapUiMediumMarginEnd"/>
+               </layout:HorizontalLayout >
+                <layout:HorizontalLayout   class="sapUiMediumMarginTop">
+                <Label text="Attesa documentazione aggiuntiva:" class="sapUiSmallMarginEnd"  />
+                    <Text  id="docAgg" class="sapUiMediumMarginEnd"/>  
+               </layout:HorizontalLayout >
+                </layout:VerticalLayout>
+                
+            <layout:VerticalLayout class="sapUiMediumMarginTop">
+                        <Title text="Dati Amminastrazione" />
+                        <layout:HorizontalLayout >
+                        <Label text="Dirigente/Direttore Firmatario:" class="sapUiSmallMarginEnd" />
+                        <Text  id="DDFirmatario" class="sapUiMediumMarginEnd"/>
+                    <Label text="Data Firma:" class="sapUiSmallMarginEnd" />
+                    <Text  id="dataFirma" class="sapUiMediumMarginEnd"/>
+                     <Label text="Ufficio Amministrazione:" class="sapUiSmallMarginEnd"/>
+                        <Text  id="UffAmm" class="sapUiMediumMarginEnd"/>
+               </layout:HorizontalLayout >
+                </layout:VerticalLayout>
+               
+            </f:DynamicPageHeader>
+        </f:header>
+        
+        <f:content>
+       <VBox class="sapUiSmallMargin">
+        <form:Form id="FormChange480_12120"
+            editable="true">
+            <form:title>
+                
+            </form:title>
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="3"
+                    labelSpanL="3"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="3"
+                    columnsM="1"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                <form:FormContainer title="">
+                    <form:formElements>
+                        <form:FormElement label="Nome">
+                            <form:fields>
+                                <Input id="nome"  showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}" required="true">
+                                    <core:Item key="{}" text="{}"/>
+                                </Input>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+                <form:FormContainer title="">
+                    <form:formElements>
+                        <form:FormElement label="Cognome">
+                            <form:fields>
+                                <Input showSuggestion="true" id="cognomer" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}" required="true" >
+                                    <core:Item key="{}" text="{}"/>
+                                </Input>
+                            </form:fields>
+                        </form:FormElement>
+                        
+                    </form:formElements>
+                    
+                </form:FormContainer>
+                <form:FormContainer title="">
+                    <form:formElements>
+                        <form:FormElement label="Data" >
+                            <form:fields>
+                                <DatePicker id="data" displayFormat="dd/MM/yyyy" required="true"/>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+                
+            </form:formContainers>
+        </form:Form>
+        <form:Form id="FormChange480_12120-2"
+            editable="true">
+            <form:layout>
+                <form:ResponsiveGridLayout
+                    labelSpanXL="1"
+                    labelSpanL="1"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false" />
+            </form:layout>
+            <form:formContainers>
+                <form:FormContainer title="">
+                    <form:formElements>
+                        <form:FormElement label="Motivazione" >
+                            <form:fields>
+                                 <TextArea id="dRichiesta" required="true">
+                                 
+                                 </TextArea>
+                            </form:fields>
+                        </form:FormElement>
+                    </form:formElements>
+                </form:FormContainer>
+            </form:formContainers>
+        </form:Form>
+    </VBox>
+    <!-- <form:Form editable="false" >
+         <form:layout>
+            <form:ColumnLayout columnsM="2" columnsL="3" columnsXL="3"/>
+         </form:layout>
+         <form:formContainers>
+            <form:FormContainer expandable="true" expanded="true">
+               <form:FormElement >
+                  <form:label>
+                     <Label text="Nome" />
+                  </form:label>
+                  <form:fields>
+                     <Input id="nome"  showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
+                      <core:Item key="{}" text="{}"/>
+                      </Input>
+                  </form:fields>
+               </form:FormElement>
+
+              
+
+                 
+
+               <form:FormElement>
+                        <form:label>
+                            <Label text="Cognome" />
+                        </form:label>
+                        <form:fields>
+                         <Input showSuggestion="true" id="cognome" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}" >
+                           <core:Item key="{}" text="{}"/>
+                         </Input>
+                        </form:fields>
+                </form:FormElement>
+
+               
+               
+               
+
+                
+
+             
+
+                <form:FormElement>
+                        <form:label>
+                            <Label text="Data" />
+                        </form:label>
+                        <form:fields>
+                        <DatePicker id="data" displayFormat="dd/MM/yyyy"  />
+                        </form:fields>
+                </form:FormElement>
+
+              
+              
+
+     
+
+                </form:FormContainer>  
+<form:FormContainer>  
+ <form:FormElement>
+
+                        <form:label>
+                            <Label text="Documentazione Richiesta" />
+                        </form:label>
+                        <form:fields>
+                         <TextArea id="dRichiesta" >
+                         </TextArea>
+                        </form:fields>
+                
+                </form:FormElement>
+
+                </form:FormContainer>  
+         </form:formContainers>
+      </form:Form> -->
+
+      
+      
+</f:content>
+  
+
+  
+     
+        <f:footer>
+            <OverflowToolbar>
+                <Button text="Indietro" type="Emphasized" press="onBackButton" />
+                <ToolbarSpacer />
+                <Button type="Emphasized"  id="regRisc" text="Registra Riscontro"   />
+                
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

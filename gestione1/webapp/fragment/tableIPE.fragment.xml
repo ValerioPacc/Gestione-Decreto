@@ -14,7 +14,7 @@
 >
     <ScrollContainer>
         <content>
-            <Table class="sapUiSizeCompact" id="tableIPE" items="{DecretoImpegno>/}" includeItemInSelection="true" mode="MultiSelect" headerText="Lista Ipe" itemPress="onRowSelectionChange">
+            <Table class="sapUiSizeCompact" id="tableIPE" items="{temp>/SelectedDecree}" includeItemInSelection="true" mode="MultiSelect" headerText="Lista Ipe" itemPress="onRowSelectionChange">
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>
@@ -74,21 +74,21 @@
                     </Column>
                 </columns>
                 <ColumnListItem>
-                    <Text text="{DecretoImpegno>EsercizioDecreto}" />
-                    <Text text="{DecretoImpegno>Amminastrazione}" />
-                    <Text text="{DecretoImpegno>Esercizio}" />
-                    <Text text="{DecretoImpegno>PosizioneFinanziaria}" />
-                    <Text text="{DecretoImpegno>NumeroDecreto}" />
-                    <Text text="{path:'DecretoImpegno>DataDecreto', formatter:'.formatter.convert'}" />
-                    <Text text="{DecretoImpegno>Ragioneria}" />
-                    <Text text="{DecretoImpegno>TipologiaImpegno}" />
-                    <Text text="{DecretoImpegno>CodiceStato}" />
-                    <Text text="{DecretoImpegno>NumeroIpe}" />
-                    <Text text="{DecretoImpegno>TipoIpe}" />
-                    <Text text="{DecretoImpegno>PosizioneFinanziaria}" />
-                    <Text text="{DecretoImpegno>StrutturaAmmResp}" />
-                    <Text text="{DecretoImpegno>Beneficiario}" />
-                    <Text text="{DecretoImpegno>TotaleImpegnato}" />
+                    <Text text="{temp/>SelectedDecree>EsercizioDecreto}" />
+                    <Text text="{SelectedDecree>Amminastrazione}" />
+                    <Text text="{SelectedDecree>Esercizio}" />
+                    <Text text="{SelectedDecree>PosizioneFinanziaria}" />
+                    <Text text="{SelectedDecree>NumeroDecreto}" />
+                    <Text text="{path:'SelectedDecree>DataDecreto', formatter:'.formatter.convert'}" />
+                    <Text text="{SelectedDecree>Ragioneria}" />
+                    <Text text="{temp/>SelectedDecree>TipologiaImpegno}" />
+                    <Text text="{SelectedDecree>CodiceStato}" />
+                    <Text text="{SelectedDecree>NumeroIpe}" />
+                    <Text text="{SelectedDecree>TipoIpe}" />
+                    <Text text="{SelectedDecree>PosizioneFinanziaria}" />
+                    <Text text="{SelectedDecree>StrutturaAmmResp}" />
+                    <Text text="{SelectedDecree>Beneficiario}" />
+                    <Text text="{SelectedDecree>TotaleImpegnato}" />
                 </ColumnListItem>
             </Table>
         </content>

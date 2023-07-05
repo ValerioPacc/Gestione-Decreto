@@ -42,6 +42,7 @@ sap.ui.define(
         this.callContrattoEntity()
         this.callPniEntity()
         this.callIndReiscrizioneEntity()
+        
         // this.callAuthEntity()
         // this.callPrevisioniEntity()
 
@@ -238,6 +239,7 @@ sap.ui.define(
 
           this.getView().byId("PsFin").setText(Pf)
           this.getView().byId("strAmm").setText(StrAmm)
+          this.callImpClausolaEntity();
 
         }
         //  if (this._iSelectedStepIndex == 5) {
@@ -366,7 +368,9 @@ sap.ui.define(
         var stato = this.getView().byId("switch").getState();
 
         if (stato == true) {
-        
+          if (nContr != "") {
+            
+          
           var date = new Date(oTempModel.getProperty("/ContrattoSet").Zzdatastipula),
             mnth = ("0" + (date.getMonth() + 1)).slice(-2),
             day = ("0" + date.getDate()).slice(-2);
@@ -376,7 +380,7 @@ sap.ui.define(
 
           this.getView().byId("Dstipula").setValue(nDate);
           this.getView().byId("cig").setValue(data.Zzcig);
-          this.getView().byId("beneficiario").setValue(data.Lifnr);
+          this.getView().byId("beneficiario1").setValue(data.Lifnr);
           this.getView().byId("importoCont").setValue(data.Ktwrt);
           this.getView().byId("numConAtt").setValue(data.Ebeln);
           this.getView().byId("dataAtt").setValue(nDate);
@@ -384,8 +388,34 @@ sap.ui.define(
           this.getView().byId("formAgg").setValue(data.Zzgara);
 
           //valoriNuovi.push(KOSTL.Kostl)
-        
+        }
       }
+      else{
+
+      }
+      },
+
+      getBeneficiario : function (lifnr) {
+        var oTempModel = this.getView().getModel("temp");
+        //var stato = this.getView().byId("switch").getState();
+        var beneficiario= lifnr.Lifnr
+        
+        if (beneficiario != "") {
+          
+        
+
+          this.getView().byId("cFiscale").setValue(lifnr.Stcd1);
+          this.getView().byId("cFiscaleE").setValue(lifnr.Taxnumxl);
+          // this.getView().byId("beneficiario").setValue(data.Lifnr);
+          // this.getView().byId("importoCont").setValue(data.Ktwrt);
+          // this.getView().byId("numConAtt").setValue(data.Ebeln);
+          // this.getView().byId("dataAtt").setValue(nDate);
+          // this.getView().byId("idTypeCon").setValue(data.Bsart);
+          // this.getView().byId("formAgg").setValue(data.Zzgara);
+
+          //valoriNuovi.push(KOSTL.Kostl)
+        }
+      
       },
 
       getPosStr: function (risultati) {
@@ -534,12 +564,16 @@ sap.ui.define(
 
       controlSwitch: function (results) {
         var oProprietà = this.getView().getModel();
+        var oTempModel = this.getOwnerComponent().getModel("temp");
         var stato = this.getView().byId("switch").getState();
+        var esercizio=oTempModel.getProperty("/SelectedDecree").Esercizio
         if (stato) {
           //var oTempModel = this.getOwnerComponent().getModel("temp")
           //var nContr = oTempModel.getProperty("/ContrattoSet").Ebeln
           oProprietà.setProperty("/FilterSwitch1", true);
           oProprietà.setProperty("/FilterSwitch2", true);
+          this.getView().byId("cup").setValue("");
+          //this.getView().byId("es_decreto").setValue(esercizio);
           //this.getOtherData(nContr)
         }
         else {
@@ -1017,13 +1051,16 @@ controlswitch2: function () {
             oInput.addCustomData(oCustomData);
 
             oInput.attachChange(function (oEvent) {
+              var that = this
+              
               var sNewValue = oEvent.getParameter("value");
               var Obj = oEvent.getSource().getBindingContext().getObject()
               
               //Obj.Wtfree2023 = 
               // oEvent.getSource().getBindingContext().getObject().Zcassa2023 
                 //var Anno = oEvent.getSource().data("app:FieldData");
-                oEvent.getSource().getModel().setProperty(oEvent.getSource().getBindingContext().getPath() , Obj )
+                oEvent.getSource().getModel().setProperty(oEvent.getSource().getBindingContext().getPath() , Obj );
+                
                 console.log("Nuovo valore: " + sNewValue);
             });
 
@@ -1049,6 +1086,7 @@ controlswitch2: function () {
 
       onChangeZImpIpeCl: function (oEvent) {
         var sNewValue = oEvent.getParameter("value");
+        
         console.log("Nuovo valore: " + sNewValue);
       },
 
@@ -1078,7 +1116,7 @@ controlswitch2: function () {
         var oYears = parseInt(oTempModel.getData().SelectedDecree.Esercizio),
           oTable = sap.ui.getCore().byId("preTable"),
           colsData = this.getColsPrevisioni(oYears),
-          rows = this.getRowsData(Mese, colsData, oYears),
+          rows = this.getPreRowsData(Mese, colsData, oYears),
           model = new sap.ui.model.json.JSONModel({});
 
 
@@ -1152,6 +1190,69 @@ controlswitch2: function () {
       onChangeZImpIpeCl: function (oEvent) {
         var sNewValue = oEvent.getParameter("value");
         console.log("Nuovo valore: " + sNewValue);
+      },
+
+
+      onCreateClausola: function(oEvent){
+        var that=this;
+        oDataModel = that.getOwnerComponent().getModel();
+
+        var deepEntity = {
+          ImportiClausolaSet: null,
+          PrevisioneImpegnoSet: [],
+          Operation: 'Creazione Clausola'
+        } 
+        var oEsigModel = that.getOwnerComponent().getModel("Esigibilita");
+        var oTempModel= that.getOwnerComponent().getModel("temp");
+        var Auth = oEsigModel.getData().List[0].Geber.split(":")[1]
+      var anno = 2023
+
+
+      deepEntity.PrevisioniImpegnoSet.push({
+        ZNumCla:'',
+        Anno: anno,
+        Gennaio:'',
+        Febbraio:'',
+        Marzo:'',
+        Aprile:'',
+        Maggio:'',
+        Giugno:'',
+        Luglio:'',
+        Agosto:'',
+        Settembre:'',
+        Ottobre:'',
+        Novembre:'',
+        Dicembre:'',
+        Totale:''
+
+    });
+
+      deepEntity.ImportiClausolaSet = {
+         Codice:Auth,
+         Gjahr: anno,
+         Wtfree:oTempModel.getData().EsigibilitàSet.Wtfree,
+         Cassa:oTempModel.getData().EsigibilitàSet.Zcassa,
+         ImportoClausola: ''
+
+
+      };
+
+      oDataModel.create('/DeepEsigibiltaSet',deepEntity, {
+				urlParameters: "",
+				success: function(data, oResponse){
+					var oModelJson = new sap.ui.model.json.JSONModel();
+					  oModelJson.setData(data);
+					  //  that.getView().getModel("temp").setProperty('/ContrattoSet', data);
+					  //  that.getContratto(data)
+					  //that.callAnnoAmm(data.results);
+					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+					 },
+					  error: function(error){
+				var e = error;}
+			 });
+
+		
+
       },
       //     onSelctionAuth: function() {
       //     var rows= sap.ui.getCore().byId("PniAuth").getSelectedItems()

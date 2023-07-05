@@ -17,6 +17,18 @@
         <f:header>
             <f:DynamicPageHeader pinnable="false" >
 
+               <layout:VerticalLayout class="sapUiMediumMarginEnd">
+                        <Title text="Dati Amminastrazione" />
+                        <layout:HorizontalLayout >
+                        <Label text="Dirigente/Direttore Firmatario:" class="sapUiSmallMarginEnd" />
+                        <Text  id="DDFirmatario" class="sapUiMediumMarginEnd"/>
+                    <Label text="Data Firma:" class="sapUiSmallMarginEnd" />
+                    <Text  id="dataFirma" class="sapUiMediumMarginEnd"/>
+                     <Label text="Ufficio Amministrazione:" class="sapUiSmallMarginEnd"/>
+                        <Text  id="UffAmm" class="sapUiMediumMarginEnd"/>
+               </layout:HorizontalLayout >
+                </layout:VerticalLayout>
+
                 <layout:VerticalLayout class="sapUiLargeMarginTop">
                         <Title text="Dati Decreto" />
                         <layout:HorizontalLayout >
@@ -32,28 +44,18 @@
                         <Text  id="dataDecr" class="sapUiMediumMarginEnd"/>
                     <Label text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
                     <Text  id="NprotAmm" class="sapUiMediumMarginEnd"/>
-                  
                </layout:HorizontalLayout >
                <layout:HorizontalLayout   class="sapUiMediumMarginTop">
-                 <Label text="Data Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
-                    <Text  id="DprotAmm" class="sapUiMediumMarginEnd"/>
-                      
                         <Label text="Stato Decreto:" class="sapUiSmallMarginEnd" />
                         <Text  id="StatoDecreto" class="sapUiMediumMarginEnd"/>
-
-                  <Label text="Tipologia Impegno:" class="sapUiSmallMarginEnd" />
+                    <Label text="Tipologia Impegno:" class="sapUiSmallMarginEnd" />
                     <Text  id="TipologiaImpegno" class="sapUiMediumMarginEnd"/>
-
                      <Label text="Contratto:" class="sapUiSmallMarginEnd"/>
                         <Text  id="Cordine" class="sapUiMediumMarginEnd"/>
-
-                   
+                    <Label text="Controllo preventivo Corte dei conti:" class="sapUiSmallMarginEnd" />
+                    <Text  id="CcConti" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
                 <layout:HorizontalLayout   class="sapUiMediumMarginTop">
-
-                 <Label text="Controllo preventivo Corte dei conti:" class="sapUiSmallMarginEnd" />
-                    <Text  id="CcConti" class="sapUiMediumMarginEnd"/>
-
                 <Label text="Attesa documentazione aggiuntiva:" class="sapUiSmallMarginEnd"  />
                     <Text  id="docAgg" class="sapUiMediumMarginEnd"/>  
                </layout:HorizontalLayout >
@@ -114,8 +116,9 @@
             <OverflowToolbar>
                 <Button text="Indietro" type="Emphasized" press="navToHome" />
                 <ToolbarSpacer />
-                <Button type="Emphasized"  id="docAggiuntiva" text="Richiesta documentazione aggiuntiva"   />
-                <Button type="Emphasized" id="regRisc" text="Registrazione Riscontri di Ragioneria" />
+                <Button type="Emphasized"  id="docAggiuntiva" text="Richiesta documentazione aggiuntiva"  press="navToRegDocAgg" />
+                <Button type="Emphasized" id="regRisc" text="Registrazione Riscontri di Ragioneria" press="navToRiscontri"/>
+                <Button type="Emphasized" id="regOss" text="Registrazione Osservazioni" press="navToOsservazioni"/>
             </OverflowToolbar>
         </f:footer>
     </f:DynamicPage>

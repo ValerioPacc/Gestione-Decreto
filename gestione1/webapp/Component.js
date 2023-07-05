@@ -36,15 +36,19 @@ sap.ui.define([
                 this.setModel(models.createDeviceModel(), "device");
                 this.setModel(models.createTempModel(), "temp");
                 // set the Decreto model
-                this.setModel(models.createEsigModel(), "Lista");
-                // set the Dettaglio modelù
-                this.setModel(models.createEsigModel(), "Dettaglio");
-                // set the Dettaglio modelù
-                this.setModel(models.createEsigModel(), "Beneficiario");
+                // this.setModel(models.createListaModel(), "Lista");
+                // // set the Dettaglio modelù
+                // this.setModel(models.createDetailModel(), "Dettaglio");
+                // // set the Dettaglio modelù
+                // this.setModel(models.createLifnrModel(), "Beneficiario");
                 // set the Ipe model
                 this.setModel(models.createIPEModel(), "IpeEntitySet");
                 // set the Esig model
                 this.setModel(models.createEsigModel(), "Esigibilita");
+                // set the Previsioni model
+                this.setModel(models.createPrevModel(), "Previsioni");
+                // set the Clausola model
+                this.setModel(models.createClausModel(), "Clausola");
 
                 this.setModel(models.createcomboJSONModel(), "comboBox");
             }

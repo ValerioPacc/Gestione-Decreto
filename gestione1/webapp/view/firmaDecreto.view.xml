@@ -72,7 +72,7 @@
         </f:content>
         <f:footer>
             <OverflowToolbar>
-                <Button text="Indietro" type="Emphasized" press="navToHome" />
+                <Button text="Indietro" type="Emphasized" press="onBackButton" />
                 <ToolbarSpacer />
                  <Button type="Emphasized" id="revFirma" text="Revoca Invio alla Firma" visible="false" />
                 <Button type="Emphasized" id="Annulla" text="Annulla"   />

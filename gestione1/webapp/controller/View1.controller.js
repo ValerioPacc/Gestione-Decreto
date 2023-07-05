@@ -219,6 +219,9 @@ sap.ui.define([
 
                     this.getOwnerComponent().getRouter().navTo("dettagliDE", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
                 }
+                else{
+                    this.getOwnerComponent().getRouter().navTo("dettagliDE", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
+                }
             },
 
 

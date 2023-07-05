@@ -117,7 +117,7 @@ sap.ui.define([
 			// oEsigModel.setProperty('/List/Geber', arr)
 			//arr.push(oEsigModel.getProperty('/List'));
 			oEsigModel.setProperty("/List",arr);
-
+			
 			return arr;
 
 		},
@@ -140,32 +140,59 @@ sap.ui.define([
         
 
 	},
-		getPreRowsData: function (Aut, cols){
+		getPreRowsData: function (Mese, cols){
 			var oEsigModel = this.getOwnerComponent().getModel("Esigibilita");
 			var oTempModel = this.getOwnerComponent().getModel("temp");
 
 
 
 			//oEsigModel.setProperty('/', []);
-			var arr = [];
-			for( var i in cols){
-				var item = cols[i];
-				if(oEsigModel.getProperty("/List").length > 0){
-					var key = Object.keys(oEsigModel.getProperty("/List")[0]);
-					var oExist = _.contains(key, item.columnName);
-					if(!oExist){
-						oEsigModel.setProperty("/List/"+ item.columnName, "")
+
+				var arr = [];
+				var year = 2023
+				for (var j = 0; j < Mese.length; j++) {
+					var row = {};
+					for (var k = 0; k < cols.length; k++) {
+					  var item = cols[k].columnName;
+					  row[item] = "";
 					}
-				}else{
-					oEsigModel.setProperty("/List/"+ item.columnName, "")
-				}
+					// var annualità = year + j
+					row["Annuale"] = Mese[j]; // Assegnazione del valore "aut" alla proprietà "Geber"
+					// row["Wtfree"+annualità] =oTempModel.getData().EsigibilitaSet.Wtfree
+					// row["Zcassa"+annualità] =oTempModel.getData().EsigibilitaSet.Cassa
+					arr.push(row);
+				  }
 
-			}
-
-			oEsigModel.setProperty('/List/Annuale', Aut);
-			arr.push(oEsigModel.getProperty('/List'));
+			// oEsigModel.setProperty('/List/Geber', arr)
+			//arr.push(oEsigModel.getProperty('/List'));
 			oEsigModel.setProperty("/List",arr);
+			
 			return arr;
+			// var oPrevModel = this.getOwnerComponent().getModel("Previsioni");
+			// var oTempModel = this.getOwnerComponent().getModel("temp");
+
+
+
+			// //oEsigModel.setProperty('/', []);
+			// var arr = [];
+			// for( var i in cols){
+			// 	var item = cols[i];
+			// 	if(oPrevModel.getProperty("/ListPrev").length > 0){
+			// 		var key = Object.keys(oEsigModel.getProperty("/ListPrev")[0]);
+			// 		var oExist = _.contains(key, item.columnName);
+			// 		if(!oExist){
+			// 			oPrevModel.setProperty("/ListPrev/"+ item.columnName, "")
+			// 		}
+			// 	}else{
+			// 		oPrevModel.setProperty("/ListPrev/"+ item.columnName, "")
+			// 	}
+
+			// }
+
+			// oPrevModel.setProperty('/ListPrev/Annuale', Aut);
+			// arr.push(oPrevModel.getProperty('/ListPrev'));
+			// oPrevModel.setProperty("/ListPrev",arr);
+			// return arr;
 		},
 
 
@@ -232,25 +259,25 @@ sap.ui.define([
 			//this.viewHeaderIpe();
 		},
 
-		// callPrevisioniEntity:function () {
-		// 	var that = this;
-		// 	var oMdl = new sap.ui.model.json.JSONModel();
-		// 	this.getOwnerComponent().getModel().read("/PrevisioneImpegnoSet", {
-		// 		filters: [],
-		// 		urlParameters: "",
-		// 		success: function (data) {
-		// 			oMdl.setData(data.results);
-		// 			that.getView().getModel("temp").setProperty('/PrevisioneImpegnoSet', data.results)
-		// 		},
-		// 		error: function (error) {
-		// 			//that.getView().getModel("temp").setProperty(sProperty,[]);
-		// 			//that.destroyBusyDialog();
-		// 			var e = error;
-		// 		}
-		// 	});
+		callPrevisioniEntity:function () {
+			var that = this;
+			var oMdl = new sap.ui.model.json.JSONModel();
+			this.getOwnerComponent().getModel().read("/PrevisioneImpegnoSet", {
+				filters: [],
+				urlParameters: "",
+				success: function (data) {
+					oMdl.setData(data.results);
+					that.getView().getModel("Previsioni").setProperty('/', data.results)
+				},
+				error: function (error) {
+					//that.getView().getModel("temp").setProperty(sProperty,[]);
+					//that.destroyBusyDialog();
+					var e = error;
+				}
+			});
 
 
-		// },
+		},
 
 		viewHeaderIpe: function (oEvent) {
 			var url = location.href
@@ -324,6 +351,35 @@ sap.ui.define([
 
 				}
 			}
+
+		},
+
+
+		callImpClausolaEntity:function () {
+
+			var that = this,
+			oModel = that.getOwnerComponent().getModel()
+			var oEsigModel = that.getOwnerComponent().getModel("Esigibilita");
+			var Auth = oEsigModel.getData().List[0].Geber.split(":")[1]
+		var anno = 2023
+			var path = oModel.createKey("/ImportiClausolaSet", {
+				// Lifnr:'0010000499'
+				Codice: Auth,
+				Gjahr: anno
+			})
+
+
+			oModel.read(path, {
+				urlParameters: "",
+				success: function(data, oResponse){
+					var oModelJson = new sap.ui.model.json.JSONModel();
+					  oModelJson.setData(data.results);
+					   that.getView().getModel("Clausola").setProperty('/ImpClausola', data.results);
+					  
+					 },
+					  error: function(error){
+				var e = error;}
+			 });
 
 		},
 // callIpeEntity:function () {
@@ -435,6 +491,8 @@ sap.ui.define([
 					  oModelJson.setData(data.results);
 					   that.getView().getModel("Beneficiario").setProperty('/beneficiario', data.results);
 					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+					   var lifnr = data;
+					   that.getBeneficiario(lifnr)
 					 },
 					  error: function(error){
 				var e = error;}
@@ -611,7 +669,7 @@ sap.ui.define([
 					   that.getView().getModel("temp").setProperty('/AutorizzazioneSet', data.results);
 					   var risultati=data.results
 					   that.getPosStr(risultati)
-					/    that.callEsigibilitaEntity(risultati)
+					    that.callImpClausolaEntity(risultati)
 					  //that.callAnnoAmm(data.results);
 					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					 },

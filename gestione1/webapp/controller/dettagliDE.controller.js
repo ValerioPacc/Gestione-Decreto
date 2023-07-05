@@ -177,12 +177,13 @@ sap.ui.define(
             },
             onSelect: function (oEvent) {
                 var key = oEvent.getParameters().key;
+                var Decr =this.getOwnerComponent().getModel("temp").getData().SelectedDecree
                 if (key === "ListaIPE") {
                     // var oProprietà = this.getView().getModel();
                     // oProprietà.setProperty("/TableVisible", true)
                     {
                         
-                        this.getOwnerComponent().getRouter().navTo("firmaDecreto")
+                        this.getOwnerComponent().getRouter().navTo("firmaDecreto", { campo: Decr.Amministrazione, campo1: Decr.AreaFinanziaria, campo2: Decr.ChiaveGiustificativo, campo3: Decr.Ente, campo4: Decr.Esercizio, campo5: Decr.NumeroDecreto, campo6: Decr.RegistratoBozza, campo7: Decr.UfficioLiv1, campo8: Decr.UfficioLiv2 })
                     }
 
                 }

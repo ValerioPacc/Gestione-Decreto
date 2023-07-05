@@ -197,8 +197,8 @@
                     <PropertyRef Name="ZidIpe"/>
                     <PropertyRef Name="ZCodCla"/>
                 </Key>
-                <Property Name="ZtipoGiust" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Fdatk" Type="Edm.DateTime" Precision="11" sap:unicode="false" sap:label="Due On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtipoGiust" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="FipexEng" Type="Edm.String" Nullable="false" MaxLength="24" sap:unicode="false" sap:label="Commitment item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZannoAcc" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZoggSpesIm" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -436,21 +436,61 @@
                 </Key>
                 <Property Name="ZNumCla" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Anno" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Annuale" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Gennaio" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Febbraio" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Marzo" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Aprile" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Maggio" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Giugno" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Luglio" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Agosto" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Settembre" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ottobre" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Novembre" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Dicembre" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Totale" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:label="Amount in LC" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Annuale" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gennaio" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Febbraio" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Marzo" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Aprile" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Maggio" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Giugno" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Luglio" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Agosto" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Settembre" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ottobre" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Novembre" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dicembre" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Totale" Type="Edm.Decimal" Precision="24" Scale="3" sap:unicode="false" sap:label="Amount in LC" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
+            <EntityType Name="DeepEsigibilta" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Operation"/>
+                </Key>
+                <Property Name="Operation" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MessageType" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Previsione" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilitaToPrevisione" FromRole="FromRole_DeepEsigibilitaToPrevisione" ToRole="ToRole_DeepEsigibilitaToPrevisione"/>
+                <NavigationProperty Name="Previsioni" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilitaToPrevisioni" FromRole="FromRole_DeepEsigibilitaToPrevisioni" ToRole="ToRole_DeepEsigibilitaToPrevisioni"/>
+                <NavigationProperty Name="Importi" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilitaToImporti" FromRole="FromRole_DeepEsigibilitaToImporti" ToRole="ToRole_DeepEsigibilitaToImporti"/>
+                <NavigationProperty Name="Importo" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilitaToImporto" FromRole="FromRole_DeepEsigibilitaToImporto" ToRole="ToRole_DeepEsigibilitaToImporto"/>
+            </EntityType>
+            <EntityType Name="ImportiClausola" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Codice"/>
+                    <PropertyRef Name="Gjahr"/>
+                </Key>
+                <Property Name="Codice" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZNumCla" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Wtfree" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Cassa" Type="Edm.Decimal" Precision="22" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ImportoClausola" Type="Edm.Decimal" Precision="16" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="DeepEsigibilitaToPrevisione" sap:content-version="1">
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilta" Multiplicity="1" Role="FromRole_DeepEsigibilitaToPrevisione"/>
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.PrevisioneImpegno" Multiplicity="0..1" Role="ToRole_DeepEsigibilitaToPrevisione"/>
+            </Association>
+            <Association Name="DeepEsigibilitaToPrevisioni" sap:content-version="1">
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilta" Multiplicity="1" Role="FromRole_DeepEsigibilitaToPrevisioni"/>
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.PrevisioneImpegno" Multiplicity="*" Role="ToRole_DeepEsigibilitaToPrevisioni"/>
+            </Association>
+            <Association Name="DeepEsigibilitaToImporto" sap:content-version="1">
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilta" Multiplicity="1" Role="FromRole_DeepEsigibilitaToImporto"/>
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.ImportiClausola" Multiplicity="0..1" Role="ToRole_DeepEsigibilitaToImporto"/>
+            </Association>
+            <Association Name="DeepEsigibilitaToImporti" sap:content-version="1">
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilta" Multiplicity="1" Role="FromRole_DeepEsigibilitaToImporti"/>
+                <End Type="ZS4_DECRETOIMPEGNO_SRV.ImportiClausola" Multiplicity="*" Role="ToRole_DeepEsigibilitaToImporti"/>
+            </Association>
             <Association Name="DeepEntityToIpeEntity" sap:content-version="1">
                 <End Type="ZS4_DECRETOIMPEGNO_SRV.DeepEntity" Multiplicity="1" Role="FromRole_DeepEntityToIpeEntity"/>
                 <End Type="ZS4_DECRETOIMPEGNO_SRV.IpeEntity" Multiplicity="*" Role="ToRole_DeepEntityToIpeEntity"/>
@@ -539,13 +579,31 @@
                 <EntitySet Name="EsercizioDecretoSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.EsercizioDecreto" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="AutorizzazionePNISet" EntityType="ZS4_DECRETOIMPEGNO_SRV.AutorizzazionePNI" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="PrevisioneImpegnoSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.PrevisioneImpegno" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="DeepEsigibiltaSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilta" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ImportiClausolaCollection" EntityType="ZS4_DECRETOIMPEGNO_SRV.ImportiClausola" sap:content-version="1"/>
                 <AssociationSet Name="DeepEntityToDecretoImpegnoSet" Association="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToDecretoImpegno" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="DeepEntitySet" Role="FromRole_DeepEntityToDecretoImpegno"/>
                     <End EntitySet="DecretoImpegnoSet" Role="ToRole_DeepEntityToDecretoImpegno"/>
                 </AssociationSet>
+                <AssociationSet Name="DeepEsigibilitaToPrevisioni_AssocSet" Association="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilitaToPrevisioni" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DeepEsigibiltaSet" Role="FromRole_DeepEsigibilitaToPrevisioni"/>
+                    <End EntitySet="PrevisioneImpegnoSet" Role="ToRole_DeepEsigibilitaToPrevisioni"/>
+                </AssociationSet>
+                <AssociationSet Name="DeepEsigibilitaToPrevisione_AssocSet" Association="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilitaToPrevisione" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DeepEsigibiltaSet" Role="FromRole_DeepEsigibilitaToPrevisione"/>
+                    <End EntitySet="PrevisioneImpegnoSet" Role="ToRole_DeepEsigibilitaToPrevisione"/>
+                </AssociationSet>
+                <AssociationSet Name="DeepEsigibilitaToImporti_AssocSet" Association="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilitaToImporti" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DeepEsigibiltaSet" Role="FromRole_DeepEsigibilitaToImporti"/>
+                    <End EntitySet="ImportiClausolaCollection" Role="ToRole_DeepEsigibilitaToImporti"/>
+                </AssociationSet>
                 <AssociationSet Name="DeepEntityToOsservazioniSet" Association="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToOsservazioni" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="DeepEntitySet" Role="FromRole_DeepEntityToOsservazioni"/>
                     <End EntitySet="OsservazioneSet" Role="ToRole_DeepEntityToOsservazioni"/>
+                </AssociationSet>
+                <AssociationSet Name="DeepEsigibilitaToImporto_AssocSet" Association="ZS4_DECRETOIMPEGNO_SRV.DeepEsigibilitaToImporto" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DeepEsigibiltaSet" Role="FromRole_DeepEsigibilitaToImporto"/>
+                    <End EntitySet="ImportiClausolaCollection" Role="ToRole_DeepEsigibilitaToImporto"/>
                 </AssociationSet>
                 <AssociationSet Name="DecretoImpegnoToIpeSet" Association="ZS4_DECRETOIMPEGNO_SRV.DecretoImpegnoToIpe" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="DecretoImpegnoSet" Role="FromRole_DecretoImpegnoToIpe"/>

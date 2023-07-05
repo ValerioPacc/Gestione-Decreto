@@ -169,7 +169,7 @@
                 },
                 {
                     "name": "firmaDecreto",
-                    "pattern": "firmaDecreto",
+                    "pattern": "firmaDecreto/{campo},{campo1},{campo2},{campo3},{campo4},{campo5},{campo6},{campo7},{campo8}",
                     "titleTarget": "",
                     "greedy": false,
                     "target": "TargetfirmaDecreto"
@@ -190,11 +190,34 @@
                 },
                 {
                     "name": "documentazioneAgg",
-                    "pattern": "documentazioneAgg",
+                    "pattern": "documentazioneAgg/{campo},{campo1},{campo2},{campo3},{campo4},{campo5},{campo6},{campo7},{campo8}",
                     "titleTarget": "",
                     "greedy": false,
                     "target": "TargetdocumentazioneAgg"
+                },
+                {
+                    "name": "docAgg",
+                    "pattern": "docAgg",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "TargetdocAgg"
+                },
+                {
+                    "name": "Riscontri",
+                    "pattern": "Riscontri",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "TargetRiscontri"
+                },
+                {
+                    "name": "Osservazioni",
+                    "pattern": "Osservazioni",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": "TargetOsservazioni"
                 }
+
+
             ],
             "targets": {
                 "TargetView1": {
@@ -275,6 +298,32 @@
                     "clearControlAggregation": false,
                     "viewId": "documentazioneAgg",
                     "viewName": "documentazioneAgg",
+                    "viewLevel": 1
+                },
+                "TargetdocAgg": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "docAgg",
+                    "viewName": "docAgg",
+                    "viewLevel": 1
+                },
+
+                "TargetRiscontri": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Riscontri",
+                    "viewName": "Riscontri",
+                    "viewLevel": 1
+                },
+
+                "TargetOsservazioni": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Osservazioni",
+                    "viewName": "Osservazioni",
                     "viewLevel": 1
                 }
             }

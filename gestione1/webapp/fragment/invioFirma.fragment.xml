@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
      <Dialog id="invioFirma" title="Inserimento dati per invio della firma" draggable="true" showHeader="true" titleAlignment="Center"
       afterClose="onAfterClose" contentWidth="100%" contentHeight="40%">
-      <content>
+      <!-- <content> -->
       
 <!-- <VBox >
 <HBox >
@@ -17,26 +17,67 @@
                 </ComboBox>
                 </HBox>
 </VBox> -->
+<f:Form editable="false" >
+         <f:layout>
+            <f:ColumnLayout columnsM="2" columnsL="2" columnsXL="2"/>
+         </f:layout>
+         <f:formContainers>
+            <f:FormContainer expandable="true" expanded="true">
+               <f:FormElement >
+                  <f:label>
+                     <Label text="N.Protocollo Amm." />
+                  </f:label>
+                  <f:fields>
+                     <Input id="nPrtAmm" width="50%" showValueHelp="false" showSuggestion="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'NProtocolloAmm' }}">
+                      <core:Item key="{NProtocolloAmm}" text="{NProtocolloAmm}"/>
+                      </Input>
+                  </f:fields>
+               </f:FormElement>
 
+               
+              
+               <f:FormElement>
+                        <f:label>
+                            <Label text="Dirigente/Direttore Firmatario" />
+                        </f:label>
+                        <f:fields>
+                         <Input showSuggestion="true" id="Ddfirmatario1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'DirigenteDirettoreFirmatario' }}" required="true">
+                           <core:Item key="{DirigenteDirettoreFirmatario}" text="{DirigenteDirettoreFirmatario}"/>
+                         </Input>
+                        </f:fields>
+                </f:FormElement>
+
+                <f:FormElement>
+                        <f:label>
+                            <Label text="Data Protocollo Amm." />
+                        </f:label>
+                        <f:fields>
+                        <DatePicker id="dataProtamm" displayFormat="dd/MM/yyyy" width="50%"/>
+                        </f:fields>
+                </f:FormElement>
+<!-- <VBox >
                 <HBox justifyContent="SpaceAround">
                 <Label text="N.Protocollo Amm.:" vAlign="Inherit"/>
                <Input id="nPrtAmm" value="{NProtocolloAmm}" />
                <Label text="Data Protocollo Amm.:" vAlign="Inherit"/>
                 <DatePicker id="dataProtamm" displayFormat="dd/MM/yyyy" />
                 </HBox>
-                <VBox >
-                <HBox class="sapUiSmallMarginBegin">
+                </VBox>
+                <VBox class="sapUiSmallMarginTop">
+                <HBox justifyContent="Start">
                  <Label text="Dirigente/Direttore Firmatario:" required="true" vAlign="Inherit"/>
                  <ComboBox id="Ddfirmatario" items="{path: '/DecretoImpegnoSet', sorter: { path: 'DirigenteDirettoreFirmatario' }}" >
                  <core:Item id="Ddfirmatario1" key="{DirigenteDirettoreFirmatario}" text="{DirigenteDirettoreFirmatario}" />
                 </ComboBox>
                 </HBox>
-                </VBox>
-                </content>
+                </VBox> -->
+                <!-- </content> -->
       
                
                 
-                
+                </f:FormContainer>
+         </f:formContainers>
+      </f:Form>
       <beginButton>
        <Button text="Conferma" type="Emphasized" press=""/>
       </beginButton>
