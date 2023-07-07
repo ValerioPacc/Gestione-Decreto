@@ -36,7 +36,7 @@ sap.ui.define(
       onInit() {
         this.callEsercizioEntity()
         this.callIpeEntity();
-        this.callModPagEntity()
+        //this.callModPagEntity()
         this.callNaturaAttoEntity();
         this.callModPagEntity()
         this.callContrattoEntity()
@@ -406,6 +406,10 @@ sap.ui.define(
 
           this.getView().byId("cFiscale").setValue(lifnr.Stcd1);
           this.getView().byId("cFiscaleE").setValue(lifnr.Taxnumxl);
+          this.getView().byId("nome").setValue(lifnr.NameFirst);
+          this.getView().byId("rSociale").setValue(lifnr.ZzragSoc);
+          this.getView().byId("cognome").setValue(lifnr.NameLast);
+          this.getView().byId("IVA").setValue(lifnr.Stcd2);
           // this.getView().byId("beneficiario").setValue(data.Lifnr);
           // this.getView().byId("importoCont").setValue(data.Ktwrt);
           // this.getView().byId("numConAtt").setValue(data.Ebeln);

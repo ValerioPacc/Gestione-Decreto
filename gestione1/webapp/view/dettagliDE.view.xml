@@ -16,10 +16,10 @@
    <f:DynamicPage id="dynamicPageId" showFooter="true">
         <f:header>
             <f:DynamicPageHeader pinnable="false" >
-                 <layout:VerticalLayout class="sapUiMediumMarginEnd">
-                        <Title text="Dati Amminastrazione" />
+                 <layout:VerticalLayout class="sapUiMediumMarginEnd" id="datiAmm">
+                        <Title text="Dati Amminastrazione" id="dAmm" />
                         <layout:HorizontalLayout >
-                        <Label text="Dirigente/Direttore Firmatario:" class="sapUiSmallMarginEnd" />
+                        <Label id="dirigenteF" text="Dirigente/Direttore Firmatario:" class="sapUiSmallMarginEnd" />
                         <Text  id="DDFirmatario" class="sapUiMediumMarginEnd"/>
                     <Label text="Data Firma:" class="sapUiSmallMarginEnd" />
                     <Text  id="dataFirma" class="sapUiMediumMarginEnd"/>
@@ -37,14 +37,30 @@
                     <Text  id="idAmm" class="sapUiMediumMarginEnd"/>
                      <Label text="N.Decreto:" class="sapUiSmallMarginEnd"/>
                         <Text  id="Ndecr" class="sapUiMediumMarginEnd"/>
-                    <Label text="N.IPE:" class="sapUiSmallMarginEnd" />
+                    <Label id="nIPE" text="N.IPE contenuti:" class="sapUiSmallMarginEnd" />
                     <Text  id="Nipe" class="sapUiMediumMarginEnd"/>
                      <Label text="Data Decreto:" class="sapUiSmallMarginEnd" />
                         <Text  id="dataDecr" class="sapUiMediumMarginEnd"/>
-                    <Label text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
+                        <Label id = "tImpegno" text="Tipologia Impegno:" class="sapUiSmallMarginEnd" visible="false"/>
+                    <Text  id="Timpegno" class="sapUiMediumMarginEnd" visible="false"/>
+                    <Label id="sDecreto" text="Stato Decreto:" class="sapUiSmallMarginEnd" visible="false"/>
+                        <Text  id="Sdecreto" class="sapUiMediumMarginEnd" visible="false"/>
+                        <Label id="ragioneria" text="Ragioneria:" class="sapUiSmallMarginEnd" visible="false"/>
+                        <Text  id="Ragioneria" class="sapUiMediumMarginEnd" visible="false"/>
+                    <Label id="nProtAmm" text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
                     <Text  id="NprotAmm" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
-               <layout:HorizontalLayout   class="sapUiMediumMarginTop">
+
+                <layout:HorizontalLayout id="datiFirm"  class="sapUiMediumMarginTop" visible="false">
+                       <Label id = "NumeroProtAmm" text="N.Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
+                    <Text  id="numeroProtAmm" class="sapUiMediumMarginEnd"/>
+                     <Label id="dProtAmm" text="Data Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
+                    <Text  id="DprotAmm" class="sapUiMediumMarginEnd"/>
+               </layout:HorizontalLayout >
+
+               <layout:HorizontalLayout   class="sapUiMediumMarginTop" id="layout1">
+                <Label text="Data Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
+                    <Text  id="DataProtAmm" class="sapUiMediumMarginEnd"/>
                         <Label text="Stato Decreto:" class="sapUiSmallMarginEnd" />
                         <Text  id="StatoDecreto" class="sapUiMediumMarginEnd"/>
                     <Label text="Tipologia Impegno:" class="sapUiSmallMarginEnd" />
@@ -54,13 +70,13 @@
                     <Label text="Controllo preventivo Corte dei conti:" class="sapUiSmallMarginEnd" />
                     <Text  id="CcConti" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
-                <layout:HorizontalLayout   class="sapUiMediumMarginTop">
+                <layout:HorizontalLayout   class="sapUiMediumMarginTop" id="layout2">
                 <Label text="Attesa documentazione aggiuntiva:" class="sapUiSmallMarginEnd"  />
                     <Text  id="docAgg" class="sapUiMediumMarginEnd"/>  
                </layout:HorizontalLayout >
                 </layout:VerticalLayout>
                 
-                <layout:VerticalLayout class="sapUiLargeMarginTop">
+                <layout:VerticalLayout class="sapUiLargeMarginTop" id="datiRag">
                         <Title text="Dati Ragioneria" />
                         <layout:HorizontalLayout >
                         <Label text="Ragioneria:" class="sapUiSmallMarginEnd" />
@@ -78,6 +94,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
+        <HBox>
             <IconTabBar id="IconTabBar" class="sapUiResponsiveContentPadding" select="onSelect"  expandable="true" expanded="false">
                 <items>
                     <IconTabFilter icon="sap-icon://list" text="Lista IPE" key="ListaIPE">
@@ -94,17 +111,28 @@
 							<core:Item text="2023-2024-2025-2026" />
 </items>
  </ComboBox> -->
+
+
+
                 </items>
             </IconTabBar>
-            
+             
+  <Label text="Ragioneria:" class="sapUiLargeMarginBegin" id="rag"/>
+                <ComboBox  id="rag1" items="">
+                <core:Item  text="{}"/>
+                </ComboBox>
+            </HBox>
         </f:content>
         <f:footer>
             <OverflowToolbar>
                 <Button text="Indietro" type="Emphasized" press="onBackButton" />
                 <ToolbarSpacer />
-                <Button type="Emphasized" text="Registra IPE"  press="navToRegistraIPE" />
+                <Button type="Emphasized" id="RegistraDE" text="Registra IPE"  press="navToRegistraIPE" />
                 <Button type="Emphasized" id="rettificaDE" text="Rettifica Decreto"  press="onNavToupdateDecreto" />
                 <Button type="Emphasized" id="cancellaDE" text="Cancella Decreto" press="onDeleteRow" />
+                <Button type="Emphasized" id="revFirma" text="Revoca Invio alla Firma" visible="false" />
+                <Button type="Emphasized" id="Annulla" text="Annulla" visible="false"  />
+                <Button type="Emphasized" id="InvioFirm" text="Invio alla Firma" enabled="false" visible="false"/>
             </OverflowToolbar>
         </f:footer>
     </f:DynamicPage>

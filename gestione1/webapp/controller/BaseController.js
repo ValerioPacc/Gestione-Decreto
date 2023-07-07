@@ -3,8 +3,9 @@ sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/m/library",
 	"sap/ui/model/Filter",
+	"sap/m/MessageBox",
     "sap/ui/model/FilterOperator"
-], function (Controller, UIComponent, mobileLibrary,Filter,FilterOperator) {
+], function (Controller, UIComponent, mobileLibrary,Filter,MessageBox,FilterOperator) {
 	"use strict";
 
 	// shortcut for sap.m.URLHelper
@@ -489,13 +490,28 @@ sap.ui.define([
 				success: function(data, oResponse){
 					var oModelJson = new sap.ui.model.json.JSONModel();
 					  oModelJson.setData(data.results);
-					   that.getView().getModel("Beneficiario").setProperty('/beneficiario', data.results);
+					   that.getView().getModel("temp").setProperty('/Beneficiario', data.results);
 					   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					   var lifnr = data;
 					   that.getBeneficiario(lifnr)
+					   that.callModPagEntity()
 					 },
 					  error: function(error){
-				var e = error;}
+				var e = error;
+				MessageBox.error("il beneficiario inserito è inesistente", {
+					title: "Errore",
+					actions: ["Indietro"],
+					emphasizedAction: "Indietro",
+					onClose: function (oAction) {
+					  if (oAction === "Indietro") {
+
+					  }
+					
+			}
+				
+			 });
+			}
+				
 			 });
 
 		},
@@ -701,11 +717,11 @@ sap.ui.define([
 		callModPagEntity:function () {
 			var that = this;
 			var oMdl = new sap.ui.model.json.JSONModel();
-            var Lifnr= "0010000621"
+            var lifnr = this.getView().byId("beneficiario1").getValue()
 			var aFilters = [];
 
 			aFilters.push(
-			  new Filter({path: "Lifnr", operator: FilterOperator.EQ, value1: Lifnr })
+			  new Filter({path: "Lifnr", operator: FilterOperator.EQ, value1: lifnr })
 			
 			)
 			

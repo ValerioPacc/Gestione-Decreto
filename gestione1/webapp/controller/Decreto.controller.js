@@ -15,6 +15,7 @@ sap.ui.define(
       onInit() {
         this.callTipoImpEntity()
         this.callEsercizioEntity()
+        this.callStatoDecrEntity()
         //  var draft= this.getView().getModel("temp").getProperty("/draft");
         //  if (draft === "x") {
         //   oDataModel.read(sObjectPath, {
@@ -75,11 +76,31 @@ sap.ui.define(
 
 
       },
+
+      callStatoDecrEntity: function () {
+        var that = this;
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/StatoDecretoSet", {
+          filters: [],
+          urlParameters: "",
+          success: function (data) {
+            oMdl.setData(data.results);
+            that.getView().getModel("temp").setProperty('/StatoDecretoSet', data.results)
+          },
+          error: function (error) {
+            //that.getView().getModel("temp").setProperty(sProperty,[]);
+            //that.destroyBusyDialog();
+            var e = error;
+          }
+        });
+
+
+      },
       callEsercizioDeEntity: function () {
         var that = this;
         var TipImp=that.getView().byId("TypeI").getValue().split(":")
         var oMdl = new sap.ui.model.json.JSONModel();
-        this.getOwnerComponent().getModel().read("/EsercizioDecretoSet", {
+        this.getOwnerComponent().getModel().read("/.", {
             filters: [],
             urlParameters: {"TipoImpegno": TipImp[0]},
             success: function (data) {

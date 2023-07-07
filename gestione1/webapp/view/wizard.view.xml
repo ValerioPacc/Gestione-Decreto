@@ -220,7 +220,7 @@
                                 <!-- <Label text="Beneficiario:" required="true" />
                                 <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" valueHelpRequest="handleBenValueHelp" app:FieldName="Ben" app:filterTableField="Ben" class="sapUiSmallMarginBottom" change="callBeneficiarioEntity"/> -->
                                 <Label text="Beneficiario:" required="true" />
-                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" value="{beneficiario>/Lifnr}" class="sapUiSmallMarginBottom" change="callBeneficiarioEntity"/>
+                                <Input id="beneficiario1" showValueHelp="true" enabled="true"  valueHelpOnly="false" value="{IpeEntitySet>/Lifnr}" class="sapUiSmallMarginBottom" change="callBeneficiarioEntity"/>
                                 <layoutData>
                                     <l:GridData span="L6 M3 S3" />
                                 </layoutData>

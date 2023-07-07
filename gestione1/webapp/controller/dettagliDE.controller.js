@@ -177,15 +177,67 @@ sap.ui.define(
             },
             onSelect: function (oEvent) {
                 var key = oEvent.getParameters().key;
+                var icon = this.getView().byId("IconTabBar").mProperties.expanded
                 var Decr =this.getOwnerComponent().getModel("temp").getData().SelectedDecree
-                if (key === "ListaIPE") {
+                if (icon === true) {
+                    this.getView().byId("datiAmm").setVisible(false)
+                    this.getView().byId("datiRag").setVisible(false)
+                    this.getView().byId("rag").setVisible(false)
+                    this.getView().byId("rag1").setVisible(false)
+                    this.getView().byId("invFirma").setVisible(true)
+                    this.getView().byId("nIPE").setVisible(false)
+                    this.getView().byId("Nipe").setVisible(false)
+                    this.getView().byId("Timpegno").setVisible(true)
+                    this.getView().byId("tImpegno").setVisible(true)
+                    this.getView().byId("sDecreto").setVisible(true)
+                    this.getView().byId("Sdecreto").setVisible(true)
+                    this.getView().byId("ragioneria").setVisible(true)
+                    this.getView().byId("Ragioneria").setVisible(true)
+                    this.getView().byId("datiFirm").setVisible(true)
+                    this.getView().byId("layout1").setVisible(false)
+                    this.getView().byId("layout2").setVisible(false)
+                    this.getView().byId("nProtAmm").setVisible(false)
+                    this.getView().byId("NprotAmm").setVisible(false)
+                    this.getView().byId("RegistraDE").setVisible(false)
+                    this.getView().byId("rettificaDE").setVisible(false)
+                    this.getView().byId("cancellaDE").setVisible(false)
+                    this.getView().byId("Annulla").setVisible(true)
+                    this.getView().byId("InvioFirm").setVisible(true)
+                 
+
+
                     // var oProprietà = this.getView().getModel();
                     // oProprietà.setProperty("/TableVisible", true)
-                    {
+                    // {
                         
-                        this.getOwnerComponent().getRouter().navTo("firmaDecreto", { campo: Decr.Amministrazione, campo1: Decr.AreaFinanziaria, campo2: Decr.ChiaveGiustificativo, campo3: Decr.Ente, campo4: Decr.Esercizio, campo5: Decr.NumeroDecreto, campo6: Decr.RegistratoBozza, campo7: Decr.UfficioLiv1, campo8: Decr.UfficioLiv2 })
-                    }
+                    //     this.getOwnerComponent().getRouter().navTo("firmaDecreto", { campo: Decr.Amministrazione, campo1: Decr.AreaFinanziaria, campo2: Decr.ChiaveGiustificativo, campo3: Decr.Ente, campo4: Decr.Esercizio, campo5: Decr.NumeroDecreto, campo6: Decr.RegistratoBozza, campo7: Decr.UfficioLiv1, campo8: Decr.UfficioLiv2 })
+                    // }
 
+                }
+                else if (icon === false){
+                    this.getView().byId("datiAmm").setVisible(true)
+                    this.getView().byId("datiRag").setVisible(true)
+                    this.getView().byId("layout1").setVisible(true)
+                    this.getView().byId("layout2").setVisible(true)
+                    this.getView().byId("nProtAmm").setVisible(true)
+                    this.getView().byId("NprotAmm").setVisible(true) 
+                    this.getView().byId("rag").setVisible(true)
+                    this.getView().byId("rag1").setVisible(true)
+                    this.getView().byId("nIPE").setVisible(true)
+                    this.getView().byId("Nipe").setVisible(true)
+                    this.getView().byId("invFirma").setVisible(false)
+                    this.getView().byId("Timpegno").setVisible(false)
+                    this.getView().byId("tImpegno").setVisible(false)
+                    this.getView().byId("sDecreto").setVisible(false)
+                    this.getView().byId("Sdecreto").setVisible(false)
+                    this.getView().byId("ragioneria").setVisible(false)
+                    this.getView().byId("Ragioneria").setVisible(false)
+                    this.getView().byId("datiFirm").setVisible(false)  
+                    this.getView().byId("RegistraDE").setVisible(true)
+                    this.getView().byId("rettificaDE").setVisible(true)
+                    this.getView().byId("cancellaDE").setVisible(true)
+                    this.getView().byId("Annulla").setVisible(false)
+                    this.getView().byId("InvioFirm").setVisible(false)      
                 }
             },
             onOpenInvFirmDialogModPag: function () {

@@ -21,7 +21,7 @@ sap.ui.define([
             onInit: function () {
                 //this.callConiAuthEntity()
                  //this.callVisibilità()
-                //this.callTipoImpEntity()
+                this.callTipoImpEntity()
                 var oFilter = this.getView().byId("filterID"),
                     that = this;
 
@@ -73,7 +73,7 @@ sap.ui.define([
 
                 var bindingInfo = ""
                 var path = ""
-
+                var Tipologia = that.getView().getModel("temp").getData().TipologiaImpegnoSet
                 var numFilter = oEvent.getParameters().selectionSet.length;
 
                 for (let i = 0; i < numFilter; i++) {
@@ -90,21 +90,33 @@ sap.ui.define([
 
                             if (i == 11) {
                                 if (oEvent.getParameters().selectionSet[11].mProperties.value != '') {
+                                  if (oEvent.getParameters().selectionSet[12].mProperties.value == '' ) {
+                                   
+                                  
                                     datiGI.push(new Filter({
                                         path: "DataDecreto",
                                         operator: FilterOperator.BT,
                                         value1: oEvent.getParameters().selectionSet[11].mProperties.value,
-                                        value2: oEvent.getParameters().selectionSet[12].mProperties.value
+                                        value2: null
+                                    }));
+                                }
+                                else {
+                                    datiGI.push(new Filter({
+                                        path: "DataDecreto",
+                                        operator: FilterOperator.BT,
+                                        value1: oEvent.getParameters().selectionSet[11].mProperties.value,
+                                        value2:  oEvent.getParameters().selectionSet[12].mProperties.value
                                     }));
                                 }
                             }
+                        }
                             if (i == 17) {
                                 if (oEvent.getParameters().selectionSet[17].mProperties.value != '') {
                                     datiGI.push(new Filter({
                                         path: "DataFirma",
                                         operator: FilterOperator.BT,
-                                        value1: oEvent.getParameters().selectionSet[17].mProperties.value,
-                                        value2: oEvent.getParameters().selectionSet[18].mProperties.value
+                                        value1: this.getView().byId('dataFirmaAmmDa1').getValue(),
+                                        value2: this.getView().byId('dataFirmaAmmA1').getValue(),
                                     }));
                                 }
                             }
@@ -113,8 +125,8 @@ sap.ui.define([
                                     datiGI.push(new Filter({
                                         path: "DataProtocolloAmm",
                                         operator: FilterOperator.BT,
-                                        value1: oEvent.getParameters().selectionSet[19].mProperties.value,
-                                        value2: oEvent.getParameters().selectionSet[20].mProperties.value
+                                        value1: this.getView().byId('dataProtocolloAmmDa1').getValue(),
+                                        value2: this.getView().byId('dataProtocolloAmmA1').getValue()
                                     }));
                                 }
                             }
@@ -122,14 +134,14 @@ sap.ui.define([
                                 if (oEvent.getParameters().selectionSet[23].mProperties.value != '') {
                                     datiGI.push(new Filter({
                                         path: "DataProtocolloRag",
-                                        operator: F - ilterOperator.BT,
-                                        value1: oEvent.getParameters().selectionSet[23].mProperties.value,
-                                        value2: oEvent.getParameters().selectionSet[24].mProperties.value
+                                        operator: FilterOperator.BT,
+                                        value1: this.getView().byId('dataProtocolloRGSDa1').getValue(),
+                                        value2: this.getView().byId('dataProtocolloRGSA1').getValue()
                                     }));
                                 }
                             }
                         }
-                        else if (oEvent.getParameters().selectionSet[i].mProperties.value != '') {
+                        else if (oEvent.getParameters().selectionSet[i].mProperties.value != '' && i != 6) {
                             datiGI.push(new Filter({
                                 path: path.sorter.sPath,
                                 operator: FilterOperator.EQ,
@@ -147,6 +159,19 @@ sap.ui.define([
                                     emphasizedAction: MessageBox.Action.OK,
                                 })
                             }
+                        }
+                        else if (i == 6) {
+                            for (var t = 0; t < Tipologia.length; t++) {
+                               if (oEvent.getParameters().selectionSet[i].mProperties.value == Tipologia[t].Descrizione) {
+                                datiGI.push(new Filter({
+                                    path: 'TipologiaImpegno',
+                                    operator: FilterOperator.EQ,
+                                    value1: Tipologia[t].Codice
+                                }));
+                               }
+                                
+                            }
+                            
                         }
                     }
                 }
@@ -218,6 +243,9 @@ sap.ui.define([
                 else if (row.CodiceStato == "02") {
 
                     this.getOwnerComponent().getRouter().navTo("dettagliDE", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
+                }
+                else if (row.CodiceStato == "08") {
+                    this.getOwnerComponent().getRouter().navTo("documentazioneAgg", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
                 }
                 else{
                     this.getOwnerComponent().getRouter().navTo("dettagliDE", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })

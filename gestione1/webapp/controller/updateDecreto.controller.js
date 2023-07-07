@@ -201,9 +201,9 @@ sap.ui.define(
                                 
                                 var editDecreto = {
                                     TipologiaImpegno: that.getView().byId("TypeI").getSelectedKey(),
-                                    DataDecreto: that.getView().byId("DataDE1").getDateValue(),
+                                    DataDecreto: new Date(that.getView().byId("DataDE1").getValue()),
                                     NProtocolloAmm: that.getView().byId("numProtocolloAmma1").getValue(),
-                                    DataProtocolloAmm: that.getView().byId("dataProtocolloAmm1").getDateValue(),
+                                    DataProtocolloAmm: new Date(that.getView().byId("dataProtocolloAmm1").getValue()),
                                     ControlloCorteConti: that.getView().byId("CcorteConti").getSelected() === true ? '1' : '0'
                                 };
                          var dataNuova = editDecreto.DataProtocolloAmm,

@@ -57,10 +57,10 @@
                </layout:HorizontalLayout >
                 <layout:HorizontalLayout   class="sapUiMediumMarginTop">
                 <Label text="Attesa documentazione aggiuntiva:" class="sapUiSmallMarginEnd"  />
-                    <Text  id="docAgg" class="sapUiMediumMarginEnd"/>  
+                    <Text  id="docAgg" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout >
                 </layout:VerticalLayout>
-                
+
                 <layout:VerticalLayout class="sapUiLargeMarginTop">
                         <Title text="Dati Ragioneria" />
                         <layout:HorizontalLayout >
@@ -78,11 +78,11 @@
                 </OverflowToolbar> -->
             </f:DynamicPageHeader>
         </f:header>
-        
+
         <f:content>
-        
+        <HBox>
      <IconTabBar id="IconTabBar" class="sapUiResponsiveContentPadding" select="onSelect"  expandable="true" expanded="false">
-                
+
                 <items>
                     <IconTabFilter icon="sap-icon://list" text="Lista IPE" key="ListaIPE">
                       <core:Fragment fragmentName="gestione1.fragment.listaIPE" type="XML"  />
@@ -93,25 +93,34 @@
                     <IconTabSeparator/>
                     <IconTabFilter icon="sap-icon://documents" text="Fascicolo Elettronico" key="Fascicolo" >
                     </IconTabFilter>
-                     
-                
-                
+                    <!-- <IconTabFilter>
+                    <Label text="Ragioneria:" class="sapUiMediumMarginBegin"/>
+                <ComboBox  id="rag1" items="">
+                <core:Item  text="{}"/>
+                </ComboBox>
+</IconTabFilter> -->
+
                 </items>
-               
+
             </IconTabBar>
-            
-            <!-- <Label text="Ragioneria:"/>
+            <!-- <IconTabFilter>
+            <Label text="Ragioneria:" />
                 <ComboBox  id="rag1" items="">
                 <core:Item key="{}" text="{}"/>
-                </ComboBox> -->
-            
+                </ComboBox>
+                </IconTabFilter> -->
+ <Label text="Ragioneria:" class="sapUiLargeMarginBegin"/>
+                <ComboBox  id="rag1" items="">
+                <core:Item  text="{}"/>
+                </ComboBox>
+            </HBox>
         </f:content>
-        
+
         <!-- <Label text="Ragioneria:"/>
                 <ComboBox  id="rag1" items="">
                 <core:Item key="{}" text="{}"/>
                 </ComboBox> -->
-                
+
         <f:footer>
             <OverflowToolbar>
                 <Button text="Indietro" type="Emphasized" press="navToHome" />

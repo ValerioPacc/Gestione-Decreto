@@ -53,7 +53,9 @@ sap.ui.define(
                         //     var state= self.getView().byId("invFirma");
                         //     state.setVisible(false) 
                         //      }
-                             //self.viewHeader(data);
+                             //
+                             
+                            self.viewHeader(data);
                             //  self.onDeleteRow(data);
                             //  self.onNavToupdateDecreto(data)
                         },
@@ -96,27 +98,17 @@ sap.ui.define(
                   //     data.RegistratoBozza == oEvent.getParameters().arguments.campo6 &&
                   //     data.UfficioLiv1 == oEvent.getParameters().arguments.campo7 &&
                   //     data.UfficioLiv2 == oEvent.getParameters().arguments.campo8) {
+
+
       
-                          var dataNuova = new Date(data.DataProtocolloRag),
+                          var dataNuova = new Date(data.DataProtocolloAmm),
                           mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
                           day = ("0" + dataNuova.getDate()).slice(-2);
                       var nData = [dataNuova.getFullYear(), mnth, day].join("-");
                       var nDate = nData.split("-").reverse().join(".");
                       //var dataProtocolloRag = data.DataProtocolloRag
-                      this.getView().byId("dataProtRag").setText(nDate)
-      
-      
-      
-                      var dirigDirFirm = data.DirigenteDirettoreFirmatario
-                      this.getView().byId("DDFirmatario").setText(dirigDirFirm)
-      
-                      var dataFirm = data.DataFirma
-                      this.getView().byId("dataFirma").setText(dataFirm)
-      
-                      var ufficioAmm = data.CodiceUffico
-                      this.getView().byId("UffAmm").setText(ufficioAmm)
-      
-      
+                      this.getView().byId("DprotAmmin").setText(nDate)
+
                       var esrcDE = data.Esercizio
                       this.getView().byId("esercizio").setText(esrcDE)
       
@@ -126,8 +118,7 @@ sap.ui.define(
                       var Ndecreto = data.NumeroDecreto
                       this.getView().byId("Ndecr").setText(Ndecreto)
       
-                      var NumIpe = data.NumeroIpe
-                      this.getView().byId("Nipe").setText(NumIpe)
+                    
       
                       var dataDecr = data.DataDecreto
                       var dataNuova = new Date(dataDecr),
@@ -145,24 +136,14 @@ sap.ui.define(
       
                       var ImpgnType = data.TipologiaImpegno
                       this.getView().byId("TipologiaImpegno").setText(ImpgnType)
-      
-                      var contratto = data.ContrattoOrdine
-                      this.getView().byId("Cordine").setText(contratto)
-      
-                      var CCConti = data.ControlloCorteConti
-                      this.getView().byId("CcConti").setText(CCConti)
-      
-                      var DocAggiuntiva = data.DocumentazioneAgg
-                      this.getView().byId("docAgg").setText(DocAggiuntiva)
-      
+
                       var Ragion = data.Ragioneria
                       this.getView().byId("Rag").setText(Ragion)
       
                       // var dataProtocolloRag = data.DataProtocolloRag
                       // this.getView().byId("dataProtRag").setText(dataProtocolloRag)
       
-                      var NumProtRag = data.NProtocolloRag
-                      this.getView().byId("nProtRag").setText(NumProtRag)
+                     
       
       
       

@@ -1,5 +1,5 @@
 <core:FragmentDefinition controllerName="gestione1.controller.wizard" height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
-    <Panel headerText="Modalità di pagamento" headerLevel="H4" accessibleRole="Form" collapsed="false" toggle="handleToggle">
+    <Panel headerText="Modalità di pagamento"  accessibleRole="Form" collapsed="false" toggle="handleToggle">
         <content>
             <l:Grid>
                 <l:content>
@@ -7,12 +7,11 @@
                         <Label text="Modalità di pagamento" labelFor="Esercizio" required="true" />
                         <ComboBox 
                         required="true" 
-                        items="{comboBox>/items}" 
+                        items="{path: 'temp>/ZwelsBenSet', sorter: { path: 'Zwels' }}" selectedKey="{IpeEntitySet>/Zwels}" 
                         change="onListSelect" 
-                        id="mPag"
-                        selectedKey="{IpeEntitySet>/Zwels}">
-                            <core:Item key="{comboBox>id}" text="{comboBox>Modalita_pagamento}" />
-                        </ComboBox>
+                        id="mPag">
+                          <core:Item id="Mpag" key="{temp>Zwels}" text="{temp>Zwels}" />
+                              </ComboBox>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
                         </layoutData>
@@ -21,7 +20,7 @@
                      </l:Grid>
                     </content>
                     </Panel>
-                     <Panel headerText="Elenco c/c associati" headerLevel="H4" accessibleRole="Form" collapsed="false" toggle="handleToggle">
+                     <Panel headerText="Elenco c/c associati"  accessibleRole="Form" collapsed="false" toggle="handleToggle">
         <content>
             <l:Grid>
                 <l:content>
