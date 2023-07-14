@@ -13,19 +13,17 @@
 
  <Table id="EsigTable"
         class="Freeze"
-        selectionMode="MultiToggle"
-        fixedColumnCount="1"
-        visibleRowCount="7"
+        selectionMode="Single"
+        fixedColumnCount="1"        
         ariaLabelledBy="title"
-        
-       >
+        enableSelectAll="false">
         <extension>
             <m:OverflowToolbar style="Clear">
               
                 <m:ToolbarSpacer/>
                <m:Button id="idPNI" type="Emphasized" class="marginRight" icon="sap-icon://add" text=" PNI/Autorizzazione" press="onOpenDialog1"/>
-               <m:Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight"/>
-               <m:Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta"/>
+               <m:Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight" press="onDelAuth"/>
+               <m:Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta" enabled="false"/>
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
             </m:OverflowToolbar>
             <m:OverflowToolbar style="Clear">
@@ -35,107 +33,79 @@
             <m:Text id="strAmm" text=""/>
             </m:OverflowToolbar>
         </extension>
-        <columns>
-        
-						
-        </columns>
- <!-- <ColumnListItem>
-                    <Text text="Autorizzazione:{}" />
-                    <Text text="{}" />
-                    <Text text="{}" />
-                    <Input value="{}" />
-                    <Text text="{}" />
-                    <Text text="{}" />
-                    <Text text="{}" />
-                    <Input value="{}" />
-                    <Text text="{}" />
-                    <Text text="{}" />
-                    <Text text="{}" />
-                   <Input value="{}" />
-                    <Text text="{}" />
-                    <Text text="{}" />
-                    <Text text="{}" />
-                    <Input value="{}" />
-                    <Text text="{}" />
-                </ColumnListItem> -->
-    </Table>
-     
-    <!-- <ScrollContainer>
+        <columns>  	
+        </columns> 
+    </Table>    
 
-    <Table id="TableEsigi"
-        class="Freeze"
-        mode="MultiSelect"
-        ariam:LabelledBy="title"
-        
-       >
-        <headerToolbar>
-            <OverflowToolbar style="Clear">
-                <ToolbarSpacer/>
-               <m:Button id="idPNI" type="Emphasized" class="marginRight" icon="sap-icon://add" text=" PNI/Autorizzazione" press="onOpenDialog1"/>
-               <m:Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight"/>
-               <m:Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta"/>
-               <m:Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
-           
-            <m:Label text="{i18n>PosFin}"/>
-            <Text id="PsFin" text=""/>
-            <m:Label text="{i18n>struttura_amm_resp}" class="marginRight"/>
-            <Text id="strAmm" text=""/>
-            </OverflowToolbar>
-        </headerToolbar>
-        
-        <columns>
-         
-                    <Column width="5rem" demandPopin="true" hAlign="Center">
-                        <m:Label text="Clausola" wrapping="true" />
-                    </Column>
-                    <Column width="4rem" demandPopin="true" hAlign="Center">
-                        <m:Label text="Disponibilità PNI" />
-                    </Column>
-                    <Column width="6rem" demandPopin="true" hAlign="Center">
-                         <m:Label text="2023" />
-                    </Column>
-                    <Column width="6rem" demandPopin="true" hAlign="Center">
-                       <m:Label text="Disponibilità cassa" />
-                    </Column>
-                     <Column width="5rem" demandPopin="true" hAlign="Center">
-                        <m:Label text="Clausola" wrapping="true" />
-                    </Column>
-                    <Column width="4rem" demandPopin="true" hAlign="Center">
-                        <m:Label text="Disponibilità PNI" />
-                    </Column>
-                    <Column width="6rem" demandPopin="true" hAlign="Center">
-                         <m:Label text="2024" />
-                    </Column>
-                    <Column width="6rem" demandPopin="true" hAlign="Center">
-                       <m:Label text="Disponibilità cassa" />
-                    </Column>
-                    <Column width="5rem" demandPopin="true" hAlign="Center">
-                        <m:Label text="Clausola" wrapping="true" />
-                    </Column>
-                    <Column width="4rem" demandPopin="true" hAlign="Center">
-                        <m:Label text="Disponibilità PNI" />
-                    </Column>
-                    <Column width="6rem" demandPopin="true" hAlign="Center">
-                         <m:Label text="2025" />
-                    </Column>
-                    <Column width="6rem" demandPopin="true" hAlign="Center">
-                       <m:Label text="Disponibilità cassa" />
-                    </Column>
-                    <Column width="5rem" demandPopin="true" hAlign="Center">
-                        <m:Label text="Clausola" wrapping="true" />
-                    </Column>
-                    <Column width="4rem" demandPopin="true" hAlign="Center">
-                        <m:Label text="Disponibilità PNI" />
-                    </Column>
-                    <Column width="6rem" demandPopin="true" hAlign="Center">
-                         <m:Label text="2026" />
-                    </Column>
-                    <Column width="6rem" demandPopin="true" hAlign="Center">
-                       <m:Label text="Disponibilità cassa" />
-                    </Column>
 
-        </columns>
+<!-- PREVISIONI -->
 
-    </Table>
-    </ScrollContainer> -->
-    </core:FragmentDefinition>
+    <m:Panel id="previsionPanel" visible="false">
+        	<m:Table id="prevision"
+                inset="false"
+                items="{
+                    path: 'previsionWF>/previsionMonthsSet',
+                    sorter: {
+                        path: 'Name'
+                    }
+                }">
+            <m:headerToolbar>
+			    <m:OverflowToolbar>
+                    <m:content>
+                        <m:Title text="{previsionWF>/previsionAuth}" level="H2"/>
+                        <m:ToolbarSpacer />
+                            <m:Label text="Clausola:" labelFor="previsionClausola" vAlign="Inherit" class="marginRight sapUiLargeMarginStart"/>
+                            <m:ComboBox id="previsionClausola"
+                                placeholder="Seleziona Clausola"
+                                items="{
+                                    path: 'previsionWF>/clausoleCombo',
+                                    sorter: { path: 'nClausola' }
+                                }"
+                                change="onPrevisionClausolaChange">
+                                <m:items>
+                                    <core:Item key="{previsionWF>nClausola}" text="{previsionWF>nClausola}" />                                    
+                                </m:items>
+                            </m:ComboBox>
+                            <m:StepInput
+                                id="previsionStepInput"
+                                value="{previsionWF>/stepCurrentYear}"
+                                width="150px"
+                                min="{previsionWF>/minStep}"
+                                max="{previsionWF>/maxStep}"
+                                step="1"
+                                change="onChangePrevisionYear"/>
+                    </m:content>
+                </m:OverflowToolbar>
+                </m:headerToolbar>
+                <m:infoToolbar>
+                    <m:OverflowToolbar>
+                        <m:Label text="Annualità:" labelFor="previsionWFTotAnno" />
+                        <m:Input
+                                id="previsionWFTotAnno"
+                                type="Number"
+                                width="100px" 
+                                value="{previsionWF>/totAnno}"
+                                change="previsionWFTotAnnoLiveChange"/>
+                    </m:OverflowToolbar>
+                </m:infoToolbar>
+                <m:columns>
+                    <m:Column><m:Text text="Mese" /></m:Column>
+                    <m:Column><m:Text text="Importo" /></m:Column>                
+                </m:columns>
+                <m:items>
+                    <m:ColumnListItem vAlign="Middle">
+                        <m:cells>
+                            <m:Text text="{previsionWF>month}"/>
+                            <m:Input id="previsionWFImporto"  liveChange="previsionWFImportoLiveChange"  type="Number" value="{previsionWF>importo}" editable="{= ${previsionWF>key} === 'TOT' ? false : true }" />                        
+                        </m:cells>
+                    </m:ColumnListItem>
+                </m:items>
+            </m:Table>
+            <m:Button  class="marginRight" text="Torna alle esigibilità" press="onBackToEsigibilita"/>
+            <m:Button  class="marginRight" icon="sap-icon://save" text="Salva previsione" press="onSavePrevisionWF"/>
+
+    
+    </m:Panel>
+
+
+</core:FragmentDefinition>
