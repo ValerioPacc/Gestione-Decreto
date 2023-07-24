@@ -31,7 +31,7 @@
                      <Label text="Ragioneria:" class="sapUiSmallMarginEnd" />
                         <Text  text="{temp>/SelectedDecree/Ragioneria}" class="sapUiMediumMarginEnd"/>
                     <Label text="Stato Decreto:" class="sapUiSmallMarginEnd" />
-                    <Text  text="{temp>/SelectedDecree/CodiceStato}" class="sapUiMediumMarginEnd"/>
+                    <Text  text="{temp>/SelectedDecree/DescrizioneStato}" class="sapUiMediumMarginEnd"/>
                </layout:HorizontalLayout>
                 </layout:VerticalLayout>
            <Bar >

@@ -19,9 +19,12 @@ sap.ui.define([
         return BaseController.extend("gestione1.controller.View1", {
             formatter: DateFormatter,
             onInit: function () {
+                this.callEsercizioEntity()
                 //this.callConiAuthEntity()
                  //this.callVisibilità()
+                this.callStatoDecEntity()
                 this.callTipoImpEntity()
+                this.callCurrentUserParamEntity()
                 var oFilter = this.getView().byId("filterID"),
                     that = this;
 
@@ -74,6 +77,8 @@ sap.ui.define([
                 var bindingInfo = ""
                 var path = ""
                 var Tipologia = that.getView().getModel("temp").getData().TipologiaImpegnoSet
+                var StatoDec = that.getView().getModel("temp").getData().StatoDecretoSet
+                
                 var numFilter = oEvent.getParameters().selectionSet.length;
 
                 for (let i = 0; i < numFilter; i++) {
@@ -141,7 +146,7 @@ sap.ui.define([
                                 }
                             }
                         }
-                        else if (oEvent.getParameters().selectionSet[i].mProperties.value != '' && i != 6) {
+                        else if (oEvent.getParameters().selectionSet[i].mProperties.value != '' && i != 6 && i != 27) {
                             datiGI.push(new Filter({
                                 path: path.sorter.sPath,
                                 operator: FilterOperator.EQ,
@@ -160,6 +165,9 @@ sap.ui.define([
                                 })
                             }
                         }
+
+            
+
                         else if (i == 6) {
                             for (var t = 0; t < Tipologia.length; t++) {
                                if (oEvent.getParameters().selectionSet[i].mProperties.value == Tipologia[t].Descrizione) {
@@ -167,6 +175,20 @@ sap.ui.define([
                                     path: 'TipologiaImpegno',
                                     operator: FilterOperator.EQ,
                                     value1: Tipologia[t].Codice
+                                }));
+                               }
+                                
+                            }
+                            
+                        }
+
+                        else if (i == 27) {
+                            for (var s = 0; s < StatoDec.length; s++) {
+                               if (oEvent.getParameters().selectionSet[i].mProperties.value == StatoDec[s].DescrizioneStato) {
+                                datiGI.push(new Filter({
+                                    path: 'CodiceStato',
+                                    operator: FilterOperator.EQ,
+                                    value1: StatoDec[s].Codice
                                 }));
                                }
                                 
@@ -362,6 +384,59 @@ sap.ui.define([
 
 
             },
+
+            callStatoDecEntity: function () {
+                var that = this;
+                var oMdl = new sap.ui.model.json.JSONModel();
+                this.getOwnerComponent().getModel().read("/StatoDecretoSet", {
+                    filters: [],
+                    urlParameters: "",
+                    success: function (data) {
+                        oMdl.setData(data.results);
+                        that.getView().getModel("temp").setProperty('/StatoDecretoSet', data.results)
+                        //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+                    },
+                    error: function (error) {
+                        //that.getView().getModel("temp").setProperty(sProperty,[]);
+                        //that.destroyBusyDialog();
+                        var e = error;
+                    }
+                });
+
+
+            },
+
+            callCurrentUserParamEntity: function () {
+                var that = this;
+                var oModel = that.getOwnerComponent().getModel()
+                var ammin = []
+                var path = oModel.createKey("/CurrentUserParamSet", {
+                    Name:'/PRA/PN_DN_FUNC_AREA'
+
+                })
+                oModel.read(path, {
+                    filters: [],
+                    urlParameters: "",
+                    success: function (data) {
+                        var amm = data.Value.split(".")[0]
+                        data.Value = amm
+                        ammin.push(data)
+                        var oModelJson = new sap.ui.model.json.JSONModel();
+                        oModelJson.setData(data);
+                        that.getView().getModel("temp").setProperty('/CurrentUserParamSet', ammin)
+                        console.log("Test")
+                        //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+                    },
+                    error: function (error) {
+                        //that.getView().getModel("temp").setProperty(sProperty,[]);
+                        //that.destroyBusyDialog();
+                        var e = error;
+                    }
+                });
+
+
+            },
+
 
             callEsercizioEntity: function () {
                 var that = this;

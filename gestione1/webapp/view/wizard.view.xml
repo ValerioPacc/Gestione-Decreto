@@ -64,7 +64,7 @@
                 <Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" showNextButton="false" navigationChange="handleNavigationChange" renderMode="Page" width="auto">
                     <WizardStep id="SelezioneTitoliStep" title="Contratto" validated="true">
                         <Label text="{i18n>Ccontratto}" />
-                        <Switch  state="true" customTextOff="No" customTextOn="Si" change="controlSwitch" id="switch" />
+                        <Switch  state="{IpeEntitySet>/ZFlContOrd}" customTextOff="No" customTextOn="Si" change="controlSwitch" id="switch" />
                         <Panel height="100%">
                             <content>
                                 <l:Grid>
@@ -293,8 +293,8 @@
                                 </HBox>
                                 <Title text="" />
                                 <HBox>
-                                    <Label text="Oggetto della spesa:" labelFor="Oggetto della spesa:" />
-                                    <Input id="oggSpesa" value="{IpeEntitySet>/Ktext}" />
+                                    <Label text="Oggetto della spesa:" labelFor="Oggetto della spesa:" required="true"/>
+                                    <Input id="oggSpesa" value="{IpeEntitySet>/Ktext}" required="true"/>
                                 </HBox>
                             </VBox>
                             <VBox>
@@ -352,7 +352,7 @@
                             <VBox>
                                 <HBox>
                                     <Label text="{i18n>Natto}" labelFor="{i18n>Natto}" />
-                                    <Input id="numConAtt" enabled="true" value="{temp>/Znumcontratt}" valueHelpOnly="false" showValueHelp="true"/>
+                                    <Input id="numConAtt" enabled="true" value="{temp>/Znumcontratt}" valueHelpOnly="false" showValueHelp="false"/>
                                     <!-- <ComboBox id="numConAtt" enabled="false" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Znumcontratt' }}">
                                         <core:Item key="{temp>Znumcontratt}" text="{temp>Znumcontratt}" />
                                     </ComboBox> -->
@@ -374,7 +374,7 @@
                             <VBox>
                                 <HBox>
                                     <Label text="Data Atto:" labelFor="Data Atto:" />
-                                    <DatePicker id="dataAtt" displayFormat="dd/MM/yyyy" enabled="true"  value="{= ${path: 'temp>/IpeEntitySet/Zdataatto' , formatter: '.formatter.convert' } !== null ? ${path: 'temp>/IpeEntitySet/Zdataatto' , formatter: '.formatter.convert' } : '' }"/>
+                                    <DatePicker id="dataAtt" displayFormat="dd/MM/yyyy" enabled="true"  />
                                 </HBox>
                             </VBox>
                         </form:SimpleForm>
@@ -428,9 +428,9 @@
                             </items>
                         </IconTabBar>
                         <OverflowToolbar>
-                            <Button text="Indietro" type="Emphasized" press="onBackButton" />
+                            <Button id= "bBack" text="Indietro" type="Emphasized" press="onBackButton" />
                             <ToolbarSpacer />
-                            <Button text="Salva IPE" type="Emphasized" press="onSaveIPE"  />
+                            <Button id="SalvaIpe" text="Salva IPE" type="Emphasized" press="onSaveIPE"  />
                         </OverflowToolbar>
                     </WizardStep>
                 </Wizard>

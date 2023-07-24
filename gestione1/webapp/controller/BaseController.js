@@ -492,10 +492,11 @@ sap.ui.define([
 				success: function (data, oResponse) {
 					var oModelJson = new sap.ui.model.json.JSONModel();
 					oModelJson.setData(data.results);
-					that.getView().getModel("Beneficiario").setProperty('/beneficiario', data.results);
+					that.getView().getModel("temp").setProperty('/beneficiario', data.results);
 					//that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					var lifnr = data;
 					that.getBeneficiario(lifnr)
+					that.callModPagEntity()
 				},
 				error: function (error) {
 					var e = error;
@@ -503,6 +504,48 @@ sap.ui.define([
 			});
 
 		},
+
+		
+		callIbanBenEntity: function () {
+
+			var that = this,
+				oModel = that.getOwnerComponent().getModel()
+			var lifnr = this.getView().byId("beneficiario1").getValue()
+			var zwels = this.getView().byId("mPag").getValue()
+			//var oTempModel = that.getOwnerComponent().getModel("temp");
+			//var lifnr = oTempModel.getProperty("/ContrattoSet").Lifnr;
+			var oTempModel = that.getOwnerComponent().getModel("temp")
+			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
+			var modPag = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {Zdescwels: that.getView().byId("mPag").getValue()})
+			var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {id: modPag.Zdescwels})
+			var pagamento = modPag.Zwels
+
+			var aFilters = [];
+
+			aFilters.push(
+				new Filter({ path: "Lifnr", operator: FilterOperator.EQ, value1: lifnr }),
+				new Filter({ path: "Zwels", operator: FilterOperator.EQ, value1: pagamento })
+			)
+
+
+			oModel.read('/IbanBenSet', {
+				urlParameters: "",
+				filters: aFilters,
+				success: function (data, oResponse) {
+					var oModelJson = new sap.ui.model.json.JSONModel();
+					oModelJson.setData(data.results);
+					that.getView().getModel("temp").setProperty('/IbanBen', data.results);
+					//that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+					var modPag = data;
+					
+				},
+				error: function (error) {
+					var e = error;
+				}
+			});
+
+		},
+
 
 		// callAnnoAmm:function (entity) {
 		// 	var that = this,
@@ -689,10 +732,18 @@ sap.ui.define([
 
 		},
 		callNaturaAttoEntity: function (oEvent) {
+        var contratto = this.getView().byId("switch").getState()?'X' : ''
+		
+		var aFilters = [];
 
+		aFilters.push(
+			new Filter({ path: "ZFlContOrd", operator: FilterOperator.EQ, value1: contratto })
+			
+		)
 			var that = this,
 				oModel = that.getOwnerComponent().getModel()
 			oModel.read('/NaturaAttoSet', {
+				filters: aFilters,
 				urlParameters: "",
 				success: function (data, oResponse) {
 					var oModelJson = new sap.ui.model.json.JSONModel();
@@ -709,7 +760,7 @@ sap.ui.define([
 		callModPagEntity: function () {
 			var that = this;
 			var oMdl = new sap.ui.model.json.JSONModel();
-			var Lifnr = "0010000621"
+			var Lifnr = this.getView().byId("beneficiario1").getValue()
 			var aFilters = [];
 
 			aFilters.push(
@@ -724,7 +775,12 @@ sap.ui.define([
 				success: function (data) {
 					oMdl.setData(data.results);
 					that.getView().getModel("temp").setProperty('/ZwelsBenSet', data.results)
-
+					var modPag = data.results
+					if (modPag != []) {
+						that.getZwels(modPag)
+					}
+					
+                    that.callIbanBenEntity()
 				},
 				error: function (error) {
 					//that.getView().getModel("temp").setProperty(sProperty,[]);

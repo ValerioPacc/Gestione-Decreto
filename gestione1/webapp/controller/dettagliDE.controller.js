@@ -145,7 +145,7 @@ sap.ui.define(
                         var numProtAmm = data.NProtocolloAmm
                         this.getView().byId("NprotAmm").setText(numProtAmm)
 
-                        var decrState = data.CodiceStato
+                        var decrState = data.DescrizioneStato
                         this.getView().byId("StatoDecreto").setText(decrState)
 
                         var ImpgnType = data.TipologiaImpegno

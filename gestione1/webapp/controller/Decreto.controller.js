@@ -14,8 +14,9 @@ sap.ui.define(
       formatter: DateFormatter,
       onInit() {
         this.callTipoImpEntity()
-        this.callEsercizioEntity()
+        this.callEsercizioDeEntity()
         this.callStatoDecrEntity()
+        this.callCurrentUserParamEntity()
         //  var draft= this.getView().getModel("temp").getProperty("/draft");
         //  if (draft === "x") {
         //   oDataModel.read(sObjectPath, {
@@ -100,7 +101,7 @@ sap.ui.define(
         var that = this;
         var TipImp=that.getView().byId("TypeI").getValue().split(":")
         var oMdl = new sap.ui.model.json.JSONModel();
-        this.getOwnerComponent().getModel().read("/.", {
+        this.getOwnerComponent().getModel().read("/EsercizioDecretoSet", {
             filters: [],
             urlParameters: {"TipoImpegno": TipImp[0]},
             success: function (data) {
@@ -117,6 +118,37 @@ sap.ui.define(
 
 
     },
+
+    callCurrentUserParamEntity: function () {
+      var that = this;
+      var oModel = that.getOwnerComponent().getModel()
+      var ammin = []
+      var path = oModel.createKey("/CurrentUserParamSet", {
+          Name:'/PRA/PN_DN_FUNC_AREA'
+
+      })
+      oModel.read(path, {
+          filters: [],
+          urlParameters: "",
+          success: function (data) {
+              var amm = data.Value.split(".")[0]
+              data.Value = amm
+              ammin.push(data)
+              var oModelJson = new sap.ui.model.json.JSONModel();
+              oModelJson.setData(data);
+              that.getView().getModel("temp").setProperty('/CurrentUserParamSet', ammin)
+              console.log("Test")
+              //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+          },
+          error: function (error) {
+              //that.getView().getModel("temp").setProperty(sProperty,[]);
+              //that.destroyBusyDialog();
+              var e = error;
+          }
+      });
+
+
+  },
 
 
       onRegDIbozza: function (oEvent) {
@@ -165,6 +197,9 @@ sap.ui.define(
                 CodiceUfficio: N_codiceUff,
                 ControlloCorteConti: B_CcConti
               };
+              if (N_Datade != null && N_DataprotAmm != null) {
+                
+              
               var dataNuova = new Date(N_DataprotAmm),
                 mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
                 day = ("0" + dataNuova.getDate()).slice(-2);
@@ -178,7 +213,7 @@ sap.ui.define(
               var nData = [newDate.getFullYear(), mnth, day].join("-");
               DecretoImpegnoSet.DataDecreto = new Date(nData)
               //this.onSaveMessageDialogPress()
-
+            }
               oDataModel.create("/DecretoImpegnoSet", DecretoImpegnoSet, {
                 success: function (result, response) {
                   console.log('SUCCESS')
@@ -303,6 +338,26 @@ sap.ui.define(
             success: function (data) {
                 oMdl.setData(data.results);
                 that.getView().getModel("temp").setProperty('/FiltroEsercizioSet', data.results)
+                //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+            },
+            error: function (error) {
+                //that.getView().getModel("temp").setProperty(sProperty,[]);
+                //that.destroyBusyDialog();
+                var e = error;
+            }
+        });
+
+
+    },
+     callEsercizioEntity: function () {
+        var that = this;
+        var oMdl = new sap.ui.model.json.JSONModel();
+        this.getOwnerComponent().getModel().read("/EsercizioDecretoSet", {
+            filters: [],
+            urlParameters: "",
+            success: function (data) {
+                oMdl.setData(data.results);
+                that.getView().getModel("temp").setProperty('/EsercizioDecretoSet', data.results)
                 //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
             },
             error: function (error) {

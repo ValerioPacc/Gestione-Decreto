@@ -58,7 +58,7 @@
             <Text text="{path:'DecretoImpegno>DataDecreto', formatter:'.formatter.convert'}" />
             <Text text="{DecretoImpegno>Ragioneria}" />
             <Text text="{DecretoImpegno>TipologiaImpegno}" />
-            <Text text="{DecretoImpegno>CodiceStato}" />
+            <Text text="{DecretoImpegno>DescrizioneStato}" />
 
         </ColumnListItem>
     </Table>

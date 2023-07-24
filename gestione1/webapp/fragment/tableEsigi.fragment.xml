@@ -66,26 +66,48 @@
                                     <core:Item key="{previsionWF>nClausola}" text="{previsionWF>nClausola}" />                                    
                                 </m:items>
                             </m:ComboBox>
-                            <m:StepInput
+
+                            <m:ComboBox id="previsionStepInput"
+                                placeholder="Seleziona Anno"
+                                items="{
+                                    path: 'previsionWF>/annoCombo',
+                                    sorter: { path: 'annoCombo' }
+                                }"
+                                change="onChangePrevisionYear">
+                                <m:items>
+                                    <core:Item key="{previsionWF>anno}" text="{previsionWF>anno}" />                                    
+                                </m:items>
+                            </m:ComboBox>
+
+                            <!-- <m:StepInput
                                 id="previsionStepInput"
                                 value="{previsionWF>/stepCurrentYear}"
                                 width="150px"
                                 min="{previsionWF>/minStep}"
                                 max="{previsionWF>/maxStep}"
                                 step="1"
-                                change="onChangePrevisionYear"/>
+                                change="onChangePrevisionYear"/> -->
                     </m:content>
                 </m:OverflowToolbar>
                 </m:headerToolbar>
                 <m:infoToolbar>
                     <m:OverflowToolbar>
-                        <m:Label text="Annualità:" labelFor="previsionWFTotAnno" />
+                        <m:Label text="Annuale:" labelFor="previsionWFTotAnno" />
                         <m:Input
                                 id="previsionWFTotAnno"
                                 type="Number"
                                 width="100px" 
                                 value="{previsionWF>/totAnno}"
                                 change="previsionWFTotAnnoLiveChange"/>
+<m:ToolbarSpacer/>
+ <m:Label text="Importo Clausola:" labelFor="" />
+                        <m:Input
+                                id="previsionWFImpCla"
+                                type="Number"
+                                width="100px" 
+                                value="{previsionWF>/annoImporto}"
+                               />
+                                
                     </m:OverflowToolbar>
                 </m:infoToolbar>
                 <m:columns>

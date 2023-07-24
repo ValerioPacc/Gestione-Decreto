@@ -7,10 +7,11 @@ sap.ui.define(
         "sap/m/Button",
         "sap/m/library",
         "sap/m/Text",
-        "./BaseController",
         "gestione1/model/DateFormatter",
+        "sap/ui/model/Filter",
+	      "sap/ui/model/FilterOperator"
     ],
-    function(BaseController,MessageBox,Dialog,coreLibrary,Button,mobileLibrary,Text,DateFormatter) {
+    function(BaseController,MessageBox,Dialog,coreLibrary,Button,mobileLibrary,Text,DateFormatter,Filter,FilterOperator) {
       "use strict";
 
 
@@ -30,6 +31,7 @@ sap.ui.define(
         onInit() {
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
           oRouter.getRoute("registraIPE").attachPatternMatched(this._onObjectMatched, this);
+          this.callStatoDecEntity()
           // var view= this.getView();
           // var dataDecr = this.getOwnerComponent().getModel("temp").getData().SelectedDecree.DataDecreto;
           //       var dataNuova = new Date(dataDecr),
@@ -99,6 +101,29 @@ sap.ui.define(
         //     }
         //   })
         // },
+
+
+
+        callStatoDecEntity: function () {
+          var that = this;
+          var oMdl = new sap.ui.model.json.JSONModel();
+          this.getOwnerComponent().getModel().read("/StatoDecretoSet", {
+              filters: [],
+              urlParameters: "",
+              success: function (data) {
+                  oMdl.setData(data.results);
+                  that.getView().getModel("temp").setProperty('/StatoDecretoSet', data.results)
+                  //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+              },
+              error: function (error) {
+                  //that.getView().getModel("temp").setProperty(sProperty,[]);
+                  //that.destroyBusyDialog();
+                  var e = error;
+              }
+          });
+
+
+      },
 
         onOpenConfDialog : function () {
 

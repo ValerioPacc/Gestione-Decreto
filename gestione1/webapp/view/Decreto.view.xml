@@ -35,15 +35,15 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem groupName="gruppo2" name="Esercizio" label="{i18n>esercizio}" tooltip="suggestion" visibleInFilterBar="true" mandatory="true">
                                 <fb:control>
-                                    <ComboBox id="es_decreto" items="{path: '/FiltroEsercizioSet', sorter: { path: 'Esercizio' }}"  enabled="{= ${temp>/draft} === 'x' ? false : true}">
+                                    <ComboBox id="es_decreto" items="{path: '/EsercizioDecretoSet', sorter: { path: 'Esercizio' }}"  enabled="{= ${temp>/draft} === 'x' ? false : true}">
                                         <core:Item id="es_decreto1" key="{Esercizio}" text="{Esercizio}" />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem groupName="gruppo2" id="amministrazioneED" visibleInFilterBar="true" name="amministrazioneED" label="{i18n>amministrazioneED}" mandatory="true">
                                 <fb:control>
-                                     <ComboBox id="AmministrazioneED" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Amministrazione' }}" selectedKey="{temp>/SelectedDecree/Amministrazione}" enabled="{= ${temp>/draft} === 'x' ? false : true}">
-                                     <core:Item id="amministrazioneED1" key="{Amministrazione}" text="{Amministrazione}" />
+                                     <ComboBox id="AmministrazioneED" items="{path: 'temp>/CurrentUserParamSet', sorter: { path: 'Amministrazione' }}" selectedKey="{temp>/SelectedDecree/Amministrazione}" enabled="{= ${temp>/draft} === 'x' ? false : true}">
+                                     <core:Item id="amministrazioneED1" key="{temp>Value}" text="{temp>Value}" />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -54,9 +54,9 @@
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
-							<fb:FilterGroupItem id="DataDE" visibleInFilterBar="true" name="DataDE" groupName="Group1" label="{i18n>dataDE}">
+							<fb:FilterGroupItem id="DataDE" visibleInFilterBar="true" name="DataDE" groupName="Group1" label="{i18n>dataDE}" >
                                 <fb:control>
-                                    <DatePicker id="DataDE1" displayFormat="dd/MM/yyyy"  />
+                                    <DatePicker id="DataDE1" displayFormat="dd/MM/yyyy"  required="true"/>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numProtocolloAmma" visibleInFilterBar="true" name="numProtocolloAmma" groupName="Group1" label="{i18n>numProtocolloAmma}">

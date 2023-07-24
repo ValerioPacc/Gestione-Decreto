@@ -33,8 +33,8 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem groupName="gruppo1" id="amministrazioneED" tooltip="suggestion"  visibleInFilterBar="true" name="amministrazioneED" label="{i18n>amministrazioneED}" mandatory="true">
                                 <fb:control>
-                                    <ComboBox id="AmministrazioneED" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Amministrazione' }}">
-                                     <core:Item id="amministrazioneED1" key="{Amministrazione}" text="{Amministrazione}" />
+                                    <ComboBox id="AmministrazioneED" items="{path: 'temp>/CurrentUserParamSet', sorter: { path: 'Amministrazione' }}">
+                                     <core:Item id="amministrazioneED1" key="{temp>Value}" text="{temp>Value}" />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -202,8 +202,8 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem  visibleInFilterBar="true" name="Stato" groupName="gruppo1" label="{i18n>Stato}">
                                 <fb:control>
-                                     <ComboBox id="statoDE" items="{path: '/DecretoImpegnoSet', sorter: { path: 'CodiceStato' }}">
-                                     <core:Item id="statoDE1" key="{CodiceStato}" text="{CodiceStato}" />
+                                     <ComboBox id="statoDE" items="{path: 'temp>/StatoDecretoSet', sorter: { path: 'Codice' }}">
+                                     <core:Item id="statoDE1" key="{temp>DescrizioneStato}" text="{temp>DescrizioneStato}" />
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>

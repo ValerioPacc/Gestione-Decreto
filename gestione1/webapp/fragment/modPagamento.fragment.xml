@@ -1,5 +1,5 @@
 <core:FragmentDefinition controllerName="gestione1.controller.wizard" height="100%" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
-    <Panel headerText="Modalità di pagamento"  accessibleRole="Form" collapsed="false" toggle="handleToggle">
+    <Panel headerText="Modalità di pagamento"  accessibleRole="Form" >
         <content>
             <l:Grid>
                 <l:content>
@@ -8,9 +8,9 @@
                         <ComboBox 
                         required="true" 
                         items="{path: 'temp>/ZwelsBenSet', sorter: { path: 'Zwels' }}" selectedKey="{IpeEntitySet>/Zwels}" 
-                        change="onListSelect" 
+                        
                         id="mPag">
-                          <core:Item id="Mpag" key="{temp>Zwels}" text="{temp>Zwels}" />
+                          <core:Item id="Mpag" key="{temp>Zwels}" text="{temp>Zdescwels}" />
                               </ComboBox>
                         <layoutData>
                             <l:GridData span="L3 M3 S3" />
@@ -20,14 +20,14 @@
                      </l:Grid>
                     </content>
                     </Panel>
-                     <Panel headerText="Elenco c/c associati"  accessibleRole="Form" collapsed="false" toggle="handleToggle">
+                     <Panel headerText="Elenco c/c associati"  accessibleRole="Form" >
         <content>
             <l:Grid>
                 <l:content>
                      
                     <VBox>
                         <Label text="IBAN" labelFor="IBAN" />
-                        <ComboBox id="Iban1" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'Iban' }}" >
+                        <ComboBox id="Iban1" items="{path: 'temp>/IbanBen', sorter: { path: 'Zwels' }}" selectedKey="{IpeEntitySet>/Iban}">
                                         <core:Item key="{temp>Iban}" text="{temp>Iban}" />
                                     </ComboBox>
                         <layoutData>
