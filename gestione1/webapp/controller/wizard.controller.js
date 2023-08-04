@@ -37,13 +37,14 @@ sap.ui.define(
       onInit() {
         this.callEsercizioEntity()
         this.callIpeEntity();
+        //this.callIpeProvvisorio()
         this.callNaturaAttoEntity();
-        //this.callModPagEntity()
-        //this.callIbanBenEntity()
+        // this.callModPagEntity()
+        // this.callIbanBenEntity()
         this.callContrattoEntity()
         this.callPniEntity()
         this.callIndReiscrizioneEntity()
-        
+        this.callClausolaEntity()
         // this.callAuthEntity()
         // this.callPrevisioniEntity()
 
@@ -93,7 +94,57 @@ sap.ui.define(
 
       },
 
+      callIpeProvvisorio: function () {
 
+        var that = this,
+          oModel = that.getOwnerComponent().getModel(),
+          oTempModel = that.getOwnerComponent().getModel("temp")
+          oTempModel.getProperty("/SelectedDecree")
+          that.getOwnerComponent().getModel("IpeEntitySet").setProperty('/', [])
+
+          var path = oModel.createKey("/IpeEntitySet", {
+            Zregistrato: oTempModel.getProperty("/SelectedDecree").RegistratoBozza,
+            ZCodIpe: oTempModel.getProperty("/SelectedDecree").CodiceIpe,
+            ZNumCla: oTempModel.getProperty("/SelectedDecree").NumeroClausola,
+            Zammin: oTempModel.getProperty("/SelectedDecree").Amministrazione,
+            Bukrs:oTempModel.getProperty("/SelectedDecree").Ente,
+            Fikrs: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
+            Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
+            Zufficioliv1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
+            Zufficioliv2: oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
+            Zcoddecr: oTempModel.getProperty("/SelectedDecree").NumeroDecreto,
+            ZCodGius: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo,
+            ZidIpe: oTempModel.getProperty("/SelectedDecree").NumeroIpe,
+            ZCodCla: oTempModel.getProperty("/SelectedDecree").NumeroClausola
+
+          })
+  
+  
+        oModel.read(path, {
+          filters: [],
+          urlParameters: "",
+          success: function (data) {
+            var oModelJson = new sap.ui.model.json.JSONModel();
+            oModelJson.setData(data.results);
+            that.getOwnerComponent().getModel("IpeEntitySet").setProperty('/', data);
+            //that.controlSwitch(results);
+            // if (results.ZFlContOrd == "X") {
+            // 	that.getView().byId("switch").setState(true) 
+  
+            // }else{
+            // 	that.getView().byId("switch").setState(false) 
+            // }
+  
+          },
+          error: function (error) {
+            //that.getView().getModel("temp").setProperty(sProperty,[]);
+            //that.destroyBusyDialog();
+            console.log(error);
+          }
+  
+        });
+        //this.viewHeaderIpe();
+      },
 
       onListSelect: function (event) {
         var oSelectedKey = this.getView().byId('mPag').getSelectedKey();
@@ -158,6 +209,8 @@ sap.ui.define(
         var beneficiario = this.getView().byId("beneficiario1").getValue()
         var mPag = this.getView().byId("mPag").getSelectedItem()
         var stato = this.getView().byId("switch").getState();
+      if (stato === true) {
+        
       
 
         if (es_decreto == "" && amm == "" && Ncontratto == "" && Dstipula == "") {
@@ -190,19 +243,19 @@ sap.ui.define(
         //         emphasizedAction: MessageBox.Action.OK,
         //     })
         // }
-        else if (Ncontratto == "" && stato == true) {
+        else if (Ncontratto == "" ) {
           MessageBox.error("Campo N. Contratto obbligatorio non inserito!", {
             actions: [sap.m.MessageBox.Action.OK],
             emphasizedAction: MessageBox.Action.OK,
           })
         }
-        else if (Dstipula == "" && stato == true) {
+        else if (Dstipula == "") {
           MessageBox.error("Campo Data Stipula obbligatorio non inserito!", {
             actions: [sap.m.MessageBox.Action.OK],
             emphasizedAction: MessageBox.Action.OK,
           })
         }
-
+      }
         else {
           this._oWizard = this.byId("CreateProductWizard");
           this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
@@ -262,14 +315,9 @@ sap.ui.define(
           self.getView().byId("strAmm").setText(StrAmm);
           // this.callImpClausolaEntity();
         }
-        // var mandInf = self.getView().byId("CB1").getSelected()
-        // var noteImp = self.getView().byId("CB3").getSelected()
-        //  if (self._iSelectedStepIndex == 4 && mandInf == false || noteImp == false ) {
+        //  if (this._iSelectedStepIndex == 5) {
 
-        //   MessageBox.error("Selezionare tipologia ordinazione della spesa", {
-        //     actions: [sap.m.MessageBox.Action.OK],
-        //     emphasizedAction: MessageBox.Action.OK,
-        //   })
+        //   this.callAuthEntity()
 
         // }
         // if (this._iSelectedStepIndex == 2) {
@@ -318,6 +366,7 @@ sap.ui.define(
           oTable.addColumn(new sap.ui.table.Column({
             label: new sap.m.Label({text: i}),
             template: new sap.m.Input({value: "{" + "importo_" + i + "}", 
+                  type:"Number",
                   submit: function(oEvent){
                     self.esigibilitaImportoSubmit(oEvent);
                   },
@@ -596,7 +645,7 @@ sap.ui.define(
         var oDialog2 = this.openDialog("gestione1.fragment.anagrafica").open();
       },
 
-      onOpenGridTable: function (oEvent) {
+      onOpenGridTable: function () {
         this.getView().byId("bBack").setVisible(false)
         this.getView().byId("SalvaIpe").setVisible(false)
         var self =this,
@@ -622,7 +671,6 @@ sap.ui.define(
         
         previsionWFModel.clausoleCombo = self.fillClausoleComboModel(arrayModel);
         var oModel = new sap.ui.model.json.JSONModel();
-        var annoImporto = oEvent.getSource().data("annoImporto");
         oModel.setData(previsionWFModel);
         self.getView().setModel(oModel, "previsionWF");  
         
@@ -631,13 +679,12 @@ sap.ui.define(
         self.getView().byId("previsionStepInput").setEnabled(false);        
         self.getView().byId("EsigTable").setVisible(false);
         self.getView().byId("previsionPanel").setVisible(true);
-        self.getView().byId("previsionWFTotAnno").setValue(annoImporto);
       },
 
       onBackToEsigibilita:function(oEvent){
         var self =this;
-        this.getView().byId("bBack").setVisible(true)
-        this.getView().byId("SalvaIpe").setVisible(true)
+        self.getView().byId("bBack").setVisible(true)
+        self.getView().byId("SalvaIpe").setVisible(true)
         self.getView().byId("EsigTable").setVisible(true);
         self.getView().byId("previsionPanel").setVisible(false);
       },
@@ -655,6 +702,7 @@ sap.ui.define(
           self.getView().getModel("previsionWF").setProperty("/previsionMonthsSet", []); 
           self.getView().getModel("previsionWF").setProperty("/previsionAuth", ""); 
           self.getView().getModel("previsionWF").setProperty("/totAnno", 0);     
+          self.getView().getModel("previsionWF").setProperty("/importoClausola", 0);    
           previsionStepInput.setEnabled(false);       
           return; 
         }
@@ -664,11 +712,11 @@ sap.ui.define(
           self.fillEmptyPrevisionMonths(item, true);
           return false;
         }
-        // previsionStepInput.setEnabled(true);
 
         var item = filledClausole[index];           
         self.getView().getModel("previsionWF").setProperty("/annoCombo",self.fill40AnnoClausola(item));      
         self.getView().getModel("previsionWF").setProperty("/previsionAuth",item.autorizzazione);  
+        self.getView().getModel("previsionWF").setProperty("/importoClausola",item.importo); 
         previsionStepInput.setSelectedKey("");
         previsionStepInput.setEnabled(true);
 
@@ -722,6 +770,7 @@ sap.ui.define(
           array.push({/*fincode:item ? item.fincode : null,*/ nClausola:item ? item.nClausola : null, key:"TOT", month:"TOTALE", importo:parseFloat(tot).toFixed(2)});
 
         self.getView().getModel("previsionWF").setProperty("/previsionMonthsSet",array); 
+        self.getView().getModel("previsionWF").setProperty("/importoClausola",parseFloat(item.importo).toFixed(2)); 
         previsionStepInput.setValue(item ? item.anno : "");
         if(clearTotAnno)
           self.getView().getModel("previsionWF").setProperty("/totAnno",parseFloat(0).toFixed(2));   
@@ -749,6 +798,7 @@ sap.ui.define(
         array.push({/*fincode:item ? item.fincode : null,*/ nClausola:item ? item.ZNumCla : null, key:"12", month:"Dicembre", importo:parseFloat(item.Dicembre).toFixed(2)});
         array.push({/*fincode:item ? item.fincode : null,*/ nClausola:item ? item.ZNumCla : null, key:"TOT", month:"TOTALE", importo:parseFloat(tot).toFixed(2)});
         self.getView().getModel("previsionWF").setProperty("/previsionMonthsSet",array);
+        self.getView().getModel("previsionWF").setProperty("/importoClausola",parseFloat(item.importo).toFixed(2));
         self.getView().getModel("previsionWF").setProperty("/totAnno",item.Annuale ? parseFloat(item.Annuale).toFixed(2) : parseFloat(0).toFixed(2));         
         previsionStepInput.setValue(item.Anno);
       },
@@ -842,13 +892,15 @@ sap.ui.define(
             array=[];
           for(var i=0; i<arrayModel.length;i++){
             var item = arrayModel[i];
-            var keyNames = Object.keys(item);  
+            var keyNames = Object.keys(item);
             var propsNames = keyNames.filter(x => x.includes("nClausola_"));
             for(var j=0; j<propsNames.length;j++){
               if(item[propsNames[j]] !== ""){
+                var impx = item["importo_" + propsNames[j].substring(10)];
                 array.push({
                   nClausola : item[propsNames[j]],
                   anno: propsNames[j].substring(10),
+                  importo: !impx || impx === null || impx === "" ? parseFloat(0).toFixed(2) : parseFloat(impx.toString()).toFixed(2),
                   autorizzazione: item.autorizzazione, 
                   fincode:item.fincode
                 });
@@ -946,6 +998,7 @@ sap.ui.define(
         )
 
         oModel.read("/AutorizzazioneSet", {
+          
         filters:aFilters,
         urlParameters: "",
         success: function(data, oResponse){
@@ -1063,6 +1116,7 @@ sap.ui.define(
           this.getView().byId("dataAtt").setValue(nDate);
           this.getView().byId("idTypeCon").setValue(data.Bsart);
           this.getView().byId("formAgg").setValue(data.Zzgara);
+          this.getView().byId("es_decreto").setValue(data.Zzanno);
 
           //valoriNuovi.push(KOSTL.Kostl)
         }
@@ -1087,7 +1141,6 @@ sap.ui.define(
           this.getView().byId("cognome").setValue(lifnr.NameLast);
           this.getView().byId("rSociale").setValue(lifnr.ZzragSoc);
           this.getView().byId("IVA").setValue(lifnr.Stcd2);
-
           // this.getView().byId("beneficiario").setValue(data.Lifnr);
           // this.getView().byId("importoCont").setValue(data.Ktwrt);
           // this.getView().byId("numConAtt").setValue(data.Ebeln);
@@ -1272,12 +1325,15 @@ sap.ui.define(
         var oTempModel = this.getOwnerComponent().getModel("temp");
         var stato = this.getView().byId("switch").getState();
         var esercizio=oTempModel.getProperty("/SelectedDecree").Esercizio
-        if (stato) {
+        if (stato === true) {
           //var oTempModel = this.getOwnerComponent().getModel("temp")
           //var nContr = oTempModel.getProperty("/ContrattoSet").Ebeln
           oProprietà.setProperty("/FilterSwitch1", true);
           oProprietà.setProperty("/FilterSwitch2", true);
           this.getView().byId("cup").setValue("");
+          this.getView().byId("es_decreto").setValue("");
+          this.getView().byId("es_decreto").setEnabled(true);
+
           //this.getView().byId("es_decreto").setValue(esercizio);
           //this.getOtherData(nContr)
         }
@@ -1294,6 +1350,7 @@ sap.ui.define(
           this.getView().byId("numConAtt").setValue("");
           this.getView().byId("dataAtt").setValue("");
           this.getView().byId("es_decreto").setValue("");
+          this.getView().byId("es_decreto").setEnabled(false);
           // this.getView().byId("numConAtt").setEnabled(true);
           // this.getView().byId("dataAtt").setEnabled(true);
 
@@ -1483,9 +1540,13 @@ controlswitch2: function () {
       },
 
       onRegIpebozza: function (oEvent) {
+        var self = this
         var oModel = this.getView().getModel("comboBox"),
           oTempModel = this.getView().getModel("temp"),
           oIpeEntitySet = this.getView().getModel("IpeEntitySet")
+          var modPag = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {Zdescwels: self.getView().byId("mPag").getValue()})
+          var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {id: modPag.Zdescwels})
+          var pagamento = modPag.Zwels
         //oNaturaAtto = this.getView().getModel("NaturaAttoSet")
         if (oIpeEntitySet.oData.Zbozza == undefined) {
           var oBozza = false
@@ -1497,10 +1558,11 @@ controlswitch2: function () {
         var rowSelected = _.findWhere(oModel.getProperty("/Contratto"),),
           beneficiario = _.findWhere(oModel.getProperty("/Beneficiario"),),
           Zzanno = this.getView().byId("es_decreto").getSelectedKey();
+         
 
         //oTempModel.setProperty("/Step1", rowSelected);
         //oTempModel.setProperty("/Step2", beneficiario);
-        var self = this
+       
         MessageBox.warning("Sei sicuro di voler salvare l'Ipe in Bozza ?", {
           actions: ["Si", sap.m.MessageBox.Action.NO],
           emphasizedAction: "Si",
@@ -1510,9 +1572,7 @@ controlswitch2: function () {
           var  Zop =self.getView().byId("CB1").getSelected()
          var Zoa =self.getView().byId("CB2").getSelected()
          var Zni = self.getView().byId("CB3").getSelected()
-         var modPag = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {Zdescwels: self.getView().byId("mPag").getValue()})
-         var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {id: modPag.Zdescwels})
-         var pagamento = modPag.Zwels
+         
          
         //   if (Zop == true ) 
         //   var B_Zop = "1"
@@ -1545,8 +1605,8 @@ controlswitch2: function () {
                 NameFirst: self.getView().byId("nome").getValue(),//oIpeEntitySet.getProperty("/NameFirst"), //oTempModel.getProperty("/Step2/").nome,
                 NameLast: self.getView().byId("cognome").getValue(),//oIpeEntitySet.getProperty("/NameLast"), //oTempModel.getProperty("/Step2/").cognome,
                 ZzragSoc: self.getView().byId("rSociale").getValue(),//oIpeEntitySet.getProperty("/ZzragSoc"), //oTempModel.getProperty("/Step2/").Rsociale,
-                Stcd1: self.getView().byId("IVA").getValue(),//oIpeEntitySet.getProperty("/Stcd1"), //oTempModel.getProperty("/Step2/").cf,
-                Stcd2: "",//oIpeEntitySet.getProperty("/Stcd2"), //oTempModel.getProperty("/Step2/").IVA,
+                Stcd1: self.getView().byId("cFiscale").getValue(),//oIpeEntitySet.getProperty("/Stcd1"), //oTempModel.getProperty("/Step2/").cf,
+                Stcd2: self.getView().byId("IVA").getValue(),//oIpeEntitySet.getProperty("/Stcd2"), //oTempModel.getProperty("/Step2/").IVA,
                 Zwels: pagamento,//oIpeEntitySet.getProperty("/Zwels"), //oTempModel.getProperty("/items/").Modalita_pagamento,
                 Iban: self.getView().byId("Iban1").getValue(),//oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
                 ZidRich: self.getView().byId("IdAssPre").getValue(),//oIpeEntitySet.getProperty("/ZidRich"),
@@ -1567,6 +1627,7 @@ controlswitch2: function () {
               // if (stato = false) {
               //   entity.Ktwrt=null
               // }
+              
               if (oBozza == false) {
                  if (entity.Zzdatastipula != null) {
                   var dataNuova = new Date(entity.Zzdatastipula),
@@ -1642,10 +1703,10 @@ controlswitch2: function () {
         var importo = self.getView().byId("importoCont").getValue()!==""?self.getView().byId("importoCont").getValue():"0"
         entry.Ktwrt=importo;
         var date = self.getView().byId("Dstipula").getValue()!== ""?self.getView().byId("Dstipula").getValue():null
-        entry.Zzdatastipula = new Date(date)
+        //entry.Zzdatastipula = new Date(date)
 
         var data = self.getView().byId("dataAtt").getValue()!== ""?self.getView().byId("dataAtt").getValue():null
-        entry.Zdataatto=new Date (data)
+        //entry.Zdataatto=new Date (data)
 
         var path = oDataModel.createKey("/IpeEntitySet", {
           Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
@@ -1768,7 +1829,7 @@ controlswitch2: function () {
         var self =this,
             array = []
             var modPag = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {Zdescwels: self.getView().byId("mPag").getValue()})
-         var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {id: modPag.Zdescwels})
+         //var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {id: modPag.Zdescwels})
          var pagamento = modPag.Zwels
             oTempModel = self.getOwnerComponent().getModel("temp");
 
@@ -1776,7 +1837,7 @@ controlswitch2: function () {
               Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
               Fikrs: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
               Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
-              Zzanno: oTempModel.getProperty("/SelectedDecree").Esercizio,// Zzanno,
+              Zzanno: self.getView().byId("es_decreto").getValue(),// Zzanno,
               Zregistrato: oTempModel.getProperty("/SelectedDecree").RegistratoBozza,
               ZCodCla: '',
               ZCodGius: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo,
@@ -1798,8 +1859,8 @@ controlswitch2: function () {
               NameFirst: self.getView().byId("nome").getValue(),//oIpeEntitySet.getProperty("/NameFirst"), //oTempModel.getProperty("/Step2/").nome,
               NameLast: self.getView().byId("cognome").getValue(),//oIpeEntitySet.getProperty("/NameLast"), //oTempModel.getProperty("/Step2/").cognome,
               ZzragSoc: self.getView().byId("rSociale").getValue(),//oIpeEntitySet.getProperty("/ZzragSoc"), //oTempModel.getProperty("/Step2/").Rsociale,
-              Stcd1: self.getView().byId("IVA").getValue(),//oIpeEntitySet.getProperty("/Stcd1"), //oTempModel.getProperty("/Step2/").cf,
-              Stcd2: "",//oIpeEntitySet.getProperty("/Stcd2"), //oTempModel.getProperty("/Step2/").IVA,
+              Stcd1: self.getView().byId("cFiscale").getValue(),//oIpeEntitySet.getProperty("/Stcd1"), //oTempModel.getProperty("/Step2/").cf,
+                Stcd2: self.getView().byId("IVA").getValue(),//oIpeEntitySet.getProperty("/Stcd2"), //oTempModel.getProperty("/Step2/").IVA,
               Zwels: pagamento,//oIpeEntitySet.getProperty("/Zwels"), //oTempModel.getProperty("/items/").Modalita_pagamento,
               Iban: self.getView().byId("Iban1").getValue(),//oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
               ZidRich: self.getView().byId("IdAssPre").getValue(),//oIpeEntitySet.getProperty("/ZidRich"),
@@ -1832,7 +1893,6 @@ controlswitch2: function () {
             var nData = [dataNuova.getFullYear(), mnth, day].join("-");
             entity.Zdataatto = new Date(nData)
              }
-
         array.push(entity);
         return array;
       },

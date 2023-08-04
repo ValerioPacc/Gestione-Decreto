@@ -64,16 +64,16 @@
                 <Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" showNextButton="false" navigationChange="handleNavigationChange" renderMode="Page" width="auto">
                     <WizardStep id="SelezioneTitoliStep" title="Contratto" validated="true">
                         <Label text="{i18n>Ccontratto}" />
-                        <Switch  state="{IpeEntitySet>/ZFlContOrd}" customTextOff="No" customTextOn="Si" change="controlSwitch" id="switch" />
+                        <Switch  state="false" customTextOff="No" customTextOn="Si" change="controlSwitch" id="switch" />
                         <Panel height="100%">
                             <content>
                                 <l:Grid>
                                     <l:content>
                                         <VBox>
                                             <Label text="{i18n>Eserc}" required="true" />
-                                            <ComboBox id="es_decreto"  selectedKey="{= ${IpeEntitySet>/Zbozza} === 'X' ? ${IpeEntitySet>/Zzanno} : ${temp>/SelectedDecree/Esercizio} }" enabled="false" items="{path: 'temp>/FiltroEsercizioSet', sorter: { path: 'Esercizio' }}">
-                                                <core:Item id="es_decreto1" key="{temp>Esercizio}" text="{temp>Esercizio}" />
-                                            </ComboBox>
+                                            <ComboBox id="es_decreto" items="{path: '/DecretoImpegnoSet', sorter: { path: 'Esercizio' }}" selectedKey="" enabled="false">
+                                        <core:Item id="es_decreto1" key="" text="" />
+                                    </ComboBox>
                                             <layoutData>
                                                 <l:GridData span="L3 M3 S3" />
                                             </layoutData>

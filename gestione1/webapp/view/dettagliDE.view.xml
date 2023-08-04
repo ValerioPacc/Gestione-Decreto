@@ -121,7 +121,10 @@
                 <ComboBox  id="rag1" items="">
                 <core:Item  text="{}"/>
                 </ComboBox>
+
+               
             </HBox>
+            
         </f:content>
         <f:footer>
             <OverflowToolbar>

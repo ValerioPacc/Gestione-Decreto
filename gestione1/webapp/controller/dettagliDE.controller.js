@@ -4,11 +4,13 @@ sap.ui.define(
         "gestione1/model/DateFormatter",
         "./BaseController",
         "sap/m/MessageBox",
+        "sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
         //"sap/m/iconTabBar",
 
 
     ],
-    function (DateFormatter, BaseController, MessageBox,) {
+    function (DateFormatter, BaseController, MessageBox,Filter,FilterOperator) {
         "use strict";
         var oData = {
             VisibleButton: true,
@@ -19,8 +21,10 @@ sap.ui.define(
 
 
             onInit() {
+                this.callTipoImpEntity()
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.getRoute("dettagliDE").attachPatternMatched(this._onObjectMatched, this);
+                
                 //var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
                 // if (row.CodiceStato == "01") {
                 //     this.getView().byId("invFirma").setEnabled(false)
@@ -29,8 +33,9 @@ sap.ui.define(
 
             },
             _onObjectMatched: function (oEvent) {
-
+                
                 var self = this;
+                
                 var oDataModel = self.getOwnerComponent().getModel();
                 var path = oDataModel.createKey("/DecretoImpegnoSet", {
                     Amministrazione: oEvent.getParameters().arguments.campo,
@@ -49,15 +54,16 @@ sap.ui.define(
                    oDataModel.read(path, {
                      success: function(data, oResponse){
                          self.getView().getModel("temp").setProperty('/SelectedDecree', data); 
-                         
-                         var stato= data.CodiceStato
-                         if (stato == "01") {
+                       
+                        //  var stato= data.CodiceStato
+                        //  if (stato == "01") {
                             
-                            //var oProprietà = self.getView().getModel();
-                            var state= self.getView().byId("invFirma");
-                            state.setVisible(false) 
-                             }
+                        //     //var oProprietà = self.getView().getModel();
+                        //     var state= self.getView().byId("invFirma");
+                        //     state.setVisible(false) 
+                        //      }
                              self.viewHeader(data);
+                             self.callIpeEntity()
                             //  self.onDeleteRow(data);
                             //  self.onNavToupdateDecreto(data)
                         },
@@ -71,6 +77,165 @@ sap.ui.define(
                 
             },
 
+
+            callTipoImpEntity: function () {
+                var that = this;
+                var oMdl = new sap.ui.model.json.JSONModel();
+                this.getOwnerComponent().getModel().read("/TipologiaImpegnoSet", {
+                  filters: [],
+                  urlParameters: "",
+                  success: function (data) {
+                    oMdl.setData(data.results);
+                    that.getView().getModel("temp").setProperty('/TipologiaImpegnoSet', data.results)
+                  },
+                  error: function (error) {
+                    //that.getView().getModel("temp").setProperty(sProperty,[]);
+                    //that.destroyBusyDialog();
+                    var e = error;
+                  }
+                });
+          
+          
+              },
+          
+            onSearch: function (oEvent) {
+
+                //var visibilità = this.getView().getModel("temp").getData().Visibilità[0]
+                var that = this,
+                    oModel = that.getOwnerComponent().getModel(),
+                    oTempModel = that.getOwnerComponent().getModel("temp"),
+                    aFilters = [];
+                
+    
+                aFilters.push(
+                    new Filter({ path: "Zregistrato", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").RegistratoBozza }),
+                    new Filter({ path: "ZCodIpe", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").CodiceIpe }),
+                    new Filter({ path: "ZNumCla", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroClausola }),
+                    new Filter({ path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
+                    new Filter({ path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
+                    new Filter({ path: "Gjahr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Esercizio }),
+                    new Filter({ path: "Zammin", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Amministrazione }),
+                    new Filter({ path: "Zcoddecr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroDecreto }),
+                    new Filter({ path: "Zufficioliv1", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1 }),
+                    new Filter({ path: "Zufficioliv2", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv2 }),
+                    new Filter({ path: "ZCodGius", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo }),
+                    new Filter({ path: "ZidIpe", operator: FilterOperator.EQ, value1: "" }),
+                    new Filter({ path: "ZCodCla", operator: FilterOperator.EQ, value1: "" })
+                );
+                // var abc=this.getView().byId("filterbar").getAllFilterItems();
+
+                // var bindingInfo = ""
+                // var path = ""
+               
+                
+                // var numFilter = oEvent.getParameters().selectionSet.length;
+
+                // for (let i = 0; i < numFilter; i++) {
+
+                //     bindingInfo = "items"
+                //     path = oEvent.getParameters().selectionSet[i].getBindingInfo(bindingInfo)
+                //     if (path == undefined) {
+                //         bindingInfo = "suggestionItems"
+                //         path = oEvent.getParameters().selectionSet[i].getBindingInfo(bindingInfo)
+                //     }
+                //     var filtro = oEvent.getParameters().selectionSet[i]
+                   
+                //console.log(datiGI)
+
+                var oModel = that.getModel();
+
+                that.getModel().metadataLoaded().then(function () {
+                    oModel.read("/IpeEntitySet", {
+                        filters: aFilters,
+                        //urlParameters:{ "AutorityRole": visibilità.AGR_NAME, "AutorityFikrs": visibilità.FIKRS, "AutorityPrctr": visibilità.PRCTR },
+                        success: function (data, oResponse) {
+                            var oModelJson = new sap.ui.model.json.JSONModel();
+                            oModelJson.setData(data.results);
+                            that.getView().getModel("temp").setProperty('/IpeEntitySet', oModelJson);
+                            that.getOwnerComponent().setModel(oModelJson, "ListaIpe");
+                        },
+                        error: function (error) {
+                            var e = error;
+                            MessageBox.error("Errore durante l'estrazione della tabella", {
+                                actions: [sap.m.MessageBox.Action.OK],
+                                emphasizedAction: MessageBox.Action.OK,
+                            })
+                        }
+
+                    });
+
+                });
+            
+               
+        
+
+        
+
+    },
+  
+            // callIpeEntity: function () {
+
+            //     var that = this,
+            //         oModel = that.getOwnerComponent().getModel(),
+            //         oTempModel = that.getOwnerComponent().getModel("temp"),
+            //         aFilters = [];
+    
+                
+    
+            //     aFilters.push(
+            //         new Filter({ path: "Zregistrato", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").RegistratoBozza }),
+            //         new Filter({ path: "ZCodIpe", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").CodiceIpe }),
+            //         new Filter({ path: "ZNumCla", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroClausola }),
+            //         new Filter({ path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
+            //         new Filter({ path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
+            //         new Filter({ path: "Gjahr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Esercizio }),
+            //         new Filter({ path: "Zammin", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Amministrazione }),
+            //         new Filter({ path: "Zcoddecr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroDecreto }),
+            //         new Filter({ path: "Zufficioliv1", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1 }),
+            //         new Filter({ path: "Zufficioliv2", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv2 }),
+            //         new Filter({ path: "ZCodGius", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo }),
+            //         new Filter({ path: "ZidIpe", operator: FilterOperator.EQ, value1: "" }),
+            //         new Filter({ path: "ZCodCla", operator: FilterOperator.EQ, value1: "" })
+            //     );
+    
+    
+            //     oModel.read("/IpeEntitySet", {
+            //         filters: aFilters,
+            //         urlParameters: "",
+            //         success: function (data) {
+            //             var results = data.results;
+            //             if (results.length > 0) {
+            //                 // var mnth = ("0" + (results[0].Zzdatastipula.getMonth() + 1)).slice(-2),
+            //                 // day = ("0" + results[0].Zzdatastipula.getDate()).slice(-2);
+    
+            //                 // var nData = [results[0].Zzdatastipula.getFullYear(), mnth, day].join("-");
+            //                 // results[0].Zzdatastipula = nData.split("-").reverse().join(".");
+    
+            //                 that.getView().getModel("IpeEntitySet").setProperty('/', results[0]);
+    
+            //             } else {
+            //                 that.getView().getModel("IpeEntitySet").setProperty('/', []);
+            //                 that.getView().getModel("temp").setProperty('/NewIPE', "X");
+            //             }
+            //             //that.controlSwitch(results);
+            //             // if (results.ZFlContOrd == "X") {
+            //             // 	that.getView().byId("switch").setState(true) 
+    
+            //             // }else{
+            //             // 	that.getView().byId("switch").setState(false) 
+            //             // }
+    
+            //         },
+            //         error: function (error) {
+            //             //that.getView().getModel("temp").setProperty(sProperty,[]);
+            //             //that.destroyBusyDialog();
+            //             console.log(error);
+            //         }
+    
+            //     });
+            //     //this.viewHeaderIpe();
+            // },
+     
             viewHeader: function (data) {
                 // console.log(this.getView().getModel("temp").getData(
                 // "/HeaderNISet('"+ oEvent.getParameters().arguments.campo +
@@ -79,18 +244,22 @@ sap.ui.define(
                 // "','"+ oEvent.getParameters().arguments.campo3 +
                 // "','"+ oEvent.getParameters().arguments.campo4 +
                 // "','"+ oEvent.getParameters().arguments.campo5 + "')"))
-
+                var oTempModel = this.getOwnerComponent().getModel("temp");
                 // var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
                 // for (var i = 0; i < header.length; i++) {
+if (data.DataProtocolloAmm != null) {
+    
 
-                    var dataNuova = new Date(data.DataProtocolloRag),
+                    var dataNuova = new Date(data.DataProtocolloAmm),
                         mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
                         day = ("0" + dataNuova.getDate()).slice(-2);
                     var nData = [dataNuova.getFullYear(), mnth, day].join("-");
                     var nDate = nData.split("-").reverse().join(".");
                     //var dataProtocolloRag = data.DataProtocolloRag
-                    this.getView().byId("dataProtRag").setText(nDate)
-
+                    this.getView().byId("DprotAmm").setText(nDate)
+                    this.getView().byId("DataProtAmm").setText(nDate)
+                    
+}
 
                     // if (data.Amministrazione == oEvent.getParameters().arguments.campo &&
                     //     data.AreaFinanziaria == oEvent.getParameters().arguments.campo1 &&
@@ -144,12 +313,19 @@ sap.ui.define(
 
                         var numProtAmm = data.NProtocolloAmm
                         this.getView().byId("NprotAmm").setText(numProtAmm)
+                        this.getView().byId("numeroProtAmm").setText(numProtAmm)
+                        
 
                         var decrState = data.DescrizioneStato
                         this.getView().byId("StatoDecreto").setText(decrState)
-
+                        this.getView().byId("Sdecreto").setText(decrState)
+                        
                         var ImpgnType = data.TipologiaImpegno
-                        this.getView().byId("TipologiaImpegno").setText(ImpgnType)
+                        var tipoImp = _.findWhere(oTempModel.getProperty('/TipologiaImpegnoSet'), {Codice: ImpgnType})
+                        //var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {id: tipoImp.Descrizione})
+                        var tipologia = tipoImp.Descrizione
+                        this.getView().byId("TipologiaImpegno").setText(tipologia)
+                        this.getView().byId("Timpegno").setText(tipologia)
 
                         var contratto = data.ContrattoOrdine
                         this.getView().byId("Cordine").setText(contratto)
@@ -369,6 +545,7 @@ sap.ui.define(
             },
 
             navToWizard: function (oEvent) {
+                //var row = this.getView().byId("ListaIPE").getSelectedItem().getBindingContext("ListaIpe").getObject()
                 this.getOwnerComponent().getRouter().navTo("wizard");
             },
             navToFirma: function (oEvent) {

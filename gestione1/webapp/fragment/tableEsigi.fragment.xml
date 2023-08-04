@@ -78,15 +78,6 @@
                                     <core:Item key="{previsionWF>anno}" text="{previsionWF>anno}" />                                    
                                 </m:items>
                             </m:ComboBox>
-
-                            <!-- <m:StepInput
-                                id="previsionStepInput"
-                                value="{previsionWF>/stepCurrentYear}"
-                                width="150px"
-                                min="{previsionWF>/minStep}"
-                                max="{previsionWF>/maxStep}"
-                                step="1"
-                                change="onChangePrevisionYear"/> -->
                     </m:content>
                 </m:OverflowToolbar>
                 </m:headerToolbar>
@@ -99,15 +90,15 @@
                                 width="100px" 
                                 value="{previsionWF>/totAnno}"
                                 change="previsionWFTotAnnoLiveChange"/>
-<m:ToolbarSpacer/>
- <m:Label text="Importo Clausola:" labelFor="" />
+
+                        <m:ToolbarSpacer />
+
+                        <m:Label text="Importo clausola:" labelFor="importoClausolaWFTotAnno"/>      
                         <m:Input
-                                id="previsionWFImpCla"
-                                type="Number"
+                                id="importoClausolaWFTotAnno"
                                 width="100px" 
-                                value="{previsionWF>/annoImporto}"
-                               />
-                                
+                                value="{previsionWF>/importoClausola}"
+                                enabled="false"/>  
                     </m:OverflowToolbar>
                 </m:infoToolbar>
                 <m:columns>

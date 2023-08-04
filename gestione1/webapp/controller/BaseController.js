@@ -197,6 +197,40 @@ sap.ui.define([
 			// return arr;
 		},
 
+		callClausolaEntity: function () {
+
+			var that = this,
+				oModel = that.getOwnerComponent().getModel(),
+				oTempModel = that.getOwnerComponent().getModel("temp"),
+			    IdIpe = oTempModel.getProperty("/IpeEntitySet").getData()[0].ZidIpe,
+				aFilters = [];
+
+
+			aFilters.push(
+				
+				new Filter({ path: "ZidIpe", operator: FilterOperator.EQ, value1: IdIpe })
+				
+			);
+
+
+			oModel.read("/ClausolaSet", {
+				filters: aFilters,
+				urlParameters: "",
+				success: function (data) {
+					var results = data.results;
+					
+						that.getView().getModel("temp").setProperty('Clausole', results);		
+
+				},
+				error: function (error) {
+					console.log(error);
+				}
+
+			});
+			//this.viewHeaderIpe();
+		},
+
+		
 
 		callIpeEntity: function () {
 
@@ -237,6 +271,12 @@ sap.ui.define([
 						// results[0].Zzdatastipula = nData.split("-").reverse().join(".");
 
 						that.getView().getModel("IpeEntitySet").setProperty('/', results[0]);
+						var ipe = data.results[0]
+						var stato = that.getOwnerComponent().getModel("temp").getData().SelectedDecree.DescrizioneStato
+						if (stato === "Decreto impegno registrato in provvisorio") {
+							that.getDataModIpe(ipe);
+						}
+
 
 					} else {
 						that.getView().getModel("IpeEntitySet").setProperty('/', []);
@@ -261,6 +301,49 @@ sap.ui.define([
 			//this.viewHeaderIpe();
 		},
 
+
+
+		getDataModIpe: function (ipe) {
+			var self = this;
+			var oTempModel = self.getOwnerComponent().getModel("temp")
+			
+
+
+				if (ipe.ZFlContOrd === "") {
+					self.getView().byId("switch").setState(false)
+				} else {
+					self.getView().byId("switch").setState(true)
+				}
+				if (ipe.Zop === "") {
+					self.getView().byId("CB1").setSelected(false)
+					self.getView().byId("CB1").setEnabled(false)
+				} else {
+					self.getView().byId("CB1").setSelected(true)
+					self.getView().byId("CB1").setEnabled(false)
+				}
+
+				self.getView().byId("cup").setValue(ipe.Zzcup)
+				self.getView().byId("cup").setEnabled(false)
+				self.getView().byId("beneficiario1").setValue(ipe.Lifnr)
+				self.getView().byId("beneficiario1").setEnabled(false)
+				self.getView().byId("cFiscale").setValue(ipe.Stcd1)
+				self.getView().byId("nome").setValue(ipe.NameFirst)
+				self.getView().byId("cognome").setValue(ipe.NameLast)
+				self.getView().byId("rSociale").setValue(ipe.ZzragSoc)
+				self.getView().byId("cFiscaleE").setValue(ipe.Taxnumxl)
+				self.getView().byId("IVA").setValue(ipe.Stcd2)
+				self.callModPagEntity()
+				self.getView().byId("mPag").setEnabled(false)
+				self.getView().byId("Iban1").setEnabled(false)
+				self.getView().byId("IdAssPre").setEnabled(false)
+				self.getView().byId("pFin").setEnabled(false)
+				self.getView().byId("StrAmm").setEnabled(false)
+				self.getView().byId("oggSpesa").setValue(ipe.ZoggSpesIm)
+				self.getView().byId("naturAtto").setValue(ipe.Znaturaatto)
+				self.getView().byId("naturAtto").setEnabled(false)
+
+
+		},
 		callPrevisioniEntity: function () {
 			var that = this;
 			var oMdl = new sap.ui.model.json.JSONModel();
@@ -505,7 +588,7 @@ sap.ui.define([
 
 		},
 
-		
+
 		callIbanBenEntity: function () {
 
 			var that = this,
@@ -516,8 +599,8 @@ sap.ui.define([
 			//var lifnr = oTempModel.getProperty("/ContrattoSet").Lifnr;
 			var oTempModel = that.getOwnerComponent().getModel("temp")
 			//this.getOwnerComponent().getModel("CountryMatchCodeSet")
-			var modPag = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {Zdescwels: that.getView().byId("mPag").getValue()})
-			var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {id: modPag.Zdescwels})
+			var modPag = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), { Zdescwels: that.getView().byId("mPag").getValue() })
+			var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), { id: modPag.Zdescwels })
 			var pagamento = modPag.Zwels
 
 			var aFilters = [];
@@ -537,7 +620,7 @@ sap.ui.define([
 					that.getView().getModel("temp").setProperty('/IbanBen', data.results);
 					//that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
 					var modPag = data;
-					
+
 				},
 				error: function (error) {
 					var e = error;
@@ -732,14 +815,14 @@ sap.ui.define([
 
 		},
 		callNaturaAttoEntity: function (oEvent) {
-        var contratto = this.getView().byId("switch").getState()?'X' : ''
-		
-		var aFilters = [];
+			var contratto = this.getView().byId("switch").getState() ? 'X' : ''
 
-		aFilters.push(
-			new Filter({ path: "ZFlContOrd", operator: FilterOperator.EQ, value1: contratto })
-			
-		)
+			var aFilters = [];
+
+			aFilters.push(
+				new Filter({ path: "ZFlContOrd", operator: FilterOperator.EQ, value1: contratto })
+
+			)
 			var that = this,
 				oModel = that.getOwnerComponent().getModel()
 			oModel.read('/NaturaAttoSet', {
@@ -779,8 +862,8 @@ sap.ui.define([
 					if (modPag != []) {
 						that.getZwels(modPag)
 					}
-					
-                    that.callIbanBenEntity()
+
+					that.callIbanBenEntity()
 				},
 				error: function (error) {
 					//that.getView().getModel("temp").setProperty(sProperty,[]);

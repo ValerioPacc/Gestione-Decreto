@@ -33,7 +33,7 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem groupName="gruppo1" id="amministrazioneED" tooltip="suggestion"  visibleInFilterBar="true" name="amministrazioneED" label="{i18n>amministrazioneED}" mandatory="true">
                                 <fb:control>
-                                    <ComboBox id="AmministrazioneED" items="{path: 'temp>/CurrentUserParamSet', sorter: { path: 'Amministrazione' }}">
+                                    <ComboBox id="AmministrazioneED" items="{path: 'temp>/CurrentUserParamSet', sorter: { path: 'Amministrazione' }}" selectedKey="{temp>Value}">
                                      <core:Item id="amministrazioneED1" key="{temp>Value}" text="{temp>Value}" />
                                     </ComboBox>
                                 </fb:control>

@@ -424,7 +424,8 @@ sap.ui.define([
                         var oModelJson = new sap.ui.model.json.JSONModel();
                         oModelJson.setData(data);
                         that.getView().getModel("temp").setProperty('/CurrentUserParamSet', ammin)
-                        console.log("Test")
+                        //console.log("Test")
+        
                         //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
                     },
                     error: function (error) {

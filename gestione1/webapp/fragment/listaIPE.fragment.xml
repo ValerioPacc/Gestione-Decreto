@@ -9,7 +9,30 @@
     xmlns:core="sap.ui.core"
     xmlns:menu="sap.m.MenuItem"
     xmlns:menBtn="sap.m.Menu" height="100%">
-    <Table class="sapUiSizeCompact" id="ListaIPE" items="{DecretoImpegno>/}" includeItemInSelection="true"  mode="SingleSelectLeft">
+          <VBox class="sapUiSmallMarginTop">       
+                <HBox >
+               <Label text="Tipo Ipe: " required="false" /> 
+            <ComboBox id="TipoIpe" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'ZtipoIpe' }}" selectedKey="{temp>ZtipoIpe}">
+             <core:Item id="TipoIpe1" key="{temp>ZtipoIpe}" text="{temp>ZtipoIpe}" />
+            </ComboBox>
+
+             <Label text="Stato Ipe: " required="false" class="sapUiSmallMarginBegin"/> 
+            <ComboBox id="StatoIpe" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'ZcodiStatoipe' }}" selectedKey="{temp>ZtipoIpe}">
+             <core:Item id="StatoIpe1" key="{temp>ZcodiStatoipe}" text="{temp>ZcodiStatoipe}" />
+            </ComboBox>
+
+            <Label text="Numero IPE Da: " class="sapUiSmallMarginBegin"/>
+            <Input id="nIpeDa" showValueHelp="false" value=""  valueHelpOnly="false"  class="sapUiSmallMarginBottom" />
+
+            <Label text="Numero IPE A: " class="sapUiSmallMarginBegin"/>
+            <Input id="nIpeA" showValueHelp="false" value=""  valueHelpOnly="false"  class="sapUiSmallMarginBottom" />
+</HBox>
+            </VBox>
+            <OverflowToolbar >
+            <ToolbarSpacer />
+              <Button   text="Avvio" type="Emphasized" press="onSearch"/>
+            </OverflowToolbar>
+    <Table class="sapUiSizeCompact" id="ListaIPE" items="{ListaIpe>/}" includeItemInSelection="true"  mode="SingleSelectLeft">
         <headerToolbar>
             <OverflowToolbar>
                 <content>
@@ -52,15 +75,15 @@
             </Column>
         </columns>
         <ColumnListItem>
-            <Text text="{DecretoImpegno>NumeroIpe}" />
-            <Text text="{DecretoImpegno>TipoIpe}" />
-            <Text text="{DecretoImpegno>Esercizio}" />
-            <Text text="{DecretoImpegno>PosizioneFinanziaria}" />
-            <Text text="{DecretoImpegno>StrutturaAmmResp}" />
-            <Text text="{DecretoImpegno>ContrattoOrdine}" />
-            <Text text="{DecretoImpegno>Beneficiario}" />
-            <Text text="{DecretoImpegno>}" />
-            <Text text="{DecretoImpegno>}" />
+            <Text text="{ListaIpe>ZCodIpe}" />
+            <Text text="{ListaIpe>ZtipoIpe}" />
+            <Text text="{ListaIpe>Gjahr}" />
+            <Text text="{ListaIpe>Fipex}" />
+            <Text text="{ListaIpe>Fistl}" />
+            <Text text="{ListaIpe>ZFlContOrd}" />
+            <Text text="{ListaIpe>Lifnr}" />
+            <Text text="{ListaIpe>ZoggSpesIm}" />
+            <Text text="{ListaIpe>ZtotVers}" />
 
         </ColumnListItem>
     </Table>

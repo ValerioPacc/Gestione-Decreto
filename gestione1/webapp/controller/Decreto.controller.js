@@ -17,6 +17,7 @@ sap.ui.define(
         this.callEsercizioDeEntity()
         this.callStatoDecrEntity()
         this.callCurrentUserParamEntity()
+        this.valueDate()
         //  var draft= this.getView().getModel("temp").getProperty("/draft");
         //  if (draft === "x") {
         //   oDataModel.read(sObjectPath, {
@@ -39,6 +40,16 @@ sap.ui.define(
 
         // error: getItems(...)[1].setExpanded is not a function
 
+      },
+
+      valueDate: function () {
+       
+        var dataNuova = new Date,
+        mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+        day = ("0" + dataNuova.getDate()).slice(-2);
+      var nData = [dataNuova.getFullYear(), mnth, day].join("-");
+      
+        this.getView().byId("DataDE1").setValue(nData)
       },
 
 
@@ -152,25 +163,35 @@ sap.ui.define(
 
 
       onRegDIbozza: function (oEvent) {
-        var that = this;
-
-
-        var N_tipo_impegno = (this.getView().byId("TypeI").mProperties.value).split(":")[0]
+        // var that = this;
+        // var oTempModel = that.getView().getModel("temp");
+        //var tipImp = oTempModel.getProperty('/TipologiaImpegnoSet')
+        // var uno = _.findWhere(oTempModel.getProperty('/TipologiaImpegnoSet'), {Descrizione: that.getView().byId("TypeI").mProperties.value})
+        // var tre = _.findWhere(oTempModel.getProperty('/TipologiaImpegnoSet'), {id: uno.Descrizione})
+        // var due = uno.Codice
+        var N_tipo_impegno = this.getView().byId("TypeI").mProperties.selectedKey
         var N_es_decreto = this.getView().byId("es_decreto").mProperties.value;
         var N_Amm = this.getView().byId("AmministrazioneED").mProperties.value;
         var N_codiceUff = this.getView().byId("UffApp1").mProperties.value;
         var N_Datade = this.getView().byId("DataDE1").mProperties.dateValue
         var N_NprotAmm = this.getView().byId("numProtocolloAmma1").getValue();
-        var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").mProperties.dateValue
+        var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").getDateValue()
         var N_CcConti = this.getView().byId("CcorteConti").getSelected();
         if (N_CcConti == true)
           var B_CcConti = "1"
         if (N_CcConti == false)
           var B_CcConti = "0"
 
+//           for (var i = 0; i < tipImp.length; i++) {
+//             var impCode  = tipImp[i];
+            
+//           }
+// if (N_tipo_impegno === oTempModel.getProperty('/TipologiaImpegnoSet').Descrizione ) {
+//   N_tipo_impegno === oTempModel.getProperty('/TipologiaImpegnoSet').Codice 
+// }
 
 
-
+var that = this;
         MessageBox.warning("Sei sicuro di voler preimpostare il Decreto?", {
           title: "Attenzione",
           actions: ["Si", "No"],
@@ -197,7 +218,9 @@ sap.ui.define(
                 CodiceUfficio: N_codiceUff,
                 ControlloCorteConti: B_CcConti
               };
-              if (N_Datade != null && N_DataprotAmm != null) {
+            
+              
+              if (N_DataprotAmm != null) {
                 
               
               var dataNuova = new Date(N_DataprotAmm),
@@ -205,8 +228,8 @@ sap.ui.define(
                 day = ("0" + dataNuova.getDate()).slice(-2);
               var nData = [dataNuova.getFullYear(), mnth, day].join("-");
               DecretoImpegnoSet.DataProtocolloAmm = new Date(nData)
-
-
+              }
+              if (N_Datade != null) {
               var newDate = new Date(N_Datade),
                 mnth = ("0" + (newDate.getMonth() + 1)).slice(-2),
                 day = ("0" + newDate.getDate()).slice(-2);

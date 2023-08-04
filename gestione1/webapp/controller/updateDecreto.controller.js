@@ -5,19 +5,21 @@ sap.ui.define(
         'sap/ui/export/Spreadsheet',
         "sap/ui/core/library",
         "sap/m/MessageBox",
+        'sap/ui/model/json/JSONModel',
         'gestione1/model/DateFormatter'
     ],
-    function(BaseController,Spreadsheet,CoreLibrary,MessageBox,DateFormatter) {
+    function(BaseController,Spreadsheet,CoreLibrary,MessageBox,JSONModel,DateFormatter) {
       "use strict";
-  
-      return BaseController.extend("gestione1.controller.updateDecreto", {
+ return BaseController.extend("gestione1.controller.updateDecreto", {
         formatter: DateFormatter,
+     
         onInit() {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.getRoute("updateDecreto").attachPatternMatched(this._onObjectMatched, this);
-            this.callEsercizioEntity()
+            //this.callEsercizioEntity()
+            this.callTipoImpEntity()
             this.callEsercizioDeEntity()
-            
+            this.callCurrentUserParamEntity()
         //  var draft= this.getView().getModel("temp").getProperty("/draft");
         //  if (draft === "x") {
         //   oDataModel.read(sObjectPath, {
@@ -34,15 +36,15 @@ sap.ui.define(
         //     }
         // });
         //  }
-         
 
 
-          
+
+
            // error: getItems(...)[1].setExpanded is not a function
-          
+
         },
-     
-      
+
+
         // navToRegistraIPE: function (oEvent) {
         //     this.getOwnerComponent().getRouter().navTo("registraIPE");
         // },
@@ -71,30 +73,53 @@ sap.ui.define(
 
     },
 
-      callEsercizioEntity: function () {
-        var that = this;
-        var oMdl = new sap.ui.model.json.JSONModel();
-        this.getOwnerComponent().getModel().read("/FiltroEsercizioSet", {
-            filters: [],
-            urlParameters: "",
-            success: function (data) {
-                oMdl.setData(data.results);
-                that.getView().getModel("temp").setProperty('/FiltroEsercizioSet', data.results)
-                //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
-            },
-            error: function (error) {
-                //that.getView().getModel("temp").setProperty(sProperty,[]);
-                //that.destroyBusyDialog();
-                var e = error;
-            }
-        });
+    callTipoImpEntity: function () {
+      var that = this;
+      var oMdl = new sap.ui.model.json.JSONModel();
+      this.getOwnerComponent().getModel().read("/TipologiaImpegnoSet", {
+        filters: [],
+        urlParameters: "",
+        success: function (data) {
+          oMdl.setData(data.results);
+          that.getView().getModel("temp").setProperty('/TipologiaImpegnoSet', data.results)
+        },
+        error: function (error) {
+          //that.getView().getModel("temp").setProperty(sProperty,[]);
+          //that.destroyBusyDialog();
+          var e = error;
+        }
+      });
 
 
     },
 
+
+    //   callEsercizioEntity: function () {
+    //     var that = this;
+    //     var oMdl = new sap.ui.model.json.JSONModel();
+    //     this.getOwnerComponent().getModel().read("/FiltroEsercizioSet", {
+    //         filters: [],
+    //         urlParameters: "",
+    //         success: function (data) {
+    //             oMdl.setData(data.results);
+    //             that.getView().getModel("temp").setProperty('/FiltroEsercizioSet', data.results)
+    //             //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+    //         },
+    //         error: function (error) {
+    //             //that.getView().getModel("temp").setProperty(sProperty,[]);
+    //             //that.destroyBusyDialog();
+    //             var e = error;
+    //         }
+    //     });
+
+
+    // },
+
+  
     _onObjectMatched: function (oEvent) {
 
         var self = this;
+        var oTempModel = self.getOwnerComponent().getModel("temp");
         var oDataModel = self.getOwnerComponent().getModel();
         var path = oDataModel.createKey("/DecretoImpegnoSet", {
             Amministrazione: oEvent.getParameters().arguments.campo,
@@ -108,13 +133,40 @@ sap.ui.define(
             UfficioLiv2: oEvent.getParameters().arguments.campo8,
         });
 
-        
-        //oDataModel.metadataLoaded().then( function() { 
+
+        //oDataModel.metadataLoaded().then( function() {
            oDataModel.read(path, {
              success: function(data, oResponse){
-                 self.getView().getModel("temp").setProperty('/SelectedDecree', data); 
-                 
-                 
+if (data.DataProtocolloAmm != null) {
+  
+
+              var dataNuova = data.DataProtocolloAmm,
+              mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
+              day = ("0" + dataNuova.getDate()).slice(-2);
+             var nData = [dataNuova.getFullYear(), mnth, day].join("-");
+             var nDate = nData.split("-").reverse().join("/");
+             data.DataProtocolloAmm= nDate ;
+}
+           
+            var newDate = data.DataDecreto,
+            mnth = ("0" + (newDate.getMonth() + 1)).slice(-2),
+            day = ("0" + newDate.getDate()).slice(-2);
+            var nData1= [newDate.getFullYear(), mnth, day].join("-");
+            var nDate1 = nData1.split("-").reverse().join("/");
+            data.DataDecreto= nDate1 ;
+
+              if (data.DataProtocolloAmm === null) {
+                self.getView().byId("dataProtocolloAmm1").setValue(null)
+              }
+              var impegno = data.TipologiaImpegno
+              var tipoImp = _.findWhere(oTempModel.getProperty('/TipologiaImpegnoSet'), {Codice: impegno})
+              //var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), {id: tipoImp.Descrizione})
+              var tipologia = tipoImp.Descrizione
+              var tipoImp = self.getView().byId("TypeI").setValue(tipologia)
+                 self.getView().getModel("temp").setProperty('/SelectedDecree', data);
+
+                
+
                 },
                  error: function(error){
                 var e = error;
@@ -122,19 +174,51 @@ sap.ui.define(
         });
     //});
 
-        
-        
+
+
     },
+
+
+    callCurrentUserParamEntity: function () {
+      var that = this;
+      var oModel = that.getOwnerComponent().getModel()
+      var ammin = []
+      var path = oModel.createKey("/CurrentUserParamSet", {
+          Name:'/PRA/PN_DN_FUNC_AREA'
+
+      })
+      oModel.read(path, {
+          filters: [],
+          urlParameters: "",
+          success: function (data) {
+              var amm = data.Value.split(".")[0]
+              data.Value = amm
+              ammin.push(data)
+              var oModelJson = new sap.ui.model.json.JSONModel();
+              oModelJson.setData(data);
+              that.getView().getModel("temp").setProperty('/CurrentUserParamSet', ammin)
+              console.log("Test")
+              //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
+          },
+          error: function (error) {
+              //that.getView().getModel("temp").setProperty(sProperty,[]);
+              //that.destroyBusyDialog();
+              var e = error;
+          }
+      });
+
+
+  },
 
     onBackButton: function () {
         window.history.go(-1);
         //this.getOwnerComponent().getRouter().navTo("DettagliDE");
-        
+
     },
-      
+
       onModDIbozza: function (oEvent) {
         var that = this
-        var data = that.getView().getModel("temp").oData.SelectedDecree    
+        var data = that.getView().getModel("temp").oData.SelectedDecree
         // var url = location.href
         // var sUrl = url.split("/dettagliDE/")[1]
         // var aValori = sUrl.split(",")
@@ -148,8 +232,8 @@ sap.ui.define(
         var RegistratoBozza = data.RegistratoBozza
         var UfficioLiv1 = data.UfficioLiv1
         var UfficioLiv2 = data.UfficioLiv2
-       
-        
+
+
         // var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
         // for (var i = 0; i < header.length; i++) {
             if (data.Amministrazione == Amministrazione &&
@@ -167,10 +251,10 @@ sap.ui.define(
                     emphasizedAction: MessageBox.Action.YES,
                     onClose: function (oAction) {
                         if (oAction === sap.m.MessageBox.Action.YES) {
-                            
+
                             // var oModel = that.getOwnerComponent().getModel("temp");
                             var oModel = that.getView().getModel();
-                            
+
 
                             var path = oModel.createKey("/DecretoImpegnoSet", {
                                 Amministrazione: data.Amministrazione,
@@ -183,38 +267,43 @@ sap.ui.define(
                                 UfficioLiv1: data.UfficioLiv1,
                                 UfficioLiv2: data.UfficioLiv2,
                             });
-                             
+
         //                     var dataNuova = new Date(data.DataProtocolloAmm),
         //                      mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
         //                      day = ("0" + dataNuova.getDate()).slice(-2);
         //                     var nData = [dataNuova.getFullYear(), mnth, day].join("-");
         //                     var nDate = nData.split("-").reverse().join(".");
         //    data.DataProtocolloAmm= new Date(nDate)
-           
-           
+
+
         //    var newDate = new Date(data.DataDecreto),
         //    mnth = ("0" + (newDate.getMonth() + 1)).slice(-2),
         //    day = ("0" + newDate.getDate()).slice(-2);
         //   var nData1= [newDate.getFullYear(), mnth, day].join("-");
         //   var nDate1 = nData1.split("-").reverse().join(".");
         //   data.DataDecreto= new Date(nDate1)
-                                
+
                                 var editDecreto = {
                                     TipologiaImpegno: that.getView().byId("TypeI").getSelectedKey(),
-                                    DataDecreto: new Date(that.getView().byId("DataDE1").getValue()),
+                                    DataDecreto: that.getView().byId("DataDE1").getValue(),
                                     NProtocolloAmm: that.getView().byId("numProtocolloAmma1").getValue(),
-                                    DataProtocolloAmm: new Date(that.getView().byId("dataProtocolloAmm1").getValue()),
+                                    DataProtocolloAmm: that.getView().byId("dataProtocolloAmm1").getValue()!== ""?that.getView().byId("dataProtocolloAmm1").getValue():null,
                                     ControlloCorteConti: that.getView().byId("CcorteConti").getSelected() === true ? '1' : '0'
                                 };
-                         var dataNuova = editDecreto.DataProtocolloAmm,
+                                
+                                  if (editDecreto.DataProtocolloAmm != null) {
+                                    
+                                  
+                                
+                         var dataNuova = new Date(editDecreto.DataProtocolloAmm),
                              mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
                              day = ("0" + dataNuova.getDate()).slice(-2);
                             var nData = [dataNuova.getFullYear(), mnth, day].join("-");
                             //var nDate = nData.split("-").reverse().join(".");
                             editDecreto.DataProtocolloAmm= nData + "T00:00:00";
-           
-           
-           var newDate = editDecreto.DataDecreto,
+
+                          }
+           var newDate = new Date (editDecreto.DataDecreto),
            mnth = ("0" + (newDate.getMonth() + 1)).slice(-2),
            day = ("0" + newDate.getDate()).slice(-2);
           var nData1= [newDate.getFullYear(), mnth, day].join("-");
@@ -228,8 +317,8 @@ sap.ui.define(
 //                             // var nData = [dataNuova.getFullYear(), mnth, day].join("-");
 //                             // var nDate = nData.split("-").reverse().join(".");
 //            editDecreto.DataProtocolloAmm= new Date(date1)
-           
-           
+
+
 //            var newDate =  editDecreto.DataDecreto.split(".")
 //            var date = newDate[1] + "/" +  newDate[0] + "/" + newDate[2]
 //            //     mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
@@ -237,7 +326,7 @@ sap.ui.define(
 //            // var nData = [dataNuova.getFullYear(), mnth, day].join("-");
 //            // var nDate = nData.split("-").reverse().join(".");
 // editDecreto.DataDecreto= new Date(date)
-          
+
 
                                 oModel.update(path, editDecreto, {
                                     success: function (result, response) {
@@ -253,39 +342,39 @@ sap.ui.define(
                                                 emphasizedAction: "OK",
                                                 onClose: function (oAction) {
                                                   if (oAction === "OK") {
-                      
+
                                                     oModel.read(path, {
                                                         success: function(data, oResponse){
                                                             that.getView().getModel("temp").setProperty('/SelectedDecree', data);
                                                             that.getView().getModel("temp").setProperty('/draft', 'x' );
                                                             var Decr = data;
                                                             that.getOwnerComponent().getRouter().navTo("registraIPE" , { campo: Decr.Amministrazione, campo1: Decr.AreaFinanziaria, campo2: Decr.ChiaveGiustificativo, campo3: Decr.Ente, campo4: Decr.Esercizio, campo5: Decr.NumeroDecreto, campo6: Decr.RegistratoBozza, campo7: Decr.UfficioLiv1, campo8: Decr.UfficioLiv2 });
-                                                            
+
                                                            },
                                                             error: function(error){
                                                            var e = error;
                                                        }
                                                    });
-                                                    
-                      
-                      
-                                                 
-                      
+
+
+
+
+
                                                   }
-                      
+
                                                   else {
                                                     that.navToHome();
-                                                    
-                      
+
+
                                                   }
-                      
+
                                                 }
                                               })
-                      
+
                                             }
                                             else {
                                               that.navToHome();
-                                             
+
                                             }
                                           }
                                         })
@@ -298,16 +387,16 @@ sap.ui.define(
                                             })
                                 }
                             });
-                        
+
                         }
                     }
                 });
                 }
             //}
-        
+
     },
-    
+
       });
-      
+
     }
   );
