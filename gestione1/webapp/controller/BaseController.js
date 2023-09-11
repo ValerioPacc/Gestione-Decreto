@@ -201,32 +201,40 @@ sap.ui.define([
 
 			var that = this,
 				oModel = that.getOwnerComponent().getModel(),
-				oTempModel = that.getOwnerComponent().getModel("temp"),
-			    IdIpe = oTempModel.getProperty("/IpeEntitySet").getData()[0].ZidIpe,
+				oIpeModel = that.getOwnerComponent().getModel("IpeEntitySet"),
+			    IdIpe = oIpeModel.getProperty("/SelectedIpe").ZidIpe,
 				aFilters = [];
 
 
 			aFilters.push(
-				
 				new Filter({ path: "ZidIpe", operator: FilterOperator.EQ, value1: IdIpe })
-				
 			);
-
 
 			oModel.read("/ClausolaSet", {
 				filters: aFilters,
 				urlParameters: "",
 				success: function (data) {
 					var results = data.results;
-					
-						that.getView().getModel("temp").setProperty('Clausole', results);		
-
+					that.getView().getModel("temp").setProperty('/Clausole', results);	
 				},
 				error: function (error) {
 					console.log(error);
 				}
-
 			});
+
+			oModel.read("/PrevisioneImpegnoSet", {
+				filters: aFilters,
+				urlParameters: "",
+				success: function (data) {
+					var results = data.results;
+					that.getView().getModel("temp").setProperty('/PrevisioneImpegno', results);	
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			});
+
+
 			//this.viewHeaderIpe();
 		},
 
@@ -271,16 +279,24 @@ sap.ui.define([
 						// results[0].Zzdatastipula = nData.split("-").reverse().join(".");
 
 						that.getView().getModel("IpeEntitySet").setProperty('/', results[0]);
-						var ipe = data.results[0]
 						var stato = that.getOwnerComponent().getModel("temp").getData().SelectedDecree.DescrizioneStato
 						if (stato === "Decreto impegno registrato in provvisorio") {
-							that.getDataModIpe(ipe);
+						that.getView().byId("salvaBozza").setVisible(false)
+                that.getView().byId("salvaBozza1").setVisible(false)
+                that.getView().byId("salvaBozza2").setVisible(false)
+                that.getView().byId("salvaBozza3").setVisible(false)
+                that.getView().byId("salvaBozza4").setVisible(false)
 						}
-
 
 					} else {
 						that.getView().getModel("IpeEntitySet").setProperty('/', []);
 						that.getView().getModel("temp").setProperty('/NewIPE', "X");
+					}
+					if (data.results !=  0) {
+						
+						
+					}else{
+						
 					}
 					//that.controlSwitch(results);
 					// if (results.ZFlContOrd == "X") {
@@ -301,7 +317,7 @@ sap.ui.define([
 			//this.viewHeaderIpe();
 		},
 
-
+		
 
 		getDataModIpe: function (ipe) {
 			var self = this;
@@ -334,14 +350,21 @@ sap.ui.define([
 				self.getView().byId("IVA").setValue(ipe.Stcd2)
 				self.callModPagEntity()
 				self.getView().byId("mPag").setEnabled(false)
+				self.getView().byId("Iban1").setValue(ipe.Iban)
 				self.getView().byId("Iban1").setEnabled(false)
 				self.getView().byId("IdAssPre").setEnabled(false)
+				self.getView().byId("pFin").setValue(ipe.Fipex)
 				self.getView().byId("pFin").setEnabled(false)
+				self.getView().byId("StrAmm").setValue(ipe.Fistl)
 				self.getView().byId("StrAmm").setEnabled(false)
 				self.getView().byId("oggSpesa").setValue(ipe.ZoggSpesIm)
 				self.getView().byId("naturAtto").setValue(ipe.Znaturaatto)
 				self.getView().byId("naturAtto").setEnabled(false)
-
+				self.getView().byId("numConAtt").setValue(ipe.ZZnumcontratt)
+				self.getView().byId("numConAtt").setEnabled(false)
+				self.getView().byId("dataAtt").setValue(ipe.Zdataatto)
+				self.getView().byId("dataAtt").setEnabled(false)
+				self.getView().byId("CB3").setEnabled(false)
 
 		},
 		callPrevisioniEntity: function () {

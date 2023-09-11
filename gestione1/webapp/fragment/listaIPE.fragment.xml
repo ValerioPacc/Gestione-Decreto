@@ -12,8 +12,8 @@
           <VBox class="sapUiSmallMarginTop">       
                 <HBox >
                <Label text="Tipo Ipe: " required="false" /> 
-            <ComboBox id="TipoIpe" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'ZtipoIpe' }}" selectedKey="{temp>ZtipoIpe}">
-             <core:Item id="TipoIpe1" key="{temp>ZtipoIpe}" text="{temp>ZtipoIpe}" />
+            <ComboBox id="TipoIpe" items="{path: 'temp>/TipoIpeSet', sorter: { path: 'ZtipoIpe' }}" selectedKey="{IpeEntitySet>ZtipoIpe}">
+             <core:Item id="TipoIpe1" key="{temp>Description}" text="{temp>Description}" />
             </ComboBox>
 
              <Label text="Stato Ipe: " required="false" class="sapUiSmallMarginBegin"/> 
@@ -39,7 +39,7 @@
                     <ToolbarSpacer />
                     <Button  id="antStampa"  type="Emphasized" text="Anteprima di Stampa" visible="false"/>
                     <Button icon="sap-icon://print" id="stampa" type="Emphasized" text="Stampa" visible="false"/>
-                    <Button icon="sap-icon://edit" id="rettificaIPE"  type="Emphasized" text="Rettifica IPE" press="navToWizard"/>
+                    <Button icon="sap-icon://edit" id="rettificaIPE"  type="Emphasized" text="Rettifica IPE" press="navToUpdateIpe"/>
                     <Button icon="sap-icon://search" id="DettaglioIPE" type="Emphasized" text="Dettaglio IPE" />
                     <Button icon="sap-icon://excel-attachment" id="Esporta" press="onExport" type="Emphasized" text="Esporta" />
                 </content>

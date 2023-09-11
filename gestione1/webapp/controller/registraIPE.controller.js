@@ -1,6 +1,6 @@
 sap.ui.define(
     [
-        "sap/ui/core/mvc/Controller",
+        "./BaseController",
         "sap/m/MessageBox",
         "sap/m/Dialog",
         "sap/ui/core/library",
@@ -32,6 +32,7 @@ sap.ui.define(
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
           oRouter.getRoute("registraIPE").attachPatternMatched(this._onObjectMatched, this);
           this.callStatoDecEntity()
+          this.callIpeEntity()
           // var view= this.getView();
           // var dataDecr = this.getOwnerComponent().getModel("temp").getData().SelectedDecree.DataDecreto;
           //       var dataNuova = new Date(dataDecr),
@@ -157,9 +158,10 @@ sap.ui.define(
         this.getOwnerComponent().getRouter().navTo("RegistraIPE");
       }, 
       navToWizard: function (oEvent) {
+        var IpeMdl = this.getOwnerComponent().getModel("IpeEntitySet").oData;
         
-        this.getOwnerComponent().getRouter().navTo("wizard");
-        
+        //this.getOwnerComponent().getRouter().navTo("wizard", {campo:IpeMdl.Zregistrato, campo1:IpeMdl.ZCodIpe, campo2: IpeMdl.ZNumCla, campo3:IpeMdl.Zammin, campo4:IpeMdl.Bukrs, campo5:IpeMdl.Fikrs, campo6:IpeMdl.Gjahr, campo7:IpeMdl.Zufficioliv1, campo8:IpeMdl.Zufficioliv2, campo9:IpeMdl.Zcoddecr, campo10:IpeMdl.ZCodGius, campo11:IpeMdl.ZidIpe, campo12:IpeMdl.ZCodCla});
+        this.getOwnerComponent().getRouter().navTo("wizard", {campo:" ", campo1:" ", campo2: " ", campo3: " ", campo4: " ", campo5: " ", campo6: " ", campo7: " ", campo8: " ", campo9: " ", campo10: " " , campo11: " ", campo12: " "});
     },
     navToView1: function (oEvent) {
       this.getOwnerComponent().getRouter().navTo("View1");

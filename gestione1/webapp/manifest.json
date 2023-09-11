@@ -155,7 +155,7 @@
                 },
                 {
                     "name": "wizard",
-                    "pattern": "wizard",
+                    "pattern": "wizard/{campo},{campo1},{campo2},{campo3},{campo4},{campo5},{campo6},{campo7},{campo8},{campo9},{campo10},{campo11},{campo12}", 
                     "titleTarget": "",
                     "greedy": false,
                     "target": "Targetwizard"

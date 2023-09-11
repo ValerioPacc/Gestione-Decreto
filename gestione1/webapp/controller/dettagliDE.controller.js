@@ -24,13 +24,12 @@ sap.ui.define(
                 this.callTipoImpEntity()
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.getRoute("dettagliDE").attachPatternMatched(this._onObjectMatched, this);
-                
+                this.callTipoIPEntitySet()
                 //var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
                 // if (row.CodiceStato == "01") {
                 //     this.getView().byId("invFirma").setEnabled(false)
                 // }
-
-
+              
             },
             _onObjectMatched: function (oEvent) {
                 
@@ -54,7 +53,10 @@ sap.ui.define(
                    oDataModel.read(path, {
                      success: function(data, oResponse){
                          self.getView().getModel("temp").setProperty('/SelectedDecree', data); 
-                       
+                         var stato = self.getOwnerComponent().getModel("temp").getData().SelectedDecree.DescrizioneStato
+                if (stato === "Decreto impegno registrato in provvisorio") {
+                    self.getView().byId("rettificaDE").setEnabled(false)
+                }
                         //  var stato= data.CodiceStato
                         //  if (stato == "01") {
                             
@@ -78,6 +80,7 @@ sap.ui.define(
             },
 
 
+
             callTipoImpEntity: function () {
                 var that = this;
                 var oMdl = new sap.ui.model.json.JSONModel();
@@ -87,6 +90,26 @@ sap.ui.define(
                   success: function (data) {
                     oMdl.setData(data.results);
                     that.getView().getModel("temp").setProperty('/TipologiaImpegnoSet', data.results)
+                  },
+                  error: function (error) {
+                    //that.getView().getModel("temp").setProperty(sProperty,[]);
+                    //that.destroyBusyDialog();
+                    var e = error;
+                  }
+                });
+          
+          
+              },
+
+              callTipoIPEntitySet: function () {
+                var that = this;
+                var oMdl = new sap.ui.model.json.JSONModel();
+                this.getOwnerComponent().getModel().read("/TipoIpeSet", {
+                  filters: [],
+                  urlParameters: "",
+                  success: function (data) {
+                    oMdl.setData(data.results);
+                    that.getView().getModel("temp").setProperty('/TipoIpeSet', data.results)
                   },
                   error: function (error) {
                     //that.getView().getModel("temp").setProperty(sProperty,[]);
@@ -552,15 +575,20 @@ if (data.DataProtocolloAmm != null) {
                 this.getOwnerComponent().getRouter().navTo("firmaDecreto", {campo:Amministrazione, campo1:AreaFinanziaria, campo2: ChiaveGiustificativo, campo3:Ente, campo4:Esercizio, campo5:NumeroDecreto, campo6:RegistratoBozza, campo7:UfficioLiv1, campo8:UfficioLiv2 })
             },
 
+            navToUpdateIpe: function (oEvent) {
+                var row = this.getView().byId("ListaIPE").getSelectedItem().getBindingContext("ListaIpe").getObject()
+                this.getOwnerComponent().getRouter().navTo("wizard", {campo:row.Zregistrato, campo1:row.ZCodIpe, campo2: row.ZNumCla, campo3:row.Zammin, campo4:row.Bukrs, campo5:row.Fikrs, campo6:row.Gjahr, campo7:row.Zufficioliv1, campo8:row.Zufficioliv2, campo9:row.Zcoddecr, campo10:row.ZCodGius, campo11:row.ZidIpe, campo12:row.ZCodCla});;
+            },
+
 
             onBackButton: function () {
                 // this.getOwnerComponent().getRouter().navTo("View1");
-                this.getView().getModel("temp").setProperty("/SelectedDecree",[]);
-                var oTempModel = this.getView().getModel("temp");
-                oTempModel.setProperty("/draft","");
-                window.history.go(-1);
-               
-
+                // this.getView().getModel("temp").setProperty("/SelectedDecree",[]);
+                // var oTempModel = this.getView().getModel("temp");
+                // oTempModel.setProperty("/draft","");
+                // window.history.go(-1);
+                // location.reload()
+                this.navToHome()
                 
             },
 

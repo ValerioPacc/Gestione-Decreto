@@ -22,7 +22,7 @@
               
                 <m:ToolbarSpacer/>
                <m:Button id="idPNI" type="Emphasized" class="marginRight" icon="sap-icon://add" text=" PNI/Autorizzazione" press="onOpenDialog1"/>
-               <m:Button type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight" press="onDelAuth"/>
+               <m:Button id="delete" type="Emphasized" icon="sap-icon://delete" text="Elimina" class="sapUiSmallMarginStart marginRight" press="onDelAuth"/>
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://excel-attachment" text="Esporta" enabled="false"/>
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
             </m:OverflowToolbar>
