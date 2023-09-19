@@ -96,7 +96,7 @@ sap.ui.define(
 
 
       },
-
+      // getEntity per IpeEntity per la modifica Ipe //
       _onObjectMatched: function (oEvent) {
 
         var that = this
@@ -169,71 +169,7 @@ sap.ui.define(
         //this.viewHeaderIpe();
       },
 
-      // callIpeProvvisorio: function () {
-
-      //   var that = this,
-      //     oModel = that.getOwnerComponent().getModel(),
-      //     oTempModel = that.getOwnerComponent().getModel("temp")
-      //   oTempModel.getProperty("/SelectedDecree")
-      //   that.getOwnerComponent().getModel("IpeEntitySet").setProperty('/', [])
-
-      //   var path = oModel.createKey("/IpeEntitySet", {
-      //     Zregistrato: oTempModel.getProperty("/SelectedDecree").RegistratoBozza,
-      //     ZCodIpe: oTempModel.getProperty("/SelectedDecree").CodiceIpe,
-      //     ZNumCla: oTempModel.getProperty("/SelectedDecree").NumeroClausola,
-      //     Zammin: oTempModel.getProperty("/SelectedDecree").Amministrazione,
-      //     Bukrs: oTempModel.getProperty("/SelectedDecree").Ente,
-      //     Fikrs: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria,
-      //     Gjahr: oTempModel.getProperty("/SelectedDecree").Esercizio,
-      //     Zufficioliv1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1,
-      //     Zufficioliv2: oTempModel.getProperty("/SelectedDecree").UfficioLiv2,
-      //     Zcoddecr: oTempModel.getProperty("/SelectedDecree").NumeroDecreto,
-      //     ZCodGius: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo,
-      //     ZidIpe: oTempModel.getProperty("/SelectedDecree").NumeroIpe,
-      //     ZCodCla: oTempModel.getProperty("/SelectedDecree").NumeroClausola
-
-      //   })
-
-
-      //   oModel.read(path, {
-      //     filters: [],
-      //     urlParameters: "",
-      //     success: function (data) {
-      //       var oModelJson = new sap.ui.model.json.JSONModel();
-      //       oModelJson.setData(data.results);
-      //       that.getOwnerComponent().getModel("IpeEntitySet").setProperty('/', data);
-      //       //that.controlSwitch(results);
-      //       // if (results.ZFlContOrd == "X") {
-      //       // 	that.getView().byId("switch").setState(true) 
-
-      //       // }else{
-      //       // 	that.getView().byId("switch").setState(false) 
-      //       // }
-
-      //     },
-      //     error: function (error) {
-      //       //that.getView().getModel("temp").setProperty(sProperty,[]);
-      //       //that.destroyBusyDialog();
-      //       console.log(error);
-      //     }
-
-      //   });
-      //   //this.viewHeaderIpe();
-      // },
-
-      onListSelect: function (event) {
-        var oSelectedKey = this.getView().byId('mPag').getSelectedKey();
-
-        this.getView().getModel("comboBox").setProperty('/Zwels', oSelectedKey);
-
-        if (oSelectedKey === '2') {
-          this.getView().byId('labelCS').setRequired(true);
-        } else {
-          this.getView().byId('labelCS').setRequired(false);
-        }
-
-      },
-
+      // gestione visibilità flag Reiscrizione //
       handleChange: function () {
         var oProprietà = this.getView().getModel();
         var stato = this.getView().byId("IndReiscrizione").getState();
@@ -249,6 +185,8 @@ sap.ui.define(
           this.getView().byId("Reiscrizione").setVisible(false)
         }
       },
+
+
       onBackButton: function () {
         this._oWizard = this.byId("CreateProductWizard");
         this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
@@ -295,13 +233,14 @@ sap.ui.define(
           if (stato === true) {
 
 
-            if (es_decreto == "" && amm == "" && Ncontratto == "" && Dstipula == "") {
-              MessageBox.error("Campi obbligatori non inseriti!", {
-                actions: [sap.m.MessageBox.Action.OK],
-                emphasizedAction: MessageBox.Action.OK,
-              })
-            }
-            else if (es_decreto == "") {
+            // if (es_decreto == "" && amm == "" && Ncontratto == "" && Dstipula == "") {
+            //   MessageBox.error("Campi obbligatori non inseriti!", {
+            //     actions: [sap.m.MessageBox.Action.OK],
+            //     emphasizedAction: MessageBox.Action.OK,
+            //   })
+            // }
+            // else 
+            if (es_decreto == "") {
               MessageBox.error("Campo Esercizio obbligatorio non inserito!", {
                 actions: [sap.m.MessageBox.Action.OK],
                 emphasizedAction: MessageBox.Action.OK,
@@ -383,7 +322,7 @@ sap.ui.define(
 
         else if (this._iSelectedStepIndex == 2) {
           var pFin = this.getView().byId("pFin").getValue()
-          var StrAmm = this.getView().byId("StrAmm").getValue()
+          var StrAmm = this.getView().byId("idFilterStruttAmmResp").getValue()
           var oggSpesa = this.getView().byId("oggSpesa").getValue()
 
           if (pFin == "" || undefined) {
@@ -399,7 +338,7 @@ sap.ui.define(
               actions: [sap.m.MessageBox.Action.OK],
               emphasizedAction: MessageBox.Action.OK,
             })
-          } 
+          }
           else if (oggSpesa == "" || undefined) {
             MessageBox.error("Valorizzare tutti i campi obbligatori", {
               actions: [sap.m.MessageBox.Action.OK],
@@ -414,26 +353,30 @@ sap.ui.define(
             this._iSelectedStepIndex++;
             this._oSelectedStep = oNextStep;
           }
-        
+
 
 
         }
         else if (this._iSelectedStepIndex == 3) {
-        
-            if (this._oSelectedStep && !this._oSelectedStep.bLast) {
-              this._oWizard.goToStep(oNextStep, true);
-            } else {
-              this._oWizard.nextStep();
-            }
-            this._iSelectedStepIndex++;
-            this._oSelectedStep = oNextStep;
-          
-        
+
+          if (this._oSelectedStep && !this._oSelectedStep.bLast) {
+            this._oWizard.goToStep(oNextStep, true);
+          } else {
+            this._oWizard.nextStep();
+          }
+          this._iSelectedStepIndex++;
+          this._oSelectedStep = oNextStep;
+
+
 
 
         }
         else if (this._iSelectedStepIndex == 4) {
-        
+          var PF = this.getView().byId("pFin").getValue()
+          var SAR = this.getView().byId("idFilterStruttAmmResp").getValue()
+          this.getView().byId("PsFin").setText(PF)
+          this.getView().byId("strAmm").setText(SAR)
+
           if (this._oSelectedStep && !this._oSelectedStep.bLast) {
             this._oWizard.goToStep(oNextStep, true);
           } else {
@@ -442,55 +385,55 @@ sap.ui.define(
           this._iSelectedStepIndex++;
           this._oSelectedStep = oNextStep;
           var self = this,
-          oTable = self.getView().byId("EsigTable"),
-          clausoles = self.getView().getModel("temp").getProperty("/Clausole"),
-          previsionis = self.getView().getModel("temp").getProperty("/PrevisioneImpegno"),
-          oModel = new sap.ui.model.json.JSONModel();
+            oTable = self.getView().byId("EsigTable"),
+            clausoles = self.getView().getModel("temp").getProperty("/Clausole"),
+            previsionis = self.getView().getModel("temp").getProperty("/PrevisioneImpegno"),
+            oModel = new sap.ui.model.json.JSONModel();
 
-        self._lastNumClausola = 0;
-        self.getView().getModel("temp").setProperty('/EsigibilitaSet', []);
-        //giannilecci
-        if (clausoles && clausoles.length > 0) {
-          self.getView().byId("idPNI").setEnabled(false)
-          self.getView().byId("delete").setEnabled(false)
-          var fipex = self.getView().byId("pFin").getValue()
-          var fistl = self.getView().byId("StrAmm").getValue();
-          self.getView().byId("PsFin").setText(fipex);
-          self.getView().byId("strAmm").setText(fistl);
-          self.fillDefaultModelEsigibilitàFromUpdate(clausoles);
-          oModel.setData({ EsigibilitaSet: self.getView().getModel("temp").getProperty('/EsigibilitaSet') });
-          var _previsionis = self.fillDefaultModelPrevisionFromUpdate(previsionis);
-          self.getView().getModel("temp").setProperty('/PrevisionSet', _previsionis);
+          self._lastNumClausola = 0;
+          self.getView().getModel("temp").setProperty('/EsigibilitaSet', []);
+          //giannilecci
+          if (clausoles && clausoles.length > 0) {
+            self.getView().byId("idPNI").setEnabled(false)
+            self.getView().byId("delete").setEnabled(false)
+            var fipex = self.getView().byId("pFin").getValue()
+            var fistl = self.getView().byId("idFilterStruttAmmResp").getValue();
+            self.getView().byId("PsFin").setText(fipex);
+            self.getView().byId("strAmm").setText(fistl);
+            self.fillDefaultModelEsigibilitàFromUpdate(clausoles);
+            oModel.setData({ EsigibilitaSet: self.getView().getModel("temp").getProperty('/EsigibilitaSet') });
+            var _previsionis = self.fillDefaultModelPrevisionFromUpdate(previsionis);
+            self.getView().getModel("temp").setProperty('/PrevisionSet', _previsionis);
+          }
+          else {
+            oModel.setData({ EsigibilitaSet: [] });
+            self.getView().getModel("temp").setProperty('/PrevisionSet', []);
+          }
+          oTable.setModel(oModel);
+          oTable.bindRows("/EsigibilitaSet");
+          console.log("ESIGIBILITA'"); //TODO:da canc
+
+          var oTempModel = this.getOwnerComponent().getModel("temp");
+          console.log(oTempModel);
+
+          self.fillTableEsigibilita(oTempModel.getProperty("/SelectedDecree").Esercizio);
+          // self.getView().getModel("temp").setProperty('/PrevisionSet',[]);
+          self.getView().getModel("temp").setProperty('/previsionWF', null);
+
+          self.getView().byId("EsigTable").setVisible(true);
+          self.getView().byId("previsionPanel").setVisible(false);
+
+          var Auth = oTempModel.getData().Autorizzazioni.Value
+          if (Auth == "A") {
+            self.getView().byId("idPNI").setText("Autorizzazioni")
+
+          }
+          var Pf = self.getView().byId("pFin").getValue();
+          var StrAmm = self.getView().byId("idFilterStruttAmmResp").getValue();
+          self.getView().byId("PsFin").setText(Pf);
+          self.getView().byId("strAmm").setText(StrAmm);
+
         }
-        else {
-          oModel.setData({ EsigibilitaSet: [] });
-          self.getView().getModel("temp").setProperty('/PrevisionSet', []);
-        }
-        oTable.setModel(oModel);
-        oTable.bindRows("/EsigibilitaSet");
-        console.log("ESIGIBILITA'"); //TODO:da canc
-
-        var oTempModel = this.getOwnerComponent().getModel("temp");
-        console.log(oTempModel);
-
-        self.fillTableEsigibilita(oTempModel.getProperty("/SelectedDecree").Esercizio);
-        // self.getView().getModel("temp").setProperty('/PrevisionSet',[]);
-        self.getView().getModel("temp").setProperty('/previsionWF', null);
-
-        self.getView().byId("EsigTable").setVisible(true);
-        self.getView().byId("previsionPanel").setVisible(false);
-
-        var Auth = oTempModel.getData().Autorizzazioni.Value
-        if (Auth == "A") {
-          self.getView().byId("idPNI").setText("Autorizzazioni")
-
-        }
-        var Pf = self.getView().byId("pFin").getValue();
-        var StrAmm = self.getView().byId("StrAmm").getValue();
-        self.getView().byId("PsFin").setText(Pf);
-        self.getView().byId("strAmm").setText(StrAmm);
-      
-      }
 
         // else if (this._iSelectedStepIndex == 5) {
         //   var self = this,
@@ -543,7 +486,7 @@ sap.ui.define(
         //   self.getView().byId("strAmm").setText(StrAmm);
         // }
       },
-
+      //  funzione struttura tabella esigibilità //
       fillTableEsigibilita: function (decreYear) {
         var self = this,
           oTable = self.getView().byId("EsigTable"),
@@ -594,6 +537,7 @@ sap.ui.define(
         }
       },
 
+      // valorizzazione tabella esigibilità //
       ValueTableEsigibilita: function (decreYear) {
         var self = this,
           oTable = self.getView().byId("EsigTable"),
@@ -644,7 +588,7 @@ sap.ui.define(
       },
 
 
-
+      // invio importo annuo per creazione clausola esgibilità //
       esigibilitaImportoSubmit: function (oEvent) {
         var self = this,
           importo = !oEvent.getParameters().value || oEvent.getParameters().value === null || oEvent.getParameters().value === "" ? 0 : oEvent.getParameters().value,
@@ -654,7 +598,7 @@ sap.ui.define(
           pni = oEvent.getSource().data("pni"),
           annoImporto = oEvent.getSource().data("annoImporto"),
           fipex = self.getView().byId("pFin").getValue(),
-          fistl = self.getView().byId("StrAmm").getValue();
+          fistl = self.getView().byId("idFilterStruttAmmResp").getValue();
 
         importo = parseFloat(importo);
         var path = self.getOwnerComponent().getModel().createKey("EsigibilitaSet", {
@@ -1399,13 +1343,14 @@ sap.ui.define(
         return object;
       },
 
+      //  Dialog per selezione autorizzazioni //
       onOpenDialog1: function () {
         // this.callAuthEntity();
         var self = this;
         var oModel = self.getOwnerComponent().getModel();
         var oTempModel = self.getOwnerComponent().getModel("temp");
         var Pfinanz = self.getView().byId("pFin").getValue();
-        var StrAmm = self.getView().byId("StrAmm").getValue();
+        var StrAmm = self.getView().byId("idFilterStruttAmmResp").getValue();
         var Zzanno = oTempModel.getData().SelectedDecree.Esercizio;
         var flagContratto = self.getView().byId("switch").getState();
         var contratto = self.getView().byId("ValueHelpContratto");
@@ -1442,44 +1387,11 @@ sap.ui.define(
         });
 
 
-        // this.callEsigibilitaEntity()
-        // if (!this.sFragment) {
-        // 	this.sFragment = this.loadFragment({
-        // 		name: "gestione1.fragment.listaPNI",
-        //     controller: this
-        // 	}).then(function (oFragment) {
-        //     this.getView().addDependent(oFragment);
-        //     return oFragment;
-        //   }.bind(this));
-        // }
-        // var UIStateModel= this.getView().getModel("UIState");
-        // var UIStateData= UIStateModel.getData();
-        // UIStateData.visible = false;
-        // UIStateModel.setData(UIStateData);
-        // this.sFragment.then(function(oFragment) {
-        // 	oFragment.open();
-        // }.bind(this));
-        // this.callAuthEntity()
-
+       
       },
       onOpenDialog2: function () {
         var oDialog3 = this.openDialog("gestione1.fragment.listaERP").open();
-        // if (!this.dFragment) {
-        // 	this.dFragment = this.loadFragment({
-        // 		name: "gestione1.fragment.listaERP",
-        //     controller: this
-        // 	}).then(function (oFragment) {
-        //     this.getView().addDependent(oFragment);
-        //     return oFragment;
-        //   }.bind(this));
-        // } 
-        // var UIStateModel= this.getView().getModel("UIState");
-        // var UIStateData= UIStateModel.getData();
-        // UIStateData.visible = true;
-        // UIStateModel.setData(UIStateData);
-        // this.dFragment.then(function(oFragment) {
-        // 	oFragment.open();
-        // }.bind(this));
+  
       },
       onOpenDialogModPag: function () {
 
@@ -1498,21 +1410,10 @@ sap.ui.define(
           sap.ui.getCore().byId("input").setValue(Codice.Description);
 
 
-          //valoriNuovi.push(KOSTL.Kostl) }
+      
 
         }
-        // this._setBeneficiario(beneficiario);
-
-        //   if (stato == false) {
-        //     this.getView().byId("numConAtt").setValue("");
-        //     this.getView().byId("dataAtt").setValue("");
-
-        // }
-        // //this.getView().getModel("IpeEntitySet").setProperty('/Zzdatastipula' ,rowSelected.data); 
-        // this.getView().getModel("IpeEntitySet").setProperty('/Zzcig' ,rowSelected.cig); 
-        // this.getView().getModel("IpeEntitySet").setProperty('/Zzcup' ,rowSelected.cup);
-        // this.getView().getModel("IpeEntitySet").setProperty('/Ktwrt' ,rowSelected.importo); 
-        //this.getView().getModel("CountryMatchCodeSet").setProperty('/Description' ,country.Description); 
+       
       },
 
       getContratto: function (data) {
@@ -1564,14 +1465,7 @@ sap.ui.define(
           this.getView().byId("cognome").setValue(lifnr.NameLast);
           this.getView().byId("rSociale").setValue(lifnr.ZzragSoc);
           this.getView().byId("IVA").setValue(lifnr.Stcd2);
-          // this.getView().byId("beneficiario").setValue(data.Lifnr);
-          // this.getView().byId("importoCont").setValue(data.Ktwrt);
-          // this.getView().byId("numConAtt").setValue(data.Ebeln);
-          // this.getView().byId("dataAtt").setValue(nDate);
-          // this.getView().byId("idTypeCon").setValue(data.Bsart);
-          // this.getView().byId("formAgg").setValue(data.Zzgara);
-
-          //valoriNuovi.push(KOSTL.Kostl)
+       
         }
 
       },
@@ -1588,14 +1482,7 @@ sap.ui.define(
           this.getView().byId("mPag").setValue(preModpag);
 
 
-          // this.getView().byId("beneficiario").setValue(data.Lifnr);
-          // this.getView().byId("importoCont").setValue(data.Ktwrt);
-          // this.getView().byId("numConAtt").setValue(data.Ebeln);
-          // this.getView().byId("dataAtt").setValue(nDate);
-          // this.getView().byId("idTypeCon").setValue(data.Bsart);
-          // this.getView().byId("formAgg").setValue(data.Zzgara);
-
-          //valoriNuovi.push(KOSTL.Kostl)
+        
         }
 
       },
@@ -1610,21 +1497,7 @@ sap.ui.define(
       },
 
 
-      //  onClickButton1 : function(){
-      //    var UIStateModel= this.getView().getModel("UIState");
-      //    var UIStateData= UIStateModel.getData();
-      //   UIStateData.visible = false;
-      //   UIStateModel.setData(UIStateData);
-
-      //  },
-
-      //  onClickButton2 : function(){
-      //   var UIStateModel= this.getView().getModel("UIState");
-      //   var UIStateData= UIStateModel.getData();
-      //   UIStateData.visible = true;
-      //   UIStateModel.setData(UIStateData);
-
-      //  },
+     
 
       onSaveMessageDialogPress: function (oEvent) {
 
@@ -1967,9 +1840,15 @@ sap.ui.define(
         var oModel = this.getView().getModel("comboBox"),
           oTempModel = this.getView().getModel("temp"),
           oIpeEntitySet = this.getView().getModel("IpeEntitySet")
-        var modPag = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), { Zdescwels: self.getView().byId("mPag").getValue() })
-        var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), { id: modPag.Zdescwels })
-        var pagamento = modPag.Zwels
+        this._oWizard = this.byId("CreateProductWizard");
+        this._oSelectedStep = this._oWizard.getSteps()[this._iSelectedStepIndex];
+        this._iSelectedStepIndex = this._oWizard.getSteps().indexOf(this._oSelectedStep);
+        if (this._iSelectedStepIndex === 1) {
+          var modPag = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), { Zdescwels: self.getView().byId("mPag").getValue() })
+          var modalita = _.findWhere(oTempModel.getProperty('/ZwelsBenSet'), { id: modPag.Zdescwels })
+          var pagamento = modPag.Zwels
+        }
+
         //oNaturaAtto = this.getView().getModel("NaturaAttoSet")
         if (oIpeEntitySet.oData.Zbozza == undefined) {
           var oBozza = false
@@ -2034,7 +1913,7 @@ sap.ui.define(
                 Iban: self.getView().byId("Iban1").getValue(),//oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
                 ZidRich: self.getView().byId("IdAssPre").getValue(),//oIpeEntitySet.getProperty("/ZidRich"),
                 Fipex: self.getView().byId("pFin").getValue(),
-                Fistl: self.getView().byId("StrAmm").getValue(),
+                Fistl: self.getView().byId("idFilterStruttAmmResp").getValue(),
                 ZoggSpesIm: self.getView().byId("oggSpesa").getValue(),
                 Znaturaatto: self.getView().byId("naturAtto").getValue().split(":")[0],
                 Znumcontratt: self.getView().byId("numConAtt").getValue(),
@@ -2204,12 +2083,12 @@ sap.ui.define(
         self.getView().setBusy(true);
         var decreto = self.getOwnerComponent().getModel("temp").getData().SelectedDecree;
         var stato = self.getOwnerComponent().getModel("temp").getData().SelectedDecree.DescrizioneStato;
-        var Lifnr = self.getView().byId("beneficiario1").getEnabled();        
+        var Lifnr = self.getView().byId("beneficiario1").getEnabled();
         var deepObject = {
           ChiaveGiustificativo: decreto.ChiaveGiustificativo,
           DecretoImpegnoSet: null,
           IpeEntitySet: null,
-          Funzionalita: clausoles && clausoles.length > 0 && Lifnr == false ? "MODIFICA_IPE_PROVVISORIO" : "REGISTRA_PROVVISORIO" && stato == "Decreto impegno registrato in provvisorio" && Lifnr == true ?"AGGIUNGI_IPE_PROVVISORIO" :"REGISTRA_PROVVISORIO",
+          Funzionalita: clausoles && clausoles.length > 0 && Lifnr == false ? "MODIFICA_IPE_PROVVISORIO" : "REGISTRA_PROVVISORIO" && stato == "Decreto impegno registrato in provvisorio" && Lifnr == true ? "AGGIUNGI_IPE_PROVVISORIO" : "REGISTRA_PROVVISORIO",
           ImportiClausolaSet: null,
           PrevisioneImpegnoSet: null
         };
@@ -2287,7 +2166,7 @@ sap.ui.define(
           Iban: self.getView().byId("Iban1").getValue(),//oIpeEntitySet.getProperty("/Iban"), //oTempModel.getProperty("/Step2/").iban,
           ZidRich: self.getView().byId("IdAssPre").getValue(),//oIpeEntitySet.getProperty("/ZidRich"),
           Fipex: self.getView().byId("pFin").getValue(),
-          Fistl: self.getView().byId("StrAmm").getValue(),
+          Fistl: self.getView().byId("idFilterStruttAmmResp").getValue(),
           ZoggSpesIm: self.getView().byId("oggSpesa").getValue(),
           Znaturaatto: self.getView().byId("naturAtto").getValue().split(":")[0],
           Znumcontratt: self.getView().byId("numConAtt").getValue(),

@@ -8,6 +8,9 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     xmlns="sap.m"
+    xmlns:inputRicercaContratto="zsap.com.r3.cosp.s4.inputricercacontratto.inputricercacontratto.controls"
+    xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls"
+    xmlns:zcontrolMatchSar="zsap.com.r3.cobi.s4.custapiuser.z_s4_userlog.controls"
     controllerName="gestione1.controller.wizard"
 >
     <NavContainer id="wizardNavContainer">
@@ -88,8 +91,8 @@
                                         </VBox>
                                         <VBox>
                                             <Label text="{i18n>Ncontratto}" required="true" />
-                                          
-                                            <Input
+                                          <inputRicercaContratto:InputRicercaContratto  liveChange="callContrattoEntity" enabled="{/FilterSwitch1}" id="ValueHelpContratto" />
+                                            <!-- <Input
                                                 id="ValueHelpContratto"
                                                 showValueHelp="true"
                                                 enabled="{/FilterSwitch1}"
@@ -100,7 +103,7 @@
                                                 app:filterTableField="ValueHelpContratto"
                                                 class="sapUiSmallMarginBottom"
                                                 change="callContrattoEntity"
-                                            />
+                                            /> -->
                                             <!-- 4500001128 -->
                                             <!--core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/-->
                                             <layoutData>
@@ -278,7 +281,8 @@
                                 <Title text="" />
                                 <HBox>
                                     <Label text="Posizione Finanziaria:" labelFor="Posizione Finanziaria:" required="true" />
-                                    <Input id="pFin" value="" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest" valueHelpOnly="false" />
+                                    <zcontrol:InputPosizioneFinanziaria id="pFin" fase="GEST" spesa="X" reale="R" anno="2023" versione="D" maxSuggestionWidth="60%" liveChange="onSelectPosFin" width="70%"/>
+                                    <!-- <Input id="pFin" value="" showSuggestion="true" showValueHelp="true" valueHelpRequest="onValueHelpRequest" valueHelpOnly="false" /> -->
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>
@@ -308,7 +312,8 @@
                                 <Title text="" />
                                 <HBox>
                                     <Label text="Struttura Amministrativa Responsabile:" labelFor="Struttura Amministrativa Responsabile:" wrapping="true" required="true"/>
-                                    <Input id="StrAmm" showSuggestion="true" value="" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" valueHelpOnly="false" />
+                                     <zcontrolMatchSar:GestioneLogUser eos="S" id="idFilterStruttAmmResp" fase="GEST" entrata="X" reale="R" anno="2023" SEM_OBJ="Z_TEST_LIB"  versione="D" width="70%" placeholder="Scegli struttura amministrativa"/>
+                                    <!-- <Input id="StrAmm" showSuggestion="true" value="" showValueHelp="true" valueHelpRequest="onValueHelpRequest2" valueHelpOnly="false" /> -->
                                     <layoutData>
                                         <l:GridData span="L3 M3 S3" />
                                     </layoutData>

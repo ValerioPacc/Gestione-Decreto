@@ -17,8 +17,8 @@
             </ComboBox>
 
              <Label text="Stato Ipe: " required="false" class="sapUiSmallMarginBegin"/> 
-            <ComboBox id="StatoIpe" items="{path: 'temp>/IpeEntitySet', sorter: { path: 'ZcodiStatoipe' }}" selectedKey="{temp>ZtipoIpe}">
-             <core:Item id="StatoIpe1" key="{temp>ZcodiStatoipe}" text="{temp>ZcodiStatoipe}" />
+            <ComboBox id="StatoIpe" items="{path: 'temp>/StatoIpeSet', sorter: { path: 'Codice' }}" selectedKey="{temp>Codice}">
+             <core:Item id="StatoIpe1" key="{temp>Codice}" text="{temp>Codice}" />
             </ComboBox>
 
             <Label text="Numero IPE Da: " class="sapUiSmallMarginBegin"/>
@@ -76,14 +76,14 @@
         </columns>
         <ColumnListItem>
             <Text text="{ListaIpe>ZCodIpe}" />
-            <Text text="{ListaIpe>ZtipoIpe}" />
+            <Text text="{ListaIpe>DesTipoIpe}" />
             <Text text="{ListaIpe>Gjahr}" />
             <Text text="{ListaIpe>Fipex}" />
             <Text text="{ListaIpe>Fistl}" />
             <Text text="{ListaIpe>ZFlContOrd}" />
-            <Text text="{ListaIpe>Lifnr}" />
+            <Text text="{ListaIpe>NameFirst}  {ListaIpe>NameLast}" />
             <Text text="{ListaIpe>ZoggSpesIm}" />
-            <Text text="{ListaIpe>ZtotVers}" />
+            <Text text="{ListaIpe>ZImpIpeCl}" />
 
         </ColumnListItem>
     </Table>

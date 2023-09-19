@@ -20,8 +20,10 @@ sap.ui.define([
             formatter: DateFormatter,
             onInit: function () {
                 this.callEsercizioEntity()
-                //this.callConiAuthEntity()
+                //this.callConiAuthEntity()  //chiamata per i coni visibilità ancora non funzionante
                  //this.callVisibilità()
+                 this.callUfficioEntity()
+                 this.callEserFipexEntity()
                 this.callStatoDecEntity()
                 this.callTipoImpEntity()
                 this.callCurrentUserParamEntity()
@@ -40,32 +42,13 @@ sap.ui.define([
                 });
 
             },
-
-            // callVisibilità: function () {
-            //     var that = this 
-            //     var filters = []
-            //      filters.push
-            //      (new Filter({ path: "SEM_OBJ", operator: FilterOperator.EQ, value1: "COSP_R3_FIORI_E022" }),
-            //       new Filter({ path: "AUTH_OBJ", operator: FilterOperator.EQ, value1: "Z_GEST_IMP" })) 
-            //           // "ODataModel" required from module "sap/ui/model/odata/v2/ODataModel" 
-            //           var visibilità = new ODataModel("http://10.38.125.80:8000/sap/opu/odata/sap/ZSS4_CA_CONI_VISIBILITA_SRV/"); 
-            //           visibilità.read("/ZES_CONIAUTH_SET", {
-            //              filters: filters, 
-            //              urlParameters: "",
-            //               success: function (data) { 
-            //                 console.log("success")
-            //                  //oMdl.setData(data.results);
-            //                   that.getView().getModel("temp").setProperty('/Visibilità', data.results)},
-            //                     error: function (error) {
-            //                          console.log(error)
-            //                           //that.getView().getModel("temp").setProperty(sProperty,[]);
-            //                            //that.destroyBusyDialog();
-            //                           var e = error; } }); },
+        
 
             navToDecreto: function (oEvent) {
                 this.getOwnerComponent().getRouter().navTo("Decreto");
             },
 
+            ////  Funzione estrazione tabella lista Decreti   ///
             onSearch: function (oEvent) {
 
                 //var visibilità = this.getView().getModel("temp").getData().Visibilità[0]
@@ -78,6 +61,7 @@ sap.ui.define([
                 var path = ""
                 var Tipologia = that.getView().getModel("temp").getData().TipologiaImpegnoSet
                 var StatoDec = that.getView().getModel("temp").getData().StatoDecretoSet
+                var EserFipex = that.getView().getModel("temp").getData().EsercizioFipexSet
                 
                 var numFilter = oEvent.getParameters().selectionSet.length;
 
@@ -165,6 +149,23 @@ sap.ui.define([
                                 })
                             }
                         }
+                        else if (i == 1) {
+                            if (oEvent.getParameters().selectionSet[i].mProperties.value == '') {
+                                MessageBox.error("Valorizzare Amministrazione", {
+                                    actions: [sap.m.MessageBox.Action.OK],
+                                    emphasizedAction: MessageBox.Action.OK,
+                                })
+                            }
+                        }
+                          /// controllo valorizzazione Esercizio posizione finanziaria ///
+                        else if (i == 33) {
+                            if (oEvent.getParameters().selectionSet[i].mProperties.value == '') {
+                                MessageBox.error("Valorizzare Esercizio Posizione Finanziaria", {
+                                    actions: [sap.m.MessageBox.Action.OK],
+                                    emphasizedAction: MessageBox.Action.OK,
+                                })
+                            }
+                        }
 
             
 
@@ -189,6 +190,19 @@ sap.ui.define([
                                     path: 'CodiceStato',
                                     operator: FilterOperator.EQ,
                                     value1: StatoDec[s].Codice
+                                }));
+                               }
+                                
+                            }
+                            
+                        }
+                        else if (i == 33) {
+                            for (var t = 0; t < EserFipex.length; t++) {
+                               if (oEvent.getParameters().selectionSet[i].mProperties.value == EserFipex[t].Anno) {
+                                datiGI.push(new Filter({
+                                    path: 'Anno',
+                                    operator: FilterOperator.EQ,
+                                    value1: EserFipex[t].Anno
                                 }));
                                }
                                 
@@ -250,6 +264,46 @@ sap.ui.define([
                 // this.getView().byId("PreimpostazioneNI").setEnabled(true);
 
             },
+            
+            callEserFipexEntity: function () {
+                var that = this;
+                var oMdl = new sap.ui.model.json.JSONModel();
+                this.getOwnerComponent().getModel().read("/EsercizioFipexSet", {
+                    filters: [],
+                    urlParameters: "",
+                    success: function (data) {
+                        oMdl.setData(data.results);
+                        that.getView().getModel("temp").setProperty('/EsercizioFipexSet', data.results)
+                    },
+                    error: function (error) {
+                        //that.getView().getModel("temp").setProperty(sProperty,[]);
+                        //that.destroyBusyDialog();
+                        var e = error;
+                    }
+                });
+                
+    
+            },
+
+            callUfficioEntity: function () {
+                var that = this;
+                var oMdl = new sap.ui.model.json.JSONModel();
+                this.getOwnerComponent().getModel().read("/UfficioSet", {
+                    filters: [],
+                    urlParameters: "",
+                    success: function (data) {
+                        oMdl.setData(data.results);
+                        that.getView().getModel("temp").setProperty('/UfficioSet', data.results)
+                    },
+                    error: function (error) {
+                        //that.getView().getModel("temp").setProperty(sProperty,[]);
+                        //that.destroyBusyDialog();
+                        var e = error;
+                    }
+                });
+                
+    
+            },
 
             navToRegistraIpe: function (oEvent) {
                 this.getOwnerComponent().getRouter().navTo("registraIPE");
@@ -266,9 +320,9 @@ sap.ui.define([
 
                     this.getOwnerComponent().getRouter().navTo("dettagliDE", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
                 }
-                else if (row.CodiceStato == "08") {
-                    this.getOwnerComponent().getRouter().navTo("documentazioneAgg", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
-                }
+                // else if (row.CodiceStato == "08") {
+                //     this.getOwnerComponent().getRouter().navTo("documentazioneAgg", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
+                // }
                 else{
                     this.getOwnerComponent().getRouter().navTo("dettagliDE", { campo: row.Amministrazione, campo1: row.AreaFinanziaria, campo2: row.ChiaveGiustificativo, campo3: row.Ente, campo4: row.Esercizio, campo5: row.NumeroDecreto, campo6: row.RegistratoBozza, campo7: row.UfficioLiv1, campo8: row.UfficioLiv2 })
                 }
@@ -326,6 +380,8 @@ sap.ui.define([
 
                 return aCols;
             },
+
+            
             onExport: function () {
                 //console.log("onExport")
                 var aCols, oRowBinding, oSettings, oSheet, oTable;
@@ -473,7 +529,9 @@ sap.ui.define([
                     new Filter({ path: "AUTH_OBJ", operator: FilterOperator.EQ, value1: "Z_GEST_IMP" })
                 )
                 // "ODataModel" required from module "sap/ui/model/odata/v2/ODataModel"
-                self.getOwnerComponent().getModel("ZSS4_CA_CONI_VISIBILITA_SRV").read("/ZET_CONIAUTH_SET", {
+                var visibilità = new ODataModel("http://10.38.125.80:8000/sap/opu/odata/sap/ZSS4_CA_CONI_VISIBILITA_SRV/");
+                visibilità.read("/ZES_CONIAUTH_SET", {
+                //
                     filters: filters,
                     urlParameters: "",
                     success: function (data) {

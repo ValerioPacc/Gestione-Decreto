@@ -25,12 +25,12 @@ sap.ui.define(
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.getRoute("dettagliDE").attachPatternMatched(this._onObjectMatched, this);
                 this.callTipoIPEntitySet()
-                //var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
-                // if (row.CodiceStato == "01") {
-                //     this.getView().byId("invFirma").setEnabled(false)
-                // }
+                this.callStatoIPEntitySet()
+               
               
             },
+
+            // chiamata read getEntity per valorizzazione header //
             _onObjectMatched: function (oEvent) {
                 
                 var self = this;
@@ -47,8 +47,8 @@ sap.ui.define(
                     UfficioLiv1: oEvent.getParameters().arguments.campo7,
                     UfficioLiv2: oEvent.getParameters().arguments.campo8,
                 });
-
-                
+                 
+               
                 //oDataModel.metadataLoaded().then( function() { 
                    oDataModel.read(path, {
                      success: function(data, oResponse){
@@ -120,10 +120,29 @@ sap.ui.define(
           
           
               },
-          
-            onSearch: function (oEvent) {
 
-                //var visibilità = this.getView().getModel("temp").getData().Visibilità[0]
+              callStatoIPEntitySet: function () {
+                var that = this;
+                var oMdl = new sap.ui.model.json.JSONModel();
+                this.getOwnerComponent().getModel().read("/StatoIpeSet", {
+                  filters: [],
+                  urlParameters: "",
+                  success: function (data) {
+                    oMdl.setData(data.results);
+                    that.getView().getModel("temp").setProperty('/StatoIpeSet', data.results)
+                  },
+                  error: function (error) {
+                    //that.getView().getModel("temp").setProperty(sProperty,[]);
+                    //that.destroyBusyDialog();
+                    var e = error;
+                  }
+                });
+          
+          
+              },
+          // chiamata per estrazione tabella lista IPE con filtri non collegati //
+            onSearch: function (oEvent) {
+              
                 var that = this,
                     oModel = that.getOwnerComponent().getModel(),
                     oTempModel = that.getOwnerComponent().getModel("temp"),
@@ -145,25 +164,6 @@ sap.ui.define(
                     new Filter({ path: "ZidIpe", operator: FilterOperator.EQ, value1: "" }),
                     new Filter({ path: "ZCodCla", operator: FilterOperator.EQ, value1: "" })
                 );
-                // var abc=this.getView().byId("filterbar").getAllFilterItems();
-
-                // var bindingInfo = ""
-                // var path = ""
-               
-                
-                // var numFilter = oEvent.getParameters().selectionSet.length;
-
-                // for (let i = 0; i < numFilter; i++) {
-
-                //     bindingInfo = "items"
-                //     path = oEvent.getParameters().selectionSet[i].getBindingInfo(bindingInfo)
-                //     if (path == undefined) {
-                //         bindingInfo = "suggestionItems"
-                //         path = oEvent.getParameters().selectionSet[i].getBindingInfo(bindingInfo)
-                //     }
-                //     var filtro = oEvent.getParameters().selectionSet[i]
-                   
-                //console.log(datiGI)
 
                 var oModel = that.getModel();
 
@@ -188,88 +188,16 @@ sap.ui.define(
                     });
 
                 });
-            
-               
-        
 
-        
 
     },
   
-            // callIpeEntity: function () {
-
-            //     var that = this,
-            //         oModel = that.getOwnerComponent().getModel(),
-            //         oTempModel = that.getOwnerComponent().getModel("temp"),
-            //         aFilters = [];
-    
-                
-    
-            //     aFilters.push(
-            //         new Filter({ path: "Zregistrato", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").RegistratoBozza }),
-            //         new Filter({ path: "ZCodIpe", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").CodiceIpe }),
-            //         new Filter({ path: "ZNumCla", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroClausola }),
-            //         new Filter({ path: "Bukrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Ente }),
-            //         new Filter({ path: "Fikrs", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").AreaFinanziaria }),
-            //         new Filter({ path: "Gjahr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Esercizio }),
-            //         new Filter({ path: "Zammin", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").Amministrazione }),
-            //         new Filter({ path: "Zcoddecr", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").NumeroDecreto }),
-            //         new Filter({ path: "Zufficioliv1", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv1 }),
-            //         new Filter({ path: "Zufficioliv2", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").UfficioLiv2 }),
-            //         new Filter({ path: "ZCodGius", operator: FilterOperator.EQ, value1: oTempModel.getProperty("/SelectedDecree").ChiaveGiustificativo }),
-            //         new Filter({ path: "ZidIpe", operator: FilterOperator.EQ, value1: "" }),
-            //         new Filter({ path: "ZCodCla", operator: FilterOperator.EQ, value1: "" })
-            //     );
-    
-    
-            //     oModel.read("/IpeEntitySet", {
-            //         filters: aFilters,
-            //         urlParameters: "",
-            //         success: function (data) {
-            //             var results = data.results;
-            //             if (results.length > 0) {
-            //                 // var mnth = ("0" + (results[0].Zzdatastipula.getMonth() + 1)).slice(-2),
-            //                 // day = ("0" + results[0].Zzdatastipula.getDate()).slice(-2);
-    
-            //                 // var nData = [results[0].Zzdatastipula.getFullYear(), mnth, day].join("-");
-            //                 // results[0].Zzdatastipula = nData.split("-").reverse().join(".");
-    
-            //                 that.getView().getModel("IpeEntitySet").setProperty('/', results[0]);
-    
-            //             } else {
-            //                 that.getView().getModel("IpeEntitySet").setProperty('/', []);
-            //                 that.getView().getModel("temp").setProperty('/NewIPE', "X");
-            //             }
-            //             //that.controlSwitch(results);
-            //             // if (results.ZFlContOrd == "X") {
-            //             // 	that.getView().byId("switch").setState(true) 
-    
-            //             // }else{
-            //             // 	that.getView().byId("switch").setState(false) 
-            //             // }
-    
-            //         },
-            //         error: function (error) {
-            //             //that.getView().getModel("temp").setProperty(sProperty,[]);
-            //             //that.destroyBusyDialog();
-            //             console.log(error);
-            //         }
-    
-            //     });
-            //     //this.viewHeaderIpe();
-            // },
+            // funzione valorizzazione header //
      
             viewHeader: function (data) {
-                // console.log(this.getView().getModel("temp").getData(
-                // "/HeaderNISet('"+ oEvent.getParameters().arguments.campo +
-                // "','"+ oEvent.getParameters().arguments.campo1 +
-                // "','"+ oEvent.getParameters().arguments.campo2 +
-                // "','"+ oEvent.getParameters().arguments.campo3 +
-                // "','"+ oEvent.getParameters().arguments.campo4 +
-                // "','"+ oEvent.getParameters().arguments.campo5 + "')"))
+            
                 var oTempModel = this.getOwnerComponent().getModel("temp");
-                // var header = this.getView().getModel("temp").getData().DecretoImpegnoSet.oData
-                // for (var i = 0; i < header.length; i++) {
+             
 if (data.DataProtocolloAmm != null) {
     
 
@@ -284,16 +212,8 @@ if (data.DataProtocolloAmm != null) {
                     
 }
 
-                    // if (data.Amministrazione == oEvent.getParameters().arguments.campo &&
-                    //     data.AreaFinanziaria == oEvent.getParameters().arguments.campo1 &&
-                    //     data.ChiaveGiustificativo == oEvent.getParameters().arguments.campo2 &&
-                    //     data.Ente == oEvent.getParameters().arguments.campo3 &&
-                    //     data.Esercizio == oEvent.getParameters().arguments.campo4 &&
-                    //     data.NumeroDecreto == oEvent.getParameters().arguments.campo5 &&
-                    //     data.RegistratoBozza == oEvent.getParameters().arguments.campo6 &&
-                    //     data.UfficioLiv1 == oEvent.getParameters().arguments.campo7 &&
-                    //     data.UfficioLiv2 == oEvent.getParameters().arguments.campo8) {
-
+            
+                        if (data.DataProtocolloRag != null) {
                             var dataNuova = new Date(data.DataProtocolloRag),
                             mnth = ("0" + (dataNuova.getMonth() + 1)).slice(-2),
                             day = ("0" + dataNuova.getDate()).slice(-2);
@@ -301,7 +221,7 @@ if (data.DataProtocolloAmm != null) {
                         var nDate = nData.split("-").reverse().join(".");
                         //var dataProtocolloRag = data.DataProtocolloRag
                         this.getView().byId("dataProtRag").setText(nDate)
-
+                        }
 
 
                         var dirigDirFirm = data.DirigenteDirettoreFirmatario
@@ -351,13 +271,28 @@ if (data.DataProtocolloAmm != null) {
                         this.getView().byId("Timpegno").setText(tipologia)
 
                         var contratto = data.ContrattoOrdine
-                        this.getView().byId("Cordine").setText(contratto)
+                        if (contratto != "") {
+                            this.getView().byId("Cordine").setText("Si")
+                        }else{
+                            this.getView().byId("Cordine").setText("No")
+                        }
+                        
 
                         var CCConti = data.ControlloCorteConti
-                        this.getView().byId("CcConti").setText(CCConti)
+                        if (CCConti != "") {
+                            this.getView().byId("CcConti").setText("Si")
+                        }else{
+                            this.getView().byId("CcConti").setText("No")
+                        }
+                        
 
                         var DocAggiuntiva = data.DocumentazioneAgg
-                        this.getView().byId("docAgg").setText(DocAggiuntiva)
+                        if (DocAggiuntiva != "") {
+                            this.getView().byId("docAgg").setText("Si")
+                        }else{
+                            this.getView().byId("docAgg").setText("No")
+                        }
+                       
 
                         var Ragion = data.Ragioneria
                         this.getView().byId("Rag").setText(Ragion)
@@ -366,7 +301,12 @@ if (data.DataProtocolloAmm != null) {
                         // this.getView().byId("dataProtRag").setText(dataProtocolloRag)
 
                         var NumProtRag = data.NProtocolloRag
-                        this.getView().byId("nProtRag").setText(NumProtRag)
+                        if (NumProtRag === "0000000") {
+                            this.getView().byId("nProtRag").setText("")    
+                        } else{
+                            this.getView().byId("nProtRag").setText(NumProtRag)
+                        }
+                        
 
 
 
@@ -374,6 +314,8 @@ if (data.DataProtocolloAmm != null) {
                 //}
 
             },
+
+            // funzione per visibilità di campi del header //
             onSelect: function (oEvent) {
                 var key = oEvent.getParameters().key;
                 var icon = this.getView().byId("IconTabBar").mProperties.expanded
@@ -456,7 +398,7 @@ if (data.DataProtocolloAmm != null) {
             },
 
 
-
+                  //// cancellazione decreto ////
             onDeleteRow: function (oEvent) {
                 var that = this;
                 var data = that.getView().getModel("temp").oData.SelectedDecree
@@ -591,7 +533,7 @@ if (data.DataProtocolloAmm != null) {
                 this.navToHome()
                 
             },
-
+                //// navigazione schermata modifica decreto in bozza ////
             onNavToupdateDecreto: function(oEvent){
             //var row = this.getView().byId("DecretoImpegno").getSelectedItem().getBindingContext("DecretoImpegno").getObject()
                 //this.getModel("temp").setProperty("/SelectedDecree", row);

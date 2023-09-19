@@ -67,7 +67,11 @@
                 "sap.ui.comp": {},
                 "sap.ui.generic.app": {},
                 "sap.ui.table": {},
-                "sap.ushell": {}
+                "sap.ushell": {},
+                "zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin": {},
+                "zsap.com.r3.cobi.s4.custapiuser.z_s4_userlog": {},
+                "zsap.com.r3.cosp.s4.inputricercacontratto.inputricercacontratto": {}
+                
             }
         },
         "contentDensities": {

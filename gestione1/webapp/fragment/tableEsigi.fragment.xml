@@ -27,7 +27,7 @@
                <m:Button type="Emphasized" class="marginRight" icon="sap-icon://edit" text="Imposta previsioni" press="onOpenGridTable"/>
             </m:OverflowToolbar>
             <m:OverflowToolbar style="Clear">
-            <m:Label text="{i18n>PosFin}"/>
+            <m:Label text="{i18n>PosizFin}"/>
             <m:Text id="PsFin" text=""/>
             <m:Label text="{i18n>struttura_amm_resp}" class="marginRight"/>
             <m:Text id="strAmm" text=""/>

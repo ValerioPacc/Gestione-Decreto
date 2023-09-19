@@ -327,9 +327,12 @@ sap.ui.define([
 
 				if (ipe.ZFlContOrd === "") {
 					self.getView().byId("switch").setState(false)
+					self.getView().byId("switch").setEnabled(false)
 				} else {
 					self.getView().byId("switch").setState(true)
+					self.getView().byId("switch").setEnabled(false)
 				}
+
 				if (ipe.Zop === "") {
 					self.getView().byId("CB1").setSelected(false)
 					self.getView().byId("CB1").setEnabled(false)
@@ -337,7 +340,7 @@ sap.ui.define([
 					self.getView().byId("CB1").setSelected(true)
 					self.getView().byId("CB1").setEnabled(false)
 				}
-
+                self.getView().byId("Person").setEnabled(false)
 				self.getView().byId("cup").setValue(ipe.Zzcup)
 				self.getView().byId("cup").setEnabled(false)
 				self.getView().byId("beneficiario1").setValue(ipe.Lifnr)
@@ -355,8 +358,8 @@ sap.ui.define([
 				self.getView().byId("IdAssPre").setEnabled(false)
 				self.getView().byId("pFin").setValue(ipe.Fipex)
 				self.getView().byId("pFin").setEnabled(false)
-				self.getView().byId("StrAmm").setValue(ipe.Fistl)
-				self.getView().byId("StrAmm").setEnabled(false)
+				self.getView().byId("idFilterStruttAmmResp").setValue(ipe.Fistl)
+				self.getView().byId("idFilterStruttAmmResp").setEnabled(false)
 				self.getView().byId("oggSpesa").setValue(ipe.ZoggSpesIm)
 				self.getView().byId("naturAtto").setValue(ipe.Znaturaatto)
 				self.getView().byId("naturAtto").setEnabled(false)
@@ -556,28 +559,11 @@ sap.ui.define([
 					var e = error;
 				}
 			});
-			//},
-			// var that = this,
-			// oModel = that.getOwnerComponent().getModel()
-			// //oTempModel = that.getOwnerComponent().getModel("temp"),
-			// //this.getOwnerComponent().getModel("CountryMatchCodeSet")
-
-
-
-
-			// oModel.read("/CountryMatchCodeSet", {
-			// 	urlParameters: "",
-			// 	success: function(data, oResponse){
-			// 		var oModelJson = new sap.ui.model.json.JSONModel();
-			// 		  oModelJson.setData(data.results);
-			// 		   that.getView().getModel("temp").setProperty('/CountryMatchCodeSet', oModelJson);
-			// 		   //that.getOwnerComponent().setModel(oModelJson, "DecretoImpegno");
-			// 		 },
-			// 		  error: function(error){
-			// 	var e = error;}
-			//  });
+			
 
 		},
+
+		
 		callBeneficiarioEntity: function () {
 
 			var that = this,
@@ -680,46 +666,46 @@ sap.ui.define([
 
 
 		// },
-		callEsigibilitaEntity: function (risultati) {
-			var that = this,
-				oModel = that.getOwnerComponent().getModel()
-			var oTempModel = that.getOwnerComponent().getModel("temp");
-			var Auth = risultati[0].Fincode
-			var Anno = oTempModel.getData().SelectedDecree.Esercizio
-			var Pfinan = sap.ui.getCore().byId("PosizFin").getText()
-			var StramminRes = sap.ui.getCore().byId("StruttAmmin").getText()
-			var dataScad = '12.31.' + Anno
-			var DataScadenza = new Date(dataScad),
-				mnth = ("0" + (DataScadenza.getMonth() + 1)).slice(-2),
-				day = ("0" + DataScadenza.getDate()).slice(-2);
-			var nData = [DataScadenza.getFullYear(), mnth, day].join("-");
-			dataScad = new Date(nData)
+		// callEsigibilitaEntity: function (risultati) {
+		// 	var that = this,
+		// 		oModel = that.getOwnerComponent().getModel()
+		// 	var oTempModel = that.getOwnerComponent().getModel("temp");
+		// 	var Auth = risultati[0].Fincode
+		// 	var Anno = oTempModel.getData().SelectedDecree.Esercizio
+		// 	var Pfinan = sap.ui.getCore().byId("PosizFin").getText()
+		// 	var StramminRes = sap.ui.getCore().byId("StruttAmmin").getText()
+		// 	var dataScad = '12.31.' + Anno
+		// 	var DataScadenza = new Date(dataScad),
+		// 		mnth = ("0" + (DataScadenza.getMonth() + 1)).slice(-2),
+		// 		day = ("0" + DataScadenza.getDate()).slice(-2);
+		// 	var nData = [DataScadenza.getFullYear(), mnth, day].join("-");
+		// 	dataScad = new Date(nData)
 
 
-			var path = oModel.createKey("/EsigibilitaSet", {
-				Autorizzazione: Auth,
-				NumeroPni: '',
-				Epr: '',
-				Gjahr: Anno,
-				Fdatk: nData,
-				Fipex: Pfinan,
-				Fistl: StramminRes
-			})
+		// 	var path = oModel.createKey("/EsigibilitaSet", {
+		// 		Autorizzazione: Auth,
+		// 		NumeroPni: '',
+		// 		Epr: '',
+		// 		Gjahr: Anno,
+		// 		Fdatk: nData,
+		// 		Fipex: Pfinan,
+		// 		Fistl: StramminRes
+		// 	})
 
-			oModel.read(path, {
-				urlParameters: "",
-				success: function (data, oResponse) {
-					var oModelJson = new sap.ui.model.json.JSONModel();
-					oModelJson.setData(data);
-					that.getView().getModel("temp").setProperty('/EsigibilitaSet', data);
+		// 	oModel.read(path, {
+		// 		urlParameters: "",
+		// 		success: function (data, oResponse) {
+		// 			var oModelJson = new sap.ui.model.json.JSONModel();
+		// 			oModelJson.setData(data);
+		// 			that.getView().getModel("temp").setProperty('/EsigibilitaSet', data);
 
-				},
-				error: function (error) {
-					var e = error;
-				}
-			});
+		// 		},
+		// 		error: function (error) {
+		// 			var e = error;
+		// 		}
+		// 	});
 
-		},
+		// },
 
 		callContrattoEntity: function () {
 			var that = this
@@ -790,7 +776,7 @@ sap.ui.define([
 			//  var oIpeEntitySet = this.getView().getModel("")
 			var oTempModel = that.getOwnerComponent().getModel("temp");
 			var Pfinanz = that.getView().byId("pFin").getValue()
-			var StrAmm = that.getView().byId("StrAmm").getValue()
+			var StrAmm = that.getView().byId("idFilterStruttAmmResp").getValue()
 			var Zzanno = oTempModel.getData().SelectedDecree.Esercizio
 
 			// var oModel = that.getOwnerComponent().getModel()

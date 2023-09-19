@@ -134,6 +134,12 @@
                 <Property Name="ModPagamento" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="TipoBeneficiario" Type="Edm.String" sap:unicode="false" sap:label="" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
+            <EntityType Name="EsercizioFipex" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Anno"/>
+                </Key>
+                <Property Name="Anno" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
             <EntityType Name="DecretoImpegno" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Amministrazione"/>
@@ -147,6 +153,7 @@
                     <PropertyRef Name="UfficioLiv2"/>
                 </Key>
                 <Property Name="Amministrazione" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Anno" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="AreaFinanziaria" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="FM Area" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Beneficiario" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Vendor" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Cancellato" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -209,152 +216,153 @@
             </EntityType>
             <EntityType Name="IpeEntity" sap:content-version="1">
                 <Key>
-                    <PropertyRef Name="Zregistrato"/>
-                    <PropertyRef Name="ZCodIpe"/>
-                    <PropertyRef Name="ZNumCla"/>
-                    <PropertyRef Name="Zammin"/>
                     <PropertyRef Name="Bukrs"/>
                     <PropertyRef Name="Fikrs"/>
                     <PropertyRef Name="Gjahr"/>
-                    <PropertyRef Name="Zufficioliv1"/>
-                    <PropertyRef Name="Zufficioliv2"/>
+                    <PropertyRef Name="Zammin"/>
+                    <PropertyRef Name="ZCodCla"/>
                     <PropertyRef Name="Zcoddecr"/>
                     <PropertyRef Name="ZCodGius"/>
+                    <PropertyRef Name="ZCodIpe"/>
                     <PropertyRef Name="ZidIpe"/>
-                    <PropertyRef Name="ZCodCla"/>
+                    <PropertyRef Name="ZNumCla"/>
+                    <PropertyRef Name="Zregistrato"/>
+                    <PropertyRef Name="Zufficioliv1"/>
+                    <PropertyRef Name="Zufficioliv2"/>
                 </Key>
-                <Property Name="BudgetPd" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Budget Period" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Fdatk" Type="Edm.DateTime" Precision="11" sap:unicode="false" sap:label="Due On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zrsf" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Ruoli di spesa fissa" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FlagExImpfut" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Flag ex impegno futu" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZstatoMigr" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZcodDocum" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:label="Codice fascicolo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZtipoGiust" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FipexEng" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:label="Commitment item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZannoAcc" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZoggSpesIm" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FistlEng" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="Funds center" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ktwrt" Type="Edm.Decimal" Precision="16" Scale="3" sap:unicode="false" sap:label="Target Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZannoGestimp" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="GeberEng" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Fund" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZchiaRit" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZImpIpeCl" Type="Edm.Decimal" Precision="16" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZdatPer" Type="Edm.DateTime" Precision="11" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZtotVers" Type="Edm.Decimal" Precision="17" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZdatReiscr" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZeconoRag" Type="Edm.Decimal" Precision="17" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zdataatto" Type="Edm.DateTime" Precision="11" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZeconoPer" Type="Edm.Decimal" Precision="17" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZmimpPer" Type="Edm.Decimal" Precision="16" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZtotEconom" Type="Edm.Decimal" Precision="17" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZnumeroPni" Type="Edm.String" MaxLength="27" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zzdatastipula" Type="Edm.DateTime" Precision="11" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZcodiKErrore" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FlgCanc" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZFlContOrd" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZTipoDecreto" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zbloccfondi" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zbozza" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZclausolaVar" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZcompRes" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zni" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zoa" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zop" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zperenzione" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZtipoIpe" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZtipoRes" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DesTipoIpe" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Fikrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="FM Area" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Zammin" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZCodCla" Type="Edm.String" Nullable="false" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Zcoddecr" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZCodGius" Type="Edm.String" Nullable="false" MaxLength="26" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZCodIpe" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZidIpe" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZNumCla" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Zregistrato" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Zufficioliv1" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Zufficioliv2" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Belnr" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Earmarked Funds" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Blart" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Document type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZCodIpeMig" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZCodIpePer" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZStatoCla" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zblart" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZcodiStatoipe" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zzblart" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Blpos" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Document item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZCodIpeApe" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZCodIpeMod" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZNumClaApe" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZNumClaMig" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZNumClaMod" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZNumClaPer" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZamministrMig" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Bpent" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Val.Adjustment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Bsart" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Document Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BudgetPd" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Budget Period" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ebeln" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Purchasing Doc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Epr" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fdatk" Type="Edm.DateTime" Precision="11" sap:unicode="false" sap:label="Due On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fipex" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:label="Commitment Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FipexEng" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:label="Commitment item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fistl" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="Funds center" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FistlEng" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="Funds center" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagExImpfut" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Flag ex impegno futu" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlgCanc" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Geber" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Fund" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GeberEng" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Fund" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iban" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ktext" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ktwrt" Type="Edm.Decimal" Precision="16" Scale="3" sap:unicode="false" sap:label="Target Value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lifnr" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Vendor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameFirst" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="First name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameLast" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Last name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stcd1" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="Tax Number 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Stcd2" Type="Edm.String" MaxLength="11" sap:unicode="false" sap:label="Tax Number 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxnumxl" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Tax Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Wtorig" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZamministrMig" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZamministrPer" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZannoAcc" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZannoGestimp" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Zannualita" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zbpent" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Val.Adjustment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZgjahrMig" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZgjahrPer" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zufficioliv1Mig" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zufficioliv1Per" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zufficioliv2Mig" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zufficioliv2Per" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zzanno" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zzbpent" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Val.Adjustment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zbelnr" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Document Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zblart" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zbloccfondi" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Zblpos" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zzblpos" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zbozza" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zbpent" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Val.Adjustment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZchiaRit" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZclausolaVar" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZCodClaApe" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZCodClaMig" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZCodClaMod" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZCodClaPer" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZcoddecrApe" Type="Edm.String" MaxLength="7" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZcoddecrMig" Type="Edm.String" MaxLength="7" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZcoddecrMod" Type="Edm.String" MaxLength="7" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZcoddecrPer" Type="Edm.String" MaxLength="7" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZcoddecrReiscr" Type="Edm.String" MaxLength="7" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Belnr" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Earmarked Funds" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ebeln" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Purchasing Doc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Geber" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Fund" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Lifnr" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Vendor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zbelnr" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Document Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZidRich" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zwels" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Payment Methods" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zzbelnr" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Document Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zzcig" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zzgara" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Stcd2" Type="Edm.String" MaxLength="11" sap:unicode="false" sap:label="Tax Number 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zzcup" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Fistl" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="Funds center" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Stcd1" Type="Edm.String" MaxLength="16" sap:unicode="false" sap:label="Tax Number 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zgeber" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Ktext" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Fipex" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:label="Commitment Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Znaturaatto" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Znumcontratt" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZcodDocum" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:label="Codice fascicolo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZCodGiusApe" Type="Edm.String" MaxLength="26" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZCodGiusMig" Type="Edm.String" MaxLength="26" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZCodGiusMod" Type="Edm.String" MaxLength="26" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZCodGiusPer" Type="Edm.String" MaxLength="26" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZidIpeMig" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZidIpePer" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Wtorig" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZCodClaApe" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZCodClaMig" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZCodClaMod" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZCodClaPer" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Iban" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameFirst" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="First name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="NameLast" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Last name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Taxnumxl" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Tax Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ZzragSoc" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZcodiKErrore" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZCodIpeApe" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZCodIpeMig" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZCodIpeMod" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZCodIpePer" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZcodiStatoipe" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZcompRes" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zdataatto" Type="Edm.DateTime" Precision="11" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZdatPer" Type="Edm.DateTime" Precision="11" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZdatReiscr" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZeconoPer" Type="Edm.Decimal" Precision="17" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZeconoRag" Type="Edm.Decimal" Precision="17" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZFlContOrd" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zgeber" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZgjahrMig" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZgjahrPer" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZidIpeApe" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZidIpeMig" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="ZidIpeMod" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Zregistrato" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZCodIpe" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZNumCla" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Zammin" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Fikrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="FM Area" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Gjahr" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Zufficioliv1" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Zufficioliv2" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Zcoddecr" Type="Edm.String" Nullable="false" MaxLength="7" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZCodGius" Type="Edm.String" Nullable="false" MaxLength="26" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZidIpe" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="ZCodCla" Type="Edm.String" Nullable="false" MaxLength="34" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZidIpePer" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZidRich" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZImpIpeCl" Type="Edm.Decimal" Precision="16" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZmimpPer" Type="Edm.Decimal" Precision="16" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Znaturaatto" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zni" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZNumClaApe" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZNumClaMig" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZNumClaMod" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZNumClaPer" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Znumcontratt" Type="Edm.String" MaxLength="24" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZnumeroPni" Type="Edm.String" MaxLength="27" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zoa" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZoggSpesIm" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zop" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zperenzione" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zrsf" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Ruoli di spesa fissa" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZStatoCla" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZstatoMigr" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZTipoDecreto" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtipoGiust" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtipoIpe" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ZtipoRes" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtotEconom" Type="Edm.Decimal" Precision="17" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZtotVers" Type="Edm.Decimal" Precision="17" Scale="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zufficioliv1Mig" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zufficioliv1Per" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zufficioliv2Mig" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zufficioliv2Per" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zwels" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Payment Methods" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzanno" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzbelnr" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Document Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzblart" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzblpos" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzbpent" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Val.Adjustment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzcig" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzcup" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzdatastipula" Type="Edm.DateTime" Precision="11" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zzgara" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzragSoc" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="StatoDecreto" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Codice"/>
                 </Key>
-                <Property Name="Codice" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Codice" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="DescrizioneStato" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="TipologiaImpegno" sap:content-version="1">
@@ -372,11 +380,11 @@
                 <Property Name="Funzionalita" Type="Edm.String" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Msgty" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Message Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Message" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <NavigationProperty Name="ImportiClausolaSet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToImportiClausola" FromRole="FromRole_DeepEntityToImportiClausola" ToRole="ToRole_DeepEntityToImportiClausola"/>
-                <NavigationProperty Name="PrevisioneImpegnoSet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToPrevisioneImpegno" FromRole="FromRole_DeepEntityToPrevisioneImpegno" ToRole="ToRole_DeepEntityToPrevisioneImpegno"/>
-                <NavigationProperty Name="DecretoImpegnoSet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToDecretoImpegno" FromRole="FromRole_DeepEntityToDecretoImpegno" ToRole="ToRole_DeepEntityToDecretoImpegno"/>
-                <NavigationProperty Name="IpeEntitySet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToIpeEntity" FromRole="FromRole_DeepEntityToIpeEntity" ToRole="ToRole_DeepEntityToIpeEntity"/>
                 <NavigationProperty Name="Osservazione" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToOsservazioni" FromRole="FromRole_DeepEntityToOsservazioni" ToRole="ToRole_DeepEntityToOsservazioni"/>
+                <NavigationProperty Name="IpeEntitySet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToIpeEntity" FromRole="FromRole_DeepEntityToIpeEntity" ToRole="ToRole_DeepEntityToIpeEntity"/>
+                <NavigationProperty Name="DecretoImpegnoSet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToDecretoImpegno" FromRole="FromRole_DeepEntityToDecretoImpegno" ToRole="ToRole_DeepEntityToDecretoImpegno"/>
+                <NavigationProperty Name="PrevisioneImpegnoSet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToPrevisioneImpegno" FromRole="FromRole_DeepEntityToPrevisioneImpegno" ToRole="ToRole_DeepEntityToPrevisioneImpegno"/>
+                <NavigationProperty Name="ImportiClausolaSet" Relationship="ZS4_DECRETOIMPEGNO_SRV.DeepEntityToImportiClausola" FromRole="FromRole_DeepEntityToImportiClausola" ToRole="ToRole_DeepEntityToImportiClausola"/>
             </EntityType>
             <EntityType Name="Contratto" sap:content-version="1">
                 <Key>
@@ -608,6 +616,27 @@
                 <Property Name="Langu" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Language Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="220" sap:unicode="false" sap:label="Message Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
+            <EntityType Name="TipoIpe" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ZtipoIpe"/>
+                </Key>
+                <Property Name="ZtipoIpe" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="StatoIpe" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Codice"/>
+                </Key>
+                <Property Name="Codice" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescrizioneStato" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Ufficio" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Zufficio"/>
+                </Key>
+                <Property Name="Zufficio" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZvimDescrufficio" Type="Edm.String" sap:unicode="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
             <ComplexType Name="DatiPagamento">
                 <Property Name="Iban" Type="Edm.String" sap:label="" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="PaeseResidenza" Type="Edm.String" sap:label="" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -739,6 +768,7 @@
             </Association>
             <EntityContainer Name="ZS4_DECRETOIMPEGNO_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
                 <EntitySet Name="ModalitaPagamentoSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.ModalitaPagamento" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="EsercizioFipexSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.EsercizioFipex" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="DecretoImpegnoSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.DecretoImpegno" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="IpeEntitySet" EntityType="ZS4_DECRETOIMPEGNO_SRV.IpeEntity" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="StatoDecretoSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.StatoDecreto" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
@@ -756,6 +786,9 @@
                 <EntitySet Name="CurrentUserParamSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.CurrentUserParam" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="ClausolaSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.Clausola" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="MessageStructureSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.MessageStructure" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="TipoIpeSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.TipoIpe" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="StatoIpeSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.StatoIpe" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="UfficioSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.Ufficio" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="EsigibilitaSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.Esigibilita" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="BeneficiarioEntitySet" EntityType="ZS4_DECRETOIMPEGNO_SRV.BeneficiarioEntity" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
                 <EntitySet Name="CountryMatchCodeSet" EntityType="ZS4_DECRETOIMPEGNO_SRV.CountryMatchCode" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -796,38 +829,38 @@
                     <Parameter Name="PosizioneFinanziaria" Type="Edm.String" Mode="In" MaxLength="24"/>
                 </FunctionImport>
                 <FunctionImport Name="WizardValidation" ReturnType="Collection(ZS4_DECRETOIMPEGNO_SRV.MessageStructure)" EntitySet="MessageStructureSet" m:HttpMethod="GET">
-                    <Parameter Name="Bukrs" Type="Edm.String" Mode="In" MaxLength="4"/>
-                    <Parameter Name="Zammin" Type="Edm.String" Mode="In" MaxLength="3"/>
-                    <Parameter Name="ZNumCla" Type="Edm.String" Mode="In" MaxLength="3"/>
-                    <Parameter Name="ZCodIpe" Type="Edm.String" Mode="In" MaxLength="3"/>
-                    <Parameter Name="ZzragSoc" Type="Edm.String" Mode="In" MaxLength="60"/>
-                    <Parameter Name="Taxnumxl" Type="Edm.String" Mode="In" MaxLength="60"/>
-                    <Parameter Name="NameLast" Type="Edm.String" Mode="In" MaxLength="40"/>
-                    <Parameter Name="NameFirst" Type="Edm.String" Mode="In" MaxLength="40"/>
-                    <Parameter Name="Iban" Type="Edm.String" Mode="In" MaxLength="34"/>
-                    <Parameter Name="Znumcontratt" Type="Edm.String" Mode="In" MaxLength="24"/>
-                    <Parameter Name="Znaturaatto" Type="Edm.String" Mode="In" MaxLength="24"/>
-                    <Parameter Name="Fipex" Type="Edm.String" Mode="In" MaxLength="24"/>
-                    <Parameter Name="Stcd1" Type="Edm.String" Mode="In" MaxLength="16"/>
-                    <Parameter Name="Fistl" Type="Edm.String" Mode="In" MaxLength="16"/>
-                    <Parameter Name="Zzcup" Type="Edm.String" Mode="In" MaxLength="15"/>
-                    <Parameter Name="Stcd2" Type="Edm.String" Mode="In" MaxLength="11"/>
-                    <Parameter Name="Zzgara" Type="Edm.String" Mode="In" MaxLength="10"/>
-                    <Parameter Name="Zzcig" Type="Edm.String" Mode="In" MaxLength="10"/>
-                    <Parameter Name="Zwels" Type="Edm.String" Mode="In" MaxLength="10"/>
-                    <Parameter Name="ZidRich" Type="Edm.String" Mode="In" MaxLength="10"/>
-                    <Parameter Name="Lifnr" Type="Edm.String" Mode="In" MaxLength="10"/>
-                    <Parameter Name="Ebeln" Type="Edm.String" Mode="In" MaxLength="10"/>
-                    <Parameter Name="Zzanno" Type="Edm.String" Mode="In" MaxLength="4"/>
-                    <Parameter Name="Bsart" Type="Edm.String" Mode="In" MaxLength="4"/>
-                    <Parameter Name="Zop" Type="Edm.String" Mode="In" MaxLength="1"/>
-                    <Parameter Name="Zoa" Type="Edm.String" Mode="In" MaxLength="1"/>
-                    <Parameter Name="Zni" Type="Edm.String" Mode="In" MaxLength="1"/>
-                    <Parameter Name="ZFlContOrd" Type="Edm.String" Mode="In" MaxLength="1"/>
-                    <Parameter Name="Zzdatastipula" Type="Edm.DateTime" Mode="In" Precision="7"/>
-                    <Parameter Name="Zdataatto" Type="Edm.DateTime" Mode="In" Precision="7"/>
-                    <Parameter Name="Ktwrt" Type="Edm.Decimal" Mode="In" Precision="3" Scale="3"/>
                     <Parameter Name="ZoggSpesIm" Type="Edm.String" Mode="In" MaxLength="100"/>
+                    <Parameter Name="Ktwrt" Type="Edm.Decimal" Mode="In" Precision="3" Scale="3"/>
+                    <Parameter Name="Zdataatto" Type="Edm.DateTime" Mode="In" Precision="7"/>
+                    <Parameter Name="Zzdatastipula" Type="Edm.DateTime" Mode="In" Precision="7"/>
+                    <Parameter Name="ZFlContOrd" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="Zni" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="Zoa" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="Zop" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="Bsart" Type="Edm.String" Mode="In" MaxLength="4"/>
+                    <Parameter Name="Zzanno" Type="Edm.String" Mode="In" MaxLength="4"/>
+                    <Parameter Name="Ebeln" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="Lifnr" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="ZidRich" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="Zwels" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="Zzcig" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="Zzgara" Type="Edm.String" Mode="In" MaxLength="10"/>
+                    <Parameter Name="Stcd2" Type="Edm.String" Mode="In" MaxLength="11"/>
+                    <Parameter Name="Zzcup" Type="Edm.String" Mode="In" MaxLength="15"/>
+                    <Parameter Name="Fistl" Type="Edm.String" Mode="In" MaxLength="16"/>
+                    <Parameter Name="Stcd1" Type="Edm.String" Mode="In" MaxLength="16"/>
+                    <Parameter Name="Fipex" Type="Edm.String" Mode="In" MaxLength="24"/>
+                    <Parameter Name="Znaturaatto" Type="Edm.String" Mode="In" MaxLength="24"/>
+                    <Parameter Name="Znumcontratt" Type="Edm.String" Mode="In" MaxLength="24"/>
+                    <Parameter Name="Iban" Type="Edm.String" Mode="In" MaxLength="34"/>
+                    <Parameter Name="NameFirst" Type="Edm.String" Mode="In" MaxLength="40"/>
+                    <Parameter Name="NameLast" Type="Edm.String" Mode="In" MaxLength="40"/>
+                    <Parameter Name="Taxnumxl" Type="Edm.String" Mode="In" MaxLength="60"/>
+                    <Parameter Name="ZzragSoc" Type="Edm.String" Mode="In" MaxLength="60"/>
+                    <Parameter Name="ZCodIpe" Type="Edm.String" Mode="In" MaxLength="3"/>
+                    <Parameter Name="ZNumCla" Type="Edm.String" Mode="In" MaxLength="3"/>
+                    <Parameter Name="Zammin" Type="Edm.String" Mode="In" MaxLength="3"/>
+                    <Parameter Name="Bukrs" Type="Edm.String" Mode="In" MaxLength="4"/>
                     <Parameter Name="WizardStep" Type="Edm.String" Mode="In" MaxLength="2"/>
                 </FunctionImport>
             </EntityContainer>

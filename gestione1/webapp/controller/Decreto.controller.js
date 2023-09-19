@@ -161,7 +161,7 @@ sap.ui.define(
 
   },
 
-
+///// registrazione Decreto in bozza /////
       onRegDIbozza: function (oEvent) {
         // var that = this;
         // var oTempModel = that.getView().getModel("temp");
@@ -173,7 +173,7 @@ sap.ui.define(
         var N_es_decreto = this.getView().byId("es_decreto").mProperties.value;
         var N_Amm = this.getView().byId("AmministrazioneED").mProperties.value;
         var N_codiceUff = this.getView().byId("UffApp1").mProperties.value;
-        var N_Datade = this.getView().byId("DataDE1").mProperties.dateValue
+        var N_Datade = this.getView().byId("DataDE1").getDateValue()
         var N_NprotAmm = this.getView().byId("numProtocolloAmma1").getValue();
         var N_DataprotAmm = this.getView().byId("dataProtocolloAmm1").getDateValue()
         var N_CcConti = this.getView().byId("CcorteConti").getSelected();
@@ -182,17 +182,10 @@ sap.ui.define(
         if (N_CcConti == false)
           var B_CcConti = "0"
 
-//           for (var i = 0; i < tipImp.length; i++) {
-//             var impCode  = tipImp[i];
-            
-//           }
-// if (N_tipo_impegno === oTempModel.getProperty('/TipologiaImpegnoSet').Descrizione ) {
-//   N_tipo_impegno === oTempModel.getProperty('/TipologiaImpegnoSet').Codice 
-// }
 
 
 var that = this;
-        MessageBox.warning("Sei sicuro di voler preimpostare il Decreto?", {
+        MessageBox.warning("Procedere con la registrazione del Decreto?", {
           title: "Attenzione",
           actions: ["Si", "No"],
           emphasizedAction: "Si",
@@ -240,7 +233,7 @@ var that = this;
               oDataModel.create("/DecretoImpegnoSet", DecretoImpegnoSet, {
                 success: function (result, response) {
                   console.log('SUCCESS')
-                  MessageBox.success("Decreto creato correttamente", {
+                  MessageBox.success("Decreto "  +  result.ChiaveGiustificativo +  " creato correttamente", {
                     actions: ["OK", "Indietro"],
                     emphasizedAction: "OK",
                     onClose: function (oAction) {
@@ -302,6 +295,7 @@ var that = this;
           }
         })
       },
+      // controllo campi obbligatori //
       checkFields: function (fields) {
         var self = this,
           check = true,
@@ -390,64 +384,8 @@ var that = this;
             }
         });
 
-
     },
-      //  checkFields: function (view) {
-      //    var self = this,
-      //    check = false;
-
-      //       if(vie === "Anagrafica"){
-      //         var oForm = self.__dialog.getContent()[0].getFormContainers()[0],
-      //         oForm2 = self.__dialog.getContent()[1].getFormContainers()[0],
-      //         sPaese = oForm.getFormElements()[0].getFields()[0].getValue() !== "" ? true : false,
-      //         sPaeseD = oForm.getFormElements()[0].getFields()[1].getValue() !== "" ? true : false,
-      //         sCatBen = oForm.getFormElements()[1].getFields()[0].getSelectedKey() !== "" ? true : false,
-      //         sDocBen = oForm.getFormElements()[2].getFields()[0].getValue() !== "" ? true : false,
-      //         sNome = oForm.getFormElements()[3].getFields()[0].getValue() !== "" ? true : false,
-      //         sCogn = oForm.getFormElements()[4].getFields()[0].getValue() !== "" ? true : false,
-      //         sVia = oForm.getFormElements()[5].getFields()[0].getValue() !== "" ? true : false,
-      //         sCiv = oForm.getFormElements()[5].getFields()[1].getValue() !== "" ? true : false,
-      //         sLoc = oForm.getFormElements()[6].getFields()[0].getValue() !== "" ? true : false,
-      //         sReg = oForm.getFormElements()[6].getFields()[1].getValue() !== "" ? true : false,
-      //         sRegD = oForm.getFormElements()[6].getFields()[2].getValue() !== "" ? true : false,
-      //         sCap = oForm.getFormElements()[7].getFields()[0].getValue() !== "" ? true : false,
-      //         sCF = oForm2.getFormElements()[0].getFields()[0].getValue() !== "" ? true : false;
-
-      //         if (sPaese && sPaeseD && sCatBen && sDocBen && sNome && sCogn && sVia && sCiv 
-      //           && sLoc && sReg && sRegD && sCap && sCF) {
-      //             check = true;
-      //         }
-
-      //       }else{
-      //         var ben = sap.ui.getCore().byId("RegBen").getValue() !== "" ? true : false,
-      //         mod = sap.ui.getCore().byId("RegModPag").getSelectedKey() !== "" ? true : false,
-      //         iban = sap.ui.getCore().byId("iban").getValue() !== "" ? true : false;
-
-      //         if (ben && mod && iban) {
-      //             check = true;
-      //         }
-
-      //       }
-
-
-      //     return check;
-      // },
-      // onBackMessageBoxPress: function (oEvent) {
-      //   MessageBox.success("Registrazione Bozza Decreto d'Impegno", {
-      //     actions: ["Continuare", "Indietro"],
-      //     emphasizedAction: "Annulla",
-      //     onClose: function (sAction) {
-
-      //       if (sAction === "Indietro") {
-      //         // this.getOwnerComponent().getRouter().navTo("View1");
-      //       }
-      //       else{
-      //         sAction.close();
-      //       }
-      //     }
-      //   })
-      // },
-
+      
     });
 
   }

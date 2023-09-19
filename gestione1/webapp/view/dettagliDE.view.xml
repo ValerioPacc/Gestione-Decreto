@@ -62,7 +62,7 @@
                 <Label text="Data Protocollo Amm.:" class="sapUiSmallMarginEnd"  />
                     <Text  id="DataProtAmm" class="sapUiMediumMarginEnd"/>
                         <Label text="Stato Decreto:" class="sapUiSmallMarginEnd" />
-                        <Text  id="StatoDecreto" class="sapUiMediumMarginEnd"/>
+                        <Text  id="StatoDecreto" class="sapUiMediumMarginEnd" wrapping="false"/>
                     <Label text="Tipologia Impegno:" class="sapUiSmallMarginEnd" />
                     <Text  id="TipologiaImpegno" class="sapUiMediumMarginEnd"/>
                      <Label text="Contratto:" class="sapUiSmallMarginEnd"/>

@@ -11,6 +11,9 @@
     xmlns:core="sap.ui.core"
     xmlns:menu="sap.m.MenuItem"
     xmlns:menBtn="sap.m.Menu"
+    xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls"
+    xmlns:zcontrolMatchSar="zsap.com.r3.cobi.s4.custapiuser.z_s4_userlog.controls"
+    xmlns:inputRicercaContratto="zsap.com.r3.cosp.s4.inputricercacontratto.inputricercacontratto.controls"
     height="100%"
     controllerName="gestione1.controller.View1"
 >
@@ -84,9 +87,10 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="nContratto" visibleInFilterBar="true" name="nContratto" groupName="gruppo1" label="{i18n>nContratto}">
                                 <fb:control>
-                                   <Input showSuggestion="true" id="nContratto1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'ContrattoOrdine' }}">
+                                <inputRicercaContratto:InputRicercaContratto id="nContratto1" />
+                                   <!-- <Input showSuggestion="true" id="nContratto1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'ContrattoOrdine' }}">
                                       <core:Item key="{ContrattoOrdine}" text="{ContrattoOrdine}"/>
-                                    </Input>
+                                    </Input> -->
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="CIG" visibleInFilterBar="true" name="CIG" groupName="gruppo1" label="{i18n>CIG}">
@@ -209,8 +213,8 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="UffApp" visibleInFilterBar="true" name="UffApp" groupName="gruppo1" label="{i18n>UffApp}">
                                 <fb:control>
-                                    <ComboBox  id="UffApp1" items="{path: '/DecretoImpegnoSet', sorter: { path: 'CodiceUfficio' }}">
-                                      <core:Item key="{CodiceUfficio}" text="{CodiceUfficio}"/>
+                                    <ComboBox  id="UffApp1" items="{path: 'temp>/UfficioSet', sorter: { path: 'Zufficio' }}">
+                                      <core:Item key="{temp>Zufficio}" text="{temp>Zufficio}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
@@ -245,25 +249,27 @@
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="EserPosFin" visibleInFilterBar="true" name="EserPosFin" groupName="gruppo1" label="{i18n>EserPosFin}" mandatory="true">
+                            <fb:FilterGroupItem id="EserPosFin" visibleInFilterBar="true" name="EserPosFin" groupName="gruppo1" label="{i18n>EserPosFin}"  mandatory="true">
                                 <fb:control>
-                                     <Input showSuggestion="true" id="EserPosFin1" showValueHelp="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: '' }}">
-                                      <core:Item key="{}" text="{}"/>
-                                    </Input>
+                                     <ComboBox  id="EserPosFin1" items="{path: 'temp>/EsercizioFipexSet', sorter: { path: 'Anno' }}">
+                                      <core:Item key="{temp>Anno}" text="{temp>Anno}"/>
+                                    </ComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="PosFin" visibleInFilterBar="true" name="PosFin" groupName="gruppo1" label="{i18n>PosFin}" mandatory="true">
                                 <fb:control>
-                                    <Input showSuggestion="true" id="PosFin1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'PosizioneFinanziaria' }}">
-                                      <core:Item key="{PosizioneFinanziaria}" text="{PosizioneFinanziaria}"/>
-                                    </Input>
+                                <zcontrol:InputPosizioneFinanziaria id="filterBarPosFinSpesa" fase="GEST" spesa="X" reale="R" anno="2023" versione="D" maxSuggestionWidth="60%" liveChange="onSelectPosFin" width="70%"/>
+                                    <!-- <Input showSuggestion="true" id="PosFin1" showValueHelp="true" valueHelpOnly="false" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'PosizioneFinanziaria' }}">
+                                     <core:Item key="{}" text="{}"/> 
+                                     </Input> -->
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="struttura_amm" visibleInFilterBar="true" name="struttura_amm" groupName="gruppo1" label="{i18n>struttura_amm}">
+                            <fb:FilterGroupItem id="struttura_amm" visibleInFilterBar="true" name="struttura_amm" groupName="gruppo1" label="{i18n>struttura_amm_resp}">
                                 <fb:control>
-                                    <Input showSuggestion="true" id="struttura_amm1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'StrutturaAmmResp' }}">
+                                <zcontrolMatchSar:GestioneLogUser eos="S" id="idFilterStruttAmmResp" fase="GEST" entrata="X" reale="R" anno="2023" SEM_OBJ="Z_TEST_LIB"  versione="D" width="70%" placeholder="Scegli struttura amministrativa"/>
+                                    <!-- <Input showSuggestion="true" id="struttura_amm1" showValueHelp="true" suggestionItems="{path: '/DecretoImpegnoSet', sorter: { path: 'StrutturaAmmResp' }}">
                                       <core:Item key="{StrutturaAmmResp}" text="{StrutturaAmmResp}"/>
-                                    </Input>
+                                    </Input> -->
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="Comp_Res" visibleInFilterBar="true" name="Comp_Res" groupName="gruppo1" label="{i18n>Comp_Res}">

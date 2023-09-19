@@ -56,7 +56,7 @@
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="DataDE" visibleInFilterBar="true" name="DataDE" groupName="Group1" label="{i18n>dataDE}" >
                                 <fb:control>
-                                    <DatePicker id="DataDE1" displayFormat="dd/MM/yyyy"  required="true"/>
+                                    <DatePicker id="DataDE1" value="{type: 'sap.ui.model.type.Date', formatOptions: {pattern:'dd.MM.yyyy'}}" valueFormat="dd.MM.yyyy" displayFormat="dd.MM.yyyy"  required="true"/>
                                 </fb:control>
                             </fb:FilterGroupItem>
 							<fb:FilterGroupItem id="numProtocolloAmma" visibleInFilterBar="true" name="numProtocolloAmma" groupName="Group1" label="{i18n>numProtocolloAmma}">
@@ -67,7 +67,7 @@
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem id="dataProtocolloAmm" visibleInFilterBar="true" name="dataProtocolloAmm" groupName="Group1" label="{i18n>dataProtocolloAmm}">
                                 <fb:control>
-                                    <DatePicker id="dataProtocolloAmm1" displayFormat="dd/MM/yyyy"  />
+                                    <DatePicker id="dataProtocolloAmm1" value="{type: 'sap.ui.model.type.Date', formatOptions: {pattern:'dd.MM.yyyy'}}" valueFormat="dd.MM.yyyy" displayFormat="dd.MM.yyyy"  />
                                 </fb:control>
                                 </fb:FilterGroupItem>
                         </fb:filterGroupItems>
